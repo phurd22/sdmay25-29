@@ -1,0 +1,5 @@
+repo_type: "other"
+description: "Template repo for custom PCB designed with KiCAD 5 and sourced through JLCPCB.com"
+ownership:
+    primary: "rr42925"
+    backup: "ak55774"

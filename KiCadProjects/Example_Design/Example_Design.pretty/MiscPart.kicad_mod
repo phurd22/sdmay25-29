@@ -1,0 +1,8 @@
+(module MiscPart (layer F.Cu) (tedit 636513FA)
+  (fp_text reference REF** (at 0 1.27) (layer Cmts.User)
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_text value MiscPart (at 0 -0.5) (layer Cmts.User)
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+)

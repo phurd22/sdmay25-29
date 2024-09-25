@@ -1,0 +1,206 @@
+# KiPlot config file
+kiplot:
+  version: 1
+
+preflight:
+  run_erc: true
+  update_xml: true
+  run_drc: true
+  check_zone_fills: true
+  ignore_unconnected: false
+
+filters:
+  - name: only_jlc_parts
+    comment: 'Only parts with JLC code'
+    type: generic
+    include_only:
+      - column: 'LCSC'
+        regex: '^C\d+'
+
+  - name: not_jlc_parts
+    comment: 'Only parts without JLC code'
+    type: generic
+    include_only:
+      - column: 'LCSC'
+        regex: '^C\d+'
+    invert: true
+
+variants:
+  - name: 'Default'
+    comment: 'No variant applied'
+    type: kibom
+    pre_transform: '_rot_footprint'
+
+  # Begin example variant definition
+  # - name: 'Low_Spec_Variant'    # Workflow name of variant.
+  #   comment: 'Feature reduced version of design'    # Short description of variant.
+  #   type: kibom    # Do not change this.
+  #   file_id: _Low_Spec    #Suffix included in filename for files generated with this variant.
+  #   variant: Low_Spec    #KiCAD name of variant.
+  #   pre_transform:    # Do not change these.
+  #     - '_var_rename'
+  #     - '_rot_footprint'
+  # End example variant definition
+
+outputs:
+
+  - name: 'sch_to_pdf'
+    comment: "Print schematic (PDF)"
+    type: pdf_sch_print
+    dir: .
+    options:
+      output: '%f_Schematic%v.%x'
+
+  - name: 'gerbers'
+    comment: "Gerbers for the board house"
+    type: gerber
+    dir: .
+    options:
+      #General Options
+      plot_sheet_reference: false
+      plot_footprint_values: false
+      plot_footprint_refs: true
+      force_plot_invisible_refs_vals: false
+      exclude_edge_layer: true
+      exclude_pads_from_silkscreen: true
+      tent_vias: true
+      use_aux_axis_as_origin: false
+      line_width: 0.15
+
+      #Gerber Options
+      use_protel_extensions: true
+      create_gerber_job_file: false
+      subtract_mask_from_silk: true
+      gerber_precision: 4.6
+      use_gerber_x2_attributes: false
+      use_gerber_net_attributes: false
+
+    layers:
+      - layer: F.Cu
+        suffix: F_Cu
+      - layer: F.Paste
+        suffix: F_Paste
+      - layer: F.SilkS
+        suffix: F_SilkS
+      - layer: F.Mask
+        suffix: F_Mask
+      - layer: B.Cu
+        suffix: B_Cu
+      - layer: B.Paste
+        suffix: B_Paste
+      - layer: B.SilkS
+        suffix: B_SilkS
+      - layer: B.Mask
+        suffix: B_Mask
+      - layer: Edge.Cuts
+        suffix: Edge_Cuts
+  
+  - name: 'excellon_drill'
+    comment: "Excellon Drill Files"
+    type: excellon
+    dir: .
+    options:
+      mirror_y_axis: false
+      minimal_header: false
+      pth_and_npth_single_file: false
+      route_mode_for_oval_holes: false
+      map:
+        type: 'gerber'
+      use_aux_axis_as_origin: false
+      metric_units: true
+      zeros_format: DECIMAL_FORMAT
+
+  - name: 'zip_gerbers'
+    comment: Zip gerber files
+    type: compress
+    options:
+      output: 'JLCPCB_Gerbers.%x'
+      format: ZIP
+      files:
+      - from_output: gerbers
+      - from_output: excellon_drill
+
+  - name: 'gen_jlc_bom'
+    comment: "Generate BOM for JLCPCB"
+    type: bom
+    dir: .
+    options:
+      format: CSV
+      output: '%f_JLCPCB_BOM%v.%x'
+      group_fields: ['Part','Value','LCSC', 'Part No']
+      exclude_filter: only_jlc_parts
+      csv:
+        hide_pcb_info: true
+        hide_stats_info: true
+        quote_all: true
+      columns:
+        - field: Value
+          name: Comment
+        - field: References
+          name: Designator
+        - Footprint
+        - field: 'LCSC'
+          name: 'LCSC Part Number'
+  
+  - name: 'man_order_html_bom'
+    comment: "Manually ordered parts BOM"
+    type: bom
+    dir: .
+    options:
+      format: HTML
+      source_by_id: true
+      output: '%f_Manual_Order_BOM_@orderQuantity@x%v.%x'
+      group_fields:  ['Part', 'Value','LCSC', 'Part No']
+      number: @orderQuantity@
+      exclude_filter: not_jlc_parts
+      html:
+        generate_dnf: false
+        hide_pcb_info: true
+        hide_stats_info: true
+        highlight_empty: false
+        logo: false
+        title: Assembly Run Manual Order BOM, @orderQuantity@x @orderVariant@
+      columns:
+        - Row
+        - References
+        - Value
+        - Part No
+        - Build Quantity
+        - Link
+        - Note
+
+  - name: 'gen_int_bom'
+    comment: "Generate Interactive BOM"
+    type: ibom
+    dir: .
+    options:
+      output: '%f_InteractiveBOM%v.%x'
+      show_fields: Value,Part No
+      group_fields: Value,Part No
+      checkboxes: Placed
+      include_tracks: true
+      layer_view: F
+
+  - name: 'position'
+    comment: 'Pick and place file'
+    type: position
+    options:
+      output: '%f_cpl_jlc%v.%x'
+      format: CSV
+      units: millimeters
+      separate_files_for_front_and_back: false
+      dnf_filter: only_jlc_parts
+      only_smd: false
+      columns:
+        - id: Ref
+          name: Designator
+        - Val
+        - Package
+        - id: PosX
+          name: "Mid X"
+        - id: PosY
+          name: "Mid Y"
+        - id: Rot
+          name: Rotation
+        - id: Side
+          name: Layer
