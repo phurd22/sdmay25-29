@@ -1,0 +1,156 @@
+name: Process Order and Assembly Files Request
+on:
+  issues:
+    types:
+      - opened
+      - reopened
+
+jobs:
+  Parse_Issue:
+    if: startsWith(github.event.issue.title, 'Order and Assembly Files Request:')
+    name: Parse Order and Assembly Files Request
+    runs-on: deere-ubuntu-latest
+    outputs:
+      output1: ${{ steps.ParseIssueBody.outputs.IssueBodyJSON }}
+    steps:
+    - id: ParseIssueBody
+      run: |
+        cat <(echo IssueBodyJSON={) <(echo "${{ github.event.issue.body }}" | sed 's/://g' | sed -z 's/### \([[:print:]]*\)\n\n/\"\1\": /g' | sed '/^$/d' | sed 's/: \([[:print:]]*\)$/: \"\1\",/g') <(echo }) | sed -z 's/\n//g' >> "$GITHUB_OUTPUT"
+  
+  Verify_Inputs:
+    name: Verify Inputs
+    runs-on: deere-ubuntu-latest
+    needs: Parse_Issue
+    steps:
+    - name: Verify Inputs
+      run: |
+        if ! [[ '${{fromJSON(needs.Parse_Issue.outputs.output1).Quantity_of_Boards}}' =~ ^[0-9]+ ]]
+        then
+          echo "::error title='Board Qty Not An Integer'::'Board quantity entered is not an integer.'"
+          exit 1
+        fi
+
+  RunERC:
+    name: Run ERC
+    runs-on: deere-ubuntu-latest
+    container: docker.deere.com/inti-cmnb/kicad5_auto:1.4.0
+    needs:
+      - Parse_Issue
+      - Verify_Inputs
+    env:
+      KICAD_VARIABLES: -E orderQuantity=${{ fromJSON(needs.Parse_Issue.outputs.output1).Quantity_of_Boards }} -E orderVariant=${{ fromJSON(needs.Parse_Issue.outputs.output1).Board_Variant }}
+
+    steps:
+    - name: Check out the repository to the runner
+      uses: actions/checkout@v4
+    
+    - name: Make the script files executable
+      run: chmod +x scripts/run_erc.sh
+
+    - name: Run ERC
+      run: scripts/run_erc.sh
+
+    - name: Retrieve results
+      uses: actions/upload-artifact@v4
+      with:
+        name: ERC_Results
+        path: Fabrication
+
+  RunDRC:
+    name: Run DRC
+    runs-on: deere-ubuntu-latest
+    container: docker.deere.com/inti-cmnb/kicad5_auto:1.4.0
+    needs:
+      - Parse_Issue
+      - Verify_Inputs
+      - RunERC
+    env:
+      KICAD_VARIABLES: -E orderQuantity=${{ fromJSON(needs.Parse_Issue.outputs.output1).Quantity_of_Boards }} -E orderVariant=${{ fromJSON(needs.Parse_Issue.outputs.output1).Board_Variant }}
+
+    steps:
+    - name: Check out the repository to the runner
+      uses: actions/checkout@v4
+    
+    - name: Make the script files executable
+      run: chmod +x scripts/run_drc.sh
+
+    - name: Run DRC
+      run: scripts/run_drc.sh
+
+    - name: Retrieve results
+      uses: actions/upload-artifact@v4
+      with:
+        name: DRC_Results
+        path: Fabrication
+
+  GenUsrFiles:
+    name: Generate User Files
+    runs-on: deere-ubuntu-latest
+    container: docker.deere.com/inti-cmnb/kicad5_auto:1.4.0
+    needs:
+      - Parse_Issue
+      - Verify_Inputs
+      - RunERC
+      - RunDRC
+    env:
+      KICAD_VARIABLES: -E orderQuantity=${{ fromJSON(needs.Parse_Issue.outputs.output1).Quantity_of_Boards }} -E orderVariant=${{ fromJSON(needs.Parse_Issue.outputs.output1).Board_Variant }} -g variant=${{ fromJSON(needs.Parse_Issue.outputs.output1).Board_Variant }}
+
+    steps:
+    - name: Check out the repository to the runner
+      uses: actions/checkout@v4
+    
+    - name: Make the script files executable
+      run: chmod +x scripts/generate_user_files.sh
+
+    - name: Generate User Files
+      run: scripts/generate_user_files.sh
+        
+    - name: Retrieve results
+      uses: actions/upload-artifact@v4
+      with:
+        name: Manual_Order_and_Assembly_Files
+        path: Fabrication
+
+  GenBrdHseFiles:
+    name: Generate Board House Files
+    runs-on: deere-ubuntu-latest
+    container: docker.deere.com/inti-cmnb/kicad5_auto:1.4.0
+    needs:
+      - Parse_Issue
+      - Verify_Inputs
+      - RunERC
+      - RunDRC
+    env:
+      KICAD_VARIABLES: -E orderQuantity=${{ fromJSON(needs.Parse_Issue.outputs.output1).Quantity_of_Boards }} -E orderVariant=${{ fromJSON(needs.Parse_Issue.outputs.output1).Board_Variant }} -g variant=${{ fromJSON(needs.Parse_Issue.outputs.output1).Board_Variant }}
+
+    steps:
+    - name: Check out the repository to the runner
+      uses: actions/checkout@v4
+    
+    - name: Make the script files executable
+      run: chmod +x scripts/generate_board_house_files.sh
+
+    - name: Generate Board House Files
+      run: scripts/generate_board_house_files.sh
+
+    - name: Retrieve results
+      uses: actions/upload-artifact@v4
+      with:
+        name: JLCPCB_Files
+        path: |
+          Fabrication/*/*.csv
+          Fabrication/*/*.zip
+
+  Close_Issue:
+    name: Close Order and Assembly Files Request
+    runs-on: deere-ubuntu-latest
+    needs:
+      - GenUsrFiles
+      - GenBrdHseFiles
+    steps:
+      - name: Close_Issue
+        run: |
+          gh issue close $ISSUE --reason completed --comment "Issue closed by workflow run [#${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{ github.event.issue.html_url }}

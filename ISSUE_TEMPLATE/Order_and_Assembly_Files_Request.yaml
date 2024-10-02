@@ -1,0 +1,21 @@
+name: 'Order and Assembly Files Request'
+description: 'Form to request generation of order and assembly files for a build of boards'
+title: 'Order and Assembly Files Request: [Your descriptor here]'
+body:
+  - type: input
+    id: Quantity_of_Boards
+    attributes:
+      label: 'Quantity_of_Boards'
+    validations:
+      required: true
+  - type: dropdown
+    id: Board_Variant
+    attributes:
+      label: 'Board_Variant'
+      multiple: false
+      options:
+        - 'Default'
+        # - 'Low_Spec_Variant'
+      default: 0
+    validations:
+      required: true
