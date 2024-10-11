@@ -33,7 +33,7 @@ jobs:
   RunERC:
     name: Run ERC
     runs-on: ubuntu-latest
-    container: docker.deere.com/inti-cmnb/kicad5_auto:1.4.0
+    container: docker.com/kicad/kicad:8.0 #docker pull kicad/kicad:8.0
     needs:
       - Parse_Issue
       - Verify_Inputs
