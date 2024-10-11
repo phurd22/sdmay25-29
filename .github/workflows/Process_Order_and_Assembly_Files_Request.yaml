@@ -9,7 +9,7 @@ jobs:
   Parse_Issue:
     if: startsWith(github.event.issue.title, 'Order and Assembly Files Request:')
     name: Parse Order and Assembly Files Request
-    runs-on: deere-ubuntu-latest
+    runs-on: ubuntu-latest
     outputs:
       output1: ${{ steps.ParseIssueBody.outputs.IssueBodyJSON }}
     steps:
@@ -19,7 +19,7 @@ jobs:
   
   Verify_Inputs:
     name: Verify Inputs
-    runs-on: deere-ubuntu-latest
+    runs-on: ubuntu-latest
     needs: Parse_Issue
     steps:
     - name: Verify Inputs
@@ -32,7 +32,7 @@ jobs:
 
   RunERC:
     name: Run ERC
-    runs-on: deere-ubuntu-latest
+    runs-on: ubuntu-latest
     container: docker.deere.com/inti-cmnb/kicad5_auto:1.4.0
     needs:
       - Parse_Issue
@@ -58,7 +58,7 @@ jobs:
 
   RunDRC:
     name: Run DRC
-    runs-on: deere-ubuntu-latest
+    runs-on: ubuntu-latest
     container: docker.deere.com/inti-cmnb/kicad5_auto:1.4.0
     needs:
       - Parse_Issue
@@ -85,7 +85,7 @@ jobs:
 
   GenUsrFiles:
     name: Generate User Files
-    runs-on: deere-ubuntu-latest
+    runs-on: ubuntu-latest
     container: docker.deere.com/inti-cmnb/kicad5_auto:1.4.0
     needs:
       - Parse_Issue
@@ -113,7 +113,7 @@ jobs:
 
   GenBrdHseFiles:
     name: Generate Board House Files
-    runs-on: deere-ubuntu-latest
+    runs-on: ubuntu-latest
     container: docker.deere.com/inti-cmnb/kicad5_auto:1.4.0
     needs:
       - Parse_Issue
@@ -143,7 +143,7 @@ jobs:
 
   Close_Issue:
     name: Close Order and Assembly Files Request
-    runs-on: deere-ubuntu-latest
+    runs-on: ubuntu-latest
     needs:
       - GenUsrFiles
       - GenBrdHseFiles
