@@ -1,0 +1,5 @@
+- Unzip the Digital.zip folder.
+- Run Digital.jar.
+- After opening, the program gives you a tutorial.
+
+- Credit: https://github.com/hneemann/Digital?tab=readme-ov-file
