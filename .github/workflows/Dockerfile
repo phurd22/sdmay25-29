@@ -1,0 +1,1 @@
+FROM kicad/kicad:8.0
