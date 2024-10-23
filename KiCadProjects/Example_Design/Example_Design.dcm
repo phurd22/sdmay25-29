@@ -1,9 +1,0 @@
-EESchema-DOCLIB  Version 2.0
-#
-$CMP LED_ALT
-D Light emitting diode, filled shape
-K LED diode
-F ~
-$ENDCMP
-#
-#End Doc Library
