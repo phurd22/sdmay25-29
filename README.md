@@ -24,7 +24,7 @@ Update ```description``` and ```ownership``` entries in ```APM.yml```.
 
 ## New KiCAD Project Creation
 
-Open the KiCAD 5 application.
+Open the KiCAD 8 application.
 
 In the KiCAD Project Manager select ```File``` > ```New``` > ```Project```.
 
