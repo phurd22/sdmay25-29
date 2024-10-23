@@ -34,7 +34,7 @@ jobs:
     name: Run ERC
     runs-on: ubuntu-latest
     container:
-      image: 'Dockerfile'
+      image: kicad/kicad:8.0
     needs:
       - Parse_Issue
       - Verify_Inputs
@@ -61,7 +61,7 @@ jobs:
     name: Run DRC
     runs-on: ubuntu-latest
     container:
-      image: 'Dockerfile'
+      image: kicad/kicad:8.0
     needs:
       - Parse_Issue
       - Verify_Inputs
@@ -89,7 +89,7 @@ jobs:
     name: Generate User Files
     runs-on: ubuntu-latest
     container:
-      image: 'Dockerfile'
+      image: kicad/kicad:8.0
     needs:
       - Parse_Issue
       - Verify_Inputs
@@ -118,7 +118,7 @@ jobs:
     name: Generate Board House Files
     runs-on: ubuntu-latest
     container:
-      image: 'Dockerfile'
+      image: kicad/kicad:8.0
     needs:
       - Parse_Issue
       - Verify_Inputs
