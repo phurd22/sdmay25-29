@@ -1,0 +1,18 @@
+Explanation:
+	The script generates a pdf array of bits where a dot is a 1, and an empty space is a 0.
+	The first number is on the left side of the paper, and the least significant bit is at the bottom.
+	You may run into errors when running the script. Make sure you have the following python package installed:
+		pip install fpdf
+	If you are still running into errors, your input is formatted incorrectly. There are three different ways you can use the script.
+	Read the rest to understand how to format your commands.
+
+Generate 30 random numbers between -2^49 and (2^49)-1:
+	Run the script with no command line arguments
+
+Use a text file of numbers:
+	Create a text file consisting of only integer numbers separated by only commas. Ex: "67,785,7909,-178"
+	Run the script with the text file name as your only argument (make sure the text file and script are in the
+	same directory). Ex: "python DtoBPage.py mynums.txt"
+
+Use a list of numbers straight from command line:
+	Run the script with 50 or less numbers as command line arguments. Ex: "python DtoBPage.py 87 6758 -7986 897"
