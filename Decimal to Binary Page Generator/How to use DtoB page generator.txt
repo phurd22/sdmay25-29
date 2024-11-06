@@ -15,4 +15,4 @@ Use a text file of numbers:
 	same directory). Ex: "python DtoBPage.py mynums.txt"
 
 Use a list of numbers straight from command line:
-	Run the script with 50 or less numbers as command line arguments. Ex: "python DtoBPage.py 87 6758 -7986 897"
+	Run the script with 30 or less numbers as command line arguments. Ex: "python DtoBPage.py 87 6758 -7986 897"
