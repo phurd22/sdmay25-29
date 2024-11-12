@@ -11,11 +11,11 @@ do
   cd $dir
 
   # Run KiBot generate gerbers
-  [ -f *.sch ] && kibot $KICAD_VARIABLES -c ../../Config.kibot.yaml -d ../../Fabrication/${dir##*/} -s run_drc,run_erc zip_gerbers
+  [ -f *.sch ] && kibot $KICAD_VARIABLES -c ../../Config.kibot.yaml -d ../../Fabrication/${dir##*/} -s drc,erc zip_gerbers
   # Run KiBot generate JLCPCB BOM
-  [ -f *.sch ] && kibot $KICAD_VARIABLES -c ../../Config.kibot.yaml -d ../../Fabrication/${dir##*/} -s run_drc,run_erc gen_jlc_bom
+  [ -f *.sch ] && kibot $KICAD_VARIABLES -c ../../Config.kibot.yaml -d ../../Fabrication/${dir##*/} -s drc,erc gen_jlc_bom
   # Run KiBot generate position file
-  [ -f *.sch ] && kibot $KICAD_VARIABLES -c ../../Config.kibot.yaml -d ../../Fabrication/${dir##*/} -s run_drc,run_erc position
+  [ -f *.sch ] && kibot $KICAD_VARIABLES -c ../../Config.kibot.yaml -d ../../Fabrication/${dir##*/} -s drc,erc position
 
   # Return to upper directory
   cd ../../
