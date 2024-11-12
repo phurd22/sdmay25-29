@@ -11,7 +11,7 @@ do
   cd $dir
 
   # Run KiBot ERC check
-  [ -f *.sch ] && kibot $KICAD_VARIABLES -c ../../Config.kibot.yaml -d ../../Fabrication/${dir##*/} -s update_xml,drc -i
+  [ -f *.sch ] && kibot $KICAD_VARIABLES -c ../../Config.kibot.yaml --out-dir ../../Fabrication/${dir##*/} --skip-pre update_xml,drc --invert-sel
 
   # Return to upper directory
   cd ../../
