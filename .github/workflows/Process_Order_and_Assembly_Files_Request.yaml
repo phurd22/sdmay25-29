@@ -34,7 +34,7 @@ jobs:
     name: Run ERC
     runs-on: ubuntu-latest
     container:
-      image: kicad/kicad:8.0
+      image: ghcr.io/inti-cmnb/kicad8_auto_full:latest
       options: --user root
     needs:
       - Parse_Issue
@@ -62,7 +62,7 @@ jobs:
     name: Run DRC
     runs-on: ubuntu-latest
     container:
-      image: kicad/kicad:8.0
+      image: ghcr.io/inti-cmnb/kicad8_auto_full:latest
       options: --user root
     needs:
       - Parse_Issue
@@ -91,7 +91,7 @@ jobs:
     name: Generate User Files
     runs-on: ubuntu-latest
     container:
-      image: kicad/kicad:8.0
+      image: ghcr.io/inti-cmnb/kicad8_auto_full:latest
       options: --user root
     needs:
       - Parse_Issue
@@ -121,7 +121,7 @@ jobs:
     name: Generate Board House Files
     runs-on: ubuntu-latest
     container:
-      image: kicad/kicad:8.0
+      image: ghcr.io/inti-cmnb/kicad8_auto_full:latest
       options: --user root
     needs:
       - Parse_Issue
