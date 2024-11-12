@@ -1,11 +1,4 @@
 (fp_lib_table
   (version 7)
-  (lib (name "footprints.pretty1")(type "KiCad")(uri "E:/Senior Design/sdmay25-29/KiCadProjects/parts/footprints/footprints.pretty1")(options "")(descr ""))
-  (lib (name "footprints.pretty2")(type "KiCad")(uri "E:/Senior Design/sdmay25-29/KiCadProjects/parts/footprints/footprints.pretty2")(options "")(descr ""))
-  (lib (name "footprints.pretty3")(type "KiCad")(uri "E:/Senior Design/sdmay25-29/KiCadProjects/parts/footprints/footprints.pretty3")(options "")(descr ""))
-  (lib (name "footprints.pretty4")(type "KiCad")(uri "E:/Senior Design/sdmay25-29/KiCadProjects/parts/footprints/footprints.pretty4")(options "")(descr ""))
-  (lib (name "footprints.pretty5")(type "KiCad")(uri "E:/Senior Design/sdmay25-29/KiCadProjects/parts/footprints/footprints.pretty5")(options "")(descr ""))
-  (lib (name "footprints.pretty6")(type "KiCad")(uri "E:/Senior Design/sdmay25-29/KiCadProjects/parts/footprints/footprints.pretty6")(options "")(descr ""))
-  (lib (name "footprints.pretty7")(type "KiCad")(uri "E:/Senior Design/sdmay25-29/KiCadProjects/parts/footprints/footprints.pretty7")(options "")(descr ""))
-  (lib (name "footprints.pretty8")(type "KiCad")(uri "E:/Senior Design/sdmay25-29/KiCadProjects/parts/footprints/footprints.pretty8")(options "")(descr ""))
+  (lib (name "0_add_sub")(type "KiCad")(uri "${KIPRJMOD}/0_add_sub.pretty")(options "")(descr ""))
 )
