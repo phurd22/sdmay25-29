@@ -11,7 +11,7 @@ do
   cd $dir
 
   # Run KiBot DRC check
-  [ -f *.kicad_pcb ] && kibot $KICAD_VARIABLES -c ../../Config.kibot.yaml -d ../../Fabrication/${dir##*/} -s update_xml,run_erc -i
+  [ -f *.kicad_pcb ] && kibot $KICAD_VARIABLES -c ../../Config.kibot.yaml -d ../../Fabrication/${dir##*/} -s update_xml,erc -i
 
   # Return to upper directory
   cd ../../
