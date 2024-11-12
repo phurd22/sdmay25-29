@@ -909,29 +909,6 @@
 	)
 	(fp_text user "*"
 		(at -7.62 -16.6497 0)
-		(unlocked yes)
-		(layer "F.SilkS")
-		(uuid "6205c847-e103-496c-a760-fa3ac4aa362c")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(fp_text user "*"
-		(at -7.62 -16.6497 0)
-		(layer "F.SilkS")
-		(uuid "c8f90b4b-cf4c-443b-b653-738df00e5bb4")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(fp_text user "*"
-		(at -7.62 -16.6497 0)
 		(layer "F.Fab")
 		(uuid "394be1e4-579d-4a80-9011-34a7982c7a04")
 		(effects
@@ -1077,7 +1054,7 @@
 		(remove_unused_layers no)
 		(uuid "94fbb64a-647f-490e-80f4-9e2bc9b4aafb")
 	)
-	(model "C:/projects/sdmay25-29/KiCadProjects/parts/footprints/chips/DIP_14/DIP_14.step"
+	(model "C:/projects/sdmay25-29/KiCadProjects/parts/footprints/chips/DIP_14/DIP_14.stp"
 		(offset
 			(xyz -3.75 7.5 2.5)
 		)
@@ -1085,7 +1062,7 @@
 			(xyz 1 1 1)
 		)
 		(rotate
-			(xyz 0 0 180)
+			(xyz -90 0 0)
 		)
 	)
 )

@@ -235,4 +235,15 @@
 		(remove_unused_layers no)
 		(uuid "b2883afe-f23c-46f2-a2d1-6ca2687615cf")
 	)
+	(model "C:/projects/sdmay25-29/KiCadProjects/parts/footprints/headers/1x2_Header.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
 )
