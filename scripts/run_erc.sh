@@ -13,7 +13,7 @@ do
   pwd
 
   # Run KiBot ERC check
-  [ -f *.kicad_sch ] && kibot $KICAD_VARIABLES --plot-config ../../Config.kibot.yaml --out-dir ../../Fabrication/${dir##*/} --skip-pre update_xml,drc --invert-sel
+  [ -f *.kicad_sch ] && kibot $KICAD_VARIABLES -c ../../Config.kibot.yaml -d ../../Fabrication/${dir##*/} -s update_xml,run_drc -i
 
   # Return to upper directory
   cd ../../
