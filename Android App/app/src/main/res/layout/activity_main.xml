@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/gold">
 
     <GridLayout
         android:layout_width="330dp"
@@ -27,10 +28,12 @@
             android:layout_rowWeight="1"
             android:layout_column="0"
             android:layout_columnWeight="1"
+            android:backgroundTint="@color/cardinal"
             android:text="1" />
 
         <!-- Button 2 -->
         <Button
+            android:backgroundTint="@color/cardinal"
             android:id="@+id/button2"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -42,6 +45,7 @@
 
         <!-- Button 3 -->
         <Button
+            android:backgroundTint="@color/cardinal"
             android:id="@+id/button3"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -53,6 +57,7 @@
 
         <!-- Button 4 -->
         <Button
+            android:backgroundTint="@color/cardinal"
             android:id="@+id/button4"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -64,6 +69,7 @@
 
         <!-- Button 5 -->
         <Button
+            android:backgroundTint="@color/cardinal"
             android:id="@+id/button5"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -75,6 +81,7 @@
 
         <!-- Button 6 -->
         <Button
+            android:backgroundTint="@color/cardinal"
             android:id="@+id/button6"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -86,6 +93,7 @@
 
         <!-- Button 7 -->
         <Button
+            android:backgroundTint="@color/cardinal"
             android:id="@+id/button7"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -97,6 +105,7 @@
 
         <!-- Button 8 -->
         <Button
+            android:backgroundTint="@color/cardinal"
             android:id="@+id/button8"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -108,6 +117,7 @@
 
         <!-- Button 9 -->
         <Button
+            android:backgroundTint="@color/cardinal"
             android:id="@+id/button9"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -119,6 +129,7 @@
 
         <!-- Button 10 -->
         <Button
+            android:backgroundTint="@color/cardinal"
             android:id="@+id/buttonClear"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -130,6 +141,7 @@
 
         <!-- Button 11 -->
         <Button
+            android:backgroundTint="@color/cardinal"
             android:id="@+id/button0"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -141,6 +153,7 @@
 
         <!-- Button 12 -->
         <Button
+            android:backgroundTint="@color/cardinal"
             android:id="@+id/buttonVariable"
             android:layout_width="0dp"
             android:layout_height="0dp"
