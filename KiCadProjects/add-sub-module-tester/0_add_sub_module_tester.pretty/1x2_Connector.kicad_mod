@@ -246,4 +246,15 @@
 		(remove_unused_layers no)
 		(uuid "1e14cf1b-383d-46c2-be66-17a04fa69317")
 	)
+	(model "C:/projects/sdmay25-29/KiCadProjects/parts/footprints/connectors/1x2_Connector.STEP"
+		(offset
+			(xyz 1.25 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 0 0)
+		)
+	)
 )

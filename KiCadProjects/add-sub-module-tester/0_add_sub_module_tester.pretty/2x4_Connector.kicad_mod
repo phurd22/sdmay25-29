@@ -276,4 +276,15 @@
 		(solder_mask_margin 0.102)
 		(uuid "b949adc5-8237-451d-a1ce-b93bdd9dab87")
 	)
+	(model "C:/projects/sdmay25-29/KiCadProjects/parts/footprints/connectors/2x4_Connector.step"
+		(offset
+			(xyz 3.75 1.25 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 0 0)
+		)
+	)
 )

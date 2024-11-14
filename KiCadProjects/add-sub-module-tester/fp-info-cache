@@ -1,4 +1,4 @@
-24201431038797302
+24218747069548175
 0_add_sub_module_tester
 1x2_Connector
 
@@ -14,6 +14,62 @@ PPTC021LFBN-RC
 8
 8
 0_add_sub_module_tester
+AP6503
+8-Lead Plastic SO, Exposed Die Pad (see https://www.diodes.com/assets/Package-Files/SO-8EP.pdf)
+SO exposed pad
+0
+9
+9
+0_add_sub_module_tester
+CP_Elec_4x5.4
+SMD capacitor, aluminum electrolytic, Panasonic A5 / Nichicon, 4.0x5.4mm
+capacitor electrolytic
+0
+2
+2
+0_add_sub_module_tester
+CP_Elec_6.3x7.7
+SMD capacitor, aluminum electrolytic, Nichicon, 6.3x7.7mm
+capacitor electrolytic
+0
+2
+2
+0_add_sub_module_tester
+C_0603_1608Metric
+Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator
+capacitor
+0
+2
+2
+0_add_sub_module_tester
+Fuse_Holder
+
+
+0
+2
+2
+0_add_sub_module_tester
+IND-SMD_L4.5-W4.0
+
+
+0
+2
+2
+0_add_sub_module_tester
+Jack_Connector
+
+
+0
+3
+3
+0_add_sub_module_tester
+LED_0805_2012Metric
+LED SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator
+LED
+0
+2
+2
+0_add_sub_module_tester
 MountingHole_2.2mm_M2_Pad
 Mounting Hole 2.2mm, M2
 mounting hole 2.2mm m2
@@ -21,12 +77,26 @@ mounting hole 2.2mm m2
 1
 1
 0_add_sub_module_tester
+R_0603_1608Metric
+Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator
+resistor
+0
+2
+2
+0_add_sub_module_tester
 R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal
 Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=7.62mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf
 Resistor Axial_DIN0207 series Axial Horizontal pin pitch 7.62mm 0.25W = 1/4W length 6.3mm diameter 2.5mm
 0
 2
 2
+0_add_sub_module_tester
+Slide_Switch_Angled
+
+MFS201N-16-Z 
+0
+8
+8
 0_add_sub_module_tester
 Toggle_Switch_3PIN
 
