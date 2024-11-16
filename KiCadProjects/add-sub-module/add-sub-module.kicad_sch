@@ -5883,7 +5883,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" ""
+		(property "Part No" "C84772"
 			(at 22.86 49.53 0)
 			(effects
 				(font
@@ -5892,7 +5892,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" ""
+		(property "Link" "https://jlcpcb.com/partdetail/85943-CT40805B104K500F3/C84772"
 			(at 22.86 49.53 0)
 			(effects
 				(font
@@ -6265,7 +6265,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "0_add_sub:DIP_14"
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
 			(at 231.14 114.3 0)
 			(effects
 				(font
@@ -6294,7 +6294,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "296-2083-5-ND"
+		(property "Part No" "C2879109"
 			(at 231.14 114.3 0)
 			(effects
 				(font
@@ -6303,7 +6303,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://www.digikey.com/en/products/detail/texas-instruments/CD74HCT04E/38238"
+		(property "Link" "https://jlcpcb.com/partdetail/TexasInstruments-CD74HCT04E/C2879109"
 			(at 231.14 114.3 0)
 			(effects
 				(font
@@ -6569,7 +6569,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" ""
+		(property "Part No" "C84772"
 			(at 22.86 92.71 0)
 			(effects
 				(font
@@ -6578,7 +6578,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" ""
+		(property "Link" "https://jlcpcb.com/partdetail/85943-CT40805B104K500F3/C84772"
 			(at 22.86 92.71 0)
 			(effects
 				(font
@@ -6712,7 +6712,7 @@
 				)
 			)
 		)
-		(property "Footprint" "0_add_sub:1x2_Header"
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
 			(at 30.48 186.69 0)
 			(effects
 				(font
@@ -6741,7 +6741,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "SAM10326-ND"
+		(property "Part No" "C3329876"
 			(at 30.48 186.69 0)
 			(effects
 				(font
@@ -6750,7 +6750,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://www.digikey.com/en/products/detail/samtec-inc/TSW-102-23-F-S/6679063"
+		(property "Link" "https://jlcpcb.com/partdetail/Samtec-TSW_102_23_FS/C3329876"
 			(at 30.48 186.69 0)
 			(effects
 				(font
@@ -6819,7 +6819,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "0_add_sub:DIP_14"
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
 			(at 40.64 114.3 0)
 			(effects
 				(font
@@ -6848,7 +6848,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "296-2086-5-ND"
+		(property "Part No" "C2862275"
 			(at 40.64 114.3 0)
 			(effects
 				(font
@@ -6857,7 +6857,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://www.digikey.com/en/products/detail/texas-instruments/CD74HCT10E/38242?s=N4IgTCBcDaIMIBEDsAWAEnAKgRgAwFEQBdAXyA"
+		(property "Link" "https://jlcpcb.com/partdetail/TexasInstruments-CD74HCT10E/C2862275"
 			(at 40.64 114.3 0)
 			(effects
 				(font
@@ -7432,7 +7432,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" ""
+		(property "Part No" "C84772"
 			(at 22.86 114.3 0)
 			(effects
 				(font
@@ -7441,7 +7441,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" ""
+		(property "Link" "https://jlcpcb.com/partdetail/85943-CT40805B104K500F3/C84772"
 			(at 22.86 114.3 0)
 			(effects
 				(font
@@ -8066,7 +8066,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "0_add_sub:DIP_14"
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
 			(at 134.62 114.3 0)
 			(effects
 				(font
@@ -8095,7 +8095,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "296-8380-5-ND"
+		(property "Part No" "C354417"
 			(at 134.62 114.3 0)
 			(effects
 				(font
@@ -8104,7 +8104,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://www.digikey.com/en/products/detail/texas-instruments/SN74HCT02N/376866"
+		(property "Link" "https://jlcpcb.com/partdetail/TexasInstruments-SN74HCT02N/C354417"
 			(at 134.62 114.3 0)
 			(effects
 				(font
@@ -8578,7 +8578,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "0_add_sub:DIP_14"
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
 			(at 86.36 114.3 0)
 			(effects
 				(font
@@ -8607,7 +8607,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "296-1603-5-ND"
+		(property "Part No" "C354416"
 			(at 86.36 114.3 0)
 			(effects
 				(font
@@ -8616,7 +8616,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://www.digikey.com/en/products/detail/texas-instruments/SN74HCT00N/277249"
+		(property "Link" "https://jlcpcb.com/partdetail/TexasInstruments-SN74HCT00N/C354416"
 			(at 86.36 114.3 0)
 			(effects
 				(font
@@ -9103,7 +9103,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" ""
+		(property "Part No" "C84772"
 			(at 22.86 71.12 0)
 			(effects
 				(font
@@ -9112,7 +9112,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" ""
+		(property "Link" "https://jlcpcb.com/partdetail/85943-CT40805B104K500F3/C84772"
 			(at 22.86 71.12 0)
 			(effects
 				(font
@@ -9609,7 +9609,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "0_add_sub:DIP_16"
+		(property "Footprint" "Package_DIP:DIP-16_W7.62mm"
 			(at 180.34 114.3 0)
 			(effects
 				(font
@@ -9638,7 +9638,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "296-8406-5-ND"
+		(property "Part No" "C1547251"
 			(at 180.34 114.3 0)
 			(effects
 				(font
@@ -9647,7 +9647,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://www.digikey.com/en/products/detail/texas-instruments/SN74HCT257N/376803?s=N4IgTCBcDaIMoDkDsAWAEgYQCpgKxIRAF0BfIA"
+		(property "Link" "https://jlcpcb.com/partdetail/TexasInstruments-SN74HCT257N/C1547251"
 			(at 180.34 114.3 0)
 			(effects
 				(font
@@ -9786,7 +9786,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" ""
+		(property "Part No" "C84772"
 			(at 22.86 27.94 0)
 			(effects
 				(font
@@ -9795,7 +9795,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" ""
+		(property "Link" "https://jlcpcb.com/partdetail/85943-CT40805B104K500F3/C84772"
 			(at 22.86 27.94 0)
 			(effects
 				(font
@@ -9929,7 +9929,7 @@
 				)
 			)
 		)
-		(property "Footprint" "0_add_sub:2x4_Header"
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_2x04_P2.54mm_Vertical"
 			(at 30.48 160.02 0)
 			(effects
 				(font
@@ -9958,7 +9958,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "SAM8996-ND"
+		(property "Part No" "C6339738"
 			(at 30.48 160.02 0)
 			(effects
 				(font
@@ -9967,7 +9967,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://www.digikey.com/en/products/detail/samtec-inc/TSW-104-07-F-D/2685891"
+		(property "Link" "https://jlcpcb.com/partdetail/Samtec-TSW_104_07_FD/C6339738"
 			(at 30.48 160.02 0)
 			(effects
 				(font
