@@ -5883,7 +5883,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "C84772"
+		(property "Part No" ""
 			(at 22.86 49.53 0)
 			(effects
 				(font
@@ -5892,7 +5892,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://jlcpcb.com/partdetail/85943-CT40805B104K500F3/C84772"
+		(property "Link" "https://www.newark.com/multicomp/mc0805b104k500a5-08mm/ceramic-capacitor-0-1uf-50v-x7r/dp/46P6240"
 			(at 22.86 49.53 0)
 			(effects
 				(font
@@ -6265,7 +6265,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm_Socket"
 			(at 231.14 114.3 0)
 			(effects
 				(font
@@ -6294,7 +6294,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "C2879109"
+		(property "Part No" ""
 			(at 231.14 114.3 0)
 			(effects
 				(font
@@ -6303,7 +6303,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://jlcpcb.com/partdetail/TexasInstruments-CD74HCT04E/C2879109"
+		(property "Link" "https://www.digikey.com/en/products/detail/texas-instruments/CD74HCT04E/38238"
 			(at 231.14 114.3 0)
 			(effects
 				(font
@@ -6569,7 +6569,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "C84772"
+		(property "Part No" ""
 			(at 22.86 92.71 0)
 			(effects
 				(font
@@ -6578,7 +6578,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://jlcpcb.com/partdetail/85943-CT40805B104K500F3/C84772"
+		(property "Link" "https://www.newark.com/multicomp/mc0805b104k500a5-08mm/ceramic-capacitor-0-1uf-50v-x7r/dp/46P6240"
 			(at 22.86 92.71 0)
 			(effects
 				(font
@@ -6819,7 +6819,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm_Socket"
 			(at 40.64 114.3 0)
 			(effects
 				(font
@@ -6848,7 +6848,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "C2862275"
+		(property "Part No" ""
 			(at 40.64 114.3 0)
 			(effects
 				(font
@@ -6857,7 +6857,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://jlcpcb.com/partdetail/TexasInstruments-CD74HCT10E/C2862275"
+		(property "Link" "https://www.digikey.com/en/products/detail/texas-instruments/CD74HCT10E/38242"
 			(at 40.64 114.3 0)
 			(effects
 				(font
@@ -7432,7 +7432,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "C84772"
+		(property "Part No" ""
 			(at 22.86 114.3 0)
 			(effects
 				(font
@@ -7441,7 +7441,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://jlcpcb.com/partdetail/85943-CT40805B104K500F3/C84772"
+		(property "Link" "https://www.newark.com/multicomp/mc0805b104k500a5-08mm/ceramic-capacitor-0-1uf-50v-x7r/dp/46P6240"
 			(at 22.86 114.3 0)
 			(effects
 				(font
@@ -8066,7 +8066,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm_Socket"
 			(at 134.62 114.3 0)
 			(effects
 				(font
@@ -8095,7 +8095,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "C354417"
+		(property "Part No" ""
 			(at 134.62 114.3 0)
 			(effects
 				(font
@@ -8104,7 +8104,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://jlcpcb.com/partdetail/TexasInstruments-SN74HCT02N/C354417"
+		(property "Link" "https://www.digikey.com/en/products/detail/texas-instruments/SN74HCT02N/376866"
 			(at 134.62 114.3 0)
 			(effects
 				(font
@@ -8578,7 +8578,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
+		(property "Footprint" "Package_DIP:DIP-14_W7.62mm_Socket"
 			(at 86.36 114.3 0)
 			(effects
 				(font
@@ -8607,7 +8607,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "C354416"
+		(property "Part No" ""
 			(at 86.36 114.3 0)
 			(effects
 				(font
@@ -8616,7 +8616,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://jlcpcb.com/partdetail/TexasInstruments-SN74HCT00N/C354416"
+		(property "Link" "https://www.digikey.com/en/products/detail/texas-instruments/SN74HCT00N/277249"
 			(at 86.36 114.3 0)
 			(effects
 				(font
@@ -9103,7 +9103,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "C84772"
+		(property "Part No" ""
 			(at 22.86 71.12 0)
 			(effects
 				(font
@@ -9112,7 +9112,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://jlcpcb.com/partdetail/85943-CT40805B104K500F3/C84772"
+		(property "Link" "https://www.newark.com/multicomp/mc0805b104k500a5-08mm/ceramic-capacitor-0-1uf-50v-x7r/dp/46P6240"
 			(at 22.86 71.12 0)
 			(effects
 				(font
@@ -9609,7 +9609,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-16_W7.62mm"
+		(property "Footprint" "Package_DIP:DIP-16_W7.62mm_Socket"
 			(at 180.34 114.3 0)
 			(effects
 				(font
@@ -9638,7 +9638,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "C1547251"
+		(property "Part No" ""
 			(at 180.34 114.3 0)
 			(effects
 				(font
@@ -9647,7 +9647,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://jlcpcb.com/partdetail/TexasInstruments-SN74HCT257N/C1547251"
+		(property "Link" "https://www.digikey.com/en/products/detail/texas-instruments/SN74HCT257N/376803"
 			(at 180.34 114.3 0)
 			(effects
 				(font
@@ -9786,7 +9786,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "C84772"
+		(property "Part No" ""
 			(at 22.86 27.94 0)
 			(effects
 				(font
@@ -9795,7 +9795,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://jlcpcb.com/partdetail/85943-CT40805B104K500F3/C84772"
+		(property "Link" "https://www.newark.com/multicomp/mc0805b104k500a5-08mm/ceramic-capacitor-0-1uf-50v-x7r/dp/46P6240"
 			(at 22.86 27.94 0)
 			(effects
 				(font
