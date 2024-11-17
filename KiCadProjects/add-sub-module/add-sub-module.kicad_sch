@@ -6722,7 +6722,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/6129/tsw-xxx-xx-xxx-x-xx-xxx-mkt.pdf"
 			(at 30.48 186.69 0)
 			(effects
 				(font
@@ -6750,7 +6750,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://jlcpcb.com/partdetail/Samtec-TSW_102_23_FS/C3329876"
+		(property "Link" "https://www.digikey.com/en/products/detail/samtec-inc/TSW-102-23-F-S/6679063"
 			(at 30.48 186.69 0)
 			(effects
 				(font
@@ -9939,7 +9939,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/6129/tsw-xxx-xx-xxx-x-xx-xxx-mkt.pdf"
 			(at 30.48 160.02 0)
 			(effects
 				(font
@@ -9967,7 +9967,7 @@
 				(hide yes)
 			)
 		)
-		(property "Link" "https://jlcpcb.com/partdetail/Samtec-TSW_104_07_FD/C6339738"
+		(property "Link" "https://www.digikey.com/en/products/detail/samtec-inc/TSW-104-07-F-D/2685891"
 			(at 30.48 160.02 0)
 			(effects
 				(font
