@@ -6294,7 +6294,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" ""
+		(property "Part No" "C2325"
 			(at 231.14 114.3 0)
 			(effects
 				(font
@@ -6848,7 +6848,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" ""
+		(property "Part No" "C2325"
 			(at 40.64 114.3 0)
 			(effects
 				(font
@@ -8095,7 +8095,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" ""
+		(property "Part No" "C2325"
 			(at 134.62 114.3 0)
 			(effects
 				(font
@@ -8607,7 +8607,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" ""
+		(property "Part No" "C2325"
 			(at 86.36 114.3 0)
 			(effects
 				(font
@@ -9638,7 +9638,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" ""
+		(property "Part No" "C2326"
 			(at 180.34 114.3 0)
 			(effects
 				(font
