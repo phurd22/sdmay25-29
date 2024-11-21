@@ -8,11 +8,11 @@ numbers = []
 if len(sys.argv) == 1:
     lower_bound = -(2**49)
     upper_bound = (2**49) - 1
-    numbers = [random.randint(lower_bound, upper_bound) for i in range(50)]
+    numbers = [random.randint(lower_bound, upper_bound) for i in range(30)]
     numbers_string = ",".join(map(str, numbers))
     with open("generated_numbers.txt", "w") as file:
         file.write(numbers_string)
-elif len(sys.argv) == 2:
+elif len(sys.argv) == 2 and not sys.argv[1].isnumeric:
     filename = sys.argv[1]
     with open(sys.argv[1], "r") as file:
         numbers = file.read().strip().split(",")
@@ -27,10 +27,10 @@ pdf.add_page()
 
 # Set dot dimensions and spacing
 dot_radius = 2
-x_offset = 7
-x_spacer = 6.68965
-y_offset = 7
-y_spacer = 5.73469
+x_offset = 13
+y_offset = 13
+x_spacer = (208 - (x_offset * 2)) / 29
+y_spacer = (295 - (y_offset * 2)) / 49
 
 # Right side of page x = 208
 # Bottom of page y = 295
@@ -51,6 +51,12 @@ for row in range(len(numbers)):
             y = y_offset + col * y_spacer
             pdf.set_fill_color(0)
             pdf.ellipse(x, y, dot_radius, dot_radius, "F")
+            
+# Add labels for least significant bit and first number
+label_y = y_offset + 49 * y_spacer
+pdf.set_font("Arial", size=8)
+pdf.text(x_spacer, label_y + dot_radius, "b0")
+pdf.text(x_offset, label_y + dot_radius + y_offset / 2, "n0")
 
 # Save PDF
 pdf.output("bit_grid.pdf")
