@@ -6,175 +6,196 @@
     android:layout_height="match_parent"
     android:background="@color/gold">
 
-    <GridLayout
-        android:layout_width="330dp"
-        android:layout_height="317dp"
-        android:layout_marginBottom="16dp"
-        android:alignmentMode="alignMargins"
-        android:columnCount="3"
-        android:padding="16dp"
-        android:rowCount="4"
-        android:useDefaultMargins="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <!-- Button 1 -->
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="60sp" />
+
+        <com.example.abcbuddyapp.PunchcardView
+            android:id="@+id/punchcard"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_row="0"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
-            android:backgroundTint="@color/cardinal"
-            android:text="1" />
+            android:layout_weight="1" />
 
-        <!-- Button 2 -->
-        <Button
-            android:backgroundTint="@color/cardinal"
-            android:id="@+id/button2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_row="0"
-            android:layout_rowWeight="1"
-            android:layout_column="1"
-            android:layout_columnWeight="1"
-            android:text="2" />
+        <GridLayout
+            android:id="@+id/numpad"
+            android:layout_width="330dp"
+            android:layout_height="317dp"
+            android:layout_marginBottom="16dp"
+            android:alignmentMode="alignMargins"
+            android:columnCount="3"
+            android:padding="16dp"
+            android:rowCount="4"
+            android:useDefaultMargins="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-        <!-- Button 3 -->
-        <Button
-            android:backgroundTint="@color/cardinal"
-            android:id="@+id/button3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_row="0"
-            android:layout_rowWeight="1"
-            android:layout_column="2"
-            android:layout_columnWeight="1"
-            android:text="3" />
+            <!-- Button 1 -->
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="0"
+                android:layout_rowWeight="1"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:backgroundTint="@color/cardinal"
+                android:text="1" />
 
-        <!-- Button 4 -->
-        <Button
-            android:backgroundTint="@color/cardinal"
-            android:id="@+id/button4"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_row="1"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
-            android:text="4" />
+            <!-- Button 2 -->
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="0"
+                android:layout_rowWeight="1"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:backgroundTint="@color/cardinal"
+                android:text="2" />
 
-        <!-- Button 5 -->
-        <Button
-            android:backgroundTint="@color/cardinal"
-            android:id="@+id/button5"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_row="1"
-            android:layout_rowWeight="1"
-            android:layout_column="1"
-            android:layout_columnWeight="1"
-            android:text="5" />
+            <!-- Button 3 -->
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="0"
+                android:layout_rowWeight="1"
+                android:layout_column="2"
+                android:layout_columnWeight="1"
+                android:backgroundTint="@color/cardinal"
+                android:text="3" />
 
-        <!-- Button 6 -->
-        <Button
-            android:backgroundTint="@color/cardinal"
-            android:id="@+id/button6"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_row="1"
-            android:layout_rowWeight="1"
-            android:layout_column="2"
-            android:layout_columnWeight="1"
-            android:text="6" />
+            <!-- Button 4 -->
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="1"
+                android:layout_rowWeight="1"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:backgroundTint="@color/cardinal"
+                android:text="4" />
 
-        <!-- Button 7 -->
-        <Button
-            android:backgroundTint="@color/cardinal"
-            android:id="@+id/button7"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_row="2"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
-            android:text="7" />
+            <!-- Button 5 -->
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="1"
+                android:layout_rowWeight="1"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:backgroundTint="@color/cardinal"
+                android:text="5" />
 
-        <!-- Button 8 -->
-        <Button
-            android:backgroundTint="@color/cardinal"
-            android:id="@+id/button8"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_row="2"
-            android:layout_rowWeight="1"
-            android:layout_column="1"
-            android:layout_columnWeight="1"
-            android:text="8" />
+            <!-- Button 6 -->
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="1"
+                android:layout_rowWeight="1"
+                android:layout_column="2"
+                android:layout_columnWeight="1"
+                android:backgroundTint="@color/cardinal"
+                android:text="6" />
 
-        <!-- Button 9 -->
-        <Button
-            android:backgroundTint="@color/cardinal"
-            android:id="@+id/button9"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_row="2"
-            android:layout_rowWeight="1"
-            android:layout_column="2"
-            android:layout_columnWeight="1"
-            android:text="9" />
+            <!-- Button 7 -->
+            <Button
+                android:id="@+id/button7"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="2"
+                android:layout_rowWeight="1"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:backgroundTint="@color/cardinal"
+                android:text="7" />
 
-        <!-- Button 10 -->
-        <Button
-            android:backgroundTint="@color/cardinal"
-            android:id="@+id/buttonClear"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_row="3"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
-            android:text="C" />
+            <!-- Button 8 -->
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="2"
+                android:layout_rowWeight="1"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:backgroundTint="@color/cardinal"
+                android:text="8" />
 
-        <!-- Button 11 -->
-        <Button
-            android:backgroundTint="@color/cardinal"
-            android:id="@+id/button0"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_row="3"
-            android:layout_rowWeight="1"
-            android:layout_column="1"
-            android:layout_columnWeight="1"
-            android:text="0" />
+            <!-- Button 9 -->
+            <Button
+                android:id="@+id/button9"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="2"
+                android:layout_rowWeight="1"
+                android:layout_column="2"
+                android:layout_columnWeight="1"
+                android:backgroundTint="@color/cardinal"
+                android:text="9" />
 
-        <!-- Button 12 -->
-        <Button
-            android:backgroundTint="@color/cardinal"
-            android:id="@+id/buttonVariable"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_row="3"
-            android:layout_rowWeight="1"
-            android:layout_column="2"
-            android:layout_columnWeight="1"
-            android:text="X" />
+            <!-- Button 10 -->
+            <Button
+                android:id="@+id/buttonClear"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="3"
+                android:layout_rowWeight="1"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:backgroundTint="@color/cardinal"
+                android:text="C" />
 
-    </GridLayout>
+            <!-- Button 11 -->
+            <Button
+                android:id="@+id/button0"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="3"
+                android:layout_rowWeight="1"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:backgroundTint="@color/cardinal"
+                android:text="0" />
 
-    <TextView
-        android:id="@+id/equation"
-        android:layout_width="1279dp"
-        android:layout_height="95dp"
-        android:layout_marginTop="4dp"
-        android:text="2x + 4y = 8"
-        android:textAlignment="center"
-        android:textSize="60sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <!-- Button 12 -->
+            <Button
+                android:id="@+id/buttonVariable"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_row="3"
+                android:layout_rowWeight="1"
+                android:layout_column="2"
+                android:layout_columnWeight="1"
+                android:backgroundTint="@color/cardinal"
+                android:text="X" />
+
+        </GridLayout>
+    </LinearLayout>
+
+<!--    <TextView-->
+<!--        android:id="@+id/equation"-->
+<!--        android:layout_width="1279dp"-->
+<!--        android:layout_height="95dp"-->
+<!--        android:layout_marginTop="4dp"-->
+<!--        android:text="2x + 4y = 8"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textSize="60sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="1.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
