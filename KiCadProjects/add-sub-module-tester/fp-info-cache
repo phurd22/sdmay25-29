@@ -1,4 +1,4 @@
-24218747069548175
+24218758656290984
 0_add_sub_module_tester
 1x2_Connector
 
@@ -97,13 +97,6 @@ MFS201N-16-Z
 0
 8
 8
-0_add_sub_module_tester
-Toggle_Switch_3PIN
-
-ANT13SECQE 
-0
-3
-3
 0_add_sub_module_tester
 empire
 
@@ -98090,3 +98083,10 @@ Varistor VF
 0
 2
 2
+easyeda2kicad
+SW-TH_SK12D07VG5
+
+
+0
+5
+5
