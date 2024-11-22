@@ -2708,7 +2708,7 @@
 				)
 			)
 		)
-		(property "Value" "SN74HCT257N"
+		(property "Value" "IC-16P"
 			(at 3.81 20.11 0)
 			(layer "F.Fab")
 			(uuid "41facd48-788a-451b-b1bf-069bff58bea3")
@@ -2732,7 +2732,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "SN74HCT257N"
+		(property "Datasheet" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -2745,7 +2745,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "SN74HCT257N"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4051,7 +4051,7 @@
 				)
 			)
 		)
-		(property "Value" "CD74HCT10E"
+		(property "Value" "IC-14P"
 			(at 3.81 17.57 0)
 			(layer "F.Fab")
 			(uuid "4014b5c8-fba6-4b80-b0f4-b5179c5f226b")
@@ -4075,7 +4075,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "CD74HCT10E"
+		(property "Datasheet" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4088,7 +4088,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "CD74HCT10E"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -5372,7 +5372,7 @@
 				)
 			)
 		)
-		(property "Value" "SN74HCT00N"
+		(property "Value" "IC-14P"
 			(at 3.81 17.57 0)
 			(layer "F.Fab")
 			(uuid "02875edf-dab1-46e5-a8f1-7d7b0097bf82")
@@ -5396,7 +5396,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "SN74HCT00N"
+		(property "Datasheet" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -5409,7 +5409,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "SN74HCT00N"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -5904,7 +5904,7 @@
 				)
 			)
 		)
-		(property "Value" "SN74HCT02N"
+		(property "Value" "IC-14P"
 			(at 3.81 17.57 0)
 			(layer "F.Fab")
 			(uuid "80c63ca1-8ba6-4479-bd81-321cc367cb80")
@@ -5928,7 +5928,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "SN74HCT02N"
+		(property "Datasheet" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -5941,7 +5941,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "SN74HCT02N"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -7074,7 +7074,7 @@
 				)
 			)
 		)
-		(property "Value" "CD74HCT04E"
+		(property "Value" "IC-14P"
 			(at 3.81 17.57 0)
 			(layer "F.Fab")
 			(uuid "c41b764b-b254-477e-9178-c40c2ab37816")
@@ -7098,7 +7098,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "CD74HCT04E"
+		(property "Datasheet" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -7111,7 +7111,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "CD74HCT04E"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
