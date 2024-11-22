@@ -2745,7 +2745,7 @@
 				)
 			)
 		)
-		(property "Description" "SN74HCT257N"
+		(property "Description" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4088,7 +4088,7 @@
 				)
 			)
 		)
-		(property "Description" "CD74HCT10E"
+		(property "Description" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -5409,7 +5409,7 @@
 				)
 			)
 		)
-		(property "Description" "SN74HCT00N"
+		(property "Description" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -5941,7 +5941,7 @@
 				)
 			)
 		)
-		(property "Description" "SN74HCT02N"
+		(property "Description" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -7111,7 +7111,7 @@
 				)
 			)
 		)
-		(property "Description" "CD74HCT04E"
+		(property "Description" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")

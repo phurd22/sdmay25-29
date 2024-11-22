@@ -6400,7 +6400,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "CD74HCT04E"
+		(property "Description" ""
 			(at 231.14 114.3 0)
 			(effects
 				(font
@@ -6987,7 +6987,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "CD74HCT10E"
+		(property "Description" ""
 			(at 40.64 114.3 0)
 			(effects
 				(font
@@ -8478,7 +8478,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "SN74HCT02N"
+		(property "Description" ""
 			(at 134.62 114.3 0)
 			(effects
 				(font
@@ -9195,7 +9195,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "SN74HCT00N"
+		(property "Description" ""
 			(at 86.36 114.3 0)
 			(effects
 				(font
@@ -10292,7 +10292,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "SN74HCT257N"
+		(property "Description" ""
 			(at 180.34 114.3 0)
 			(effects
 				(font

@@ -4191,7 +4191,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part No" "  C136744"
+		(property "Part No" "C136744"
 			(at 128.27 104.14 0)
 			(effects
 				(font
@@ -4209,7 +4209,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "  C136744"
+		(property "LCSC" "C136744"
 			(at 128.27 104.14 0)
 			(effects
 				(font

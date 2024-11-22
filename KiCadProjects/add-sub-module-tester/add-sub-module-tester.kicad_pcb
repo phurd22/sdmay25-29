@@ -3395,7 +3395,7 @@
 				)
 			)
 		)
-		(property "Part No" "  C136744"
+		(property "Part No" "C136744"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -3421,7 +3421,7 @@
 				)
 			)
 		)
-		(property "LCSC" "  C136744"
+		(property "LCSC" "C136744"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
