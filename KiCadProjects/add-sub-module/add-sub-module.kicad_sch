@@ -6371,7 +6371,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "CD74HCT04E"
+		(property "Value" "IC-14P"
 			(at 232.156 80.518 90)
 			(effects
 				(font
@@ -6390,7 +6390,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "CD74HCT04E"
+		(property "Datasheet" ""
 			(at 231.14 114.3 0)
 			(effects
 				(font
@@ -6400,7 +6400,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "CD74HCT04E"
 			(at 231.14 114.3 0)
 			(effects
 				(font
@@ -6958,7 +6958,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "CD74HCT10E"
+		(property "Value" "IC-14P"
 			(at 41.656 80.264 90)
 			(effects
 				(font
@@ -6977,7 +6977,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "CD74HCT10E"
+		(property "Datasheet" ""
 			(at 40.64 114.3 0)
 			(effects
 				(font
@@ -6987,7 +6987,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "CD74HCT10E"
 			(at 40.64 114.3 0)
 			(effects
 				(font
@@ -8449,7 +8449,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "SN74HCT02N"
+		(property "Value" "IC-14P"
 			(at 135.128 80.264 90)
 			(effects
 				(font
@@ -8468,7 +8468,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "SN74HCT02N"
+		(property "Datasheet" ""
 			(at 134.62 114.3 0)
 			(effects
 				(font
@@ -8478,7 +8478,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "SN74HCT02N"
 			(at 134.62 114.3 0)
 			(effects
 				(font
@@ -9166,7 +9166,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "SN74HCT00N"
+		(property "Value" "IC-14P"
 			(at 87.376 80.264 90)
 			(effects
 				(font
@@ -9185,7 +9185,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "SN74HCT00N"
+		(property "Datasheet" ""
 			(at 86.36 114.3 0)
 			(effects
 				(font
@@ -9195,7 +9195,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "SN74HCT00N"
 			(at 86.36 114.3 0)
 			(effects
 				(font
@@ -10263,7 +10263,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "SN74HCT257N"
+		(property "Value" "IC-16P"
 			(at 181.356 80.01 90)
 			(effects
 				(font
@@ -10282,7 +10282,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "SN74HCT257N"
+		(property "Datasheet" ""
 			(at 180.34 114.3 0)
 			(effects
 				(font
@@ -10292,7 +10292,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "SN74HCT257N"
 			(at 180.34 114.3 0)
 			(effects
 				(font
