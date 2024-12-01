@@ -12,10 +12,13 @@ import java.util.List;
 
 public class PunchcardView extends View {
 
-    private List<String> equationParts = new ArrayList<>(); // Store equation parts
-    private Paint paint;
-    private int cellSize = 50; // Size of each binary cell
-    private int padding = 10; // Padding between rows
+    private static final int NUM_COLUMNS = 75; // Total columns
+    private static final int NUM_ROWS = 10;    // Total rows
+
+    private List<List<Boolean>> punchedGrid; // Store punched status for each cell
+    private Paint greyPaint, blackPaint;
+    private int cellWidth, cellHeight; // Width and height of each punch area
+    private int padding = 8; // Padding between cells
 
     public PunchcardView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -23,47 +26,85 @@ public class PunchcardView extends View {
     }
 
     private void init() {
-        paint = new Paint();
-        paint.setColor(Color.BLACK);
-        paint.setTextSize(40);
-        paint.setStyle(Paint.Style.FILL);
+        punchedGrid = new ArrayList<>();
+        for (int col = 0; col < NUM_COLUMNS; col++) {
+            List<Boolean> column = new ArrayList<>();
+            for (int row = 0; row < NUM_ROWS; row++) {
+                column.add(false); // Initially, no punches
+            }
+            punchedGrid.add(column);
+        }
+
+        greyPaint = new Paint();
+        greyPaint.setColor(Color.LTGRAY);
+        greyPaint.setStyle(Paint.Style.FILL);
+
+        blackPaint = new Paint();
+        blackPaint.setColor(Color.BLACK);
+        blackPaint.setStyle(Paint.Style.FILL);
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+
+        // Dynamically calculate cell sizes based on view dimensions
+        int totalPadding = padding * (NUM_COLUMNS - 1);
+        cellWidth = (w - totalPadding) / NUM_COLUMNS;
+        cellHeight = (h - totalPadding) / NUM_ROWS;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        int startY = padding;
+        int startX = 0;
 
-        for (String part : equationParts) {
-            drawEquationPart(canvas, part, startY);
-            startY += cellSize + padding; // Move to the next row
-        }
-    }
+        for (int col = 0; col < NUM_COLUMNS; col++) {
+            int startY = 0;
 
-    private void drawEquationPart(Canvas canvas, String part, int y) {
-        int startX = padding;
+            // Draw greyed-out punch positions for this column
+            for (int row = 0; row < NUM_ROWS; row++) {
+                float rectLeft = startX;
+                float rectTop = startY;
+                float rectRight = startX + cellWidth;
+                float rectBottom = startY + cellHeight;
 
-        for (char bit : part.toCharArray()) {
-            if (bit == '1') {
-                canvas.drawCircle(startX + cellSize / 2, y + cellSize / 2, cellSize / 3, paint); // Draw a hole for 1
-            } else {
-                // Leave blank for 0
+                canvas.drawRoundRect(rectLeft, rectTop, rectRight, rectBottom, 10, 10, greyPaint);
+
+                // Draw punched hole if marked
+                if (punchedGrid.get(col).get(row)) {
+                    float cx = startX + cellWidth / 2f;
+                    float cy = startY + cellHeight / 2f;
+                    float radius = Math.min(cellWidth, cellHeight) / 2.5f; // Larger radius
+                    canvas.drawCircle(cx, cy, radius, blackPaint);
+                }
+
+                startY += cellHeight + padding; // Move to next row
             }
-            startX += cellSize; // Move to the next cell
+
+            startX += cellWidth + padding; // Move to the next column
         }
     }
 
-    public void addEquationPart(String binaryPart) {
-        equationParts.add(binaryPart);
-        invalidate(); // Redraw the view
+    public void punchCell(int column, int row) {
+        if (column >= 0 && column < NUM_COLUMNS && row >= 0 && row < NUM_ROWS) {
+            punchedGrid.get(column).set(row, true);
+            invalidate(); // Redraw the view
+        }
     }
 
-    public void clearEquationParts() {
-        equationParts.clear();
+    public void clearPunches() {
+        for (List<Boolean> column : punchedGrid) {
+            for (int row = 0; row < NUM_ROWS; row++) {
+                column.set(row, false);
+            }
+        }
         invalidate(); // Redraw the view
     }
-
 }
+
+
+
 
 
