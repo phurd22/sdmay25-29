@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean awaitingVariable; // Tracks whether a variable should follow the current coefficient
     private int segmentStartColumn; // Tracks the start of each 15-column segment
     private boolean isNegative, isPositive; // Indicates if the current part of the equation is negative
+    private boolean isFirstNumber;
+    private int currentVariableIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         segmentStartColumn = 0;
         isNegative = false;
         isPositive = false;
+        isFirstNumber = true;
+        currentVariableIndex = 0;
 
         // Setup numpad buttons
         GridLayout numpad = findViewById(R.id.numpad);
@@ -62,46 +66,57 @@ public class MainActivity extends AppCompatActivity {
                 char nextVariable = getNextVariable();
                 currentEquation.append(nextVariable);
                 awaitingVariable = false;
+                currentVariableIndex++;
 
                 // Move to next segment
                 segmentStartColumn += 15;
                 currentColumn = segmentStartColumn;
                 isNegative = false; // Reset negative indicator
                 isPositive = false;
+                isFirstNumber = true;
             }
         } else {
             int number = Integer.parseInt(input);
-            if (number == 0) {
+            if (number == 0 && isFirstNumber) {
                 // User entered 0 as a leading digit (negative indicator)
                 isPositive = false;
                 isNegative = true;
+                isFirstNumber = false;
+            } else if (number != 0 && isFirstNumber) {
+                isPositive = true;
+                isNegative = false;
+                isFirstNumber = false;
+                if (currentColumn != 0) {
+                    currentEquation.append("+");
+                }
+                currentEquation.append(number);
             } else {
                 currentEquation.append(number);
+                isFirstNumber = false;
                 if (isNegative) {
                     currentEquation.insert(currentEquation.length() - 1, "-");
                     isNegative = false;
                 }
-            }
-            if (number != 0) {
-                isPositive = true;
-            } else {
-                currentEquation.append(number);
-                if (isPositive) {
-                    currentEquation.insert(currentEquation.length() - 1, "+");
-                    isPositive = false;
-                }
+//                if (isPositive && !isFirstNumber) {
+//                    currentEquation.insert(currentEquation.length() - 1, "+");
+//                    currentEquation.append(number);
+//                    isPositive = false;
+//                }
             }
             punchNumber(number);
-            awaitingVariable = true;
+            if (!isFirstNumber) {
+                awaitingVariable = true;
+            }
         }
 
         equationTextView.setText(currentEquation.toString());
     }
 
     private char getNextVariable() {
-        String variables = "xyzw";
-        int index = (currentEquation.length() - segmentStartColumn) / 15;
-        return variables.charAt(index % variables.length());
+        String variables = "xyzwj";
+        return variables.charAt(currentVariableIndex);
+//        int index = (currentEquation.length() - segmentStartColumn) / 15;
+//        return variables.charAt(index % variables.length());
     }
 
     private void punchNumber(int number) {
@@ -118,5 +133,8 @@ public class MainActivity extends AppCompatActivity {
         equationTextView.setText("Please enter an equation");
         awaitingVariable = false;
         isNegative = false;
+        isPositive = false;
+        isFirstNumber = true;
+        currentVariableIndex = 0;
     }
 }
