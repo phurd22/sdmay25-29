@@ -1,0 +1,245 @@
+(footprint "Fuse_Holder"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at -9.16 -5.815 0)
+		(layer "F.SilkS")
+		(uuid "8c21d3b0-06ba-4a2e-b721-0a485616d997")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "FUSE_4628"
+		(at -6.175 6.04 0)
+		(layer "F.Fab")
+		(uuid "71aeeb0b-6572-4a6d-a0f9-3fea58923702")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "485fa6aa-5c76-44c2-bbe9-4536f1f8efc3")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "13eb6e38-482e-49d6-b427-b9d54b105a0d")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "851b819a-a4bc-4f4f-b047-48d3c4108edf")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_line
+		(start -12.105 -4.495)
+		(end -12.105 -1.32)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "afae6ddf-2b4a-4ef3-92af-97cfe5c04fa6")
+	)
+	(fp_line
+		(start -12.105 -4.495)
+		(end 12.105 -4.495)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "a8dfac80-dc62-413d-b555-4b5ab67964ee")
+	)
+	(fp_line
+		(start -12.105 1.32)
+		(end -12.105 4.495)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "b66f6a37-e191-45f3-b646-357de417f7e2")
+	)
+	(fp_line
+		(start -12.105 4.495)
+		(end 12.105 4.495)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "509de06e-774d-413c-8a14-b96ac29dff5a")
+	)
+	(fp_line
+		(start 12.105 -4.495)
+		(end 12.105 -1.15)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "384b9749-9b5b-4aa0-8ada-2bbd1648920e")
+	)
+	(fp_line
+		(start 12.105 1.15)
+		(end 12.105 4.495)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "9fec0d62-c65b-4236-a582-89bc81245394")
+	)
+	(fp_line
+		(start -12.49 -4.745)
+		(end 12.49 -4.745)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "cf706b34-af16-429a-8856-6e7f575c662e")
+	)
+	(fp_line
+		(start -12.49 4.745)
+		(end -12.49 -4.745)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "c3fba7c1-8d54-49d5-b549-e359d5d15936")
+	)
+	(fp_line
+		(start 12.49 -4.745)
+		(end 12.49 4.745)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "ccfb5d4b-74fa-4d47-b1d5-39f42bf627d0")
+	)
+	(fp_line
+		(start 12.49 4.745)
+		(end -12.49 4.745)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "afec369e-59a6-446f-b43a-0e5c8bd02491")
+	)
+	(fp_line
+		(start -12.105 -4.495)
+		(end 12.105 -4.495)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "1e405a0f-e22d-417e-b1f1-2ed0f488472a")
+	)
+	(fp_line
+		(start -12.105 4.495)
+		(end -12.105 -4.495)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "447befee-8c29-48fb-a474-a9eba130895d")
+	)
+	(fp_line
+		(start 12.105 -4.495)
+		(end 12.105 4.495)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "d218fde5-23cf-409f-ac85-9d6ec5a3f1c7")
+	)
+	(fp_line
+		(start 12.105 4.495)
+		(end -12.105 4.495)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "f34706ea-5d2b-4cbc-bca4-1a2d37dfdfee")
+	)
+	(pad "1" thru_hole circle
+		(at -11.25 0)
+		(size 1.98 1.98)
+		(drill 1.32)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.102)
+		(uuid "f89455db-2651-4535-9ca0-3de63674801c")
+	)
+	(pad "2" thru_hole circle
+		(at 11.25 0)
+		(size 1.98 1.98)
+		(drill 1.32)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.102)
+		(uuid "e42a6b18-737e-4b0a-be75-afed1f7a835e")
+	)
+	(model "C:/projects/sdmay25-29/KiCadProjects/parts/footprints/fuses/Fuse_Holder.step"
+		(offset
+			(xyz -2.75 -1 7)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 0 0)
+		)
+	)
+	(model "C:/projects/sdmay25-29/KiCadProjects/parts/footprints/fuses/5x20_Fuse.STEP"
+		(offset
+			(xyz -8 -0.5 9.5)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 90)
+		)
+	)
+)
