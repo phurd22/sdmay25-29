@@ -68,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
         greenButton = findViewById(R.id.greenButton);
         connectButton = findViewById(R.id.connectButton);
 
-        redButton.setBackgroundColor(getResources().getColor(R.color.gray));
-        yellowButton.setBackgroundColor(getResources().getColor(R.color.gray));
-        greenButton.setBackgroundColor(getResources().getColor(R.color.gray));
+        redButton.setBackgroundColor(getResources().getColor(R.color.dark_red));
+        yellowButton.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
+        greenButton.setBackgroundColor(getResources().getColor(R.color.dark_green));
 
         redLEDOn = false;
         yellowLEDOn = false;
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 if (redLEDOn) {
                     sendIntBluetoothCommand(10);
                     redLEDOn = false;
-                    redButton.setBackgroundColor(getResources().getColor(R.color.gray));
+                    redButton.setBackgroundColor(getResources().getColor(R.color.dark_red));
                 }
                 else {
                     sendIntBluetoothCommand(11);
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 if (yellowLEDOn) {
                     sendIntBluetoothCommand(20);
                     yellowLEDOn = false;
-                    yellowButton.setBackgroundColor(getResources().getColor(R.color.gray));
+                    yellowButton.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
                 }
                 else {
                     sendIntBluetoothCommand(21);
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 if (greenLEDOn) {
                     sendIntBluetoothCommand(30);
                     greenLEDOn = false;
-                    greenButton.setBackgroundColor(getResources().getColor(R.color.gray));
+                    greenButton.setBackgroundColor(getResources().getColor(R.color.dark_green));
                 }
                 else {
                     sendIntBluetoothCommand(31);
