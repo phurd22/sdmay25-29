@@ -10,8 +10,10 @@ do
   # Change dir to KiCADProject subfolder
   cd $dir
 
+  pwd
+
   # Run KiBot ERC check
-  [ -f *.sch ] && kibot $KICAD_VARIABLES -c ../../Config.kibot.yaml -d ../../Fabrication/${dir##*/} -s update_xml,run_drc -i
+  [ -f *.kicad_sch ] && kibot $KICAD_VARIABLES -c ../../Config.kibot.yaml -d ../../Fabrication/${dir##*/} -s update_xml,run_drc -i
 
   # Return to upper directory
   cd ../../
