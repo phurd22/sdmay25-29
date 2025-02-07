@@ -43,7 +43,7 @@
 
             <TextView
                 android:id="@+id/Var4"
-                android:layout_width="254dp"
+                android:layout_width="252dp"
                 android:layout_height="wrap_content"
                 android:text="Var4"
                 android:textAlignment="center"
