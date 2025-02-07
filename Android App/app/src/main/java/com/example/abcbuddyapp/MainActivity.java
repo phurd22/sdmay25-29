@@ -14,14 +14,12 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 
     private PunchcardView punchcardView;
-    private TextView equationTextView;
-    private StringBuilder currentEquation;
-    private int currentColumn; // Tracks the current column for punching
-    private boolean awaitingVariable; // Tracks whether a variable should follow the current coefficient
-    private int segmentStartColumn; // Tracks the start of each 15-column segment
-    private boolean isNegative, isPositive; // Indicates if the current part of the equation is negative
-    private boolean isFirstNumber;
-    private int currentVariableIndex;
+    private TextView[] variableTextViews = new TextView[5]; // Holds TextViews for equation variables
+    private StringBuilder currentSegment; // Stores the coefficient currently being entered
+    private int segmentStartColumn; // Start column of the current 15-column segment
+    private boolean awaitingVariable; // True if waiting for variable input after coefficient
+    private boolean isNegative, isFirstNumber; // Flags for input handling
+    private int currentVariableIndex; // Tracks the variable being assigned (x, y, z, etc.)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +33,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         punchcardView = findViewById(R.id.punchcard);
-        equationTextView = findViewById(R.id.textView);
-        equationTextView.setText("Please enter an equation");
-        currentEquation = new StringBuilder();
-        currentColumn = 0;
-        awaitingVariable = false;
-        segmentStartColumn = 0;
-        isNegative = false;
-        isPositive = false;
-        isFirstNumber = true;
-        currentVariableIndex = 0;
+        variableTextViews[0] = findViewById(R.id.Var1);
+        variableTextViews[1] = findViewById(R.id.Var2);
+        variableTextViews[2] = findViewById(R.id.Var3);
+        variableTextViews[3] = findViewById(R.id.Var4);
+        variableTextViews[4] = findViewById(R.id.Var5);
+
+        resetEquationState();
 
         // Setup numpad buttons
         GridLayout numpad = findViewById(R.id.numpad);
@@ -64,76 +59,86 @@ public class MainActivity extends AppCompatActivity {
         if (input.equalsIgnoreCase("X")) {
             if (awaitingVariable) {
                 char nextVariable = getNextVariable();
-                currentEquation.append(nextVariable);
-                awaitingVariable = false;
-                currentVariableIndex++;
+                currentSegment.append(nextVariable);
 
-                // Move to next segment
+                // Update the corresponding TextView
+                if (currentVariableIndex < variableTextViews.length) {
+                    variableTextViews[currentVariableIndex].setText(currentSegment.toString());
+                }
+
+                // Punch all digits from right to left
+                punchStoredNumber();
+
+                // Move to the next segment
+                currentVariableIndex++;
                 segmentStartColumn += 15;
-                currentColumn = segmentStartColumn;
-                isNegative = false; // Reset negative indicator
-                isPositive = false;
+                awaitingVariable = false;
+                isNegative = false;
                 isFirstNumber = true;
+                currentSegment.setLength(0);
             }
         } else {
             int number = Integer.parseInt(input);
-            if (number == 0 && isFirstNumber) {
-                // User entered 0 as a leading digit (negative indicator)
-                isPositive = false;
-                isNegative = true;
-                isFirstNumber = false;
-            } else if (number != 0 && isFirstNumber) {
-                isPositive = true;
-                isNegative = false;
-                isFirstNumber = false;
-                if (currentColumn != 0) {
-                    currentEquation.append("+");
+            if (isFirstNumber) {
+                if (number == 0) {
+                    isNegative = true; // Mark number as negative
+                } else {
+                    if (isNegative) {
+                        currentSegment.append("-"); // Add leading zero for negatives
+                    }
+                    currentSegment.append(number);
+                    isFirstNumber = false;
                 }
-                currentEquation.append(number);
             } else {
-                currentEquation.append(number);
-                isFirstNumber = false;
-                if (isNegative) {
-                    currentEquation.insert(currentEquation.length() - 1, "-");
-                    isNegative = false;
-                }
-//                if (isPositive && !isFirstNumber) {
-//                    currentEquation.insert(currentEquation.length() - 1, "+");
-//                    currentEquation.append(number);
-//                    isPositive = false;
-//                }
+                currentSegment.append(number);
             }
-            punchNumber(number);
-            if (!isFirstNumber) {
-                awaitingVariable = true;
-            }
-        }
 
-        equationTextView.setText(currentEquation.toString());
+            awaitingVariable = true;
+        }
     }
 
     private char getNextVariable() {
         String variables = "xyzwj";
         return variables.charAt(currentVariableIndex);
-//        int index = (currentEquation.length() - segmentStartColumn) / 15;
-//        return variables.charAt(index % variables.length());
     }
 
-    private void punchNumber(int number) {
-        int row = number; // Row maps directly to the number (0-9)
-        punchcardView.punchCell(currentColumn++, row);
+    private void punchStoredNumber() {
+        // Get the coefficient as a string (excluding the variable)
+        String coefficient = currentSegment.toString().replaceAll("[^0-9]", ""); // Remove non-numeric chars
+        boolean hasLeadingZero = currentSegment.toString().startsWith("0");
+
+        // Determine where the first digit should be punched
+        int punchColumn = segmentStartColumn + 14 - (coefficient.length() - 1);
+        if (hasLeadingZero) {
+            punchColumn--; // Shift to make space for the leading zero
+        }
+
+        // Punch leading zero for negative numbers
+        if (hasLeadingZero) {
+            punchcardView.punchCell(punchColumn, 0);
+            punchColumn++; // Shift back to punch the actual number
+        }
+
+        // Punch each digit in reverse order
+        for (int i = 0; i < coefficient.length(); i++) {
+            int digit = Character.getNumericValue(coefficient.charAt(i));
+            punchcardView.punchCell(punchColumn + i, digit);
+        }
     }
 
     private void clearEquation() {
-        currentEquation.setLength(0);
-        equationTextView.setText("");
+        resetEquationState();
         punchcardView.clearPunches();
-        currentColumn = 0;
+        for (TextView textView : variableTextViews) {
+            textView.setText("");
+        }
+    }
+
+    private void resetEquationState() {
+        currentSegment = new StringBuilder();
         segmentStartColumn = 0;
-        equationTextView.setText("Please enter an equation");
         awaitingVariable = false;
         isNegative = false;
-        isPositive = false;
         isFirstNumber = true;
         currentVariableIndex = 0;
     }
