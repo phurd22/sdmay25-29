@@ -10,8 +10,10 @@ do
   # Change dir to KiCADProject subfolder
   cd $dir
 
+  pwd
+
   # Run KiBot DRC check
-  [ -f *.kicad_pcb ] && kibot $KICAD_VARIABLES -c ../../Config.kibot.yaml -d ../../Fabrication/${dir##*/} -s update_xml,run_erc -i
+  [ -f *.kicad_pcb ] && kibot $KICAD_VARIABLES --plot-config ../../Config.kibot.yaml --out-dir ../../Fabrication/${dir##*/} --skip-pre update_xml,erc --invert-sel
 
   # Return to upper directory
   cd ../../

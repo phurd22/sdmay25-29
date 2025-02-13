@@ -60,15 +60,14 @@ public class MainActivity extends AppCompatActivity {
         if (input.equalsIgnoreCase("X")) {
             if (awaitingVariable) {
                 char nextVariable = getNextVariable();
-                currentSegment.append(nextVariable);
 
-                // Update the corresponding TextView
+                // Prepare display text (remove leading zero before showing)
+                String displayText = currentSegment.toString().replaceFirst("0", "") + nextVariable;
                 if (currentVariableIndex < variableTextViews.length) {
-                    variableTextViews[currentVariableIndex].setText(currentSegment.toString());
+                    variableTextViews[currentVariableIndex].setText(displayText);
                 }
 
-                // Punch all digits from right to left
-                punchStoredNumber();
+                punchStoredNumber(); // Now properly aligned & includes leading zero (only in punch)
 
                 // Move to the next segment
                 currentVariableIndex++;
@@ -82,10 +81,11 @@ public class MainActivity extends AppCompatActivity {
             int number = Integer.parseInt(input);
             if (isFirstNumber) {
                 if (number == 0) {
-                    isNegative = true; // Mark number as negative
+                    isNegative = true; // Mark as negative
+                    currentSegment.append("0"); // Store for punching only (not displayed)
                 } else {
                     if (isNegative) {
-                        currentSegment.append("-"); // Add leading zero for negatives
+                        currentSegment.insert(0, "-"); // Ensure negative sign is stored
                     }
                     currentSegment.append(number);
                     isFirstNumber = false;
