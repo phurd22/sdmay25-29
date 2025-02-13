@@ -1,6 +1,7 @@
 package com.example.abcbuddyapp;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
@@ -103,28 +104,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void punchStoredNumber() {
-        // Get the coefficient as a string (excluding the variable)
-        String coefficient = currentSegment.toString().replaceAll("[^0-9]", ""); // Remove non-numeric chars
-        boolean hasLeadingZero = currentSegment.toString().startsWith("0");
+        String rawCoefficient = currentSegment.toString();
+        boolean isNegative = rawCoefficient.startsWith("-"); // Detect negative indicator
+        String coefficient = rawCoefficient.replaceAll("[^0-9]", ""); // Extract all digits
 
-        // Determine where the first digit should be punched
         int punchColumn = segmentStartColumn + 14 - (coefficient.length() - 1);
-        if (hasLeadingZero) {
-            punchColumn--; // Shift to make space for the leading zero
-        }
 
-        // Punch leading zero for negative numbers
-        if (hasLeadingZero) {
-            punchcardView.punchCell(punchColumn, 0);
-            punchColumn++; // Shift back to punch the actual number
+        // Punch the leading zero if it's negative
+        if (isNegative) {
+            punchcardView.punchCell(punchColumn - 1 , 0);
         }
-
-        // Punch each digit in reverse order
+        
+        // Punch each digit, ensuring all zeroes are included
         for (int i = 0; i < coefficient.length(); i++) {
             int digit = Character.getNumericValue(coefficient.charAt(i));
             punchcardView.punchCell(punchColumn + i, digit);
         }
     }
+
+
 
     private void clearEquation() {
         resetEquationState();
