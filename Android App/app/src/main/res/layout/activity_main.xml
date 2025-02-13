@@ -26,6 +26,7 @@
                 android:autoSizeStepGranularity="2sp"
                 android:autoSizeTextType="uniform"
                 android:ellipsize="end"
+                android:gravity="bottom"
                 android:maxLines="1"
                 android:text="Var1"
                 android:textAlignment="center"
@@ -41,6 +42,7 @@
                 android:autoSizeMinTextSize="10sp"
                 android:autoSizeMaxTextSize="60sp"
                 android:autoSizeStepGranularity="2sp"
+                android:gravity="bottom"
                 android:textSize="60sp"
                 android:maxLines="1"
                 android:ellipsize="end" />
@@ -55,6 +57,7 @@
                 android:autoSizeMinTextSize="10sp"
                 android:autoSizeMaxTextSize="60sp"
                 android:autoSizeStepGranularity="2sp"
+                android:gravity="bottom"
                 android:textSize="60sp"
                 android:maxLines="1"
                 android:ellipsize="end" />
@@ -69,6 +72,7 @@
                 android:autoSizeMinTextSize="10sp"
                 android:autoSizeMaxTextSize="60sp"
                 android:autoSizeStepGranularity="2sp"
+                android:gravity="bottom"
                 android:textSize="60sp"
                 android:maxLines="1"
                 android:ellipsize="end" />
@@ -93,6 +97,7 @@
                 android:autoSizeMinTextSize="10sp"
                 android:autoSizeMaxTextSize="60sp"
                 android:autoSizeStepGranularity="2sp"
+                android:gravity="bottom"
                 android:textSize="60sp"
                 android:maxLines="1"
                 android:ellipsize="end" />
