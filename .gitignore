@@ -1,0 +1,5 @@
+.DS_Store
+KiCadProjects/.DS_Store
+KiCadProjects/**/fp-info-cache
+KiCadProjects/**/fp-lib-table
+KiCadProjects/**/sym-lib-table
