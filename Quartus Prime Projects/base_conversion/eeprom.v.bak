@@ -1,0 +1,48 @@
+module eeprom #(
+    parameter ADDR_WIDTH = 8,  // Address width
+    parameter DATA_WIDTH = 8,  // Data width
+    parameter MEM_SIZE   = 256 // Memory size (2^ADDR_WIDTH)
+) (
+    input wire clk,            // Clock signal
+    input wire rst_n,          // Active-low reset
+    input wire cs_n,           // Active-low chip select
+    input wire oe_n,           // Active-low output enable
+    input wire we_n,           // Active-low write enable
+    input wire [ADDR_WIDTH-1:0] addr, // Address bus
+    inout wire [DATA_WIDTH-1:0] data  // Data bus (bidirectional)
+);
+
+    // Internal memory array
+    reg [DATA_WIDTH-1:0] memory [0:MEM_SIZE-1];
+
+    // Internal data register
+    reg [DATA_WIDTH-1:0] data_out;
+
+    // Tri-state buffer control
+    assign data = (!cs_n && !oe_n && we_n) ? data_out : {DATA_WIDTH{1'bz}};
+
+    // Write operation
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            // Reset memory to all zeros (optional)
+            integer i;
+            for (i = 0; i < MEM_SIZE; i = i + 1) begin
+                memory[i] <= {DATA_WIDTH{1'b0}};
+            end
+        end else if (!cs_n && !we_n) begin
+            // Write data to memory on rising clock edge when write enable is active
+            memory[addr] <= data;
+        end
+    end
+
+    // Read operation
+    always @(*) begin
+        if (!cs_n && !oe_n && we_n) begin
+            // Read data from memory when output enable is active
+            data_out = memory[addr];
+        end else begin
+            data_out = {DATA_WIDTH{1'bz}};
+        end
+    end
+
+endmodule
