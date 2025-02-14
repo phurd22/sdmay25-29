@@ -6,8 +6,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,7 @@ public class Base2PunchView extends View {
 
     //TODO: Need to add ability to switch pages. Add touch event listener for
     // the left and right arrow buttons.
+    private OnPageChangeListener pageChangeListener;
 
     private final int dotRadius = 8; // Dot size for grid points
     private int xOffset;
@@ -55,6 +58,15 @@ public class Base2PunchView extends View {
         calculateDimensions(context);
     }
 
+    public void setOnPageChangeListener(OnPageChangeListener pageChangeListener) {
+        this.pageChangeListener = pageChangeListener;
+    }
+
+    public interface OnPageChangeListener {
+        void onPreviousPage();
+        void onNextPage();
+    }
+
     private void calculateDimensions(Context context) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -70,25 +82,6 @@ public class Base2PunchView extends View {
         topYOffset = screenHeight / 33;
         xSpacer = (screenWidth - 2 * xOffset) / 29;
         ySpacer = (screenHeight - (botYOffset + topYOffset)) / 49;
-    }
-
-    public void setNumbers(List<Long> numbers, int currentPage, int totalPages) {
-        bitArray.clear();
-        for (long number : numbers) {
-            bitArray.add(toTwosComplement50Bit(number));
-        }
-        this.currentPage = currentPage;
-        this.totalPages = totalPages;
-        invalidate(); // Redraw the view with new data
-    }
-
-    private String toTwosComplement50Bit(long number) {
-        if (number >= 0) {
-            return String.format("%050d", new java.math.BigInteger(Long.toBinaryString(number)));
-        } else {
-            long twosComplement = (1L << 50) + number;
-            return String.format("%050d", new java.math.BigInteger(Long.toBinaryString(twosComplement)));
-        }
     }
 
     @Override
@@ -108,6 +101,52 @@ public class Base2PunchView extends View {
 
         drawLabels(canvas);
         drawNavigationIndicators(canvas);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            float touchX = event.getX();
+            float touchY = event.getY();
+            float arrowSize = xOffset - xOffset / 4; // Define the area for touch detection
+
+            if (touchX < arrowSize && touchY > getHeight() / 2 - botYOffset && touchY < getHeight() / 2 + botYOffset) {
+                // Left arrow tapped
+                if (pageChangeListener != null) {
+                    pageChangeListener.onPreviousPage();
+                }
+                return true;
+            } else if (touchX > getWidth() - arrowSize && touchY > getHeight() / 2 - botYOffset && touchY < getHeight() / 2 + botYOffset) {
+                // Right arrow tapped
+                if (pageChangeListener != null) {
+                    pageChangeListener.onNextPage();
+                }
+                return true;
+            }
+        }
+        else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            return true;
+        }
+        return super.onTouchEvent(event);
+    }
+
+    public void setNumbers(List<Long> numbers, int currentPage, int totalPages) {
+        bitArray.clear();
+        for (long number : numbers) {
+            bitArray.add(toTwosComplement50Bit(number));
+        }
+        this.currentPage = currentPage;
+        this.totalPages = totalPages;
+        invalidate(); // Redraw the view with new data
+    }
+
+    private String toTwosComplement50Bit(long number) {
+        if (number >= 0) {
+            return String.format("%050d", new java.math.BigInteger(Long.toBinaryString(number)));
+        } else {
+            long twosComplement = (1L << 50) + number;
+            return String.format("%050d", new java.math.BigInteger(Long.toBinaryString(twosComplement)));
+        }
     }
 
     private void drawLabels(Canvas canvas) {

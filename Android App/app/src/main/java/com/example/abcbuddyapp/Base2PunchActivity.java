@@ -37,13 +37,42 @@ public class Base2PunchActivity extends AppCompatActivity {
         List<Long> numbers1 = Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L,
                 -1L, -2L, -3L, -4L, -5L, -6L, -7L, -8L, -9L, -10L,
                 100L, 200L, 300L, 400L, 500L, 600L, 700L, 800L, 900L, 1000L);
-        List<Long> numbers2 = Arrays.asList();
-        List<Long> numbers3 = Arrays.asList();
+
+        List<Long> numbers2 = Arrays.asList(-1L, 20L, 30L, 40L, 50L, 60L, 70L, 80L, 90L, 100L,
+                100L, 200L, 300L, 400L, 500L, 600L, 700L, 800L, 900L, 1000L,
+                1001L, 1100L, 1200L, 1300L, 1400L, 1500L, 1600L, 1700L, 1800L, 1900L);
+
+        List<Long> numbers3 = Arrays.asList(1L, 2L, 4L, 8L, 16L, 32L, 64L, 128L, 256L, 512L,
+                1024L, 2048L, 4096L, 8192L, 16384L, 32768L, 65536L, 131072L, 262144L, 524288L,
+                1048576L, 2097152L, 4194304L, 8388608L, 16777216L, 33554432L, 67108864L,
+                134217728L, 268435456L, 536870912L);
 
         allNumbers.add(numbers1);
         allNumbers.add(numbers2);
         allNumbers.add(numbers3);
 
+        updatePage();
+
+        base2PunchView.setOnPageChangeListener(new Base2PunchView.OnPageChangeListener() {
+            @Override
+            public void onPreviousPage() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    updatePage();
+                }
+            }
+
+            @Override
+            public void onNextPage() {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    updatePage();
+                }
+            }
+        });
+    }
+
+    private void updatePage() {
         base2PunchView.setDrawLeftArrow(true);
         base2PunchView.setDrawRightArrow(true);
         if (currentPage == 1) {
@@ -52,6 +81,6 @@ public class Base2PunchActivity extends AppCompatActivity {
         if (currentPage == totalPages) {
             base2PunchView.setDrawRightArrow(false);
         }
-        base2PunchView.setNumbers(allNumbers.get(currentPage - 1), currentPage, totalPages);;
+        base2PunchView.setNumbers(allNumbers.get(currentPage - 1), currentPage, totalPages);
     }
 }
