@@ -62,7 +62,18 @@ public class MainActivity extends AppCompatActivity {
                 char nextVariable = getNextVariable();
 
                 // Prepare display text (remove leading zero before showing)
-                String displayText = currentSegment.toString().replaceFirst("0", "") + nextVariable;
+                String displayText = currentSegment.toString() + nextVariable;
+                boolean hasNeg = displayText.startsWith("-");
+                if (hasNeg) {
+                    displayText = displayText.substring(1);
+                }
+                while (displayText.charAt(0) == '0') {
+                    displayText = displayText.substring(1);
+                }
+                if (hasNeg) {
+                    displayText = "-" + displayText;
+                }
+
                 if (currentVariableIndex < variableTextViews.length) {
                     variableTextViews[currentVariableIndex].setText(displayText);
                 }
@@ -105,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void punchStoredNumber() {
         String rawCoefficient = currentSegment.toString();
-        boolean isNegative = rawCoefficient.startsWith("-"); // Detect negative indicator
+        boolean isNegative = rawCoefficient.startsWith("0"); // Detect negative indicator
         String coefficient = rawCoefficient.replaceAll("[^0-9]", ""); // Extract all digits
 
         int punchColumn = segmentStartColumn + 14 - (coefficient.length() - 1);
