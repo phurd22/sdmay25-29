@@ -1,0 +1,519 @@
+Analysis & Synthesis report for base_conversion
+Thu Feb 13 17:13:06 2025
+Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. General Register Statistics
+  9. Post-Synthesis Netlist Statistics for Top Partition
+ 10. Elapsed Time Per Partition
+ 11. Analysis & Synthesis Messages
+ 12. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2024  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++-----------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                            ;
++------------------------------------+----------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Thu Feb 13 17:13:06 2025              ;
+; Quartus Prime Version              ; 23.1std.1 Build 993 05/14/2024 SC Standard Edition ;
+; Revision Name                      ; base_conversion                                    ;
+; Top-level Entity Name              ; base_conversion                                    ;
+; Family                             ; Cyclone IV E                                       ;
+; Total logic elements               ; 74                                                 ;
+;     Total combinational functions  ; 70                                                 ;
+;     Dedicated logic registers      ; 8                                                  ;
+; Total registers                    ; 8                                                  ;
+; Total pins                         ; 54                                                 ;
+; Total virtual pins                 ; 0                                                  ;
+; Total memory bits                  ; 0                                                  ;
+; Embedded Multiplier 9-bit elements ; 0                                                  ;
+; Total PLLs                         ; 0                                                  ;
++------------------------------------+----------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; EP4CE55F29C7       ;                    ;
+; Top-level entity name                                            ; base_conversion    ; base_conversion    ;
+; Family name                                                      ; Cyclone IV E       ; Cyclone V          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; DSP Block Balancing                                              ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto ROM Replacement                                             ; On                 ; On                 ;
+; Auto RAM Replacement                                             ; On                 ; On                 ;
+; Auto DSP Block Replacement                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Strict RAM Replacement                                           ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto RAM Block Balancing                                         ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                    ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Timing-Driven Synthesis                                          ; On                 ; On                 ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                      ; Off                ; Off                ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; SDC constraint protection                                        ; Off                ; Off                ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                             ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                           ; On                 ; On                 ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 2           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 2           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
++----------------------------+-------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                        ;
++----------------------------------+-----------------+------------------------------------+-------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path              ; Library ;
++----------------------------------+-----------------+------------------------------------+-------------------------------------------+---------+
+; base_conversion.bdf              ; yes             ; User Block Diagram/Schematic File  ; U:/sdmay25-29/Quartus/base_conversion.bdf ;         ;
+; decoder_3to8.v                   ; yes             ; User Verilog HDL File              ; U:/sdmay25-29/Quartus/decoder_3to8.v      ;         ;
+; ones_eeprom.v                    ; yes             ; User Verilog HDL File              ; U:/sdmay25-29/Quartus/ones_eeprom.v       ;         ;
+; threes_eeprom.v                  ; yes             ; User Verilog HDL File              ; U:/sdmay25-29/Quartus/threes_eeprom.v     ;         ;
+; sevens_eeprom.v                  ; yes             ; User Verilog HDL File              ; U:/sdmay25-29/Quartus/sevens_eeprom.v     ;         ;
+; nines_eeprom.v                   ; yes             ; User Verilog HDL File              ; U:/sdmay25-29/Quartus/nines_eeprom.v      ;         ;
+; 4to1mux.v                        ; yes             ; Auto-Found Verilog HDL File        ; U:/sdmay25-29/Quartus/4to1mux.v           ;         ;
+; shift_reg.v                      ; yes             ; Auto-Found Verilog HDL File        ; U:/sdmay25-29/Quartus/shift_reg.v         ;         ;
+; mux_2_to_1.v                     ; yes             ; Auto-Found Verilog HDL File        ; U:/sdmay25-29/Quartus/mux_2_to_1.v        ;         ;
++----------------------------------+-----------------+------------------------------------+-------------------------------------------+---------+
+
+
++-------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                       ;
++---------------------------------------------+---------------------+
+; Resource                                    ; Usage               ;
++---------------------------------------------+---------------------+
+; Estimated Total logic elements              ; 74                  ;
+;                                             ;                     ;
+; Total combinational functions               ; 70                  ;
+; Logic element usage by number of LUT inputs ;                     ;
+;     -- 4 input functions                    ; 40                  ;
+;     -- 3 input functions                    ; 29                  ;
+;     -- <=2 input functions                  ; 1                   ;
+;                                             ;                     ;
+; Logic elements by mode                      ;                     ;
+;     -- normal mode                          ; 70                  ;
+;     -- arithmetic mode                      ; 0                   ;
+;                                             ;                     ;
+; Total registers                             ; 8                   ;
+;     -- Dedicated logic registers            ; 8                   ;
+;     -- I/O registers                        ; 0                   ;
+;                                             ;                     ;
+; I/O pins                                    ; 54                  ;
+;                                             ;                     ;
+; Embedded Multiplier 9-bit elements          ; 0                   ;
+;                                             ;                     ;
+; Maximum fan-out node                        ; shift_reg:inst61|Q4 ;
+; Maximum fan-out                             ; 10                  ;
+; Total fan-out                               ; 324                 ;
+; Average fan-out                             ; 1.74                ;
++---------------------------------------------+---------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                        ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------+-----------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name               ; Entity Name     ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------+-----------------+--------------+
+; |base_conversion           ; 70 (20)             ; 8 (0)                     ; 0           ; 0            ; 0       ; 0         ; 54   ; 0            ; |base_conversion                  ; base_conversion ; work         ;
+;    |4to1mux:inst62|        ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |base_conversion|4to1mux:inst62   ; 4to1mux         ; work         ;
+;    |4to1mux:inst63|        ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |base_conversion|4to1mux:inst63   ; 4to1mux         ; work         ;
+;    |4to1mux:inst64|        ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |base_conversion|4to1mux:inst64   ; 4to1mux         ; work         ;
+;    |4to1mux:inst65|        ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |base_conversion|4to1mux:inst65   ; 4to1mux         ; work         ;
+;    |4to1mux:inst66|        ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |base_conversion|4to1mux:inst66   ; 4to1mux         ; work         ;
+;    |4to1mux:inst86|        ; 8 (8)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |base_conversion|4to1mux:inst86   ; 4to1mux         ; work         ;
+;    |4to1mux:inst87|        ; 8 (8)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |base_conversion|4to1mux:inst87   ; 4to1mux         ; work         ;
+;    |4to1mux:inst88|        ; 8 (8)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |base_conversion|4to1mux:inst88   ; 4to1mux         ; work         ;
+;    |4to1mux:inst89|        ; 8 (8)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |base_conversion|4to1mux:inst89   ; 4to1mux         ; work         ;
+;    |4to1mux:inst90|        ; 8 (8)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |base_conversion|4to1mux:inst90   ; 4to1mux         ; work         ;
+;    |shift_reg:inst61|      ; 0 (0)               ; 4 (4)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |base_conversion|shift_reg:inst61 ; shift_reg       ; work         ;
+;    |shift_reg:inst69|      ; 0 (0)               ; 2 (2)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |base_conversion|shift_reg:inst69 ; shift_reg       ; work         ;
+;    |shift_reg:inst72|      ; 0 (0)               ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |base_conversion|shift_reg:inst72 ; shift_reg       ; work         ;
+;    |shift_reg:inst74|      ; 0 (0)               ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |base_conversion|shift_reg:inst74 ; shift_reg       ; work         ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------+-----------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 8     ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 54                          ;
+; cycloneiii_ff         ; 8                           ;
+;     plain             ; 8                           ;
+; cycloneiii_lcell_comb ; 70                          ;
+;     normal            ; 70                          ;
+;         2 data inputs ; 1                           ;
+;         3 data inputs ; 29                          ;
+;         4 data inputs ; 40                          ;
+;                       ;                             ;
+; Max LUT depth         ; 5.00                        ;
+; Average LUT depth     ; 4.28                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:02     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition
+    Info: Processing started: Thu Feb 13 17:12:51 2025
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off base_conversion -c base_conversion
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file eeprom.v
+    Info (12023): Found entity 1: eeprom File: U:/sdmay25-29/Quartus/eeprom.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file base_conversion.bdf
+    Info (12023): Found entity 1: base_conversion
+Info (12021): Found 1 design units, including 1 entities, in source file decoder_3to8.v
+    Info (12023): Found entity 1: decoder_3to8 File: U:/sdmay25-29/Quartus/decoder_3to8.v Line: 1
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(17): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 17
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(18): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 18
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(19): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 19
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(21): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 21
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(22): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 22
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(23): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 23
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(24): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 24
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(25): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 25
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(27): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 27
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(29): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 29
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(30): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 30
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(31): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 31
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(33): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 33
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(34): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 34
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(35): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 35
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(36): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 36
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(37): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 37
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(39): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 39
+Warning (10229): Verilog HDL Expression warning at ones_eeprom.v(42): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 42
+Info (12021): Found 1 design units, including 1 entities, in source file ones_eeprom.v
+    Info (12023): Found entity 1: ones_eeprom File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 1
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(17): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 17
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(18): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 18
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(19): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 19
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(21): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 21
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(22): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 22
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(23): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 23
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(24): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 24
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(25): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 25
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(27): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 27
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(28): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 28
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(29): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 29
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(30): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 30
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(31): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 31
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(33): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 33
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(34): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 34
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(36): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 36
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(37): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 37
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(40): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 40
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(41): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 41
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(42): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 42
+Warning (10229): Verilog HDL Expression warning at threes_eeprom.v(43): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 43
+Info (12021): Found 1 design units, including 1 entities, in source file threes_eeprom.v
+    Info (12023): Found entity 1: threes_eeprom File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 1
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(17): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 17
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(18): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 18
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(19): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 19
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(21): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 21
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(22): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 22
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(23): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 23
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(24): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 24
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(25): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 25
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(27): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 27
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(28): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 28
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(29): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 29
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(30): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 30
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(31): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 31
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(33): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 33
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(34): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 34
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(35): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 35
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(36): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 36
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(37): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 37
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(40): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 40
+Warning (10229): Verilog HDL Expression warning at sevens_eeprom.v(41): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 41
+Info (12021): Found 1 design units, including 1 entities, in source file sevens_eeprom.v
+    Info (12023): Found entity 1: sevens_eeprom File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 1
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(17): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 17
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(18): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 18
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(19): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 19
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(21): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 21
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(22): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 22
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(23): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 23
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(24): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 24
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(25): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 25
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(27): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 27
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(28): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 28
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(29): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 29
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(30): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 30
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(31): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 31
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(33): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 33
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(34): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 34
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(36): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 36
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(37): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 37
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(39): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 39
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(41): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 41
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(42): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 42
+Warning (10229): Verilog HDL Expression warning at nines_eeprom.v(43): truncated literal to match 2 bits File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 43
+Info (12021): Found 1 design units, including 1 entities, in source file nines_eeprom.v
+    Info (12023): Found entity 1: nines_eeprom File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 1
+Info (12127): Elaborating entity "base_conversion" for the top level hierarchy
+Warning (275002): No superset bus at connection
+Warning (275002): No superset bus at connection
+Warning (275002): No superset bus at connection
+Warning (275002): No superset bus at connection
+Warning (275002): No superset bus at connection
+Warning (12125): Using design file 4to1mux.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: 4to1mux File: U:/sdmay25-29/Quartus/4to1mux.v Line: 20
+Warning (12300): Found the following files while searching for definition of entity "4to1mux", but did not use these files because already using a different file containing the entity definition
+    Warning (12126): File: 4to1mux.bdf
+Info (12128): Elaborating entity "4to1mux" for hierarchy "4to1mux:inst86"
+Warning (12125): Using design file shift_reg.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: shift_reg File: U:/sdmay25-29/Quartus/shift_reg.v Line: 20
+Warning (12300): Found the following files while searching for definition of entity "shift_reg", but did not use these files because already using a different file containing the entity definition
+    Warning (12126): File: shift_reg.bdf
+Info (12128): Elaborating entity "shift_reg" for hierarchy "shift_reg:inst74"
+Info (12128): Elaborating entity "decoder_3to8" for hierarchy "decoder_3to8:inst1"
+Info (12128): Elaborating entity "nines_eeprom" for hierarchy "nines_eeprom:inst40"
+Warning (10030): Net "memory.data_a" at nines_eeprom.v(11) has no driver or initial value, using a default initial value '0' File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 11
+Warning (10030): Net "memory.waddr_a" at nines_eeprom.v(11) has no driver or initial value, using a default initial value '0' File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 11
+Warning (10030): Net "memory.we_a" at nines_eeprom.v(11) has no driver or initial value, using a default initial value '0' File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 11
+Warning (12125): Using design file mux_2_to_1.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: mux_2_to_1 File: U:/sdmay25-29/Quartus/mux_2_to_1.v Line: 1
+Info (12128): Elaborating entity "mux_2_to_1" for hierarchy "mux_2_to_1:inst81"
+Info (12128): Elaborating entity "ones_eeprom" for hierarchy "ones_eeprom:inst33"
+Warning (10030): Net "memory.data_a" at ones_eeprom.v(11) has no driver or initial value, using a default initial value '0' File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 11
+Warning (10030): Net "memory.waddr_a" at ones_eeprom.v(11) has no driver or initial value, using a default initial value '0' File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 11
+Warning (10030): Net "memory.we_a" at ones_eeprom.v(11) has no driver or initial value, using a default initial value '0' File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 11
+Info (12128): Elaborating entity "sevens_eeprom" for hierarchy "sevens_eeprom:inst39"
+Warning (10030): Net "memory.data_a" at sevens_eeprom.v(11) has no driver or initial value, using a default initial value '0' File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 11
+Warning (10030): Net "memory.waddr_a" at sevens_eeprom.v(11) has no driver or initial value, using a default initial value '0' File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 11
+Warning (10030): Net "memory.we_a" at sevens_eeprom.v(11) has no driver or initial value, using a default initial value '0' File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 11
+Info (12128): Elaborating entity "threes_eeprom" for hierarchy "threes_eeprom:inst38"
+Warning (10030): Net "memory.data_a" at threes_eeprom.v(11) has no driver or initial value, using a default initial value '0' File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 11
+Warning (10030): Net "memory.waddr_a" at threes_eeprom.v(11) has no driver or initial value, using a default initial value '0' File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 11
+Warning (10030): Net "memory.we_a" at threes_eeprom.v(11) has no driver or initial value, using a default initial value '0' File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 11
+Info (276014): Found 4 instances of uninferred RAM logic
+    Info (276007): RAM logic "ones_eeprom:inst33|memory" is uninferred due to asynchronous read logic File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 11
+    Info (276007): RAM logic "nines_eeprom:inst40|memory" is uninferred due to asynchronous read logic File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 11
+    Info (276007): RAM logic "sevens_eeprom:inst39|memory" is uninferred due to asynchronous read logic File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 11
+    Info (276007): RAM logic "threes_eeprom:inst38|memory" is uninferred due to asynchronous read logic File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 11
+Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "U:/sdmay25-29/Quartus/db/base_conversion.ram0_ones_eeprom_12e18b85.hdl.mif" contains "don't care" values -- overwriting them with 0s
+Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "U:/sdmay25-29/Quartus/db/base_conversion.ram0_nines_eeprom_87ff246f.hdl.mif" contains "don't care" values -- overwriting them with 0s
+Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "U:/sdmay25-29/Quartus/db/base_conversion.ram0_sevens_eeprom_e0e9db0a.hdl.mif" contains "don't care" values -- overwriting them with 0s
+Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "U:/sdmay25-29/Quartus/db/base_conversion.ram0_threes_eeprom_7d477c91.hdl.mif" contains "don't care" values -- overwriting them with 0s
+Warning (13044): Always-enabled tri-state buffer(s) removed
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "ones_eeprom:inst33|data[2]" to the node "inst3" into a wire File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "ones_eeprom:inst33|data[1]" to the node "inst2" into a wire File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "ones_eeprom:inst33|data[4]" to the node "inst5" into a wire File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "ones_eeprom:inst33|data[3]" to the node "inst4" into a wire File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "ones_eeprom:inst33|data[0]" to the node "inst" into a wire File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "ones_eeprom:inst33|data[6]" to the node "inst7" into a wire File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "ones_eeprom:inst33|data[5]" to the node "inst6" into a wire File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "ones_eeprom:inst33|data[7]" to the node "inst8" into a wire File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "nines_eeprom:inst40|data[2]" to the node "inst27" into a wire File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "nines_eeprom:inst40|data[1]" to the node "inst26" into a wire File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "nines_eeprom:inst40|data[4]" to the node "inst29" into a wire File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "nines_eeprom:inst40|data[3]" to the node "inst28" into a wire File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "nines_eeprom:inst40|data[0]" to the node "inst25" into a wire File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "nines_eeprom:inst40|data[6]" to the node "inst31" into a wire File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "nines_eeprom:inst40|data[5]" to the node "inst30" into a wire File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "nines_eeprom:inst40|data[7]" to the node "inst32" into a wire File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "ones_eeprom:inst33|data_out[1]" to the node "inst2" into a wire File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 54
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "ones_eeprom:inst33|data_out[0]" to the node "inst" into a wire File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 54
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "sevens_eeprom:inst39|data[2]" to the node "inst19" into a wire File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "sevens_eeprom:inst39|data[1]" to the node "inst18" into a wire File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "sevens_eeprom:inst39|data[4]" to the node "inst21" into a wire File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "sevens_eeprom:inst39|data[3]" to the node "inst20" into a wire File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "sevens_eeprom:inst39|data[0]" to the node "inst17" into a wire File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "sevens_eeprom:inst39|data[6]" to the node "inst23" into a wire File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "sevens_eeprom:inst39|data[5]" to the node "inst22" into a wire File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "sevens_eeprom:inst39|data[7]" to the node "inst24" into a wire File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "threes_eeprom:inst38|data[2]" to the node "inst10" into a wire File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "threes_eeprom:inst38|data[1]" to the node "inst9" into a wire File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "threes_eeprom:inst38|data[4]" to the node "inst13" into a wire File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "threes_eeprom:inst38|data[3]" to the node "inst12" into a wire File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "threes_eeprom:inst38|data[0]" to the node "inst11" into a wire File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "threes_eeprom:inst38|data[6]" to the node "inst15" into a wire File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "threes_eeprom:inst38|data[5]" to the node "inst14" into a wire File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "threes_eeprom:inst38|data[7]" to the node "inst16" into a wire File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 8
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "nines_eeprom:inst40|data_out[1]" to the node "inst26" into a wire File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 54
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "nines_eeprom:inst40|data_out[0]" to the node "inst25" into a wire File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 54
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "sevens_eeprom:inst39|data_out[1]" to the node "inst18" into a wire File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 54
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "sevens_eeprom:inst39|data_out[0]" to the node "inst17" into a wire File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 54
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "threes_eeprom:inst38|data_out[1]" to the node "inst9" into a wire File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 54
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "threes_eeprom:inst38|data_out[0]" to the node "inst11" into a wire File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 54
+Warning (13050): Open-drain buffer(s) that do not directly drive top-level pin(s) are removed
+    Warning (13051): Converted the fanout from the open-drain buffer "ones_eeprom:inst33|data_out[2]" to the node "inst3" into a wire File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "ones_eeprom:inst33|data_out[4]" to the node "inst5" into a wire File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "ones_eeprom:inst33|data_out[3]" to the node "inst4" into a wire File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "ones_eeprom:inst33|data_out[6]" to the node "inst7" into a wire File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "ones_eeprom:inst33|data_out[5]" to the node "inst6" into a wire File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "ones_eeprom:inst33|data_out[7]" to the node "inst8" into a wire File: U:/sdmay25-29/Quartus/ones_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "nines_eeprom:inst40|data_out[2]" to the node "inst27" into a wire File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "nines_eeprom:inst40|data_out[4]" to the node "inst29" into a wire File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "nines_eeprom:inst40|data_out[3]" to the node "inst28" into a wire File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "nines_eeprom:inst40|data_out[6]" to the node "inst31" into a wire File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "nines_eeprom:inst40|data_out[5]" to the node "inst30" into a wire File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "nines_eeprom:inst40|data_out[7]" to the node "inst32" into a wire File: U:/sdmay25-29/Quartus/nines_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "sevens_eeprom:inst39|data_out[2]" to the node "inst19" into a wire File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "sevens_eeprom:inst39|data_out[4]" to the node "inst21" into a wire File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "sevens_eeprom:inst39|data_out[3]" to the node "inst20" into a wire File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "sevens_eeprom:inst39|data_out[6]" to the node "inst23" into a wire File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "sevens_eeprom:inst39|data_out[5]" to the node "inst22" into a wire File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "sevens_eeprom:inst39|data_out[7]" to the node "inst24" into a wire File: U:/sdmay25-29/Quartus/sevens_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "threes_eeprom:inst38|data_out[2]" to the node "inst10" into a wire File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "threes_eeprom:inst38|data_out[4]" to the node "inst13" into a wire File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "threes_eeprom:inst38|data_out[3]" to the node "inst12" into a wire File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "threes_eeprom:inst38|data_out[6]" to the node "inst15" into a wire File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "threes_eeprom:inst38|data_out[5]" to the node "inst14" into a wire File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 54
+    Warning (13051): Converted the fanout from the open-drain buffer "threes_eeprom:inst38|data_out[7]" to the node "inst16" into a wire File: U:/sdmay25-29/Quartus/threes_eeprom.v Line: 54
+Info (286030): Timing-Driven Synthesis is running
+Info (144001): Generated suppressed messages file U:/sdmay25-29/Quartus/output_files/base_conversion.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 129 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 49 input pins
+    Info (21059): Implemented 5 output pins
+    Info (21061): Implemented 75 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 176 warnings
+    Info: Peak virtual memory: 4829 megabytes
+    Info: Processing ended: Thu Feb 13 17:13:06 2025
+    Info: Elapsed time: 00:00:15
+    Info: Total CPU time (on all processors): 00:00:14
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in U:/sdmay25-29/Quartus/output_files/base_conversion.map.smsg.
+
+

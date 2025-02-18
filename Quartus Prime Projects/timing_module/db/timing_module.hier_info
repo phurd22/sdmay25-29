@@ -1,0 +1,44 @@
+|timing_module
+count[0] <= four_bit_counter:inst.count_0
+count[1] <= four_bit_counter:inst.count_1
+count[2] <= four_bit_counter:inst.count_2
+count[3] <= four_bit_counter:inst.count_3
+count[4] <= four_bit_counter:inst3.count_0
+count[5] <= four_bit_counter:inst3.count_1
+count[6] <= four_bit_counter:inst3.count_2
+count[7] <= four_bit_counter:inst3.count_3
+CLK => four_bit_counter:inst.clk
+RST => four_bit_counter:inst.reset
+RST => four_bit_counter:inst3.reset
+
+
+|timing_module|four_bit_counter:inst
+clk => count[0].CLK
+clk => count[1].CLK
+clk => count[2].CLK
+clk => count[3].CLK
+reset => count[0].ACLR
+reset => count[1].ACLR
+reset => count[2].ACLR
+reset => count[3].ACLR
+count_0 <= count[0].DB_MAX_OUTPUT_PORT_TYPE
+count_1 <= count[1].DB_MAX_OUTPUT_PORT_TYPE
+count_2 <= count[2].DB_MAX_OUTPUT_PORT_TYPE
+count_3 <= count[3].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|timing_module|four_bit_counter:inst3
+clk => count[0].CLK
+clk => count[1].CLK
+clk => count[2].CLK
+clk => count[3].CLK
+reset => count[0].ACLR
+reset => count[1].ACLR
+reset => count[2].ACLR
+reset => count[3].ACLR
+count_0 <= count[0].DB_MAX_OUTPUT_PORT_TYPE
+count_1 <= count[1].DB_MAX_OUTPUT_PORT_TYPE
+count_2 <= count[2].DB_MAX_OUTPUT_PORT_TYPE
+count_3 <= count[3].DB_MAX_OUTPUT_PORT_TYPE
+
+
