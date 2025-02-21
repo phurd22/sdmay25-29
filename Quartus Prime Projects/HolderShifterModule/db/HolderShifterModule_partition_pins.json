@@ -1,0 +1,29 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "HS_Output",
+					"strict" : false
+				},
+				{
+					"name" : "HS_Input",
+					"strict" : false
+				},
+				{
+					"name" : "shift1",
+					"strict" : false
+				},
+				{
+					"name" : "DCLK",
+					"strict" : false
+				},
+				{
+					"name" : "RST",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

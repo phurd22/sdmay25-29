@@ -1,0 +1,35 @@
+m255
+K4
+z2
+!s11f vlog 2024.2 2024.05, May 20 2024
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/questasim64_2024.2/examples
+vHolderShifterModule
+2U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v
+!s110 1740158309
+!i10b 1
+!s100 TzkbDenVC29OK@hYc6`B<1
+IoJlm4oZCNc5HJm_<e4@GM1
+dU:/sdmay25-29/Quartus Prime Projects/HolderShifterModule
+w1740158179
+8U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v
+FU:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v
+!i122 0
+L0 20 53
+VDg1SIo80bB@j0V0VzS_@n1
+OL;L;2024.2;79
+r1
+!s85 0
+31
+!s108 1740158306.000000
+!s107 U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v|
+!i113 0
+o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+tCvgOpt 0
+n@holder@shifter@module
