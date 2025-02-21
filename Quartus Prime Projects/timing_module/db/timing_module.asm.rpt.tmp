@@ -1,0 +1,82 @@
+Assembler report for timing_module
+Mon Feb 17 14:53:01 2025
+Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Assembler Summary
+  3. Assembler Settings
+  4. Assembler Generated Files
+  5. Assembler Device Options: U:/sdmay25-29/Quartus Prime Projects/timing_module/output_files/timing_module.sof
+  6. Assembler Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2024  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++---------------------------------------------------------------+
+; Assembler Summary                                             ;
++-----------------------+---------------------------------------+
+; Assembler Status      ; Successful - Mon Feb 17 14:53:01 2025 ;
+; Revision Name         ; timing_module                         ;
+; Top-level Entity Name ; timing_module                         ;
+; Family                ; Cyclone IV E                          ;
+; Device                ; EP4CE55F29C7                          ;
++-----------------------+---------------------------------------+
+
+
++----------------------------------+
+; Assembler Settings               ;
++--------+---------+---------------+
+; Option ; Setting ; Default Value ;
++--------+---------+---------------+
+
+
++-----------------------------------------------------------------------------------+
+; Assembler Generated Files                                                         ;
++-----------------------------------------------------------------------------------+
+; File Name                                                                         ;
++-----------------------------------------------------------------------------------+
+; U:/sdmay25-29/Quartus Prime Projects/timing_module/output_files/timing_module.sof ;
++-----------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: U:/sdmay25-29/Quartus Prime Projects/timing_module/output_files/timing_module.sof ;
++----------------+--------------------------------------------------------------------------------------------+
+; Option         ; Setting                                                                                    ;
++----------------+--------------------------------------------------------------------------------------------+
+; JTAG usercode  ; 0x002AEDB7                                                                                 ;
+; Checksum       ; 0x002AEDB7                                                                                 ;
++----------------+--------------------------------------------------------------------------------------------+
+
+
++--------------------+
+; Assembler Messages ;
++--------------------+
+<<<<message_ref>>>>
+U:/sdmay25-29/Quartus Prime Projects/timing_module/db/timing_module.asm.qmsg
+<<<</message_ref>>>>
+
+

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for timing_module
-Fri Feb 14 11:45:29 2025
+Fri Feb 21 00:00:51 2025
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition
 
 
@@ -10,13 +10,7 @@ Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Source Files Read
-  6. Analysis & Synthesis Resource Usage Summary
-  7. Analysis & Synthesis Resource Utilization by Entity
-  8. General Register Statistics
-  9. Post-Synthesis Netlist Statistics for Top Partition
- 10. Elapsed Time Per Partition
- 11. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Messages
 
 
 
@@ -43,20 +37,20 @@ https://fpgasoftware.intel.com/eula.
 +-----------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                            ;
 +------------------------------------+----------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Feb 14 11:45:29 2025              ;
+; Analysis & Synthesis Status        ; Failed - Fri Feb 21 00:00:51 2025                  ;
 ; Quartus Prime Version              ; 23.1std.1 Build 993 05/14/2024 SC Standard Edition ;
 ; Revision Name                      ; timing_module                                      ;
 ; Top-level Entity Name              ; timing_module                                      ;
 ; Family                             ; Cyclone IV E                                       ;
-; Total logic elements               ; 8                                                  ;
-;     Total combinational functions  ; 8                                                  ;
-;     Dedicated logic registers      ; 8                                                  ;
-; Total registers                    ; 8                                                  ;
-; Total pins                         ; 10                                                 ;
-; Total virtual pins                 ; 0                                                  ;
-; Total memory bits                  ; 0                                                  ;
-; Embedded Multiplier 9-bit elements ; 0                                                  ;
-; Total PLLs                         ; 0                                                  ;
+; Total logic elements               ; N/A until Partition Merge                          ;
+;     Total combinational functions  ; N/A until Partition Merge                          ;
+;     Dedicated logic registers      ; N/A until Partition Merge                          ;
+; Total registers                    ; N/A until Partition Merge                          ;
+; Total pins                         ; N/A until Partition Merge                          ;
+; Total virtual pins                 ; N/A until Partition Merge                          ;
+; Total memory bits                  ; N/A until Partition Merge                          ;
+; Embedded Multiplier 9-bit elements ; N/A until Partition Merge                          ;
+; Total PLLs                         ; N/A until Partition Merge                          ;
 +------------------------------------+----------------------------------------------------+
 
 
@@ -155,110 +149,11 @@ https://fpgasoftware.intel.com/eula.
 ; Maximum allowed            ; 2           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 2           ;
+; Maximum used               ; 1           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.0%      ;
 +----------------------------+-------------+
-
-
-+------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                     ;
-+----------------------------------+-----------------+------------------------------------+--------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                           ; Library ;
-+----------------------------------+-----------------+------------------------------------+--------------------------------------------------------+---------+
-; four_bit_counter.v               ; yes             ; User Verilog HDL File              ; U:/sdmay25-29/Quartus/timing_module/four_bit_counter.v ;         ;
-; timing_module.bdf                ; yes             ; User Block Diagram/Schematic File  ; U:/sdmay25-29/Quartus/timing_module/timing_module.bdf  ;         ;
-+----------------------------------+-----------------+------------------------------------+--------------------------------------------------------+---------+
-
-
-+---------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary             ;
-+---------------------------------------------+-----------+
-; Resource                                    ; Usage     ;
-+---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 8         ;
-;                                             ;           ;
-; Total combinational functions               ; 8         ;
-; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 2         ;
-;     -- 3 input functions                    ; 2         ;
-;     -- <=2 input functions                  ; 4         ;
-;                                             ;           ;
-; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 8         ;
-;     -- arithmetic mode                      ; 0         ;
-;                                             ;           ;
-; Total registers                             ; 8         ;
-;     -- Dedicated logic registers            ; 8         ;
-;     -- I/O registers                        ; 0         ;
-;                                             ;           ;
-; I/O pins                                    ; 10        ;
-;                                             ;           ;
-; Embedded Multiplier 9-bit elements          ; 0         ;
-;                                             ;           ;
-; Maximum fan-out node                        ; RST~input ;
-; Maximum fan-out                             ; 8         ;
-; Total fan-out                               ; 62        ;
-; Average fan-out                             ; 1.72      ;
-+---------------------------------------------+-----------+
-
-
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                              ;
-+-----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------+------------------+--------------+
-; Compilation Hierarchy Node  ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                   ; Entity Name      ; Library Name ;
-+-----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------+------------------+--------------+
-; |timing_module              ; 8 (0)               ; 8 (0)                     ; 0           ; 0            ; 0       ; 0         ; 10   ; 0            ; |timing_module                        ; timing_module    ; work         ;
-;    |four_bit_counter:inst3| ; 4 (4)               ; 4 (4)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |timing_module|four_bit_counter:inst3 ; four_bit_counter ; work         ;
-;    |four_bit_counter:inst|  ; 4 (4)               ; 4 (4)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |timing_module|four_bit_counter:inst  ; four_bit_counter ; work         ;
-+-----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------+------------------+--------------+
-Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
-
-
-+------------------------------------------------------+
-; General Register Statistics                          ;
-+----------------------------------------------+-------+
-; Statistic                                    ; Value ;
-+----------------------------------------------+-------+
-; Total registers                              ; 8     ;
-; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 8     ;
-; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 0     ;
-; Number of registers using Preset             ; 0     ;
-+----------------------------------------------+-------+
-
-
-+-----------------------------------------------------+
-; Post-Synthesis Netlist Statistics for Top Partition ;
-+-----------------------+-----------------------------+
-; Type                  ; Count                       ;
-+-----------------------+-----------------------------+
-; boundary_port         ; 10                          ;
-; cycloneiii_ff         ; 8                           ;
-;     CLR               ; 8                           ;
-; cycloneiii_lcell_comb ; 8                           ;
-;     normal            ; 8                           ;
-;         1 data inputs ; 2                           ;
-;         2 data inputs ; 2                           ;
-;         3 data inputs ; 2                           ;
-;         4 data inputs ; 2                           ;
-;                       ;                             ;
-; Max LUT depth         ; 1.00                        ;
-; Average LUT depth     ; 0.89                        ;
-+-----------------------+-----------------------------+
-
-
-+-------------------------------+
-; Elapsed Time Per Partition    ;
-+----------------+--------------+
-; Partition Name ; Elapsed Time ;
-+----------------+--------------+
-; Top            ; 00:00:00     ;
-+----------------+--------------+
 
 
 +-------------------------------+
@@ -267,28 +162,26 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition
-    Info: Processing started: Fri Feb 14 11:45:06 2025
+    Info: Processing started: Fri Feb 21 00:00:42 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off timing_module -c timing_module
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file four_bit_counter.v
-    Info (12023): Found entity 1: four_bit_counter File: U:/sdmay25-29/Quartus/timing_module/four_bit_counter.v Line: 1
+    Info (12023): Found entity 1: four_bit_counter File: U:/sdmay25-29/Quartus Prime Projects/timing_module/four_bit_counter.v Line: 20
 Info (12021): Found 1 design units, including 1 entities, in source file timing_module.bdf
     Info (12023): Found entity 1: timing_module
-Info (12127): Elaborating entity "timing_module" for the top level hierarchy
-Info (12128): Elaborating entity "four_bit_counter" for hierarchy "four_bit_counter:inst"
-Warning (10230): Verilog HDL assignment warning at four_bit_counter.v(26): truncated value with size 32 to match size of target (4) File: U:/sdmay25-29/Quartus/timing_module/four_bit_counter.v Line: 26
-Info (286030): Timing-Driven Synthesis is running
-Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
-    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 18 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 2 input pins
-    Info (21059): Implemented 8 output pins
-    Info (21061): Implemented 8 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 2 warnings
-    Info: Peak virtual memory: 4749 megabytes
-    Info: Processing ended: Fri Feb 14 11:45:29 2025
-    Info: Elapsed time: 00:00:23
-    Info: Total CPU time (on all processors): 00:00:13
+Info (12021): Found 1 design units, including 1 entities, in source file counter.bdf
+    Info (12023): Found entity 1: counter
+Error (12049): Can't compile duplicate declarations of entity "four_bit_counter" into library "work"
+    Error (12180): Instance could be entity "four_bit_counter" in file four_bit_counter.v compiled in library work File: U:/sdmay25-29/Quartus Prime Projects/timing_module/four_bit_counter.v Line: 20
+    Error (12180): Instance could be entity "four_bit_counter" in file four_bit_counter.bdf compiled in library work
+Info (12021): Found 1 design units, including 1 entities, in source file four_bit_counter.bdf
+Info (12021): Found 1 design units, including 1 entities, in source file test.bdf
+    Info (12023): Found entity 1: test
+Error: Quartus Prime Analysis & Synthesis was unsuccessful. 3 errors, 1 warning
+    Error: Peak virtual memory: 4721 megabytes
+    Error: Processing ended: Fri Feb 21 00:00:53 2025
+    Error: Elapsed time: 00:00:11
+    Error: Total CPU time (on all processors): 00:00:11
 
 

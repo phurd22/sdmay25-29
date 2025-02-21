@@ -15,74 +15,56 @@
 
 // PROGRAM		"Quartus Prime"
 // VERSION		"Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition"
-// CREATED		"Fri Feb 14 12:18:15 2025"
+// CREATED		"Thu Feb 20 22:08:28 2025"
 
 module counter(
 	CLK,
 	RST,
-	count0,
-	count1,
-	count2,
-	count3,
-	count4,
-	count5,
-	count6,
-	count7
+	count
 );
 
 
 input wire	CLK;
 input wire	RST;
-output wire	count0;
-output wire	count1;
-output wire	count2;
-output wire	count3;
-output wire	count4;
-output wire	count5;
-output wire	count6;
-output wire	count7;
+output wire	[7:0] count;
 
-wire	SYNTHESIZED_WIRE_0;
+wire	[7:0] count_ALTERA_SYNTHESIZED;
+wire	SYNTHESIZED_WIRE_9;
 wire	SYNTHESIZED_WIRE_1;
-wire	SYNTHESIZED_WIRE_2;
-wire	SYNTHESIZED_WIRE_3;
+wire	SYNTHESIZED_WIRE_10;
 wire	SYNTHESIZED_WIRE_4;
-wire	SYNTHESIZED_WIRE_5;
-wire	SYNTHESIZED_WIRE_6;
+wire	SYNTHESIZED_WIRE_7;
+wire	SYNTHESIZED_WIRE_8;
 
-assign	count3 = SYNTHESIZED_WIRE_5;
-assign	SYNTHESIZED_WIRE_2 = 1;
-assign	SYNTHESIZED_WIRE_4 = 0;
+assign	SYNTHESIZED_WIRE_9 = 1;
 
 
 
 
 four_bit_counter	b2v_inst(
-	.clk(SYNTHESIZED_WIRE_0),
-	.reset(RST),
-	.count_0(count0),
-	.count_1(count1),
-	.count_2(count2),
-	.count_3(SYNTHESIZED_WIRE_5));
+	.En(SYNTHESIZED_WIRE_9),
+	.CLK(SYNTHESIZED_WIRE_1),
+	.CLRN(SYNTHESIZED_WIRE_10),
+	.Q(count_ALTERA_SYNTHESIZED[3:0]));
 
+assign	SYNTHESIZED_WIRE_10 =  ~RST;
 
 
 
 four_bit_counter	b2v_inst3(
-	.clk(SYNTHESIZED_WIRE_1),
-	.reset(RST),
-	.count_0(count4),
-	.count_1(count5),
-	.count_2(count6),
-	.count_3(count7));
+	.En(SYNTHESIZED_WIRE_9),
+	.CLK(SYNTHESIZED_WIRE_4),
+	.CLRN(SYNTHESIZED_WIRE_10),
+	.Q(count_ALTERA_SYNTHESIZED[7:4]));
 
-assign	SYNTHESIZED_WIRE_3 =  ~CLK;
+assign	SYNTHESIZED_WIRE_7 =  ~CLK;
 
-assign	SYNTHESIZED_WIRE_0 = ~(SYNTHESIZED_WIRE_2 & SYNTHESIZED_WIRE_3);
+assign	SYNTHESIZED_WIRE_1 = ~(SYNTHESIZED_WIRE_9 & SYNTHESIZED_WIRE_7);
 
-assign	SYNTHESIZED_WIRE_6 =  ~SYNTHESIZED_WIRE_4;
+assign	SYNTHESIZED_WIRE_8 =  ~RST;
 
-assign	SYNTHESIZED_WIRE_1 = ~(SYNTHESIZED_WIRE_5 & SYNTHESIZED_WIRE_6);
+assign	SYNTHESIZED_WIRE_4 = ~(count_ALTERA_SYNTHESIZED[3] & SYNTHESIZED_WIRE_8);
 
+assign	count = count_ALTERA_SYNTHESIZED;
 
 endmodule

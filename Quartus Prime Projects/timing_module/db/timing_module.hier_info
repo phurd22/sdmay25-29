@@ -1,18 +1,31 @@
 |timing_module
-count[0] <= four_bit_counter:inst.count_0
-count[1] <= four_bit_counter:inst.count_1
-count[2] <= four_bit_counter:inst.count_2
-count[3] <= four_bit_counter:inst.count_3
-count[4] <= four_bit_counter:inst3.count_0
-count[5] <= four_bit_counter:inst3.count_1
-count[6] <= four_bit_counter:inst3.count_2
-count[7] <= four_bit_counter:inst3.count_3
-CLK => four_bit_counter:inst.clk
+count[0] <= counter:inst.count0
+count[1] <= counter:inst.count1
+count[2] <= counter:inst.count2
+count[3] <= counter:inst.count3
+count[4] <= counter:inst.count4
+count[5] <= counter:inst.count5
+count[6] <= counter:inst.count6
+count[7] <= counter:inst.count7
+CLK => counter:inst.CLK
+RST => inst16.IN1
+
+
+|timing_module|counter:inst
+count0 <= four_bit_counter:inst.count_0
+CLK => inst6.IN0
 RST => four_bit_counter:inst.reset
 RST => four_bit_counter:inst3.reset
+count1 <= four_bit_counter:inst.count_1
+count2 <= four_bit_counter:inst.count_2
+count3 <= four_bit_counter:inst.count_3
+count4 <= four_bit_counter:inst3.count_0
+count5 <= four_bit_counter:inst3.count_1
+count6 <= four_bit_counter:inst3.count_2
+count7 <= four_bit_counter:inst3.count_3
 
 
-|timing_module|four_bit_counter:inst
+|timing_module|counter:inst|four_bit_counter:inst
 clk => count[0].CLK
 clk => count[1].CLK
 clk => count[2].CLK
@@ -27,7 +40,7 @@ count_2 <= count[2].DB_MAX_OUTPUT_PORT_TYPE
 count_3 <= count[3].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|timing_module|four_bit_counter:inst3
+|timing_module|counter:inst|four_bit_counter:inst3
 clk => count[0].CLK
 clk => count[1].CLK
 clk => count[2].CLK
