@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.*;
+import java.math.BigInteger;
+import java.util.Scanner;
 
 
 public class ABCControlPanel {
@@ -38,6 +40,7 @@ public class ABCControlPanel {
     private JSlider SD;             //Sign Detection Coefficient Selection
 
     private final MachineController machineController;
+    private BigInteger[] pendingCoefficients;
 
     //Machine Controller, contains functions for the buttons
     public static class MachineController {
@@ -288,5 +291,42 @@ public class ABCControlPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    //Helper Methods
+    private void promptForCoefficients() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter up to 5 coefficients (space-separated, last one is the constant): ");
+        String line = scanner.nextLine();
+        String[] tokens = line.trim().split("\\s+");
+        if(tokens.length > 5) {
+            System.out.println("Error: Please enter no more than 5 coefficients.");
+            return;
+        }
+        BigInteger[] cardCoefficients = new BigInteger[5];
+        for (int i = 0; i < tokens.length; i++) {
+            // Assuming coefficients fit in 50 bits; you might want to check this.
+            cardCoefficients[i] = new BigInteger(tokens[i]);
+        }
+        // Store the coefficients in a temporary location until PB2 is pressed
+        // For example, you could save cardCoefficients into a field.
+        this.pendingCoefficients = cardCoefficients;
+        System.out.println("Coefficients entered. Press PB2 to load into the CA drum.");
+    }
+
+    private String to50BitBinary(BigInteger number) {
+        // Convert to a two's complement binary string
+        String bin = number.toString(2);
+        // For positive numbers, pad with leading zeros.
+        // For negative numbers, get the last 50 bits of the two's complement representation.
+        if (number.signum() >= 0) {
+            return String.format("%50s", bin).replace(' ', '0');
+        } else {
+            // Ensure the binary string is at least 50 characters; if not, pad appropriately.
+            if (bin.length() < 50) {
+                bin = String.format("%50s", bin).replace(' ', '0');
+            }
+            return bin.substring(bin.length() - 50);
+        }
     }
 }
