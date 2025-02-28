@@ -17,7 +17,7 @@
 // PROGRAM "Quartus Prime"
 // VERSION "Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition"
 
-// DATE "02/21/2025 11:40:29"
+// DATE "02/21/2025 13:23:47"
 
 // 
 // Device: Altera EP4CE115F29C7 Package FBGA780
@@ -66,7 +66,7 @@ wire \DCLK~input_o ;
 wire \RST~input_o ;
 wire \inst~q ;
 wire \shift1~input_o ;
-wire \inst6|inst2~0_combout ;
+wire \inst5|inst2~0_combout ;
 
 
 hard_block auto_generated_inst(
@@ -76,7 +76,7 @@ hard_block auto_generated_inst(
 
 // Location: IOOBUF_X40_Y73_N9
 cycloneive_io_obuf \HS_Output~output (
-	.i(\inst6|inst2~0_combout ),
+	.i(\inst5|inst2~0_combout ),
 	.oe(vcc),
 	.seriesterminationcontrol(16'b0000000000000000),
 	.devoe(devoe),
@@ -147,20 +147,20 @@ defparam \shift1~input .simulate_z_as = "z";
 // synopsys translate_on
 
 // Location: LCCOMB_X41_Y72_N0
-cycloneive_lcell_comb \inst6|inst2~0 (
+cycloneive_lcell_comb \inst5|inst2~0 (
 // Equation(s):
-// \inst6|inst2~0_combout  = (\shift1~input_o  & (\HS_Input~input_o )) # (!\shift1~input_o  & ((\inst~q )))
+// \inst5|inst2~0_combout  = (\shift1~input_o  & (\HS_Input~input_o )) # (!\shift1~input_o  & ((\inst~q )))
 
 	.dataa(\HS_Input~input_o ),
 	.datab(gnd),
 	.datac(\inst~q ),
 	.datad(\shift1~input_o ),
 	.cin(gnd),
-	.combout(\inst6|inst2~0_combout ),
+	.combout(\inst5|inst2~0_combout ),
 	.cout());
 // synopsys translate_off
-defparam \inst6|inst2~0 .lut_mask = 16'hAAF0;
-defparam \inst6|inst2~0 .sum_lutc_input = "datac";
+defparam \inst5|inst2~0 .lut_mask = 16'hAAF0;
+defparam \inst5|inst2~0 .sum_lutc_input = "datac";
 // synopsys translate_on
 
 assign HS_Output = \HS_Output~output_o ;

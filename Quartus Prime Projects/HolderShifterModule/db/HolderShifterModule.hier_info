@@ -1,17 +1,17 @@
 |HolderShifterModule
-HS_Output <= 2to1Mux:inst6.f
+HS_Output <= TwotoOneMux:inst5.f
 RST => inst4.IN0
 DCLK => inst.CLK
 HS_Input => inst.DATAIN
-HS_Input => 2to1Mux:inst6.1
-shift1 => 2to1Mux:inst6.S
+HS_Input => TwotoOneMux:inst5.One
+shift1 => TwotoOneMux:inst5.S
 
 
-|HolderShifterModule|2to1Mux:inst6
+|HolderShifterModule|TwotoOneMux:inst5
 f <= inst2.DB_MAX_OUTPUT_PORT_TYPE
 S => inst1.IN0
 S => inst3.IN0
-1 => inst1.IN1
-0 => inst.IN0
+One => inst1.IN1
+Zero => inst.IN0
 
 

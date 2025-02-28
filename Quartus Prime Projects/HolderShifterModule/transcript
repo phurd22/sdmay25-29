@@ -1,14 +1,33 @@
 # Compile of HolderShifterModule.v was successful.
 vsim -gui work.HolderShifterModule
 # vsim -gui work.HolderShifterModule 
-# Start time: 11:18:40 on Feb 21,2025
+# Start time: 13:29:31 on Feb 21,2025
 # ** Note: (vsim-3812) Design is being optimized...
-# ** Error: U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v(62): Module '\21mux ' is not defined.
-#  For instance 'b2v_inst2' at path 'HolderShifterModule'
+# ** Error: U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v(65): Module 'TwotoOneMux' is not defined.
+#  For instance 'b2v_inst5' at path 'HolderShifterModule'
 # Optimization failed
 # ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=0.
 # Error loading design
-# End time: 11:18:44 on Feb 21,2025, Elapsed time: 0:00:04
+# End time: 13:29:34 on Feb 21,2025, Elapsed time: 0:00:03
 # Errors: 1, Warnings: 5
-dataset reload -f
-# Dataset not found: 
+# Compile of HolderShifterModule.v failed with 1 errors.
+# Compile of HolderShifterModule.v was successful.
+vsim -gui work.HolderShifterModule
+# vsim -gui work.HolderShifterModule 
+# Start time: 13:37:13 on Feb 21,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error: U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v(65): Module 'TwotoOneMux' is not defined.
+#  For instance 'b2v_inst5' at path 'HolderShifterModule'
+# Optimization failed
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=0.
+# Error loading design
+# End time: 13:37:16 on Feb 21,2025, Elapsed time: 0:00:03
+# Errors: 1, Warnings: 3
+# Compile of HolderShifterModule.v was successful.
+vsim -gui work.HolderShifterModule
+# vsim -gui work.HolderShifterModule 
+# Start time: 13:38:57 on Feb 21,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading work.HolderShifterModule(fast)
+# End time: 14:24:13 on Feb 21,2025, Elapsed time: 0:45:16
+# Errors: 0, Warnings: 2
