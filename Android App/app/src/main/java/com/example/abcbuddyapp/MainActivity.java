@@ -1,6 +1,7 @@
 package com.example.abcbuddyapp;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
@@ -59,15 +60,25 @@ public class MainActivity extends AppCompatActivity {
         if (input.equalsIgnoreCase("X")) {
             if (awaitingVariable) {
                 char nextVariable = getNextVariable();
-                currentSegment.append(nextVariable);
 
-                // Update the corresponding TextView
-                if (currentVariableIndex < variableTextViews.length) {
-                    variableTextViews[currentVariableIndex].setText(currentSegment.toString());
+                // Prepare display text (remove leading zero before showing)
+                String displayText = currentSegment.toString() + nextVariable;
+                boolean hasNeg = displayText.startsWith("-");
+                if (hasNeg) {
+                    displayText = displayText.substring(1);
+                }
+                while (displayText.charAt(0) == '0') {
+                    displayText = displayText.substring(1);
+                }
+                if (hasNeg) {
+                    displayText = "-" + displayText;
                 }
 
-                // Punch all digits from right to left
-                punchStoredNumber();
+                if (currentVariableIndex < variableTextViews.length) {
+                    variableTextViews[currentVariableIndex].setText(displayText);
+                }
+
+                punchStoredNumber(); // Now properly aligned & includes leading zero (only in punch)
 
                 // Move to the next segment
                 currentVariableIndex++;
@@ -81,10 +92,11 @@ public class MainActivity extends AppCompatActivity {
             int number = Integer.parseInt(input);
             if (isFirstNumber) {
                 if (number == 0) {
-                    isNegative = true; // Mark number as negative
+                    isNegative = true; // Mark as negative
+                    currentSegment.append("0"); // Store for punching only (not displayed)
                 } else {
                     if (isNegative) {
-                        currentSegment.append("-"); // Add leading zero for negatives
+                        currentSegment.insert(0, "-"); // Ensure negative sign is stored
                     }
                     currentSegment.append(number);
                     isFirstNumber = false;
@@ -103,28 +115,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void punchStoredNumber() {
-        // Get the coefficient as a string (excluding the variable)
-        String coefficient = currentSegment.toString().replaceAll("[^0-9]", ""); // Remove non-numeric chars
-        boolean hasLeadingZero = currentSegment.toString().startsWith("0");
+        String rawCoefficient = currentSegment.toString();
+        boolean isNegative = rawCoefficient.startsWith("0"); // Detect negative indicator
+        String coefficient = rawCoefficient.replaceAll("[^0-9]", ""); // Extract all digits
 
-        // Determine where the first digit should be punched
         int punchColumn = segmentStartColumn + 14 - (coefficient.length() - 1);
-        if (hasLeadingZero) {
-            punchColumn--; // Shift to make space for the leading zero
-        }
 
-        // Punch leading zero for negative numbers
-        if (hasLeadingZero) {
-            punchcardView.punchCell(punchColumn, 0);
-            punchColumn++; // Shift back to punch the actual number
+        // Punch the leading zero if it's negative
+        if (isNegative) {
+            punchcardView.punchCell(punchColumn - 1 , 0);
         }
-
-        // Punch each digit in reverse order
+        
+        // Punch each digit, ensuring all zeroes are included
         for (int i = 0; i < coefficient.length(); i++) {
             int digit = Character.getNumericValue(coefficient.charAt(i));
             punchcardView.punchCell(punchColumn + i, digit);
         }
     }
+
+
 
     private void clearEquation() {
         resetEquationState();

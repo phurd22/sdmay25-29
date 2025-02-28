@@ -19,43 +19,89 @@
 
             <TextView
                 android:id="@+id/Var1"
-                android:layout_width="254dp"
+                android:layout_width="269dp"
                 android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="60sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:ellipsize="end"
+                android:gravity="bottom"
+                android:maxLines="1"
                 android:text="Var1"
                 android:textAlignment="center"
                 android:textSize="60sp" />
 
             <TextView
                 android:id="@+id/Var2"
-                android:layout_width="256dp"
+                android:layout_width="244dp"
                 android:layout_height="wrap_content"
                 android:text="Var2"
                 android:textAlignment="center"
-                android:textSize="60sp" />
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeMaxTextSize="60sp"
+                android:autoSizeStepGranularity="2sp"
+                android:gravity="bottom"
+                android:textSize="60sp"
+                android:maxLines="1"
+                android:ellipsize="end" />
 
             <TextView
                 android:id="@+id/Var3"
-                android:layout_width="256dp"
+                android:layout_width="247dp"
                 android:layout_height="wrap_content"
                 android:text="Var3"
                 android:textAlignment="center"
-                android:textSize="60sp" />
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeMaxTextSize="60sp"
+                android:autoSizeStepGranularity="2sp"
+                android:gravity="bottom"
+                android:textSize="60sp"
+                android:maxLines="1"
+                android:ellipsize="end" />
 
             <TextView
                 android:id="@+id/Var4"
-                android:layout_width="254dp"
+                android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:text="Var4"
+                android:textAlignment="center"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeMaxTextSize="60sp"
+                android:autoSizeStepGranularity="2sp"
+                android:gravity="bottom"
+                android:textSize="60sp"
+                android:maxLines="1"
+                android:ellipsize="end" />
+
+            <TextView
+                android:id="@+id/equal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autoSizeTextType="uniform"
+                android:text="="
                 android:textAlignment="center"
                 android:textSize="60sp" />
 
             <TextView
                 android:id="@+id/Var5"
-                android:layout_width="258dp"
+                android:layout_width="259dp"
                 android:layout_height="wrap_content"
                 android:text="Var5"
                 android:textAlignment="center"
-                android:textSize="60sp" />
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeMaxTextSize="60sp"
+                android:autoSizeStepGranularity="2sp"
+                android:gravity="bottom"
+                android:textSize="60sp"
+                android:maxLines="1"
+                android:ellipsize="end" />
+
 
         </LinearLayout>
 
