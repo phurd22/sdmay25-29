@@ -136,6 +136,7 @@ public class Base2PunchView extends View {
             bitArray.add(toTwosComplement50Bit(number));
             Log.d("Base2PunchView", "Number: " + number);
         }
+        Log.d("Base2PunchView", numbers.toString());
         Log.d("Base2PunchView", "Done with loop");
         this.currentPage = currentPage;
         this.totalPages = totalPages;

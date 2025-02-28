@@ -99,9 +99,7 @@ public class Base2PunchActivity extends AppCompatActivity {
     private void listenForData() {
         new Thread(() -> {
             byte[] buffer = new byte[240];
-            int bytes;
             int bytesRead = 0;
-            List<Long> numbers = new ArrayList<>();
             while (true) {
                 try {
                     while (bytesRead < 240) { // Keep reading until we get 240 bytes
@@ -109,31 +107,21 @@ public class Base2PunchActivity extends AppCompatActivity {
                         if (result == -1) break; // End of stream
                         bytesRead += result;
                     }
-
+                    allNumbers.add(new ArrayList<>());
                     ByteBuffer byteBuffer = ByteBuffer.wrap(buffer);
                     for (int i = 0; i < 30; ++i) {
-                        numbers.add((long)byteBuffer.getLong());
+                        allNumbers.get(allNumbers.size() - 1).add(byteBuffer.getLong());
                     }
 
-                    for (Long value : numbers) {
+                    for (Long value : allNumbers.get(allNumbers.size() - 1)) {
                         Log.d("Bluetooth", "Received: " + value);
                     }
 
-                    allNumbers.add(numbers);
                     totalPages += 1;
-                    handler.post(this::updatePage);
                     Log.d("AllNumbers", "allNumbers size: " + allNumbers.size());
                     Log.d("AllNumbers", allNumbers.get(allNumbers.size() - 1).toString());
-                    numbers.clear();
+                    handler.post(this::updatePage);
                     bytesRead = 0;
-
-//                    if (inputStream.available() >= 240) {
-//                        bytes = inputStream.read(buffer);
-//                        String receivedData = new String(buffer, 0, bytes);
-//
-//                        handler.post(() -> Toast.makeText(Base2PunchActivity.this, "Received numbers", Toast.LENGTH_SHORT).show());
-//                        Log.d("Bluetooth", "Received: " + receivedData);
-//                    }
                 } catch (IOException e) {
                     Log.e("Bluetooth", "Error reading data", e);
                     break;
@@ -151,6 +139,7 @@ public class Base2PunchActivity extends AppCompatActivity {
         if (currentPage == totalPages) {
             base2PunchView.setDrawRightArrow(false);
         }
+        Log.d("Base2PunchView", allNumbers.get(currentPage - 1).toString());
         base2PunchView.setNumbers(allNumbers.get(currentPage - 1), currentPage, totalPages);
     }
 
