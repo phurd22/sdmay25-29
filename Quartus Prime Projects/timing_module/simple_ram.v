@@ -1,0 +1,36 @@
+module simple_ram (
+    input wire clk,                  // Clock signal
+    input wire we,                   // Write enable (1 = write, 0 = read)
+    input wire [14:0] addr,          // 15-bit address
+    inout wire [7:0] data_io         // Bidirectional 8-bit data bus
+);
+
+// Define the RAM as a 2D array (32,768 x 8 bits)
+reg [7:0] ram [0:32767];             // 2^15 = 32,768 addresses, each storing 8 bits
+
+// Internal signal to hold the output data during read operations
+reg [7:0] data_out;
+
+// Initialize all RAM locations to 0 (optional)
+integer i;
+initial begin
+    for (i = 0; i < 32768; i = i + 1) begin
+        ram[i] = 8'b0;
+    end
+end
+
+// RAM operation (read/write)
+always @(posedge clk) begin
+    if (we) begin
+        // Write operation: store data_io at the specified address
+        ram[addr] <= data_io;
+    end else begin
+        // Read operation: latch the data at the specified address
+        data_out <= ram[addr];
+    end
+end
+
+// Tri-state buffer for bidirectional data bus
+assign data_io = (we) ? 8'bz : data_out; // Drive data_io during read, high-Z during write
+
+endmodule

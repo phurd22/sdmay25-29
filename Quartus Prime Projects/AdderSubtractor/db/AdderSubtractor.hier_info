@@ -1,0 +1,26 @@
+|AdderSubtractor
+S <= inst2.DB_MAX_OUTPUT_PORT_TYPE
+X => inst9.IN0
+Cin => inst6.IN0
+Y => inst5.IN0
+Cout <= inst10.DB_MAX_OUTPUT_PORT_TYPE
+Add/Sub => 21mux:inst18.S
+Add/Sub => 21mux:inst17.S
+
+
+|AdderSubtractor|21mux:inst18
+Y <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+S => 6.IN1
+S => 7.IN1
+B => 8.IN0
+
+
+|AdderSubtractor|21mux:inst17
+Y <= 5.DB_MAX_OUTPUT_PORT_TYPE
+A => 6.IN0
+S => 6.IN1
+S => 7.IN1
+B => 8.IN0
+
+

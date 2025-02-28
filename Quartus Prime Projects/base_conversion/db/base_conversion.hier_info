@@ -1,0 +1,515 @@
+|base_conversion
+out0 <= 4to1mux:inst86.Y
+decimal0_7 => inst102.IN0
+decimal0_7 => mux_2_to_1:inst81.S
+decimal0_5 => inst102.IN1
+decimal0_9 => inst102.IN2
+decimal0_9 => inst101.IN1
+decimal0_3 => inst101.IN0
+decimal0_6 => inst101.IN2
+decimal0_6 => mux_2_to_1:inst76.S
+decode_slt[0] => decoder_3to8:inst1.in[0]
+decode_slt[1] => decoder_3to8:inst1.in[1]
+decode_slt[2] => decoder_3to8:inst1.in[2]
+CLK => nines_eeprom:inst40.clk
+CLK => shift_reg:inst74.CLK
+CLK => ones_eeprom:inst33.clk
+CLK => sevens_eeprom:inst39.clk
+CLK => shift_reg:inst72.CLK
+CLK => threes_eeprom:inst38.clk
+CLK => shift_reg:inst69.CLK
+CLK => shift_reg:inst61.CLK
+eeprom_addr[0] => nines_eeprom:inst40.addr[0]
+eeprom_addr[0] => ones_eeprom:inst33.addr[0]
+eeprom_addr[0] => sevens_eeprom:inst39.addr[0]
+eeprom_addr[0] => threes_eeprom:inst38.addr[0]
+eeprom_addr[1] => nines_eeprom:inst40.addr[1]
+eeprom_addr[1] => ones_eeprom:inst33.addr[1]
+eeprom_addr[1] => sevens_eeprom:inst39.addr[1]
+eeprom_addr[1] => threes_eeprom:inst38.addr[1]
+eeprom_addr[2] => nines_eeprom:inst40.addr[2]
+eeprom_addr[2] => ones_eeprom:inst33.addr[2]
+eeprom_addr[2] => sevens_eeprom:inst39.addr[2]
+eeprom_addr[2] => threes_eeprom:inst38.addr[2]
+eeprom_addr[3] => nines_eeprom:inst40.addr[3]
+eeprom_addr[3] => ones_eeprom:inst33.addr[3]
+eeprom_addr[3] => sevens_eeprom:inst39.addr[3]
+eeprom_addr[3] => threes_eeprom:inst38.addr[3]
+eeprom_addr[4] => nines_eeprom:inst40.addr[4]
+eeprom_addr[4] => ones_eeprom:inst33.addr[4]
+eeprom_addr[4] => sevens_eeprom:inst39.addr[4]
+eeprom_addr[4] => threes_eeprom:inst38.addr[4]
+decimal0_8 => inst91.IN0
+decimal0_8 => inst92.IN1
+decimal0_4 => inst91.IN1
+decimal0_2 => inst92.IN0
+out1 <= 4to1mux:inst87.Y
+decimal1_7 => inst104.IN0
+decimal1_7 => mux_2_to_1:inst82.S
+decimal1_5 => inst104.IN1
+decimal1_9 => inst104.IN2
+decimal1_9 => inst103.IN1
+decimal1_3 => inst103.IN0
+decimal1_6 => inst103.IN2
+decimal1_6 => mux_2_to_1:inst77.S
+decimal1_8 => inst93.IN0
+decimal1_8 => inst94.IN1
+decimal1_4 => inst93.IN1
+decimal1_2 => inst94.IN0
+out2 <= 4to1mux:inst88.Y
+decimal2_7 => inst106.IN0
+decimal2_7 => mux_2_to_1:inst83.S
+decimal2_5 => inst106.IN1
+decimal2_9 => inst106.IN2
+decimal2_9 => inst105.IN1
+decimal2_3 => inst105.IN0
+decimal2_6 => inst105.IN2
+decimal2_6 => mux_2_to_1:inst78.S
+decimal2_8 => inst95.IN0
+decimal2_8 => inst96.IN1
+decimal2_4 => inst95.IN1
+decimal2_2 => inst96.IN0
+out3 <= 4to1mux:inst89.Y
+decimal3_7 => inst108.IN0
+decimal3_7 => mux_2_to_1:inst84.S
+decimal3_5 => inst108.IN1
+decimal3_9 => inst108.IN2
+decimal3_9 => inst107.IN1
+decimal3_3 => inst107.IN0
+decimal3_6 => inst107.IN2
+decimal3_6 => mux_2_to_1:inst79.S
+decimal3_8 => inst97.IN0
+decimal3_8 => inst98.IN1
+decimal3_4 => inst97.IN1
+decimal3_2 => inst98.IN0
+out4 <= 4to1mux:inst90.Y
+decimal4_7 => inst110.IN0
+decimal4_7 => mux_2_to_1:inst85.S
+decimal4_5 => inst110.IN1
+decimal4_9 => inst110.IN2
+decimal4_9 => inst109.IN1
+decimal4_3 => inst109.IN0
+decimal4_6 => inst109.IN2
+decimal4_6 => mux_2_to_1:inst80.S
+decimal4_8 => inst99.IN0
+decimal4_8 => inst100.IN1
+decimal4_4 => inst99.IN1
+decimal4_2 => inst100.IN0
+
+
+|base_conversion|4to1mux:inst86
+s1 => SYNTHESIZED_WIRE_4.IN0
+s1 => SYNTHESIZED_WIRE_7.IN0
+s1 => SYNTHESIZED_WIRE_5.IN0
+s1 => SYNTHESIZED_WIRE_6.IN0
+s0 => SYNTHESIZED_WIRE_4.IN1
+s0 => SYNTHESIZED_WIRE_5.IN1
+s0 => SYNTHESIZED_WIRE_7.IN1
+s0 => SYNTHESIZED_WIRE_6.IN1
+W0 => SYNTHESIZED_WIRE_6.IN1
+W1 => SYNTHESIZED_WIRE_5.IN1
+W2 => SYNTHESIZED_WIRE_7.IN1
+W3 => SYNTHESIZED_WIRE_4.IN1
+Y <= Y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|shift_reg:inst74
+IN => DFF_inst.DATAIN
+CLK => Q4~reg0.CLK
+CLK => DFF_inst2.CLK
+CLK => DFF_inst1.CLK
+CLK => DFF_inst.CLK
+Q4 <= Q4~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Q3 <= DFF_inst2.DB_MAX_OUTPUT_PORT_TYPE
+Q2 <= DFF_inst1.DB_MAX_OUTPUT_PORT_TYPE
+Q1 <= DFF_inst.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|decoder_3to8:inst1
+in[0] => Decoder0.IN2
+in[1] => Decoder0.IN1
+in[2] => Decoder0.IN0
+out[0] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+out[4] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+out[5] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+out[6] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+out[7] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|nines_eeprom:inst40
+clk => ~NO_FANOUT~
+rst_n => ~NO_FANOUT~
+cs_n => always0.IN0
+oe_n => always0.IN1
+addr[0] => memory.RADDR
+addr[1] => memory.RADDR1
+addr[2] => memory.RADDR2
+addr[3] => memory.RADDR3
+addr[4] => memory.RADDR4
+addr[5] => memory.RADDR5
+addr[6] => memory.RADDR6
+addr[7] => memory.RADDR7
+addr[8] => memory.RADDR8
+addr[9] => memory.RADDR9
+addr[10] => memory.RADDR10
+addr[11] => memory.RADDR11
+addr[12] => memory.RADDR12
+addr[13] => memory.RADDR13
+addr[14] => memory.RADDR14
+addr[15] => memory.RADDR15
+data[0] <= data[0].DB_MAX_OUTPUT_PORT_TYPE
+data[1] <= data[1].DB_MAX_OUTPUT_PORT_TYPE
+data[2] <= data[2].DB_MAX_OUTPUT_PORT_TYPE
+data[3] <= data[3].DB_MAX_OUTPUT_PORT_TYPE
+data[4] <= data[4].DB_MAX_OUTPUT_PORT_TYPE
+data[5] <= data[5].DB_MAX_OUTPUT_PORT_TYPE
+data[6] <= data[6].DB_MAX_OUTPUT_PORT_TYPE
+data[7] <= data[7].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|mux_2_to_1:inst81
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|ones_eeprom:inst33
+clk => ~NO_FANOUT~
+rst_n => ~NO_FANOUT~
+cs_n => always0.IN0
+oe_n => always0.IN1
+addr[0] => memory.RADDR
+addr[1] => memory.RADDR1
+addr[2] => memory.RADDR2
+addr[3] => memory.RADDR3
+addr[4] => memory.RADDR4
+addr[5] => memory.RADDR5
+addr[6] => memory.RADDR6
+addr[7] => memory.RADDR7
+addr[8] => memory.RADDR8
+addr[9] => memory.RADDR9
+addr[10] => memory.RADDR10
+addr[11] => memory.RADDR11
+addr[12] => memory.RADDR12
+addr[13] => memory.RADDR13
+addr[14] => memory.RADDR14
+addr[15] => memory.RADDR15
+data[0] <= data[0].DB_MAX_OUTPUT_PORT_TYPE
+data[1] <= data[1].DB_MAX_OUTPUT_PORT_TYPE
+data[2] <= data[2].DB_MAX_OUTPUT_PORT_TYPE
+data[3] <= data[3].DB_MAX_OUTPUT_PORT_TYPE
+data[4] <= data[4].DB_MAX_OUTPUT_PORT_TYPE
+data[5] <= data[5].DB_MAX_OUTPUT_PORT_TYPE
+data[6] <= data[6].DB_MAX_OUTPUT_PORT_TYPE
+data[7] <= data[7].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|shift_reg:inst72
+IN => DFF_inst.DATAIN
+CLK => Q4~reg0.CLK
+CLK => DFF_inst2.CLK
+CLK => DFF_inst1.CLK
+CLK => DFF_inst.CLK
+Q4 <= Q4~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Q3 <= DFF_inst2.DB_MAX_OUTPUT_PORT_TYPE
+Q2 <= DFF_inst1.DB_MAX_OUTPUT_PORT_TYPE
+Q1 <= DFF_inst.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|sevens_eeprom:inst39
+clk => ~NO_FANOUT~
+rst_n => ~NO_FANOUT~
+cs_n => always0.IN0
+oe_n => always0.IN1
+addr[0] => memory.RADDR
+addr[1] => memory.RADDR1
+addr[2] => memory.RADDR2
+addr[3] => memory.RADDR3
+addr[4] => memory.RADDR4
+addr[5] => memory.RADDR5
+addr[6] => memory.RADDR6
+addr[7] => memory.RADDR7
+addr[8] => memory.RADDR8
+addr[9] => memory.RADDR9
+addr[10] => memory.RADDR10
+addr[11] => memory.RADDR11
+addr[12] => memory.RADDR12
+addr[13] => memory.RADDR13
+addr[14] => memory.RADDR14
+addr[15] => memory.RADDR15
+data[0] <= data[0].DB_MAX_OUTPUT_PORT_TYPE
+data[1] <= data[1].DB_MAX_OUTPUT_PORT_TYPE
+data[2] <= data[2].DB_MAX_OUTPUT_PORT_TYPE
+data[3] <= data[3].DB_MAX_OUTPUT_PORT_TYPE
+data[4] <= data[4].DB_MAX_OUTPUT_PORT_TYPE
+data[5] <= data[5].DB_MAX_OUTPUT_PORT_TYPE
+data[6] <= data[6].DB_MAX_OUTPUT_PORT_TYPE
+data[7] <= data[7].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|mux_2_to_1:inst76
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|shift_reg:inst69
+IN => DFF_inst.DATAIN
+CLK => Q4~reg0.CLK
+CLK => DFF_inst2.CLK
+CLK => DFF_inst1.CLK
+CLK => DFF_inst.CLK
+Q4 <= Q4~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Q3 <= DFF_inst2.DB_MAX_OUTPUT_PORT_TYPE
+Q2 <= DFF_inst1.DB_MAX_OUTPUT_PORT_TYPE
+Q1 <= DFF_inst.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|threes_eeprom:inst38
+clk => ~NO_FANOUT~
+rst_n => ~NO_FANOUT~
+cs_n => always0.IN0
+oe_n => always0.IN1
+addr[0] => memory.RADDR
+addr[1] => memory.RADDR1
+addr[2] => memory.RADDR2
+addr[3] => memory.RADDR3
+addr[4] => memory.RADDR4
+addr[5] => memory.RADDR5
+addr[6] => memory.RADDR6
+addr[7] => memory.RADDR7
+addr[8] => memory.RADDR8
+addr[9] => memory.RADDR9
+addr[10] => memory.RADDR10
+addr[11] => memory.RADDR11
+addr[12] => memory.RADDR12
+addr[13] => memory.RADDR13
+addr[14] => memory.RADDR14
+addr[15] => memory.RADDR15
+data[0] <= data[0].DB_MAX_OUTPUT_PORT_TYPE
+data[1] <= data[1].DB_MAX_OUTPUT_PORT_TYPE
+data[2] <= data[2].DB_MAX_OUTPUT_PORT_TYPE
+data[3] <= data[3].DB_MAX_OUTPUT_PORT_TYPE
+data[4] <= data[4].DB_MAX_OUTPUT_PORT_TYPE
+data[5] <= data[5].DB_MAX_OUTPUT_PORT_TYPE
+data[6] <= data[6].DB_MAX_OUTPUT_PORT_TYPE
+data[7] <= data[7].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|4to1mux:inst62
+s1 => SYNTHESIZED_WIRE_4.IN0
+s1 => SYNTHESIZED_WIRE_7.IN0
+s1 => SYNTHESIZED_WIRE_5.IN0
+s1 => SYNTHESIZED_WIRE_6.IN0
+s0 => SYNTHESIZED_WIRE_4.IN1
+s0 => SYNTHESIZED_WIRE_5.IN1
+s0 => SYNTHESIZED_WIRE_7.IN1
+s0 => SYNTHESIZED_WIRE_6.IN1
+W0 => SYNTHESIZED_WIRE_6.IN1
+W1 => SYNTHESIZED_WIRE_5.IN1
+W2 => SYNTHESIZED_WIRE_7.IN1
+W3 => SYNTHESIZED_WIRE_4.IN1
+Y <= Y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|shift_reg:inst61
+IN => DFF_inst.DATAIN
+CLK => Q4~reg0.CLK
+CLK => DFF_inst2.CLK
+CLK => DFF_inst1.CLK
+CLK => DFF_inst.CLK
+Q4 <= Q4~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Q3 <= DFF_inst2.DB_MAX_OUTPUT_PORT_TYPE
+Q2 <= DFF_inst1.DB_MAX_OUTPUT_PORT_TYPE
+Q1 <= DFF_inst.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|4to1mux:inst87
+s1 => SYNTHESIZED_WIRE_4.IN0
+s1 => SYNTHESIZED_WIRE_7.IN0
+s1 => SYNTHESIZED_WIRE_5.IN0
+s1 => SYNTHESIZED_WIRE_6.IN0
+s0 => SYNTHESIZED_WIRE_4.IN1
+s0 => SYNTHESIZED_WIRE_5.IN1
+s0 => SYNTHESIZED_WIRE_7.IN1
+s0 => SYNTHESIZED_WIRE_6.IN1
+W0 => SYNTHESIZED_WIRE_6.IN1
+W1 => SYNTHESIZED_WIRE_5.IN1
+W2 => SYNTHESIZED_WIRE_7.IN1
+W3 => SYNTHESIZED_WIRE_4.IN1
+Y <= Y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|mux_2_to_1:inst82
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|mux_2_to_1:inst77
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|4to1mux:inst63
+s1 => SYNTHESIZED_WIRE_4.IN0
+s1 => SYNTHESIZED_WIRE_7.IN0
+s1 => SYNTHESIZED_WIRE_5.IN0
+s1 => SYNTHESIZED_WIRE_6.IN0
+s0 => SYNTHESIZED_WIRE_4.IN1
+s0 => SYNTHESIZED_WIRE_5.IN1
+s0 => SYNTHESIZED_WIRE_7.IN1
+s0 => SYNTHESIZED_WIRE_6.IN1
+W0 => SYNTHESIZED_WIRE_6.IN1
+W1 => SYNTHESIZED_WIRE_5.IN1
+W2 => SYNTHESIZED_WIRE_7.IN1
+W3 => SYNTHESIZED_WIRE_4.IN1
+Y <= Y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|4to1mux:inst88
+s1 => SYNTHESIZED_WIRE_4.IN0
+s1 => SYNTHESIZED_WIRE_7.IN0
+s1 => SYNTHESIZED_WIRE_5.IN0
+s1 => SYNTHESIZED_WIRE_6.IN0
+s0 => SYNTHESIZED_WIRE_4.IN1
+s0 => SYNTHESIZED_WIRE_5.IN1
+s0 => SYNTHESIZED_WIRE_7.IN1
+s0 => SYNTHESIZED_WIRE_6.IN1
+W0 => SYNTHESIZED_WIRE_6.IN1
+W1 => SYNTHESIZED_WIRE_5.IN1
+W2 => SYNTHESIZED_WIRE_7.IN1
+W3 => SYNTHESIZED_WIRE_4.IN1
+Y <= Y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|mux_2_to_1:inst83
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|mux_2_to_1:inst78
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|4to1mux:inst64
+s1 => SYNTHESIZED_WIRE_4.IN0
+s1 => SYNTHESIZED_WIRE_7.IN0
+s1 => SYNTHESIZED_WIRE_5.IN0
+s1 => SYNTHESIZED_WIRE_6.IN0
+s0 => SYNTHESIZED_WIRE_4.IN1
+s0 => SYNTHESIZED_WIRE_5.IN1
+s0 => SYNTHESIZED_WIRE_7.IN1
+s0 => SYNTHESIZED_WIRE_6.IN1
+W0 => SYNTHESIZED_WIRE_6.IN1
+W1 => SYNTHESIZED_WIRE_5.IN1
+W2 => SYNTHESIZED_WIRE_7.IN1
+W3 => SYNTHESIZED_WIRE_4.IN1
+Y <= Y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|4to1mux:inst89
+s1 => SYNTHESIZED_WIRE_4.IN0
+s1 => SYNTHESIZED_WIRE_7.IN0
+s1 => SYNTHESIZED_WIRE_5.IN0
+s1 => SYNTHESIZED_WIRE_6.IN0
+s0 => SYNTHESIZED_WIRE_4.IN1
+s0 => SYNTHESIZED_WIRE_5.IN1
+s0 => SYNTHESIZED_WIRE_7.IN1
+s0 => SYNTHESIZED_WIRE_6.IN1
+W0 => SYNTHESIZED_WIRE_6.IN1
+W1 => SYNTHESIZED_WIRE_5.IN1
+W2 => SYNTHESIZED_WIRE_7.IN1
+W3 => SYNTHESIZED_WIRE_4.IN1
+Y <= Y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|mux_2_to_1:inst84
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|mux_2_to_1:inst79
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|4to1mux:inst65
+s1 => SYNTHESIZED_WIRE_4.IN0
+s1 => SYNTHESIZED_WIRE_7.IN0
+s1 => SYNTHESIZED_WIRE_5.IN0
+s1 => SYNTHESIZED_WIRE_6.IN0
+s0 => SYNTHESIZED_WIRE_4.IN1
+s0 => SYNTHESIZED_WIRE_5.IN1
+s0 => SYNTHESIZED_WIRE_7.IN1
+s0 => SYNTHESIZED_WIRE_6.IN1
+W0 => SYNTHESIZED_WIRE_6.IN1
+W1 => SYNTHESIZED_WIRE_5.IN1
+W2 => SYNTHESIZED_WIRE_7.IN1
+W3 => SYNTHESIZED_WIRE_4.IN1
+Y <= Y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|4to1mux:inst90
+s1 => SYNTHESIZED_WIRE_4.IN0
+s1 => SYNTHESIZED_WIRE_7.IN0
+s1 => SYNTHESIZED_WIRE_5.IN0
+s1 => SYNTHESIZED_WIRE_6.IN0
+s0 => SYNTHESIZED_WIRE_4.IN1
+s0 => SYNTHESIZED_WIRE_5.IN1
+s0 => SYNTHESIZED_WIRE_7.IN1
+s0 => SYNTHESIZED_WIRE_6.IN1
+W0 => SYNTHESIZED_WIRE_6.IN1
+W1 => SYNTHESIZED_WIRE_5.IN1
+W2 => SYNTHESIZED_WIRE_7.IN1
+W3 => SYNTHESIZED_WIRE_4.IN1
+Y <= Y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|mux_2_to_1:inst85
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|mux_2_to_1:inst80
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|base_conversion|4to1mux:inst66
+s1 => SYNTHESIZED_WIRE_4.IN0
+s1 => SYNTHESIZED_WIRE_7.IN0
+s1 => SYNTHESIZED_WIRE_5.IN0
+s1 => SYNTHESIZED_WIRE_6.IN0
+s0 => SYNTHESIZED_WIRE_4.IN1
+s0 => SYNTHESIZED_WIRE_5.IN1
+s0 => SYNTHESIZED_WIRE_7.IN1
+s0 => SYNTHESIZED_WIRE_6.IN1
+W0 => SYNTHESIZED_WIRE_6.IN1
+W1 => SYNTHESIZED_WIRE_5.IN1
+W2 => SYNTHESIZED_WIRE_7.IN1
+W3 => SYNTHESIZED_WIRE_4.IN1
+Y <= Y.DB_MAX_OUTPUT_PORT_TYPE
+
+

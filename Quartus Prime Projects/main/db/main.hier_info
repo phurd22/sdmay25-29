@@ -1,0 +1,113 @@
+|main
+
+
+|main|demux_3to8:inst
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+sel[0] => Decoder0.IN2
+sel[1] => Decoder0.IN1
+sel[2] => Decoder0.IN0
+out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|demux_3to8:inst2
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+sel[0] => Decoder0.IN2
+sel[1] => Decoder0.IN1
+sel[2] => Decoder0.IN0
+out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|demux_3to8:inst3
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+sel[0] => Decoder0.IN2
+sel[1] => Decoder0.IN1
+sel[2] => Decoder0.IN0
+out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|demux_3to8:inst4
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+sel[0] => Decoder0.IN2
+sel[1] => Decoder0.IN1
+sel[2] => Decoder0.IN0
+out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|demux_3to8:inst5
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+in => out.DATAB
+sel[0] => Decoder0.IN2
+sel[1] => Decoder0.IN1
+sel[2] => Decoder0.IN0
+out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
+
+
