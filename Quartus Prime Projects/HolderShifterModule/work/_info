@@ -1,6 +1,8 @@
 m255
 K4
 z2
+!s12c _opt
+Z0 !s99 nomlopt
 !s11f vlog 2024.2 2024.05, May 20 2024
 13
 !s112 1.1
@@ -9,27 +11,65 @@ z2
 !i10f 100
 cModel Technology
 dC:/questasim64_2024.2/examples
+T_opt
+!s110 1740166741
+V6W?BYRfj4kafi^:P;0?[63
+04 19 4 work HolderShifterModule fast 0
+=1-005056b6530d-67b8d654-99-2ba4
+R0
+!s12f OEM100
+!s12b OEM100
+!s124 OEM100
+!s135 nogc
+o-quiet -auto_acc_if_foreign -work work
+Z1 tCvgOpt 0
+n@_opt
+OL;O;2024.2;79
 vHolderShifterModule
-2U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v
-!s110 1740158309
+Z2 2U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v
+Z3 !s110 1740166720
 !i10b 1
-!s100 TzkbDenVC29OK@hYc6`B<1
-IoJlm4oZCNc5HJm_<e4@GM1
-dU:/sdmay25-29/Quartus Prime Projects/HolderShifterModule
-w1740158179
-8U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v
-FU:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v
-!i122 0
-L0 20 53
-VDg1SIo80bB@j0V0VzS_@n1
-OL;L;2024.2;79
+!s100 >j55md6NEJZio`<7ChQ5f2
+Ij[EBmeNGOPA8BmO]l0kc<3
+Z4 dU:/sdmay25-29/Quartus Prime Projects/HolderShifterModule
+Z5 w1740166714
+Z6 8U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v
+Z7 FU:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v
+!i122 3
+L0 20 47
+Z8 VDg1SIo80bB@j0V0VzS_@n1
+Z9 OL;L;2024.2;79
 r1
 !s85 0
 31
-!s108 1740158306.000000
-!s107 U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v|
+Z10 !s108 1740166717.000000
+Z11 !s107 U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v|
+Z12 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v|
 !i113 0
-o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-tCvgOpt 0
+Z13 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R1
 n@holder@shifter@module
+vTwotoOneMux
+R2
+R3
+!i10b 1
+!s100 SZkO:MPmman3S<X3zGSkB0
+Im0HGb9?4599eH9OZLLJU@3
+R4
+R5
+R6
+R7
+!i122 3
+L0 69 8
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R1
+n@twoto@one@mux

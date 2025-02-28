@@ -1,1 +1,9 @@
+{U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v} {1 {vlog -work work -vopt -stats=none {U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v}
+QuestaSim-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module HolderShifterModule
+-- Compiling module TwotoOneMux
 
+Top level modules:
+	HolderShifterModule
+
+} {} {}}

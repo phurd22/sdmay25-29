@@ -1,0 +1,1 @@
+C:/questasim64_2024.2/win64/VisualizerRls/bin/viscom.exe -nolock -quiet -jmem_size 131072 work.HolderShifterModule -quiet -auto_acc_if_foreign -work work -allow_unnamed -o _opt -id 1-005056b6530d-67b8d654-99-2ba4 {+__design_bin_path+U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule}
