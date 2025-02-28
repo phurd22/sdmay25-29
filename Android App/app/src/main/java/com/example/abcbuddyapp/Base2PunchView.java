@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,8 +17,6 @@ import java.util.List;
 
 public class Base2PunchView extends View {
 
-    //TODO: Need to add ability to switch pages. Add touch event listener for
-    // the left and right arrow buttons.
     private OnPageChangeListener pageChangeListener;
 
     private final int dotRadius = 8; // Dot size for grid points
@@ -132,9 +131,12 @@ public class Base2PunchView extends View {
 
     public void setNumbers(List<Long> numbers, int currentPage, int totalPages) {
         bitArray.clear();
+        Log.d("Base2PunchView", "HELLO???");
         for (long number : numbers) {
             bitArray.add(toTwosComplement50Bit(number));
+            Log.d("Base2PunchView", "Number: " + number);
         }
+        Log.d("Base2PunchView", "Done with loop");
         this.currentPage = currentPage;
         this.totalPages = totalPages;
         invalidate(); // Redraw the view with new data
