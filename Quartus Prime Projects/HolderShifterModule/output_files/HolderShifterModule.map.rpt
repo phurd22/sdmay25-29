@@ -1,5 +1,5 @@
 Analysis & Synthesis report for HolderShifterModule
-Fri Feb 21 11:39:59 2025
+Fri Feb 21 13:23:20 2025
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition
 
 
@@ -43,7 +43,7 @@ https://fpgasoftware.intel.com/eula.
 +-----------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                            ;
 +------------------------------------+----------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Feb 21 11:39:59 2025              ;
+; Analysis & Synthesis Status        ; Successful - Fri Feb 21 13:23:20 2025              ;
 ; Quartus Prime Version              ; 23.1std.1 Build 993 05/14/2024 SC Standard Edition ;
 ; Revision Name                      ; HolderShifterModule                                ;
 ; Top-level Entity Name              ; HolderShifterModule                                ;
@@ -168,7 +168,7 @@ https://fpgasoftware.intel.com/eula.
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                                ; File Name with Absolute Path                                                     ; Library ;
 +----------------------------------+-----------------+------------------------------------------+----------------------------------------------------------------------------------+---------+
 ; HolderShifterModule.bdf          ; yes             ; User Block Diagram/Schematic File        ; U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.bdf ;         ;
-; 2to1mux.bdf                      ; yes             ; Auto-Found Block Diagram/Schematic File  ; U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/2to1mux.bdf             ;         ;
+; twotoonemux.bdf                  ; yes             ; Auto-Found Block Diagram/Schematic File  ; U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/twotoonemux.bdf         ;         ;
 +----------------------------------+-----------------+------------------------------------------+----------------------------------------------------------------------------------+---------+
 
 
@@ -204,14 +204,14 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+----------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                             ;
-+----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------+---------------------+--------------+
-; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                ; Entity Name         ; Library Name ;
-+----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------+---------------------+--------------+
-; |HolderShifterModule       ; 1 (0)               ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 5    ; 0            ; |HolderShifterModule               ; HolderShifterModule ; work         ;
-;    |2to1Mux:inst6|         ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |HolderShifterModule|2to1Mux:inst6 ; 2to1Mux             ; work         ;
-+----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------+---------------------+--------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                 ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------+---------------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                    ; Entity Name         ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------+---------------------+--------------+
+; |HolderShifterModule       ; 1 (0)               ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 5    ; 0            ; |HolderShifterModule                   ; HolderShifterModule ; work         ;
+;    |TwotoOneMux:inst5|     ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |HolderShifterModule|TwotoOneMux:inst5 ; TwotoOneMux         ; work         ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -262,16 +262,16 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition
-    Info: Processing started: Fri Feb 21 11:39:46 2025
+    Info: Processing started: Fri Feb 21 13:23:08 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off HolderShifterModule -c HolderShifterModule
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file holdershiftermodule.bdf
     Info (12023): Found entity 1: HolderShifterModule
 Info (12127): Elaborating entity "HolderShifterModule" for the top level hierarchy
-Warning (12125): Using design file 2to1mux.bdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
-    Info (12023): Found entity 1: 2to1Mux
-Info (12128): Elaborating entity "2to1Mux" for hierarchy "2to1Mux:inst6"
+Warning (12125): Using design file twotoonemux.bdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: TwotoOneMux
+Info (12128): Elaborating entity "TwotoOneMux" for hierarchy "TwotoOneMux:inst5"
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
@@ -280,9 +280,9 @@ Info (21057): Implemented 7 device resources after synthesis - the final resourc
     Info (21059): Implemented 1 output pins
     Info (21061): Implemented 2 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 2 warnings
-    Info: Peak virtual memory: 4737 megabytes
-    Info: Processing ended: Fri Feb 21 11:39:59 2025
-    Info: Elapsed time: 00:00:13
-    Info: Total CPU time (on all processors): 00:00:12
+    Info: Peak virtual memory: 4738 megabytes
+    Info: Processing ended: Fri Feb 21 13:23:20 2025
+    Info: Elapsed time: 00:00:12
+    Info: Total CPU time (on all processors): 00:00:11
 
 
