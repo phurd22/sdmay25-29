@@ -44,8 +44,25 @@ public class ABCControlPanel {
 
     //Machine Controller, contains functions for the buttons
     public static class MachineController {
+
+        //User has to 'Startup" Machine
         private boolean machineOn;
+
+        //Linked with PB1. True: Addition, False: Subtraction
         private boolean additionMode;
+
+        //ASM connection. True: Card Read, False: KA
+        private boolean switch7;
+
+        //AS relay control. True:Card, False: Overdrafts
+        private boolean switch8;
+
+        //Coefficient Banks
+        private  boolean switch1, switch2, switch3, switch4, switch5, switch6;
+
+        //Drums
+        private BinaryRow CA, KA;
+        private boolean CAClear, KAClear;
         private int selectedCoefficient;
         private int coefficientSign;
 
@@ -54,95 +71,105 @@ public class ABCControlPanel {
             additionMode = true;  // default mode is addition
             selectedCoefficient = 0;
             coefficientSign = 1;  // default to positive
+            CA = new BinaryRow(new BigInteger[30]);
+            KA = new BinaryRow(new BigInteger[30]);
+            switch1 = false;
+            switch2 = false;
+            switch3 = false;
+            switch4 = false;
+            switch5 = false;
+            switch6 = false;
+            CAClear = false;
+            KAClear = false;
         }
 
         public boolean isAdditionMode() {
             return additionMode;
         }
+
         //Used for machine startup
         public void setAdditionMode(boolean mode) {
             additionMode = mode;
+        }
+
+        //Machine On
+        public void setMachineStatus(boolean mode) { machineOn = mode; }
+
+        // SW7 : 68
+        public void toggleSwitch7() {
+            switch7 = !switch7;
+            System.out.println("Inputs to ASM's are connected to: " + (switch7 ? "Card Reader" : "KA"));
+        }
+
+        // SW8 : 90
+        public void toggleSwitch8() {
+            switch8 = !switch8;
+            System.out.println("Add-Subtract relay is controlled by: " + (switch8 ? "Card" : "Overdrafts"));
+        }
+
+        // PB1 : 84
+        public void toggleAddSubtraction() {
+            additionMode = !additionMode;
+            System.out.println("Operation is now: " + (additionMode ? "Addition" : "Subtraction"));
+        }
+
+        // SW1-SW6 : 70
+        public void toggleBank(int selection) {
+            switch (selection) {
+                case 1:
+                    switch1 = !switch1;
+                    System.out.println("Coefficient Inputs 1-5: " + (switch1 ? "Selected" : "Deselected"));
+                    break;
+                case 2:
+                    switch2 = !switch2;
+                    System.out.println("Coefficient Inputs 6-10: " + (switch2 ? "Selected" : "Deselected"));
+                    break;
+                case 3:
+                    switch3 = !switch3;
+                    System.out.println("Coefficient Inputs 11-15: " + (switch3 ? "Selected" : "Deselected"));
+                    break;
+                case 4:
+                    switch4 = !switch4;
+                    System.out.println("Coefficient Inputs 16-20: " + (switch4 ? "Selected" : "Deselected"));
+                    break;
+                case 5:
+                    switch5 = !switch5;
+                    System.out.println("Coefficient Inputs 21-25: " + (switch5 ? "Selected" : "Deselected"));
+                    break;
+                case 6:
+                    switch6 = !switch6;
+                    System.out.println("Coefficient Inputs 26-30: " + (switch6 ? "Selected" : "Deselected"));
+                    break;
+            }
+        }
+
+        // SW11 : 62
+        public void clearCA() {
+            CAClear = !CAClear;
+            if (CAClear) {
+                CA = new BinaryRow(new BigInteger[30]);
+                System.out.println("CA Drum Cleared");
+            }
+        }
+        // SW12 : 63
+        public void clearKA() {
+            KAClear = !KAClear;
+            if (KAClear) {
+                KA = new BinaryRow(new BigInteger[30]);
+                System.out.println("KA Drum Cleared");
+            }
+        }
+
+        // PB3 : 69
+        public void transferCAtoKA() {
+            // Deep copy the coefficients from CA to KA.
+            KA = CA.clone();
         }
 
         public void setCoefficientSign(int signVal) {
             coefficientSign = signVal;
             String signStr = (coefficientSign == 1) ? "Positive" : "Negative";
             System.out.println("Step 29: Coefficient sign set to " + signStr + ".");
-        }
-
-        // PB1: Toggle the add/subtract mode.
-        public void toggleAddSubtraction() {
-            additionMode = !additionMode;
-            System.out.println("Operation is now: " + (additionMode ? "Addition" : "Subtraction"));
-        }
-
-        public void readBase10Card() {
-            if (!machineOn) {
-                System.out.println("Error: Machine is off. Please press MS first.");
-                return;
-            }
-            System.out.println("Step 9: Initiating base-10 card read operation. Reading IBM card...");
-            // Simulate reading a card
-        }
-
-        public void transferCAtoKA() {
-            if (!machineOn) {
-                System.out.println("Error: Machine is off. Cannot transfer CA to KA.");
-                return;
-            }
-            System.out.println("Step 11: Transferring contents of CA to KA.");
-        }
-
-        public void setCoefficientToEliminate(int coef) {
-            selectedCoefficient = coef;
-            System.out.println("Step 14: Coefficient " + selectedCoefficient + " selected for elimination.");
-        }
-
-        public void compute() {
-            if (!machineOn) {
-                System.out.println("Error: Machine is off. Cannot compute.");
-                return;
-            }
-            System.out.println("Step 17/34: Computation initiated...");
-            // Simulate computation (Gaussian elimination, etc.)
-            try {
-                Thread.sleep(1000); // simulate processing delay
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-            System.out.println("Computation complete. Equation reduced to zero.");
-        }
-
-        public void punchBase2Card() {
-            if (!machineOn) {
-                System.out.println("Error: Machine is off. Cannot punch card.");
-                return;
-            }
-            System.out.println("Step 19: Punching contents of CA onto a base-2 card.");
-        }
-
-        public void readBase2Card() {
-            if (!machineOn) {
-                System.out.println("Error: Machine is off. Cannot read base-2 card.");
-                return;
-            }
-            System.out.println("Step 24/27: Reading base-2 card into CA.");
-        }
-
-        public void setInputSourceToCardReader() {
-            System.out.println("Step 3/32: SW7 set to card read position. Inputs now from card reader.");
-        }
-
-        public void setRelayControlledByOverdraft() {
-            System.out.println("Step 4/15/33: SW8 set so that add-subtract relay is controlled by overdrafts.");
-        }
-
-        public void clearCA() {
-            System.out.println("Step 7/23: Clearing CA drum.");
-        }
-
-        public void clearKA() {
-            System.out.println("Step 7/23: Clearing KA drum.");
         }
     }
 
@@ -156,14 +183,25 @@ public class ABCControlPanel {
         //1. Turn power switch MS on.
         //Switch 1
         MS.addActionListener(e -> {
+            machineController.setMachineStatus(true);
             machineController.setAdditionMode(true);
             L2.setSelected(true);
             L3.setSelected(false);
             System.out.println("Machine started.");
         });
 
-        //5. Select ADD with PB1
-        //Pushbutton 84
+        //3. Set switch SW7 so that inputs to ASM’s are connected to card reader.
+        SW7.addActionListener(e -> {
+            machineController.toggleSwitch7();
+        });
+
+        //4. Set switch SW8 so that add-subtract relay is controlled by card
+        // (rather than by sensing overdrafts).
+        SW8.addActionListener(e -> {
+            machineController.toggleSwitch8();
+        });
+
+        //5. Select ADD with pushbutton PB1, by monitoring the lights L2 and L3.
         PB1.addActionListener(e -> {
             machineController.toggleAddSubtraction();
             //Light change for toggle
@@ -176,49 +214,64 @@ public class ABCControlPanel {
             }
         });
 
+        //6. Select field on CA into which card is read by closing one of the six switches SW1-SW6.
+        SW1.addActionListener(e -> {
+            machineController.toggleBank(1);
+        });
+        SW2.addActionListener(e -> {
+            machineController.toggleBank(2);
+        });
+        SW3.addActionListener(e -> {
+            machineController.toggleBank(3);
+        });
+        SW4.addActionListener(e -> {
+            machineController.toggleBank(4);
+        });
+        SW5.addActionListener(e -> {
+            machineController.toggleBank(5);
+        });
+        SW6.addActionListener(e -> {
+            machineController.toggleBank(6);
+        });
+
+        //7. Clear CA and KA with switches SW11 and SW12 respectively.
+        SW11.addActionListener(e -> {
+            machineController.clearCA();
+        });
+        SW12.addActionListener(e -> {
+            machineController.clearKA();
+        });
+
         //9. PB2: Start base-10 read operation
         //Pushbutton 85
-        PB2.addActionListener(e -> {
-            machineController.readBase10Card();
+
+        //11. Transfer contents of CA to KA by pressing GO button PB3.
+        PB3.addActionListener(e -> {
+
         });
 
         //PB3: Transfer CA-Drum to KA-Drum
         //Pushbutton 69
-        PB3.addActionListener(e -> {
-            machineController.transferCAtoKA();
-        });
+
 
         //II: COMPUTING
 
         //ZD slider selected the coefficient to be eliminated.
-        ZD.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                int coef = ZD.getValue();
-                machineController.setCoefficientToEliminate(coef);
-                System.out.println("ZD Slider: Coefficient " + coef + " selected for elimination.");
-            }
-        });
+
 
         //PB4: Start Base-2 Punch
         //Pushbutton 88
-        PB4.addActionListener(e -> {
-            machineController.punchBase2Card();
-        });
+
 
         //PB6: Start Computation
         //Pushbutton 86
-        PB6.addActionListener(e -> {
-            machineController.compute();
-        });
+
 
         //III: BASE-2 READING
 
         //PB5: Start Base-2 Read
         //Pushbutton 87
-        PB5.addActionListener(e -> {
-            machineController.readBase2Card();
-        });
+
 
         //IV: BASE-10 READING
 
@@ -252,18 +305,9 @@ public class ABCControlPanel {
 
         //SW7: Card Read Switch
         //Switch 68
-        SW7.addActionListener(e -> {
-            // SW7: Set input source (e.g., card reader vs. KA)
-            machineController.setInputSourceToCardReader();
-        });
-
 
         //SW8: IBM Card Sign Control
         //Switch 90
-        SW8.addActionListener(e -> {
-            // SW8: Configure add-subtract relay to be controlled by overdrafts.
-            machineController.setRelayControlledByOverdraft();
-        });
 
         //SW9: Unused
         //No reference on Manual 1968
@@ -273,15 +317,9 @@ public class ABCControlPanel {
 
         //SW11: Clear CA
         //Switch 62
-        SW11.addActionListener(e -> {
-            machineController.clearCA();
-        });
 
         //SW12: Clear KA
         //Switch 63
-        SW12.addActionListener(e -> {
-            machineController.clearKA();
-        });
     }
 
     // The main method to run your GUI.
@@ -293,25 +331,25 @@ public class ABCControlPanel {
         frame.setVisible(true);
     }
 
-    //Helper Methods
-    private void promptForCoefficients() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter up to 5 coefficients (space-separated, last one is the constant): ");
-        String line = scanner.nextLine();
-        String[] tokens = line.trim().split("\\s+");
-        if(tokens.length > 5) {
-            System.out.println("Error: Please enter no more than 5 coefficients.");
-            return;
+    // Features a row (drum) of coefficients (as BigIntegers) and a shift counter.
+    public static class BinaryRow {
+        BigInteger[] coeffs;  // the row’s coefficients (each column/band; last element is constant)
+        int shiftCount;       // number of times this row has been shifted right
+
+        public BinaryRow(BigInteger[] coeffs) {
+            this.coeffs = coeffs;
+            this.shiftCount = 0;
         }
-        BigInteger[] cardCoefficients = new BigInteger[5];
-        for (int i = 0; i < tokens.length; i++) {
-            // Assuming coefficients fit in 50 bits; you might want to check this.
-            cardCoefficients[i] = new BigInteger(tokens[i]);
+
+        public BinaryRow clone() {
+            BigInteger[] newCoeffs = new BigInteger[coeffs.length];
+            for (int i = 0; i < coeffs.length; i++) {
+                newCoeffs[i] = coeffs[i];
+            }
+            BinaryRow copy = new BinaryRow(newCoeffs);
+            copy.shiftCount = this.shiftCount;
+            return copy;
         }
-        // Store the coefficients in a temporary location until PB2 is pressed
-        // For example, you could save cardCoefficients into a field.
-        this.pendingCoefficients = cardCoefficients;
-        System.out.println("Coefficients entered. Press PB2 to load into the CA drum.");
     }
 
     private String to50BitBinary(BigInteger number) {
