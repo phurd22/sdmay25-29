@@ -1,0 +1,10 @@
+module add_sub_module(KA,CA,CIN,SUB,SUM,COUT);
+	
+	input CA, KA, CIN, SUB;
+	output SUM, COUT;
+	
+	assign SUM = 1'b0;
+	assign COUT = 1'b0;
+
+	
+endmodule

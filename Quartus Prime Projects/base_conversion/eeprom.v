@@ -1,0 +1,37 @@
+module eeprom (
+    input wire clk,            // Clock signal
+    input wire rst_n,          // Active-low reset
+    input wire cs_n,           // Active-low chip select
+    input wire oe_n,           // Active-low output enable
+    input wire [15:0] addr,   // 16-bit address bus
+    output wire [7:0] data    // 8-bit data bus (output only)
+);
+
+    // Memory size is fixed at 2^16 = 65,536 locations
+    reg [7:0] memory [0:65535];
+
+    // Initialize memory with hard-coded dummy data
+    integer i;
+    initial begin
+        for (i = 0; i < 65536; i = i + 1) begin
+            memory[i] = i[7:0]; // Example: Fill memory with lower 8 bits of address
+        end
+    end
+
+    // Internal data register
+    reg [7:0] data_out;
+
+    // Tri-state buffer control
+    assign data = (!cs_n && !oe_n) ? data_out : 8'bz;
+
+    // Read operation
+    always @(*) begin
+        if (!cs_n && !oe_n) begin
+            // Read data from memory when output enable is active
+            data_out = memory[addr];
+        end else begin
+            data_out = 8'bz;
+        end
+    end
+
+endmodule

@@ -1,0 +1,225 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "out0",
+					"strict" : false
+				},
+				{
+					"name" : "out1",
+					"strict" : false
+				},
+				{
+					"name" : "out2",
+					"strict" : false
+				},
+				{
+					"name" : "out3",
+					"strict" : false
+				},
+				{
+					"name" : "out4",
+					"strict" : false
+				},
+				{
+					"name" : "decimal0_9",
+					"strict" : false
+				},
+				{
+					"name" : "decimal0_3",
+					"strict" : false
+				},
+				{
+					"name" : "decimal0_6",
+					"strict" : false
+				},
+				{
+					"name" : "decimal0_7",
+					"strict" : false
+				},
+				{
+					"name" : "decimal0_5",
+					"strict" : false
+				},
+				{
+					"name" : "decimal0_2",
+					"strict" : false
+				},
+				{
+					"name" : "decimal0_4",
+					"strict" : false
+				},
+				{
+					"name" : "decimal0_8",
+					"strict" : false
+				},
+				{
+					"name" : "decode_slt[0]",
+					"strict" : false
+				},
+				{
+					"name" : "eeprom_addr[0]",
+					"strict" : false
+				},
+				{
+					"name" : "eeprom_addr[1]",
+					"strict" : false
+				},
+				{
+					"name" : "eeprom_addr[4]",
+					"strict" : false
+				},
+				{
+					"name" : "decode_slt[2]",
+					"strict" : false
+				},
+				{
+					"name" : "decode_slt[1]",
+					"strict" : false
+				},
+				{
+					"name" : "eeprom_addr[3]",
+					"strict" : false
+				},
+				{
+					"name" : "eeprom_addr[2]",
+					"strict" : false
+				},
+				{
+					"name" : "decimal1_9",
+					"strict" : false
+				},
+				{
+					"name" : "decimal1_3",
+					"strict" : false
+				},
+				{
+					"name" : "decimal1_6",
+					"strict" : false
+				},
+				{
+					"name" : "decimal1_7",
+					"strict" : false
+				},
+				{
+					"name" : "decimal1_5",
+					"strict" : false
+				},
+				{
+					"name" : "decimal1_2",
+					"strict" : false
+				},
+				{
+					"name" : "decimal1_4",
+					"strict" : false
+				},
+				{
+					"name" : "decimal1_8",
+					"strict" : false
+				},
+				{
+					"name" : "decimal2_9",
+					"strict" : false
+				},
+				{
+					"name" : "decimal2_3",
+					"strict" : false
+				},
+				{
+					"name" : "decimal2_6",
+					"strict" : false
+				},
+				{
+					"name" : "decimal2_7",
+					"strict" : false
+				},
+				{
+					"name" : "decimal2_5",
+					"strict" : false
+				},
+				{
+					"name" : "decimal2_2",
+					"strict" : false
+				},
+				{
+					"name" : "decimal2_4",
+					"strict" : false
+				},
+				{
+					"name" : "decimal2_8",
+					"strict" : false
+				},
+				{
+					"name" : "decimal3_9",
+					"strict" : false
+				},
+				{
+					"name" : "decimal3_3",
+					"strict" : false
+				},
+				{
+					"name" : "decimal3_6",
+					"strict" : false
+				},
+				{
+					"name" : "decimal3_7",
+					"strict" : false
+				},
+				{
+					"name" : "decimal3_5",
+					"strict" : false
+				},
+				{
+					"name" : "decimal3_2",
+					"strict" : false
+				},
+				{
+					"name" : "decimal3_4",
+					"strict" : false
+				},
+				{
+					"name" : "decimal3_8",
+					"strict" : false
+				},
+				{
+					"name" : "decimal4_9",
+					"strict" : false
+				},
+				{
+					"name" : "decimal4_3",
+					"strict" : false
+				},
+				{
+					"name" : "decimal4_6",
+					"strict" : false
+				},
+				{
+					"name" : "decimal4_7",
+					"strict" : false
+				},
+				{
+					"name" : "decimal4_5",
+					"strict" : false
+				},
+				{
+					"name" : "decimal4_2",
+					"strict" : false
+				},
+				{
+					"name" : "decimal4_4",
+					"strict" : false
+				},
+				{
+					"name" : "decimal4_8",
+					"strict" : false
+				},
+				{
+					"name" : "CLK",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

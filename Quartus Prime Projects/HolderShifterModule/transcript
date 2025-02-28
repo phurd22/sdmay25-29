@@ -1,0 +1,14 @@
+# Compile of HolderShifterModule.v was successful.
+vsim -gui work.HolderShifterModule
+# vsim -gui work.HolderShifterModule 
+# Start time: 11:18:40 on Feb 21,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error: U:/sdmay25-29/Quartus Prime Projects/HolderShifterModule/HolderShifterModule.v(62): Module '\21mux ' is not defined.
+#  For instance 'b2v_inst2' at path 'HolderShifterModule'
+# Optimization failed
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=0.
+# Error loading design
+# End time: 11:18:44 on Feb 21,2025, Elapsed time: 0:00:04
+# Errors: 1, Warnings: 5
+dataset reload -f
+# Dataset not found: 
