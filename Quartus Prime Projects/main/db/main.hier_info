@@ -1,113 +1,723 @@
 |main
+clk => ram:inst5.clk
+clk => timing_module:inst20.CLK
+clk => reg_5bit:inst26.clk
+clk => ram:inst6.clk
+clk => reg_5bit:inst28.clk
+clk => reg_5bit:inst27.clk
+rst => timing_module:inst20.RST
+ASMSrc => mux_2to1_5bit:inst30.sel
+base_conversion_data[0] => mux_2to1_5bit:inst30.bus_a[0]
+base_conversion_data[1] => mux_2to1_5bit:inst30.bus_a[1]
+base_conversion_data[2] => mux_2to1_5bit:inst30.bus_a[2]
+base_conversion_data[3] => mux_2to1_5bit:inst30.bus_a[3]
+base_conversion_data[4] => mux_2to1_5bit:inst30.bus_a[4]
+Transfer => mux_2to1_5bit:inst25.sel
+pin_name1 => keyboard.IN1
+AddSubSrc => mux_2to1_5bit:inst29.sel
+base_conversion_sign[0] => mux_2to1_5bit:inst29.bus_a[0]
+base_conversion_sign[1] => mux_2to1_5bit:inst29.bus_a[1]
+base_conversion_sign[2] => mux_2to1_5bit:inst29.bus_a[2]
+base_conversion_sign[3] => mux_2to1_5bit:inst29.bus_a[3]
+base_conversion_sign[4] => mux_2to1_5bit:inst29.bus_a[4]
+add_sub_test[0] => mux_2to1_5bit:inst29.bus_b[0]
+add_sub_test[1] => mux_2to1_5bit:inst29.bus_b[1]
+add_sub_test[2] => mux_2to1_5bit:inst29.bus_b[2]
+add_sub_test[3] => mux_2to1_5bit:inst29.bus_b[3]
+add_sub_test[4] => mux_2to1_5bit:inst29.bus_b[4]
 
 
-|main|demux_3to8:inst
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-sel[0] => Decoder0.IN2
-sel[1] => Decoder0.IN1
-sel[2] => Decoder0.IN0
-out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
+|main|AdderSubtractor:inst
+X => SYNTHESIZED_WIRE_36.IN1
+X => SYNTHESIZED_WIRE_23.IN1
+X => SYNTHESIZED_WIRE_33.IN1
+Y => SYNTHESIZED_WIRE_38.IN0
+Y => SYNTHESIZED_WIRE_29.IN0
+Cin => SYNTHESIZED_WIRE_38.IN1
+Cin => SYNTHESIZED_WIRE_29.IN1
+AddSub => AddSub.IN2
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= SYNTHESIZED_WIRE_4.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|main|demux_3to8:inst2
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-sel[0] => Decoder0.IN2
-sel[1] => Decoder0.IN1
-sel[2] => Decoder0.IN0
-out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
+|main|AdderSubtractor:inst|mux_2_to_1:b2v_inst18
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|main|demux_3to8:inst3
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-sel[0] => Decoder0.IN2
-sel[1] => Decoder0.IN1
-sel[2] => Decoder0.IN0
-out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
+|main|AdderSubtractor:inst|mux_2_to_1:b2v_inst19
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|main|demux_3to8:inst4
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-sel[0] => Decoder0.IN2
-sel[1] => Decoder0.IN1
-sel[2] => Decoder0.IN0
-out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
+|main|ram:inst5
+clk => ~NO_FANOUT~
+addr[0] => ~NO_FANOUT~
+addr[1] => ~NO_FANOUT~
+addr[2] => ~NO_FANOUT~
+addr[3] => ~NO_FANOUT~
+addr[4] => ~NO_FANOUT~
+addr[5] => ~NO_FANOUT~
+data[0] <> <UNC>
+data[1] <> <UNC>
+data[2] <> <UNC>
+data[3] <> <UNC>
+data[4] <> <UNC>
+ce_n => ~NO_FANOUT~
+oe_n => ~NO_FANOUT~
+we_n => ~NO_FANOUT~
 
 
-|main|demux_3to8:inst5
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-in => out.DATAB
-sel[0] => Decoder0.IN2
-sel[1] => Decoder0.IN1
-sel[2] => Decoder0.IN0
-out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
+|main|timing_module:inst20
+CLK => SYNTHESIZED_WIRE_16.CLK
+RST => SYNTHESIZED_WIRE_0.IN1
+RST => SYNTHESIZED_WIRE_16.ACLR
+control <= SYNTHESIZED_WIRE_13.DB_MAX_OUTPUT_PORT_TYPE
+data <= SYNTHESIZED_WIRE_13.DB_MAX_OUTPUT_PORT_TYPE
+sign_bit <= sign_bit.DB_MAX_OUTPUT_PORT_TYPE
+write <= SYNTHESIZED_WIRE_16.DB_MAX_OUTPUT_PORT_TYPE
+counter_addr[0] <= counter:b2v_inst.count
+counter_addr[1] <= counter:b2v_inst.count
+counter_addr[2] <= counter:b2v_inst.count
+counter_addr[3] <= counter:b2v_inst.count
+counter_addr[4] <= counter:b2v_inst.count
+counter_addr[5] <= counter:b2v_inst.count
+
+
+|main|timing_module:inst20|counter:b2v_inst
+CLK => SYNTHESIZED_WIRE_1.IN0
+RST => SYNTHESIZED_WIRE_10.IN2
+RST => SYNTHESIZED_WIRE_4.IN1
+count[0] <= four_bit_counter:b2v_inst.Q
+count[1] <= four_bit_counter:b2v_inst.Q
+count[2] <= four_bit_counter:b2v_inst.Q
+count[3] <= four_bit_counter:b2v_inst.Q
+count[4] <= two_bit_counter:b2v_inst2.Q
+count[5] <= two_bit_counter:b2v_inst2.Q
+
+
+|main|timing_module:inst20|counter:b2v_inst|four_bit_counter:b2v_inst
+En => SYNTHESIZED_WIRE_13.IN1
+En => Q_ALTERA_SYNTHESIZED[0].ENA
+CLK => Q_ALTERA_SYNTHESIZED[3].CLK
+CLK => Q_ALTERA_SYNTHESIZED[2].CLK
+CLK => Q_ALTERA_SYNTHESIZED[1].CLK
+CLK => Q_ALTERA_SYNTHESIZED[0].CLK
+CLRN => Q_ALTERA_SYNTHESIZED[3].ACLR
+CLRN => Q_ALTERA_SYNTHESIZED[2].ACLR
+CLRN => Q_ALTERA_SYNTHESIZED[1].ACLR
+CLRN => Q_ALTERA_SYNTHESIZED[0].ACLR
+Q[0] <= Q_ALTERA_SYNTHESIZED[0].DB_MAX_OUTPUT_PORT_TYPE
+Q[1] <= Q_ALTERA_SYNTHESIZED[1].DB_MAX_OUTPUT_PORT_TYPE
+Q[2] <= Q_ALTERA_SYNTHESIZED[2].DB_MAX_OUTPUT_PORT_TYPE
+Q[3] <= Q_ALTERA_SYNTHESIZED[3].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|timing_module:inst20|counter:b2v_inst|two_bit_counter:b2v_inst2
+Q[0] <= B.DB_MAX_OUTPUT_PORT_TYPE
+Q[1] <= inst1.DB_MAX_OUTPUT_PORT_TYPE
+CLRN => B.ACLR
+CLRN => inst1.ACLR
+CLK => B.CLK
+CLK => inst1.CLK
+En => inst4.IN0
+En => inst8.IN1
+
+
+|main|ram_buff:inst7
+en_n => data_out[4].OE
+en_n => data_out[3].OE
+en_n => data_out[2].OE
+en_n => data_out[1].OE
+en_n => data_out[0].OE
+data_in[0] => data_out[0].DATAIN
+data_in[1] => data_out[1].DATAIN
+data_in[2] => data_out[2].DATAIN
+data_in[3] => data_out[3].DATAIN
+data_in[4] => data_out[4].DATAIN
+data_out[0] <= data_out[0].DB_MAX_OUTPUT_PORT_TYPE
+data_out[1] <= data_out[1].DB_MAX_OUTPUT_PORT_TYPE
+data_out[2] <= data_out[2].DB_MAX_OUTPUT_PORT_TYPE
+data_out[3] <= data_out[3].DB_MAX_OUTPUT_PORT_TYPE
+data_out[4] <= data_out[4].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|reg_5bit:inst26
+data_out[0] <= inst.DB_MAX_OUTPUT_PORT_TYPE
+data_out[1] <= inst1.DB_MAX_OUTPUT_PORT_TYPE
+data_out[2] <= inst10.DB_MAX_OUTPUT_PORT_TYPE
+data_out[3] <= inst2.DB_MAX_OUTPUT_PORT_TYPE
+data_out[4] <= inst13.DB_MAX_OUTPUT_PORT_TYPE
+clk => inst13.CLK
+clk => inst2.CLK
+clk => inst10.CLK
+clk => inst1.CLK
+clk => inst.CLK
+en_n => mux_2_to_1:inst14.S
+en_n => mux_2_to_1:inst12.S
+en_n => mux_2_to_1:inst11.S
+en_n => mux_2_to_1:inst9.S
+en_n => mux_2_to_1:inst8.S
+data_in[0] => mux_2_to_1:inst8.W0
+data_in[1] => mux_2_to_1:inst9.W0
+data_in[2] => mux_2_to_1:inst11.W0
+data_in[3] => mux_2_to_1:inst12.W0
+data_in[4] => mux_2_to_1:inst14.W0
+
+
+|main|reg_5bit:inst26|mux_2_to_1:inst14
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|reg_5bit:inst26|mux_2_to_1:inst12
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|reg_5bit:inst26|mux_2_to_1:inst11
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|reg_5bit:inst26|mux_2_to_1:inst9
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|reg_5bit:inst26|mux_2_to_1:inst8
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|AdderSubtractor:inst1
+X => SYNTHESIZED_WIRE_36.IN1
+X => SYNTHESIZED_WIRE_23.IN1
+X => SYNTHESIZED_WIRE_33.IN1
+Y => SYNTHESIZED_WIRE_38.IN0
+Y => SYNTHESIZED_WIRE_29.IN0
+Cin => SYNTHESIZED_WIRE_38.IN1
+Cin => SYNTHESIZED_WIRE_29.IN1
+AddSub => AddSub.IN2
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= SYNTHESIZED_WIRE_4.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|AdderSubtractor:inst1|mux_2_to_1:b2v_inst18
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|AdderSubtractor:inst1|mux_2_to_1:b2v_inst19
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|mux_2to1_5bit:inst30
+bus_a[0] => bus_out.DATAA
+bus_a[1] => bus_out.DATAA
+bus_a[2] => bus_out.DATAA
+bus_a[3] => bus_out.DATAA
+bus_a[4] => bus_out.DATAA
+bus_b[0] => bus_out.DATAB
+bus_b[1] => bus_out.DATAB
+bus_b[2] => bus_out.DATAB
+bus_b[3] => bus_out.DATAB
+bus_b[4] => bus_out.DATAB
+sel => bus_out.OUTPUTSELECT
+sel => bus_out.OUTPUTSELECT
+sel => bus_out.OUTPUTSELECT
+sel => bus_out.OUTPUTSELECT
+sel => bus_out.OUTPUTSELECT
+bus_out[0] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+bus_out[1] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+bus_out[2] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+bus_out[3] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+bus_out[4] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|ram:inst6
+clk => ~NO_FANOUT~
+addr[0] => ~NO_FANOUT~
+addr[1] => ~NO_FANOUT~
+addr[2] => ~NO_FANOUT~
+addr[3] => ~NO_FANOUT~
+addr[4] => ~NO_FANOUT~
+addr[5] => ~NO_FANOUT~
+data[0] <> <UNC>
+data[1] <> <UNC>
+data[2] <> <UNC>
+data[3] <> <UNC>
+data[4] <> <UNC>
+ce_n => ~NO_FANOUT~
+oe_n => ~NO_FANOUT~
+we_n => ~NO_FANOUT~
+
+
+|main|mux_2to1_6bit:inst23
+bus_a[0] => bus_out.DATAA
+bus_a[1] => bus_out.DATAA
+bus_a[2] => bus_out.DATAA
+bus_a[3] => bus_out.DATAA
+bus_a[4] => bus_out.DATAA
+bus_a[5] => bus_out.DATAA
+bus_b[0] => bus_out.DATAB
+bus_b[1] => bus_out.DATAB
+bus_b[2] => bus_out.DATAB
+bus_b[3] => bus_out.DATAB
+bus_b[4] => bus_out.DATAB
+bus_b[5] => bus_out.DATAB
+sel => bus_out.OUTPUTSELECT
+sel => bus_out.OUTPUTSELECT
+sel => bus_out.OUTPUTSELECT
+sel => bus_out.OUTPUTSELECT
+sel => bus_out.OUTPUTSELECT
+sel => bus_out.OUTPUTSELECT
+bus_out[0] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+bus_out[1] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+bus_out[2] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+bus_out[3] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+bus_out[4] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+bus_out[5] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|addr_plus_one:inst90
+keyboard_addr[0] <= adder_4bit:inst5.S0
+keyboard_addr[1] <= adder_4bit:inst5.S1
+keyboard_addr[2] <= adder_4bit:inst5.S2
+keyboard_addr[3] <= adder_4bit:inst5.S3
+keyboard_addr[4] <= adder_4bit:inst13.S0
+keyboard_addr[5] <= adder_4bit:inst13.S1
+counter_addr[0] => adder_4bit:inst5.X0
+counter_addr[1] => adder_4bit:inst5.X1
+counter_addr[2] => adder_4bit:inst5.X2
+counter_addr[3] => adder_4bit:inst5.X3
+counter_addr[4] => adder_4bit:inst13.X0
+counter_addr[5] => adder_4bit:inst13.X1
+
+
+|main|addr_plus_one:inst90|adder_4bit:inst5
+X3 => X3.IN1
+Y3 => Y3.IN1
+X2 => X2.IN1
+Y2 => Y2.IN1
+X1 => X1.IN1
+Y1 => Y1.IN1
+X0 => X0.IN1
+Y0 => Y0.IN1
+Ci => Ci.IN1
+S3 <= full_adder:b2v_inst.SUM
+Co <= full_adder:b2v_inst.Co
+S2 <= full_adder:b2v_inst6.SUM
+S1 <= full_adder:b2v_inst7.SUM
+S0 <= full_adder:b2v_inst8.SUM
+
+
+|main|addr_plus_one:inst90|adder_4bit:inst5|full_adder:b2v_inst
+X => SYNTHESIZED_WIRE_0.IN0
+X => SYNTHESIZED_WIRE_3.IN0
+X => SYNTHESIZED_WIRE_1.IN0
+Y => SYNTHESIZED_WIRE_0.IN1
+Y => SYNTHESIZED_WIRE_1.IN1
+Y => SYNTHESIZED_WIRE_2.IN0
+Ci => SUM.IN1
+Ci => SYNTHESIZED_WIRE_3.IN1
+Ci => SYNTHESIZED_WIRE_2.IN1
+SUM <= SUM.DB_MAX_OUTPUT_PORT_TYPE
+Co <= Co.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|addr_plus_one:inst90|adder_4bit:inst5|full_adder:b2v_inst6
+X => SYNTHESIZED_WIRE_0.IN0
+X => SYNTHESIZED_WIRE_3.IN0
+X => SYNTHESIZED_WIRE_1.IN0
+Y => SYNTHESIZED_WIRE_0.IN1
+Y => SYNTHESIZED_WIRE_1.IN1
+Y => SYNTHESIZED_WIRE_2.IN0
+Ci => SUM.IN1
+Ci => SYNTHESIZED_WIRE_3.IN1
+Ci => SYNTHESIZED_WIRE_2.IN1
+SUM <= SUM.DB_MAX_OUTPUT_PORT_TYPE
+Co <= Co.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|addr_plus_one:inst90|adder_4bit:inst5|full_adder:b2v_inst7
+X => SYNTHESIZED_WIRE_0.IN0
+X => SYNTHESIZED_WIRE_3.IN0
+X => SYNTHESIZED_WIRE_1.IN0
+Y => SYNTHESIZED_WIRE_0.IN1
+Y => SYNTHESIZED_WIRE_1.IN1
+Y => SYNTHESIZED_WIRE_2.IN0
+Ci => SUM.IN1
+Ci => SYNTHESIZED_WIRE_3.IN1
+Ci => SYNTHESIZED_WIRE_2.IN1
+SUM <= SUM.DB_MAX_OUTPUT_PORT_TYPE
+Co <= Co.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|addr_plus_one:inst90|adder_4bit:inst5|full_adder:b2v_inst8
+X => SYNTHESIZED_WIRE_0.IN0
+X => SYNTHESIZED_WIRE_3.IN0
+X => SYNTHESIZED_WIRE_1.IN0
+Y => SYNTHESIZED_WIRE_0.IN1
+Y => SYNTHESIZED_WIRE_1.IN1
+Y => SYNTHESIZED_WIRE_2.IN0
+Ci => SUM.IN1
+Ci => SYNTHESIZED_WIRE_3.IN1
+Ci => SYNTHESIZED_WIRE_2.IN1
+SUM <= SUM.DB_MAX_OUTPUT_PORT_TYPE
+Co <= Co.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|addr_plus_one:inst90|adder_4bit:inst13
+X3 => X3.IN1
+Y3 => Y3.IN1
+X2 => X2.IN1
+Y2 => Y2.IN1
+X1 => X1.IN1
+Y1 => Y1.IN1
+X0 => X0.IN1
+Y0 => Y0.IN1
+Ci => Ci.IN1
+S3 <= full_adder:b2v_inst.SUM
+Co <= full_adder:b2v_inst.Co
+S2 <= full_adder:b2v_inst6.SUM
+S1 <= full_adder:b2v_inst7.SUM
+S0 <= full_adder:b2v_inst8.SUM
+
+
+|main|addr_plus_one:inst90|adder_4bit:inst13|full_adder:b2v_inst
+X => SYNTHESIZED_WIRE_0.IN0
+X => SYNTHESIZED_WIRE_3.IN0
+X => SYNTHESIZED_WIRE_1.IN0
+Y => SYNTHESIZED_WIRE_0.IN1
+Y => SYNTHESIZED_WIRE_1.IN1
+Y => SYNTHESIZED_WIRE_2.IN0
+Ci => SUM.IN1
+Ci => SYNTHESIZED_WIRE_3.IN1
+Ci => SYNTHESIZED_WIRE_2.IN1
+SUM <= SUM.DB_MAX_OUTPUT_PORT_TYPE
+Co <= Co.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|addr_plus_one:inst90|adder_4bit:inst13|full_adder:b2v_inst6
+X => SYNTHESIZED_WIRE_0.IN0
+X => SYNTHESIZED_WIRE_3.IN0
+X => SYNTHESIZED_WIRE_1.IN0
+Y => SYNTHESIZED_WIRE_0.IN1
+Y => SYNTHESIZED_WIRE_1.IN1
+Y => SYNTHESIZED_WIRE_2.IN0
+Ci => SUM.IN1
+Ci => SYNTHESIZED_WIRE_3.IN1
+Ci => SYNTHESIZED_WIRE_2.IN1
+SUM <= SUM.DB_MAX_OUTPUT_PORT_TYPE
+Co <= Co.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|addr_plus_one:inst90|adder_4bit:inst13|full_adder:b2v_inst7
+X => SYNTHESIZED_WIRE_0.IN0
+X => SYNTHESIZED_WIRE_3.IN0
+X => SYNTHESIZED_WIRE_1.IN0
+Y => SYNTHESIZED_WIRE_0.IN1
+Y => SYNTHESIZED_WIRE_1.IN1
+Y => SYNTHESIZED_WIRE_2.IN0
+Ci => SUM.IN1
+Ci => SYNTHESIZED_WIRE_3.IN1
+Ci => SYNTHESIZED_WIRE_2.IN1
+SUM <= SUM.DB_MAX_OUTPUT_PORT_TYPE
+Co <= Co.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|addr_plus_one:inst90|adder_4bit:inst13|full_adder:b2v_inst8
+X => SYNTHESIZED_WIRE_0.IN0
+X => SYNTHESIZED_WIRE_3.IN0
+X => SYNTHESIZED_WIRE_1.IN0
+Y => SYNTHESIZED_WIRE_0.IN1
+Y => SYNTHESIZED_WIRE_1.IN1
+Y => SYNTHESIZED_WIRE_2.IN0
+Ci => SUM.IN1
+Ci => SYNTHESIZED_WIRE_3.IN1
+Ci => SYNTHESIZED_WIRE_2.IN1
+SUM <= SUM.DB_MAX_OUTPUT_PORT_TYPE
+Co <= Co.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|ram_buff:inst8
+en_n => data_out[4].OE
+en_n => data_out[3].OE
+en_n => data_out[2].OE
+en_n => data_out[1].OE
+en_n => data_out[0].OE
+data_in[0] => data_out[0].DATAIN
+data_in[1] => data_out[1].DATAIN
+data_in[2] => data_out[2].DATAIN
+data_in[3] => data_out[3].DATAIN
+data_in[4] => data_out[4].DATAIN
+data_out[0] <= data_out[0].DB_MAX_OUTPUT_PORT_TYPE
+data_out[1] <= data_out[1].DB_MAX_OUTPUT_PORT_TYPE
+data_out[2] <= data_out[2].DB_MAX_OUTPUT_PORT_TYPE
+data_out[3] <= data_out[3].DB_MAX_OUTPUT_PORT_TYPE
+data_out[4] <= data_out[4].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|mux_2to1_5bit:inst25
+bus_a[0] => bus_out.DATAA
+bus_a[1] => bus_out.DATAA
+bus_a[2] => bus_out.DATAA
+bus_a[3] => bus_out.DATAA
+bus_a[4] => bus_out.DATAA
+bus_b[0] => bus_out.DATAB
+bus_b[1] => bus_out.DATAB
+bus_b[2] => bus_out.DATAB
+bus_b[3] => bus_out.DATAB
+bus_b[4] => bus_out.DATAB
+sel => bus_out.OUTPUTSELECT
+sel => bus_out.OUTPUTSELECT
+sel => bus_out.OUTPUTSELECT
+sel => bus_out.OUTPUTSELECT
+sel => bus_out.OUTPUTSELECT
+bus_out[0] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+bus_out[1] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+bus_out[2] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+bus_out[3] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+bus_out[4] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|reg_5bit:inst28
+data_out[0] <= inst.DB_MAX_OUTPUT_PORT_TYPE
+data_out[1] <= inst1.DB_MAX_OUTPUT_PORT_TYPE
+data_out[2] <= inst10.DB_MAX_OUTPUT_PORT_TYPE
+data_out[3] <= inst2.DB_MAX_OUTPUT_PORT_TYPE
+data_out[4] <= inst13.DB_MAX_OUTPUT_PORT_TYPE
+clk => inst13.CLK
+clk => inst2.CLK
+clk => inst10.CLK
+clk => inst1.CLK
+clk => inst.CLK
+en_n => mux_2_to_1:inst14.S
+en_n => mux_2_to_1:inst12.S
+en_n => mux_2_to_1:inst11.S
+en_n => mux_2_to_1:inst9.S
+en_n => mux_2_to_1:inst8.S
+data_in[0] => mux_2_to_1:inst8.W0
+data_in[1] => mux_2_to_1:inst9.W0
+data_in[2] => mux_2_to_1:inst11.W0
+data_in[3] => mux_2_to_1:inst12.W0
+data_in[4] => mux_2_to_1:inst14.W0
+
+
+|main|reg_5bit:inst28|mux_2_to_1:inst14
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|reg_5bit:inst28|mux_2_to_1:inst12
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|reg_5bit:inst28|mux_2_to_1:inst11
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|reg_5bit:inst28|mux_2_to_1:inst9
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|reg_5bit:inst28|mux_2_to_1:inst8
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|reg_5bit:inst27
+data_out[0] <= inst.DB_MAX_OUTPUT_PORT_TYPE
+data_out[1] <= inst1.DB_MAX_OUTPUT_PORT_TYPE
+data_out[2] <= inst10.DB_MAX_OUTPUT_PORT_TYPE
+data_out[3] <= inst2.DB_MAX_OUTPUT_PORT_TYPE
+data_out[4] <= inst13.DB_MAX_OUTPUT_PORT_TYPE
+clk => inst13.CLK
+clk => inst2.CLK
+clk => inst10.CLK
+clk => inst1.CLK
+clk => inst.CLK
+en_n => mux_2_to_1:inst14.S
+en_n => mux_2_to_1:inst12.S
+en_n => mux_2_to_1:inst11.S
+en_n => mux_2_to_1:inst9.S
+en_n => mux_2_to_1:inst8.S
+data_in[0] => mux_2_to_1:inst8.W0
+data_in[1] => mux_2_to_1:inst9.W0
+data_in[2] => mux_2_to_1:inst11.W0
+data_in[3] => mux_2_to_1:inst12.W0
+data_in[4] => mux_2_to_1:inst14.W0
+
+
+|main|reg_5bit:inst27|mux_2_to_1:inst14
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|reg_5bit:inst27|mux_2_to_1:inst12
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|reg_5bit:inst27|mux_2_to_1:inst11
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|reg_5bit:inst27|mux_2_to_1:inst9
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|reg_5bit:inst27|mux_2_to_1:inst8
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|mux_2to1_5bit:inst29
+bus_a[0] => bus_out.DATAA
+bus_a[1] => bus_out.DATAA
+bus_a[2] => bus_out.DATAA
+bus_a[3] => bus_out.DATAA
+bus_a[4] => bus_out.DATAA
+bus_b[0] => bus_out.DATAB
+bus_b[1] => bus_out.DATAB
+bus_b[2] => bus_out.DATAB
+bus_b[3] => bus_out.DATAB
+bus_b[4] => bus_out.DATAB
+sel => bus_out.OUTPUTSELECT
+sel => bus_out.OUTPUTSELECT
+sel => bus_out.OUTPUTSELECT
+sel => bus_out.OUTPUTSELECT
+sel => bus_out.OUTPUTSELECT
+bus_out[0] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+bus_out[1] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+bus_out[2] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+bus_out[3] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+bus_out[4] <= bus_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|AdderSubtractor:inst2
+X => SYNTHESIZED_WIRE_36.IN1
+X => SYNTHESIZED_WIRE_23.IN1
+X => SYNTHESIZED_WIRE_33.IN1
+Y => SYNTHESIZED_WIRE_38.IN0
+Y => SYNTHESIZED_WIRE_29.IN0
+Cin => SYNTHESIZED_WIRE_38.IN1
+Cin => SYNTHESIZED_WIRE_29.IN1
+AddSub => AddSub.IN2
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= SYNTHESIZED_WIRE_4.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|AdderSubtractor:inst2|mux_2_to_1:b2v_inst18
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|AdderSubtractor:inst2|mux_2_to_1:b2v_inst19
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|AdderSubtractor:inst3
+X => SYNTHESIZED_WIRE_36.IN1
+X => SYNTHESIZED_WIRE_23.IN1
+X => SYNTHESIZED_WIRE_33.IN1
+Y => SYNTHESIZED_WIRE_38.IN0
+Y => SYNTHESIZED_WIRE_29.IN0
+Cin => SYNTHESIZED_WIRE_38.IN1
+Cin => SYNTHESIZED_WIRE_29.IN1
+AddSub => AddSub.IN2
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= SYNTHESIZED_WIRE_4.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|AdderSubtractor:inst3|mux_2_to_1:b2v_inst18
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|AdderSubtractor:inst3|mux_2_to_1:b2v_inst19
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|AdderSubtractor:inst4
+X => SYNTHESIZED_WIRE_36.IN1
+X => SYNTHESIZED_WIRE_23.IN1
+X => SYNTHESIZED_WIRE_33.IN1
+Y => SYNTHESIZED_WIRE_38.IN0
+Y => SYNTHESIZED_WIRE_29.IN0
+Cin => SYNTHESIZED_WIRE_38.IN1
+Cin => SYNTHESIZED_WIRE_29.IN1
+AddSub => AddSub.IN2
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= SYNTHESIZED_WIRE_4.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|AdderSubtractor:inst4|mux_2_to_1:b2v_inst18
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|main|AdderSubtractor:inst4|mux_2_to_1:b2v_inst19
+S => F.OUTPUTSELECT
+W0 => F.DATAA
+W1 => F.DATAB
+F <= F.DB_MAX_OUTPUT_PORT_TYPE
 
 

@@ -1,9 +1,0 @@
-module mux_2to1_8(S,W0[7:0],W1[7:0],F[7:0]);
-	
-	input S, W0[7:0], W1[7:0];
-	output F[7:0];
-	
-	assign F = S ? W1:W0;
-
-	
-endmodule

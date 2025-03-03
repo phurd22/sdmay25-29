@@ -1,0 +1,21 @@
+module io_buffer (
+    input [7:0] A,        // 8-bit input A
+    input [7:0] B,        // 8-bit input B
+    input select,         // Select line
+    output reg [7:0] A_out,  // Output A
+    output reg [7:0] B_out   // Output B
+);
+
+always @(*) begin
+    if (select) begin
+        // If select is high, input A drives output B
+        A_out = A;
+        B_out = 8'bz; // High impedance state for B
+    end else begin
+        // If select is low, input B drives output A
+        A_out = 8'bz; // High impedance state for A
+        B_out = B;
+    end
+end
+
+endmodule
