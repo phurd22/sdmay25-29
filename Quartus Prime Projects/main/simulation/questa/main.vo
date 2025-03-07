@@ -1,0 +1,360 @@
+// Copyright (C) 2024  Intel Corporation. All rights reserved.
+// Your use of Intel Corporation's design tools, logic functions 
+// and other software and tools, and any partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Intel Program License 
+// Subscription Agreement, the Intel Quartus Prime License Agreement,
+// the Intel FPGA IP License Agreement, or other applicable license
+// agreement, including, without limitation, that your use is for
+// the sole purpose of programming logic devices manufactured by
+// Intel and sold by Intel or its authorized distributors.  Please
+// refer to the applicable agreement for further details, at
+// https://fpgasoftware.intel.com/eula.
+
+// VENDOR "Altera"
+// PROGRAM "Quartus Prime"
+// VERSION "Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition"
+
+// DATE "03/02/2025 23:21:01"
+
+// 
+// Device: Altera EP4CE115F29C7 Package FBGA780
+// 
+
+// 
+// This Verilog file should be used for Questa Intel FPGA (Verilog) only
+// 
+
+`timescale 1 ps/ 1 ps
+
+module main (
+	clk,
+	rst,
+	ASMSrc,
+	base_conversion_data,
+	Transfer,
+	pin_name1,
+	AddSubSrc,
+	base_conversion_sign,
+	add_sub_test);
+input 	clk;
+input 	rst;
+input 	ASMSrc;
+input 	[4:0] base_conversion_data;
+input 	Transfer;
+input 	pin_name1;
+input 	AddSubSrc;
+input 	[4:0] base_conversion_sign;
+input 	[4:0] add_sub_test;
+
+// Design Ports Information
+// clk	=>  Location: PIN_G10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// rst	=>  Location: PIN_AG4,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// ASMSrc	=>  Location: PIN_D16,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// base_conversion_data[4]	=>  Location: PIN_F7,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// base_conversion_data[3]	=>  Location: PIN_AE6,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// base_conversion_data[2]	=>  Location: PIN_R28,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// base_conversion_data[1]	=>  Location: PIN_AD21,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// base_conversion_data[0]	=>  Location: PIN_F19,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// Transfer	=>  Location: PIN_AG21,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// pin_name1	=>  Location: PIN_U2,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// AddSubSrc	=>  Location: PIN_AE25,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// base_conversion_sign[4]	=>  Location: PIN_AF5,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// base_conversion_sign[3]	=>  Location: PIN_Y22,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// base_conversion_sign[2]	=>  Location: PIN_L7,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// base_conversion_sign[1]	=>  Location: PIN_AF23,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// base_conversion_sign[0]	=>  Location: PIN_V21,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// add_sub_test[4]	=>  Location: PIN_B7,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// add_sub_test[3]	=>  Location: PIN_W7,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// add_sub_test[2]	=>  Location: PIN_R3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// add_sub_test[1]	=>  Location: PIN_A8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// add_sub_test[0]	=>  Location: PIN_Y16,	 I/O Standard: 2.5 V,	 Current Strength: Default
+
+
+wire gnd;
+wire vcc;
+wire unknown;
+
+assign gnd = 1'b0;
+assign vcc = 1'b1;
+assign unknown = 1'bx;
+
+tri1 devclrn;
+tri1 devpor;
+tri1 devoe;
+wire \clk~input_o ;
+wire \rst~input_o ;
+wire \ASMSrc~input_o ;
+wire \base_conversion_data[4]~input_o ;
+wire \base_conversion_data[3]~input_o ;
+wire \base_conversion_data[2]~input_o ;
+wire \base_conversion_data[1]~input_o ;
+wire \base_conversion_data[0]~input_o ;
+wire \Transfer~input_o ;
+wire \pin_name1~input_o ;
+wire \AddSubSrc~input_o ;
+wire \base_conversion_sign[4]~input_o ;
+wire \base_conversion_sign[3]~input_o ;
+wire \base_conversion_sign[2]~input_o ;
+wire \base_conversion_sign[1]~input_o ;
+wire \base_conversion_sign[0]~input_o ;
+wire \add_sub_test[4]~input_o ;
+wire \add_sub_test[3]~input_o ;
+wire \add_sub_test[2]~input_o ;
+wire \add_sub_test[1]~input_o ;
+wire \add_sub_test[0]~input_o ;
+
+
+hard_block auto_generated_inst(
+	.devpor(devpor),
+	.devclrn(devclrn),
+	.devoe(devoe));
+
+// Location: IOIBUF_X20_Y73_N8
+cycloneive_io_ibuf \clk~input (
+	.i(clk),
+	.ibar(gnd),
+	.o(\clk~input_o ));
+// synopsys translate_off
+defparam \clk~input .bus_hold = "false";
+defparam \clk~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X9_Y0_N22
+cycloneive_io_ibuf \rst~input (
+	.i(rst),
+	.ibar(gnd),
+	.o(\rst~input_o ));
+// synopsys translate_off
+defparam \rst~input .bus_hold = "false";
+defparam \rst~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X62_Y73_N22
+cycloneive_io_ibuf \ASMSrc~input (
+	.i(ASMSrc),
+	.ibar(gnd),
+	.o(\ASMSrc~input_o ));
+// synopsys translate_off
+defparam \ASMSrc~input .bus_hold = "false";
+defparam \ASMSrc~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X9_Y73_N8
+cycloneive_io_ibuf \base_conversion_data[4]~input (
+	.i(base_conversion_data[4]),
+	.ibar(gnd),
+	.o(\base_conversion_data[4]~input_o ));
+// synopsys translate_off
+defparam \base_conversion_data[4]~input .bus_hold = "false";
+defparam \base_conversion_data[4]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X1_Y0_N15
+cycloneive_io_ibuf \base_conversion_data[3]~input (
+	.i(base_conversion_data[3]),
+	.ibar(gnd),
+	.o(\base_conversion_data[3]~input_o ));
+// synopsys translate_off
+defparam \base_conversion_data[3]~input .bus_hold = "false";
+defparam \base_conversion_data[3]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X115_Y34_N22
+cycloneive_io_ibuf \base_conversion_data[2]~input (
+	.i(base_conversion_data[2]),
+	.ibar(gnd),
+	.o(\base_conversion_data[2]~input_o ));
+// synopsys translate_off
+defparam \base_conversion_data[2]~input .bus_hold = "false";
+defparam \base_conversion_data[2]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X102_Y0_N15
+cycloneive_io_ibuf \base_conversion_data[1]~input (
+	.i(base_conversion_data[1]),
+	.ibar(gnd),
+	.o(\base_conversion_data[1]~input_o ));
+// synopsys translate_off
+defparam \base_conversion_data[1]~input .bus_hold = "false";
+defparam \base_conversion_data[1]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X94_Y73_N1
+cycloneive_io_ibuf \base_conversion_data[0]~input (
+	.i(base_conversion_data[0]),
+	.ibar(gnd),
+	.o(\base_conversion_data[0]~input_o ));
+// synopsys translate_off
+defparam \base_conversion_data[0]~input .bus_hold = "false";
+defparam \base_conversion_data[0]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X74_Y0_N8
+cycloneive_io_ibuf \Transfer~input (
+	.i(Transfer),
+	.ibar(gnd),
+	.o(\Transfer~input_o ));
+// synopsys translate_off
+defparam \Transfer~input .bus_hold = "false";
+defparam \Transfer~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X0_Y30_N1
+cycloneive_io_ibuf \pin_name1~input (
+	.i(pin_name1),
+	.ibar(gnd),
+	.o(\pin_name1~input_o ));
+// synopsys translate_off
+defparam \pin_name1~input .bus_hold = "false";
+defparam \pin_name1~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X89_Y0_N8
+cycloneive_io_ibuf \AddSubSrc~input (
+	.i(AddSubSrc),
+	.ibar(gnd),
+	.o(\AddSubSrc~input_o ));
+// synopsys translate_off
+defparam \AddSubSrc~input .bus_hold = "false";
+defparam \AddSubSrc~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X5_Y0_N15
+cycloneive_io_ibuf \base_conversion_sign[4]~input (
+	.i(base_conversion_sign[4]),
+	.ibar(gnd),
+	.o(\base_conversion_sign[4]~input_o ));
+// synopsys translate_off
+defparam \base_conversion_sign[4]~input .bus_hold = "false";
+defparam \base_conversion_sign[4]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X115_Y30_N8
+cycloneive_io_ibuf \base_conversion_sign[3]~input (
+	.i(base_conversion_sign[3]),
+	.ibar(gnd),
+	.o(\base_conversion_sign[3]~input_o ));
+// synopsys translate_off
+defparam \base_conversion_sign[3]~input .bus_hold = "false";
+defparam \base_conversion_sign[3]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X0_Y47_N15
+cycloneive_io_ibuf \base_conversion_sign[2]~input (
+	.i(base_conversion_sign[2]),
+	.ibar(gnd),
+	.o(\base_conversion_sign[2]~input_o ));
+// synopsys translate_off
+defparam \base_conversion_sign[2]~input .bus_hold = "false";
+defparam \base_conversion_sign[2]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X105_Y0_N8
+cycloneive_io_ibuf \base_conversion_sign[1]~input (
+	.i(base_conversion_sign[1]),
+	.ibar(gnd),
+	.o(\base_conversion_sign[1]~input_o ));
+// synopsys translate_off
+defparam \base_conversion_sign[1]~input .bus_hold = "false";
+defparam \base_conversion_sign[1]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X115_Y25_N15
+cycloneive_io_ibuf \base_conversion_sign[0]~input (
+	.i(base_conversion_sign[0]),
+	.ibar(gnd),
+	.o(\base_conversion_sign[0]~input_o ));
+// synopsys translate_off
+defparam \base_conversion_sign[0]~input .bus_hold = "false";
+defparam \base_conversion_sign[0]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X29_Y73_N8
+cycloneive_io_ibuf \add_sub_test[4]~input (
+	.i(add_sub_test[4]),
+	.ibar(gnd),
+	.o(\add_sub_test[4]~input_o ));
+// synopsys translate_off
+defparam \add_sub_test[4]~input .bus_hold = "false";
+defparam \add_sub_test[4]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X0_Y12_N22
+cycloneive_io_ibuf \add_sub_test[3]~input (
+	.i(add_sub_test[3]),
+	.ibar(gnd),
+	.o(\add_sub_test[3]~input_o ));
+// synopsys translate_off
+defparam \add_sub_test[3]~input .bus_hold = "false";
+defparam \add_sub_test[3]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X0_Y34_N22
+cycloneive_io_ibuf \add_sub_test[2]~input (
+	.i(add_sub_test[2]),
+	.ibar(gnd),
+	.o(\add_sub_test[2]~input_o ));
+// synopsys translate_off
+defparam \add_sub_test[2]~input .bus_hold = "false";
+defparam \add_sub_test[2]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X18_Y73_N22
+cycloneive_io_ibuf \add_sub_test[1]~input (
+	.i(add_sub_test[1]),
+	.ibar(gnd),
+	.o(\add_sub_test[1]~input_o ));
+// synopsys translate_off
+defparam \add_sub_test[1]~input .bus_hold = "false";
+defparam \add_sub_test[1]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X96_Y0_N15
+cycloneive_io_ibuf \add_sub_test[0]~input (
+	.i(add_sub_test[0]),
+	.ibar(gnd),
+	.o(\add_sub_test[0]~input_o ));
+// synopsys translate_off
+defparam \add_sub_test[0]~input .bus_hold = "false";
+defparam \add_sub_test[0]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+endmodule
+
+module hard_block (
+
+	devpor,
+	devclrn,
+	devoe);
+
+// Design Ports Information
+// ~ALTERA_ASDO_DATA1~	=>  Location: PIN_F4,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// ~ALTERA_FLASH_nCE_nCSO~	=>  Location: PIN_E2,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// ~ALTERA_DCLK~	=>  Location: PIN_P3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// ~ALTERA_DATA0~	=>  Location: PIN_N7,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// ~ALTERA_nCEO~	=>  Location: PIN_P28,	 I/O Standard: 2.5 V,	 Current Strength: 8mA
+
+input 	devpor;
+input 	devclrn;
+input 	devoe;
+
+wire gnd;
+wire vcc;
+wire unknown;
+
+assign gnd = 1'b0;
+assign vcc = 1'b1;
+assign unknown = 1'bx;
+
+wire \~ALTERA_ASDO_DATA1~~padout ;
+wire \~ALTERA_FLASH_nCE_nCSO~~padout ;
+wire \~ALTERA_DATA0~~padout ;
+wire \~ALTERA_ASDO_DATA1~~ibuf_o ;
+wire \~ALTERA_FLASH_nCE_nCSO~~ibuf_o ;
+wire \~ALTERA_DATA0~~ibuf_o ;
+
+
+endmodule

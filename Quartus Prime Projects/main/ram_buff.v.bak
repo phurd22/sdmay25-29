@@ -1,0 +1,9 @@
+module ram_buff(
+	input en_n;
+	input data_in[4:0];
+	output data_out[4:0];
+);
+
+assign data_io = (en_n) ? 8'bz : data_out;
+
+endmodule

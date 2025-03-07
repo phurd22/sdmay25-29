@@ -1,5 +1,5 @@
 Analysis & Synthesis report for main
-Mon Feb 17 22:01:13 2025
+Sun Mar  2 23:19:06 2025
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition
 
 
@@ -10,8 +10,14 @@ Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Elapsed Time Per Partition
-  6. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. General Register Statistics
+  9. Post-Synthesis Netlist Statistics for Top Partition
+ 10. Elapsed Time Per Partition
+ 11. Analysis & Synthesis Messages
+ 12. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -38,20 +44,20 @@ https://fpgasoftware.intel.com/eula.
 +-----------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                            ;
 +------------------------------------+----------------------------------------------------+
-; Analysis & Synthesis Status        ; Failed - Mon Feb 17 22:01:13 2025                  ;
+; Analysis & Synthesis Status        ; Successful - Sun Mar  2 23:19:06 2025              ;
 ; Quartus Prime Version              ; 23.1std.1 Build 993 05/14/2024 SC Standard Edition ;
 ; Revision Name                      ; main                                               ;
 ; Top-level Entity Name              ; main                                               ;
 ; Family                             ; Cyclone IV E                                       ;
-; Total logic elements               ; N/A until Partition Merge                          ;
-;     Total combinational functions  ; N/A until Partition Merge                          ;
-;     Dedicated logic registers      ; N/A until Partition Merge                          ;
-; Total registers                    ; N/A until Partition Merge                          ;
-; Total pins                         ; N/A until Partition Merge                          ;
-; Total virtual pins                 ; N/A until Partition Merge                          ;
-; Total memory bits                  ; N/A until Partition Merge                          ;
-; Embedded Multiplier 9-bit elements ; N/A until Partition Merge                          ;
-; Total PLLs                         ; N/A until Partition Merge                          ;
+; Total logic elements               ; 0                                                  ;
+;     Total combinational functions  ; 0                                                  ;
+;     Dedicated logic registers      ; 0                                                  ;
+; Total registers                    ; 0                                                  ;
+; Total pins                         ; 21                                                 ;
+; Total virtual pins                 ; 0                                                  ;
+; Total memory bits                  ; 0                                                  ;
+; Embedded Multiplier 9-bit elements ; 0                                                  ;
+; Total PLLs                         ; 0                                                  ;
 +------------------------------------+----------------------------------------------------+
 
 
@@ -157,6 +163,97 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                            ;
++----------------------------------+-----------------+------------------------------------+---------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                  ; Library ;
++----------------------------------+-----------------+------------------------------------+---------------------------------------------------------------+---------+
+; main.bdf                         ; yes             ; User Block Diagram/Schematic File  ; U:/sdmay25-29/Quartus Prime Projects/main/main.bdf            ;         ;
+; ram_buff.v                       ; yes             ; User Verilog HDL File              ; U:/sdmay25-29/Quartus Prime Projects/main/ram_buff.v          ;         ;
+; addr_plus_one.bdf                ; yes             ; User Block Diagram/Schematic File  ; U:/sdmay25-29/Quartus Prime Projects/main/addr_plus_one.bdf   ;         ;
+; reg_5bit.bdf                     ; yes             ; User Block Diagram/Schematic File  ; U:/sdmay25-29/Quartus Prime Projects/main/reg_5bit.bdf        ;         ;
+; two_bit_counter.bdf              ; yes             ; User Block Diagram/Schematic File  ; U:/sdmay25-29/Quartus Prime Projects/main/two_bit_counter.bdf ;         ;
+; mux_2to1_5bit.v                  ; yes             ; User Verilog HDL File              ; U:/sdmay25-29/Quartus Prime Projects/main/mux_2to1_5bit.v     ;         ;
+; mux_2to1_6bit.v                  ; yes             ; User Verilog HDL File              ; U:/sdmay25-29/Quartus Prime Projects/main/mux_2to1_6bit.v     ;         ;
+; addersubtractor.v                ; yes             ; Auto-Found Verilog HDL File        ; U:/sdmay25-29/Quartus Prime Projects/main/addersubtractor.v   ;         ;
+; mux_2_to_1.v                     ; yes             ; Auto-Found Verilog HDL File        ; U:/sdmay25-29/Quartus Prime Projects/main/mux_2_to_1.v        ;         ;
+; ram.v                            ; yes             ; Auto-Found Verilog HDL File        ; U:/sdmay25-29/Quartus Prime Projects/main/ram.v               ;         ;
+; timing_module.v                  ; yes             ; Auto-Found Verilog HDL File        ; U:/sdmay25-29/Quartus Prime Projects/main/timing_module.v     ;         ;
+; counter.v                        ; yes             ; Auto-Found Verilog HDL File        ; U:/sdmay25-29/Quartus Prime Projects/main/counter.v           ;         ;
+; four_bit_counter.v               ; yes             ; Auto-Found Verilog HDL File        ; U:/sdmay25-29/Quartus Prime Projects/main/four_bit_counter.v  ;         ;
+; adder_4bit.v                     ; yes             ; Auto-Found Verilog HDL File        ; U:/sdmay25-29/Quartus Prime Projects/main/adder_4bit.v        ;         ;
+; full_adder.v                     ; yes             ; Auto-Found Verilog HDL File        ; U:/sdmay25-29/Quartus Prime Projects/main/full_adder.v        ;         ;
++----------------------------------+-----------------+------------------------------------+---------------------------------------------------------------+---------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+;                                             ;       ;
+; Total combinational functions               ; 0     ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 0     ;
+;     -- 3 input functions                    ; 0     ;
+;     -- <=2 input functions                  ; 0     ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 0     ;
+;     -- arithmetic mode                      ; 0     ;
+;                                             ;       ;
+; Total registers                             ; 0     ;
+;     -- Dedicated logic registers            ; 0     ;
+;     -- I/O registers                        ; 0     ;
+;                                             ;       ;
+; I/O pins                                    ; 21    ;
+;                                             ;       ;
+; Embedded Multiplier 9-bit elements          ; 0     ;
+;                                             ;       ;
+; Maximum fan-out node                        ; clk   ;
+; Maximum fan-out                             ; 1     ;
+; Total fan-out                               ; 21    ;
+; Average fan-out                             ; 0.50  ;
++---------------------------------------------+-------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                      ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
+; |main                      ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 21   ; 0            ; |main               ; main        ; work         ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 0     ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-------------------+---------------------------------+
+; Type              ; Count                           ;
++-------------------+---------------------------------+
+; boundary_port     ; 21                              ;
+;                   ;                                 ;
+; Max LUT depth     ; 0.00                            ;
+; Average LUT depth ; 0.00                            ;
++-------------------+---------------------------------+
+
+
 +-------------------------------+
 ; Elapsed Time Per Partition    ;
 +----------------+--------------+
@@ -172,7 +269,7 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition
-    Info: Processing started: Mon Feb 17 22:01:03 2025
+    Info: Processing started: Sun Mar  2 23:18:53 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off main -c main
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -180,15 +277,111 @@ Info (12021): Found 1 design units, including 1 entities, in source file demux_3
     Info (12023): Found entity 1: demux_3to8 File: U:/sdmay25-29/Quartus Prime Projects/main/demux_3to8.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file main.bdf
     Info (12023): Found entity 1: main
-Info (12021): Found 1 design units, including 1 entities, in source file add_sub_module.v
-    Info (12023): Found entity 1: add_sub_module File: U:/sdmay25-29/Quartus Prime Projects/main/add_sub_module.v Line: 1
+Warning (12019): Can't analyze file -- file add_sub_module.v is missing
+Warning (12019): Can't analyze file -- file simple_ram.v is missing
+Warning (12019): Can't analyze file -- file mux_2to1_8.v is missing
+Warning (12019): Can't analyze file -- file hold_shift_module.v is missing
+Info (12021): Found 1 design units, including 1 entities, in source file ram_buff.v
+    Info (12023): Found entity 1: ram_buff File: U:/sdmay25-29/Quartus Prime Projects/main/ram_buff.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file reg.bdf
+    Info (12023): Found entity 1: reg
+Info (12021): Found 1 design units, including 1 entities, in source file reg_8bit.bdf
+    Info (12023): Found entity 1: reg_8bit
+Info (12021): Found 1 design units, including 1 entities, in source file addr_plus_one.bdf
+    Info (12023): Found entity 1: addr_plus_one
+Warning (12019): Can't analyze file -- file mux_2to1_8bit.v is missing
+Info (12021): Found 1 design units, including 1 entities, in source file reg_5bit.bdf
+    Info (12023): Found entity 1: reg_5bit
+Info (12021): Found 1 design units, including 1 entities, in source file two_bit_counter.bdf
+    Info (12023): Found entity 1: two_bit_counter
+Info (12021): Found 1 design units, including 1 entities, in source file mux_2to1_5bit.v
+    Info (12023): Found entity 1: mux_2to1_5bit File: U:/sdmay25-29/Quartus Prime Projects/main/mux_2to1_5bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mux_2to1_6bit.v
+    Info (12023): Found entity 1: mux_2to1_6bit File: U:/sdmay25-29/Quartus Prime Projects/main/mux_2to1_6bit.v Line: 1
 Info (12127): Elaborating entity "main" for the top level hierarchy
-Info (12128): Elaborating entity "demux_3to8" for hierarchy "demux_3to8:inst"
-Error (12061): Can't synthesize current design -- Top partition does not contain any logic
-Error: Quartus Prime Analysis & Synthesis was unsuccessful. 1 error, 1 warning
-    Error: Peak virtual memory: 4737 megabytes
-    Error: Processing ended: Mon Feb 17 22:01:13 2025
-    Error: Elapsed time: 00:00:10
-    Error: Total CPU time (on all processors): 00:00:11
+Warning (275002): No superset bus at connection
+Warning (12125): Using design file addersubtractor.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: AdderSubtractor File: U:/sdmay25-29/Quartus Prime Projects/main/addersubtractor.v Line: 20
+Warning (12300): Found the following files while searching for definition of entity "AdderSubtractor", but did not use these files because already using a different file containing the entity definition
+    Warning (12126): File: AdderSubtractor.bdf
+Info (12128): Elaborating entity "AdderSubtractor" for hierarchy "AdderSubtractor:inst"
+Warning (12125): Using design file mux_2_to_1.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: mux_2_to_1 File: U:/sdmay25-29/Quartus Prime Projects/main/mux_2_to_1.v Line: 1
+Info (12128): Elaborating entity "mux_2_to_1" for hierarchy "AdderSubtractor:inst|mux_2_to_1:b2v_inst18" File: U:/sdmay25-29/Quartus Prime Projects/main/addersubtractor.v Line: 81
+Warning (12125): Using design file ram.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: ram File: U:/sdmay25-29/Quartus Prime Projects/main/ram.v Line: 1
+Info (12128): Elaborating entity "ram" for hierarchy "ram:inst5"
+Warning (10036): Verilog HDL or VHDL warning at ram.v(14): object "data_out" assigned a value but never read File: U:/sdmay25-29/Quartus Prime Projects/main/ram.v Line: 14
+Warning (12125): Using design file timing_module.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: timing_module File: U:/sdmay25-29/Quartus Prime Projects/main/timing_module.v Line: 20
+Warning (12300): Found the following files while searching for definition of entity "timing_module", but did not use these files because already using a different file containing the entity definition
+    Warning (12126): File: timing_module.bdf
+Info (12128): Elaborating entity "timing_module" for hierarchy "timing_module:inst20"
+Warning (12125): Using design file counter.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: counter File: U:/sdmay25-29/Quartus Prime Projects/main/counter.v Line: 20
+Warning (12300): Found the following files while searching for definition of entity "counter", but did not use these files because already using a different file containing the entity definition
+    Warning (12126): File: counter.bdf
+Info (12128): Elaborating entity "counter" for hierarchy "timing_module:inst20|counter:b2v_inst" File: U:/sdmay25-29/Quartus Prime Projects/main/timing_module.v Line: 69
+Warning (12125): Using design file four_bit_counter.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: four_bit_counter File: U:/sdmay25-29/Quartus Prime Projects/main/four_bit_counter.v Line: 20
+Warning (12300): Found the following files while searching for definition of entity "four_bit_counter", but did not use these files because already using a different file containing the entity definition
+    Warning (12126): File: four_bit_counter.bdf
+Info (12128): Elaborating entity "four_bit_counter" for hierarchy "timing_module:inst20|counter:b2v_inst|four_bit_counter:b2v_inst" File: U:/sdmay25-29/Quartus Prime Projects/main/counter.v Line: 48
+Info (12128): Elaborating entity "two_bit_counter" for hierarchy "timing_module:inst20|counter:b2v_inst|two_bit_counter:b2v_inst2" File: U:/sdmay25-29/Quartus Prime Projects/main/counter.v Line: 58
+Info (12128): Elaborating entity "ram_buff" for hierarchy "ram_buff:inst7"
+Warning (10230): Verilog HDL assignment warning at ram_buff.v(7): truncated value with size 8 to match size of target (5) File: U:/sdmay25-29/Quartus Prime Projects/main/ram_buff.v Line: 7
+Info (12128): Elaborating entity "reg_5bit" for hierarchy "reg_5bit:inst26"
+Info (12128): Elaborating entity "mux_2to1_5bit" for hierarchy "mux_2to1_5bit:inst30"
+Info (12128): Elaborating entity "mux_2to1_6bit" for hierarchy "mux_2to1_6bit:inst23"
+Info (12128): Elaborating entity "addr_plus_one" for hierarchy "addr_plus_one:inst90"
+Warning (12125): Using design file adder_4bit.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: adder_4bit File: U:/sdmay25-29/Quartus Prime Projects/main/adder_4bit.v Line: 20
+Warning (12300): Found the following files while searching for definition of entity "adder_4bit", but did not use these files because already using a different file containing the entity definition
+    Warning (12126): File: adder_4bit.bdf
+Info (12128): Elaborating entity "adder_4bit" for hierarchy "addr_plus_one:inst90|adder_4bit:inst5"
+Warning (12125): Using design file full_adder.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: full_adder File: U:/sdmay25-29/Quartus Prime Projects/main/full_adder.v Line: 20
+Warning (12300): Found the following files while searching for definition of entity "full_adder", but did not use these files because already using a different file containing the entity definition
+    Warning (12126): File: full_adder.bdf
+Info (12128): Elaborating entity "full_adder" for hierarchy "addr_plus_one:inst90|adder_4bit:inst5|full_adder:b2v_inst" File: U:/sdmay25-29/Quartus Prime Projects/main/adder_4bit.v Line: 66
+Info (144001): Generated suppressed messages file U:/sdmay25-29/Quartus Prime Projects/main/output_files/main.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 21 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "clk"
+    Warning (15610): No output dependent on input pin "rst"
+    Warning (15610): No output dependent on input pin "ASMSrc"
+    Warning (15610): No output dependent on input pin "base_conversion_data[4]"
+    Warning (15610): No output dependent on input pin "base_conversion_data[3]"
+    Warning (15610): No output dependent on input pin "base_conversion_data[2]"
+    Warning (15610): No output dependent on input pin "base_conversion_data[1]"
+    Warning (15610): No output dependent on input pin "base_conversion_data[0]"
+    Warning (15610): No output dependent on input pin "Transfer"
+    Warning (15610): No output dependent on input pin "pin_name1"
+    Warning (15610): No output dependent on input pin "AddSubSrc"
+    Warning (15610): No output dependent on input pin "base_conversion_sign[4]"
+    Warning (15610): No output dependent on input pin "base_conversion_sign[3]"
+    Warning (15610): No output dependent on input pin "base_conversion_sign[2]"
+    Warning (15610): No output dependent on input pin "base_conversion_sign[1]"
+    Warning (15610): No output dependent on input pin "base_conversion_sign[0]"
+    Warning (15610): No output dependent on input pin "add_sub_test[4]"
+    Warning (15610): No output dependent on input pin "add_sub_test[3]"
+    Warning (15610): No output dependent on input pin "add_sub_test[2]"
+    Warning (15610): No output dependent on input pin "add_sub_test[1]"
+    Warning (15610): No output dependent on input pin "add_sub_test[0]"
+Info (21057): Implemented 21 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 21 input pins
+    Info (21059): Implemented 0 output pins
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 51 warnings
+    Info: Peak virtual memory: 4753 megabytes
+    Info: Processing ended: Sun Mar  2 23:19:07 2025
+    Info: Elapsed time: 00:00:14
+    Info: Total CPU time (on all processors): 00:00:12
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in U:/sdmay25-29/Quartus Prime Projects/main/output_files/main.map.smsg.
 
 
