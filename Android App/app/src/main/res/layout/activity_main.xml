@@ -114,9 +114,9 @@
 
         <GridLayout
             android:id="@+id/numpad"
-            android:layout_gravity="center"
             android:layout_width="330dp"
             android:layout_height="330dp"
+            android:layout_gravity="center"
             android:layout_marginBottom="16dp"
             android:alignmentMode="alignMargins"
             android:columnCount="3"
@@ -272,9 +272,32 @@
                 android:text="X" />
 
         </GridLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/esp32Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/punchNumpad"
+                android:text="Connect to ESP32" />
+
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/punchNumpad"
+                android:text="Upload Equation" />
+        </LinearLayout>
+
     </LinearLayout>
 
-<!--    <TextView-->
+    <!--    <TextView-->
 <!--        android:id="@+id/equation"-->
 <!--        android:layout_width="1279dp"-->
 <!--        android:layout_height="95dp"-->

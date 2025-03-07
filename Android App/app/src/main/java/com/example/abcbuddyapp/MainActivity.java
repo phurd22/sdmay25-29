@@ -1,5 +1,6 @@
 package com.example.abcbuddyapp;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -8,9 +9,28 @@ import android.widget.TextView;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
+import android.content.pm.PackageManager;
+
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
     private boolean awaitingVariable; // True if waiting for variable input after coefficient
     private boolean isNegative, isFirstNumber; // Flags for input handling
     private int currentVariableIndex; // Tracks the variable being assigned (x, y, z, etc.)
+    private BluetoothAdapter bluetoothAdapter;
+    private BluetoothSocket bluetoothSocket;
+    private static final String ESP32_MAC_ADDRESS = "08:A6:F7:BC:5E:C6";
+    private static final UUID ESP32_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private InputStream inputStream;
+    private OutputStream outputStream;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +80,12 @@ public class MainActivity extends AppCompatActivity {
 
         Button clearButton = findViewById(R.id.buttonClear);
         clearButton.setOnClickListener(v -> clearEquation());
+        Button uploadButton = findViewById(R.id.submitButton);
+        uploadButton.setOnClickListener(v -> uploadEquation());
+        Button connectButton = findViewById(R.id.esp32Button);
+        connectButton.setOnClickListener(v -> connectToESP32());
+
+        requestBluetoothPermissions();
     }
 
     private void handleNumpadInput(String input) {
@@ -133,8 +165,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
     private void clearEquation() {
         resetEquationState();
         punchcardView.clearPunches();
@@ -150,5 +180,60 @@ public class MainActivity extends AppCompatActivity {
         isNegative = false;
         isFirstNumber = true;
         currentVariableIndex = 0;
+    }
+
+    private void uploadEquation(String equation) {
+        if (outputStream != null) {
+            try {
+                // Send the integer as a 4-byte sequence
+                outputStream.write(equation.getBytes(StandardCharsets.UTF_8));
+            } catch (IOException e) {
+                Log.e("Bluetooth", "Error sending integer", e);
+            }
+        }
+    }
+
+    private void connectToESP32() {
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (bluetoothAdapter == null) {
+            Toast.makeText(this, "Bluetooth not supported", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        BluetoothDevice device = bluetoothAdapter.getRemoteDevice(ESP32_MAC_ADDRESS);
+        try {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "You have to accept bluetooth permissions, clear app storage and cache and try again.", Toast.LENGTH_LONG).show();
+                return;
+            }
+            bluetoothSocket = device.createRfcommSocketToServiceRecord(ESP32_UUID);
+            bluetoothSocket.connect();
+            inputStream = bluetoothSocket.getInputStream();
+            Toast.makeText(this, "Connected to ESP32", Toast.LENGTH_SHORT).show();
+            //listenForData();
+        } catch (IOException e) {
+            Log.e("Bluetooth", "Connection failed", e);
+            Toast.makeText(this, "Failed to connect", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void requestBluetoothPermissions() {
+        List<String> permissions = new ArrayList<>();
+        permissions.add(android.Manifest.permission.BLUETOOTH);
+        permissions.add(android.Manifest.permission.BLUETOOTH_SCAN);
+        permissions.add(android.Manifest.permission.BLUETOOTH_CONNECT);
+        permissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
+        permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+
+        List<String> neededPermissions = new ArrayList<>();
+        for (String perm : permissions) {
+            if (ContextCompat.checkSelfPermission(this, perm) != PackageManager.PERMISSION_GRANTED) {
+                neededPermissions.add(perm);
+            }
+        }
+
+        if (!neededPermissions.isEmpty()) {
+            ActivityCompat.requestPermissions(this, neededPermissions.toArray(new String[0]), 1);
+        }
     }
 }
