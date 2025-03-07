@@ -1,41 +1,98 @@
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.math.BigInteger;
 
-
-public class ABCControlPanel {
+public class ControlPanel {
     private JPanel contentPane;
-    private JButton PB1;            //Add/Subtract Selection Push-Button
-    private JButton PB2;            //Start Base-10 Read Operation
-    private JButton PB3;            //Transfer CA-Drum to KA-Drum
-    private JButton PB4;            //Start Base-2 Punch
-    private JButton PB5;            //Start Base-2 Read
-    private JButton PB6;            //Start Computation
-    private JRadioButton SW1;       //Coefficients Input Selection: 1-5
-    private JRadioButton SW2;       //Coefficients Input Selection: 6-10
-    private JRadioButton SW3;       //Coefficients Input Selection: 11-15
-    private JRadioButton SW4;       //Coefficients Input Selection: 16-20
-    private JRadioButton SW5;       //Coefficients Input Selection: 21-25
-    private JRadioButton SW6;       //Coefficients Input Selection: 26-30
-    private JRadioButton SW7;       //Card Read Switch
-    private JRadioButton SW8;       //IBM Card Sign Control
-    private JRadioButton SW9;       //Unused
-    private JRadioButton SW10;      //IBM Card 1's Output Limit
-    private JRadioButton SW11;      //Clear-CA Switch
-    private JRadioButton SW12;      //Clear-KA Switch
-    private JCheckBox L1;           //Base-2 Read Operation
-    private JCheckBox L2;           //Add Operation
-    private JCheckBox L3;           //Subtract Operation
-    private JCheckBox L4;           //Read IBM Card Operation
-    private JCheckBox L5;           //Coefficient Elimination Operation
-    private JCheckBox L6;           //Decimal Output Operation
-    private JCheckBox L7;           //Positive Number Indicator
-    private JCheckBox L8;           //Negative Number Indicator
-    private JRadioButton MS;        //Motor Switch
-    private JRadioButton VS;        //Voltage Switch
-    private JSlider SD;             //Sign Detection Coefficient Selection
+    private JCheckBox SD0;
+    private JCheckBox ZD0;
+    private JCheckBox ZD2;
+    private JCheckBox ZD24;
+    private JCheckBox ZD3;
+    private JCheckBox ZD23;
+    private JCheckBox ZD25;
+    private JCheckBox ZD26;
+    private JCheckBox ZD29;
+    private JCheckBox ZD1;
+    private JCheckBox ZD4;
+    private JCheckBox ZD28;
+    private JCheckBox ZD27;
+    private JCheckBox ZD5;
+    private JCheckBox ZD6;
+    private JCheckBox ZD7;
+    private JCheckBox ZD8;
+    private JCheckBox ZD22;
+    private JCheckBox ZD21;
+    private JCheckBox ZD20;
+    private JCheckBox ZD19;
+    private JCheckBox ZD18;
+    private JCheckBox ZD17;
+    private JCheckBox ZD16;
+    private JCheckBox ZD15;
+    private JCheckBox ZD14;
+    private JCheckBox ZD13;
+    private JCheckBox ZD12;
+    private JCheckBox ZD11;
+    private JCheckBox ZD10;
+    private JCheckBox ZD9;
+    private JCheckBox SD1;
+    private JCheckBox SD2;
+    private JCheckBox SD3;
+    private JCheckBox SD4;
+    private JCheckBox SD5;
+    private JCheckBox SD6;
+    private JCheckBox SD7;
+    private JCheckBox SD8;
+    private JCheckBox SD9;
+    private JCheckBox SD10;
+    private JCheckBox SD11;
+    private JCheckBox SD12;
+    private JCheckBox SD13;
+    private JCheckBox SD14;
+    private JCheckBox SD15;
+    private JCheckBox SD16;
+    private JCheckBox SD17;
+    private JCheckBox SD18;
+    private JCheckBox SD19;
+    private JCheckBox SD20;
+    private JCheckBox SD21;
+    private JCheckBox SD22;
+    private JCheckBox SD23;
+    private JCheckBox SD24;
+    private JCheckBox SD25;
+    private JCheckBox SD26;
+    private JCheckBox SD27;
+    private JCheckBox SD28;
+    private JCheckBox SD29;
+    private JButton PB1;
+    private JButton PB2;
+    private JButton PB3;
+    private JButton PB4;
+    private JButton PB5;
+    private JButton PB6;
+    private JCheckBox L1;
+    private JCheckBox L2;
+    private JCheckBox L3;
+    private JRadioButton SW1;
+    private JRadioButton SW2;
+    private JRadioButton SW3;
+    private JRadioButton SW4;
+    private JRadioButton SW5;
+    private JRadioButton SW6;
+    private JRadioButton SW10;
+    private JRadioButton SW9;
+    private JRadioButton SW8;
+    private JRadioButton SW7;
+    private JCheckBox L4;
+    private JCheckBox L5;
+    private JCheckBox L6;
+    private JCheckBox L7;
+    private JCheckBox L8;
+    private JRadioButton MS;
+    private JRadioButton VS;
+    private JRadioButton SW12;
+    private JRadioButton SW11;
     private JTextField userText;
+    private JTextField a1TextField;
 
     private final MachineController machineController;
     private BigInteger[] pendingCoefficients;
@@ -59,19 +116,19 @@ public class ABCControlPanel {
         private boolean switch1, switch2, switch3, switch4, switch5, switch6;
 
         //Drums
-        private BinaryRow CA, KA;
+        private ABCControlPanel.BinaryRow CA, KA;
         private boolean CAClear, KAClear;
         private int selectedCoefficient;
         private int coefficientSign;
 
         public MachineController() {
-            
+
             machineOn = false;
             additionMode = true;  // default mode is addition
             selectedCoefficient = 0;
             coefficientSign = 1;  // default to positive
-            CA = new BinaryRow(new BigInteger[30]);
-            KA = new BinaryRow(new BigInteger[30]);
+            CA = new ABCControlPanel.BinaryRow(new BigInteger[30]);
+            KA = new ABCControlPanel.BinaryRow(new BigInteger[30]);
             switch1 = false;
             switch2 = false;
             switch3 = false;
@@ -146,7 +203,7 @@ public class ABCControlPanel {
         public void clearCA() {
             CAClear = !CAClear;
             if (CAClear) {
-                CA = new BinaryRow(new BigInteger[30]);
+                CA = new ABCControlPanel.BinaryRow(new BigInteger[30]);
                 System.out.println("CA Drum Cleared");
             }
         }
@@ -154,7 +211,7 @@ public class ABCControlPanel {
         public void clearKA() {
             KAClear = !KAClear;
             if (KAClear) {
-                KA = new BinaryRow(new BigInteger[30]);
+                KA = new ABCControlPanel.BinaryRow(new BigInteger[30]);
                 System.out.println("KA Drum Cleared");
             }
         }
@@ -196,6 +253,12 @@ public class ABCControlPanel {
             }
         }
 
+        // ZD : 66 & 72
+        public void coefficientSelect(int coe) {
+            
+        }
+
+
         public void setCoefficientSign(int signVal) {
             coefficientSign = signVal;
             String signStr = (coefficientSign == 1) ? "Positive" : "Negative";
@@ -204,7 +267,7 @@ public class ABCControlPanel {
     }
 
     //Contains listeners for the buttons
-    public ABCControlPanel() {
+    public ControlPanel() {
         // Create the controller which handles the operations.
         machineController = new MachineController();
 
@@ -290,7 +353,13 @@ public class ABCControlPanel {
 
         //II: COMPUTING
 
-        //ZD slider selected the coefficient to be eliminated.
+        //13. Set switch SW7 so that inputs to ASM’s are connected to KA.
+        //SW7 is listening above
+
+        //14. Select coefficient to be eliminated by selecting checkbox.
+        ZD0.addActionListener(e -> {
+
+        });
 
 
         //PB4: Start Base-2 Punch
@@ -310,14 +379,14 @@ public class ABCControlPanel {
         //IV: BASE-10 READING
 
         // SD slider for checking sign.
-        SD.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                int signValue = SD.getValue();  // Assume -1 for negative, +1 for positive.
-                machineController.setCoefficientSign(signValue);
-                System.out.println("SD Slider: Coefficient sign set to " + (signValue == 1 ? "Positive" : "Negative"));
-            }
-        });
+//        SD.addChangeListener(new ChangeListener() {
+//            @Override
+//            public void stateChanged(ChangeEvent e) {
+//                int signValue = SD.getValue();  // Assume -1 for negative, +1 for positive.
+//                machineController.setCoefficientSign(signValue);
+//                System.out.println("SD Slider: Coefficient sign set to " + (signValue == 1 ? "Positive" : "Negative"));
+//            }
+//        });
 
         //SW1: Coefficients Input Selection: 1-5
         //Switch 70
@@ -359,7 +428,7 @@ public class ABCControlPanel {
     // The main method to run your GUI.
     public static void main(String[] args) {
         JFrame frame = new JFrame("ABC Control Panel");
-        frame.setContentPane(new ABCControlPanel().contentPane);
+        frame.setContentPane(new ControlPanel().contentPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -375,12 +444,12 @@ public class ABCControlPanel {
             this.shiftCount = 0;
         }
 
-        public BinaryRow clone() {
+        public ABCControlPanel.BinaryRow clone() {
             BigInteger[] newCoeffs = new BigInteger[coeffs.length];
             for (int i = 0; i < coeffs.length; i++) {
                 newCoeffs[i] = coeffs[i];
             }
-            BinaryRow copy = new BinaryRow(newCoeffs);
+            ABCControlPanel.BinaryRow copy = new ABCControlPanel.BinaryRow(newCoeffs);
             copy.shiftCount = this.shiftCount;
             return copy;
         }
