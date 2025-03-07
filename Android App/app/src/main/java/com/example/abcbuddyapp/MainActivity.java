@@ -182,11 +182,21 @@ public class MainActivity extends AppCompatActivity {
         currentVariableIndex = 0;
     }
 
-    private void uploadEquation(String equation) {
+    private void uploadEquation() {
+        String equation = "";
+        equation = variableTextViews[0].getText().toString();
+        equation += variableTextViews[1].getText().toString();
+        equation += variableTextViews[2].getText().toString();
+        equation += variableTextViews[3].getText().toString();
+        equation += variableTextViews[4].getText().toString();
+        equation = equation.replaceAll("[^0-9x-]", "x");
+        equation = equation.substring(0, equation.length() - 1) + "d";
+        Log.d("Test", "Equation sent: " + equation);
+
         if (outputStream != null) {
             try {
-                // Send the integer as a 4-byte sequence
                 outputStream.write(equation.getBytes(StandardCharsets.UTF_8));
+                Log.d("Bluetooth", "Equation sent: " + equation);
             } catch (IOException e) {
                 Log.e("Bluetooth", "Error sending integer", e);
             }
@@ -209,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
             bluetoothSocket = device.createRfcommSocketToServiceRecord(ESP32_UUID);
             bluetoothSocket.connect();
             inputStream = bluetoothSocket.getInputStream();
+            outputStream = bluetoothSocket.getOutputStream();
             Toast.makeText(this, "Connected to ESP32", Toast.LENGTH_SHORT).show();
             //listenForData();
         } catch (IOException e) {
