@@ -15,32 +15,35 @@
 
 // PROGRAM		"Quartus Prime"
 // VERSION		"Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition"
-// CREATED		"Sun Mar  2 23:13:44 2025"
+// CREATED		"Mon Mar 10 17:16:33 2025"
 
 module timing_module(
 	CLK,
-	RST,
-	control,
-	data,
+	rst_n,
 	sign_bit,
-	write,
+	write_n,
+	control_n,
+	data_n,
+	zero_n,
 	counter_addr
 );
 
 
 input wire	CLK;
-input wire	RST;
-output wire	control;
-output wire	data;
+input wire	rst_n;
 output wire	sign_bit;
-output wire	write;
+output wire	write_n;
+output wire	control_n;
+output wire	data_n;
+output wire	zero_n;
 output wire	[5:0] counter_addr;
 
 wire	[5:0] counter_addr_ALTERA_SYNTHESIZED;
-reg	SYNTHESIZED_WIRE_16;
+reg	SYNTHESIZED_WIRE_15;
 wire	SYNTHESIZED_WIRE_0;
-wire	SYNTHESIZED_WIRE_17;
+wire	SYNTHESIZED_WIRE_1;
 wire	SYNTHESIZED_WIRE_2;
+wire	SYNTHESIZED_WIRE_3;
 wire	SYNTHESIZED_WIRE_4;
 wire	SYNTHESIZED_WIRE_5;
 wire	SYNTHESIZED_WIRE_6;
@@ -52,70 +55,71 @@ wire	SYNTHESIZED_WIRE_11;
 wire	SYNTHESIZED_WIRE_12;
 wire	SYNTHESIZED_WIRE_13;
 wire	SYNTHESIZED_WIRE_14;
-wire	SYNTHESIZED_WIRE_15;
 
-assign	control = SYNTHESIZED_WIRE_13;
-assign	write = SYNTHESIZED_WIRE_2;
-assign	SYNTHESIZED_WIRE_4 = 1;
-assign	SYNTHESIZED_WIRE_8 = 1;
-assign	SYNTHESIZED_WIRE_9 = 1;
+assign	write_n = SYNTHESIZED_WIRE_15;
+assign	data_n = SYNTHESIZED_WIRE_10;
+assign	SYNTHESIZED_WIRE_2 = 1;
+assign	SYNTHESIZED_WIRE_5 = 1;
+assign	SYNTHESIZED_WIRE_6 = 1;
 
 
 
 
 counter	b2v_inst(
-	.CLK(SYNTHESIZED_WIRE_16),
-	.RST(SYNTHESIZED_WIRE_0),
+	.CLK(SYNTHESIZED_WIRE_15),
+	.rst_n(SYNTHESIZED_WIRE_0),
 	.count(counter_addr_ALTERA_SYNTHESIZED));
 
 
-assign	SYNTHESIZED_WIRE_2 =  ~SYNTHESIZED_WIRE_16;
+assign	SYNTHESIZED_WIRE_1 =  ~SYNTHESIZED_WIRE_15;
 
 
-always@(posedge CLK or negedge SYNTHESIZED_WIRE_17 or negedge SYNTHESIZED_WIRE_17)
+always@(posedge CLK or negedge rst_n or negedge rst_n)
 begin
-if (!SYNTHESIZED_WIRE_17)
+if (!rst_n)
 	begin
-	SYNTHESIZED_WIRE_16 <= 0;
+	SYNTHESIZED_WIRE_15 <= 0;
 	end
 else
-if (!SYNTHESIZED_WIRE_17)
+if (!rst_n)
 	begin
-	SYNTHESIZED_WIRE_16 <= 1;
+	SYNTHESIZED_WIRE_15 <= 1;
 	end
 else
 	begin
-	SYNTHESIZED_WIRE_16 <= SYNTHESIZED_WIRE_2;
+	SYNTHESIZED_WIRE_15 <= SYNTHESIZED_WIRE_1;
 	end
 end
 
-assign	SYNTHESIZED_WIRE_17 =  ~RST;
+assign	SYNTHESIZED_WIRE_14 = counter_addr_ALTERA_SYNTHESIZED[5] & counter_addr_ALTERA_SYNTHESIZED[4] & counter_addr_ALTERA_SYNTHESIZED[3] & counter_addr_ALTERA_SYNTHESIZED[2];
 
-assign	SYNTHESIZED_WIRE_6 = counter_addr_ALTERA_SYNTHESIZED[5] & counter_addr_ALTERA_SYNTHESIZED[4] & counter_addr_ALTERA_SYNTHESIZED[3] & counter_addr_ALTERA_SYNTHESIZED[2];
+assign	SYNTHESIZED_WIRE_10 = SYNTHESIZED_WIRE_2 & SYNTHESIZED_WIRE_3 & counter_addr_ALTERA_SYNTHESIZED[5] & counter_addr_ALTERA_SYNTHESIZED[4];
 
-assign	SYNTHESIZED_WIRE_13 = SYNTHESIZED_WIRE_4 & SYNTHESIZED_WIRE_5 & counter_addr_ALTERA_SYNTHESIZED[5] & counter_addr_ALTERA_SYNTHESIZED[4];
+assign	sign_bit = counter_addr_ALTERA_SYNTHESIZED[4] & counter_addr_ALTERA_SYNTHESIZED[5] & SYNTHESIZED_WIRE_4 & SYNTHESIZED_WIRE_5;
 
-assign	SYNTHESIZED_WIRE_0 = SYNTHESIZED_WIRE_6 | RST;
+assign	SYNTHESIZED_WIRE_4 = SYNTHESIZED_WIRE_6 & SYNTHESIZED_WIRE_7 & SYNTHESIZED_WIRE_8 & SYNTHESIZED_WIRE_9;
 
-assign	sign_bit = counter_addr_ALTERA_SYNTHESIZED[4] & counter_addr_ALTERA_SYNTHESIZED[5] & SYNTHESIZED_WIRE_7 & SYNTHESIZED_WIRE_8;
-
-assign	SYNTHESIZED_WIRE_7 = SYNTHESIZED_WIRE_9 & SYNTHESIZED_WIRE_10 & SYNTHESIZED_WIRE_11 & SYNTHESIZED_WIRE_12;
-
-assign	SYNTHESIZED_WIRE_15 = counter_addr_ALTERA_SYNTHESIZED[2] | counter_addr_ALTERA_SYNTHESIZED[3];
+assign	SYNTHESIZED_WIRE_12 = counter_addr_ALTERA_SYNTHESIZED[2] | counter_addr_ALTERA_SYNTHESIZED[3];
 
 
-assign	SYNTHESIZED_WIRE_10 = counter_addr_ALTERA_SYNTHESIZED[0] ^ counter_addr_ALTERA_SYNTHESIZED[1];
+assign	SYNTHESIZED_WIRE_7 = counter_addr_ALTERA_SYNTHESIZED[0] ^ counter_addr_ALTERA_SYNTHESIZED[1];
 
-assign	SYNTHESIZED_WIRE_14 = counter_addr_ALTERA_SYNTHESIZED[1] & counter_addr_ALTERA_SYNTHESIZED[0];
+assign	SYNTHESIZED_WIRE_11 = counter_addr_ALTERA_SYNTHESIZED[1] & counter_addr_ALTERA_SYNTHESIZED[0];
 
-assign	data =  ~SYNTHESIZED_WIRE_13;
+assign	control_n =  ~SYNTHESIZED_WIRE_10;
 
-assign	SYNTHESIZED_WIRE_5 = SYNTHESIZED_WIRE_14 | SYNTHESIZED_WIRE_15;
+assign	SYNTHESIZED_WIRE_3 = SYNTHESIZED_WIRE_11 | SYNTHESIZED_WIRE_12;
+
+assign	zero_n = counter_addr_ALTERA_SYNTHESIZED[0] | counter_addr_ALTERA_SYNTHESIZED[2] | counter_addr_ALTERA_SYNTHESIZED[1] | counter_addr_ALTERA_SYNTHESIZED[3] | counter_addr_ALTERA_SYNTHESIZED[4] | counter_addr_ALTERA_SYNTHESIZED[5];
 
 
-assign	SYNTHESIZED_WIRE_11 =  ~counter_addr_ALTERA_SYNTHESIZED[2];
+assign	SYNTHESIZED_WIRE_8 =  ~counter_addr_ALTERA_SYNTHESIZED[2];
 
-assign	SYNTHESIZED_WIRE_12 =  ~counter_addr_ALTERA_SYNTHESIZED[3];
+assign	SYNTHESIZED_WIRE_9 =  ~counter_addr_ALTERA_SYNTHESIZED[3];
+
+assign	SYNTHESIZED_WIRE_0 = rst_n & SYNTHESIZED_WIRE_13;
+
+assign	SYNTHESIZED_WIRE_13 =  ~SYNTHESIZED_WIRE_14;
 
 assign	counter_addr = counter_addr_ALTERA_SYNTHESIZED;
 

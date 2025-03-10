@@ -519,21 +519,6 @@ https://fpgasoftware.intel.com/eula.
 		(circle (rect 28 68 36 76))
 	)
 )
-(symbol
-	(rect 1024 256 1056 272)
-	(text "VCC" (rect 7 0 27 10)(font "Arial" (font_size 6)))
-	(text "l" (rect 3 5 5 17)(font "Arial" )(invisible))
-	(port
-		(pt 16 16)
-		(output)
-		(text "1" (rect 19 7 24 19)(font "Courier New" (bold))(invisible))
-		(text "1" (rect 19 7 24 19)(font "Courier New" (bold))(invisible))
-		(line (pt 16 16)(pt 16 8))
-	)
-	(drawing
-		(line (pt 8 8)(pt 24 8))
-	)
-)
 (connector
 	(pt 520 328)
 	(pt 520 360)
@@ -828,10 +813,6 @@ https://fpgasoftware.intel.com/eula.
 	(pt 928 720)
 )
 (connector
-	(pt 1040 272)
-	(pt 1040 304)
-)
-(connector
 	(pt 1040 304)
 	(pt 1040 488)
 )
@@ -864,10 +845,6 @@ https://fpgasoftware.intel.com/eula.
 (connector
 	(pt 520 328)
 	(pt 664 328)
-)
-(connector
-	(pt 1040 672)
-	(pt 1040 904)
 )
 (connector
 	(pt 1208 704)
@@ -915,10 +892,6 @@ https://fpgasoftware.intel.com/eula.
 	(pt 944 1040)
 )
 (connector
-	(pt 944 1040)
-	(pt 992 1040)
-)
-(connector
 	(pt 944 768)
 	(pt 944 1040)
 )
@@ -934,6 +907,22 @@ https://fpgasoftware.intel.com/eula.
 	(pt 928 952)
 	(pt 928 1008)
 )
+(connector
+	(pt 944 1040)
+	(pt 992 1040)
+)
+(connector
+	(pt 992 1040)
+	(pt 1040 1040)
+)
+(connector
+	(pt 1040 672)
+	(pt 1040 904)
+)
+(connector
+	(pt 1040 904)
+	(pt 1040 1040)
+)
 (junction (pt 632 296))
 (junction (pt 1064 336))
 (junction (pt 632 480))
@@ -945,7 +934,6 @@ https://fpgasoftware.intel.com/eula.
 (junction (pt 1136 936))
 (junction (pt 928 536))
 (junction (pt 928 720))
-(junction (pt 1040 304))
 (junction (pt 1040 488))
 (junction (pt 1040 672))
 (junction (pt 1208 336))
@@ -956,3 +944,5 @@ https://fpgasoftware.intel.com/eula.
 (junction (pt 520 328))
 (junction (pt 944 1040))
 (junction (pt 928 952))
+(junction (pt 992 1040))
+(junction (pt 1040 904))

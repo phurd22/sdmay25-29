@@ -15,50 +15,50 @@
 
 // PROGRAM		"Quartus Prime"
 // VERSION		"Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition"
-// CREATED		"Mon Mar 10 17:15:54 2025"
+// CREATED		"Mon Mar 10 14:37:01 2025"
 
-module counter(
-	CLK,
+module addr_plus_one_4bit(
+	decade_addr,
 	rst_n,
-	count
+	decade_1_addr
 );
 
 
-input wire	CLK;
-input wire	rst_n;
-output wire	[5:0] count;
+input wire	[3:0] decade_addr;
+output wire	rst_n;
+output wire	[3:0] decade_1_addr;
 
-wire	[5:0] count_ALTERA_SYNTHESIZED;
+wire	[3:0] decade_1_addr_ALTERA_SYNTHESIZED;
+wire	SYNTHESIZED_WIRE_0;
 wire	SYNTHESIZED_WIRE_6;
-wire	SYNTHESIZED_WIRE_1;
-wire	SYNTHESIZED_WIRE_3;
-wire	SYNTHESIZED_WIRE_5;
+wire	SYNTHESIZED_WIRE_4;
 
-assign	SYNTHESIZED_WIRE_6 = 1;
-
+assign	SYNTHESIZED_WIRE_6 = 0;
+assign	SYNTHESIZED_WIRE_4 = 1;
 
 
 
-four_bit_counter	b2v_inst(
-	.En(SYNTHESIZED_WIRE_6),
-	.CLK(SYNTHESIZED_WIRE_1),
-	.CLRN(rst_n),
-	.Q(count_ALTERA_SYNTHESIZED[3:0]));
+assign	rst_n =  ~SYNTHESIZED_WIRE_0;
 
 
 
-two_bit_counter	b2v_inst2(
-	.En(SYNTHESIZED_WIRE_6),
-	.CLK(SYNTHESIZED_WIRE_3),
-	.CLRN(rst_n),
-	.Q(count_ALTERA_SYNTHESIZED[5:4]));
 
-assign	SYNTHESIZED_WIRE_5 =  ~CLK;
+adder_4bit	b2v_inst5(
+	.X3(decade_addr[3]),
+	.Y3(SYNTHESIZED_WIRE_6),
+	.X2(decade_addr[2]),
+	.Y2(SYNTHESIZED_WIRE_6),
+	.X1(decade_addr[1]),
+	.Y1(SYNTHESIZED_WIRE_6),
+	.X0(decade_addr[0]),
+	.Y0(SYNTHESIZED_WIRE_4),
+	.Ci(SYNTHESIZED_WIRE_6),
+	.S0(decade_1_addr_ALTERA_SYNTHESIZED[0]),
+	.S1(decade_1_addr_ALTERA_SYNTHESIZED[1]),
+	.S2(decade_1_addr_ALTERA_SYNTHESIZED[2]),
+	.S3(decade_1_addr_ALTERA_SYNTHESIZED[3]),
+	.Co(SYNTHESIZED_WIRE_0));
 
-assign	SYNTHESIZED_WIRE_1 = ~(SYNTHESIZED_WIRE_6 & SYNTHESIZED_WIRE_5);
-
-assign	SYNTHESIZED_WIRE_3 = ~(count_ALTERA_SYNTHESIZED[3] & rst_n);
-
-assign	count = count_ALTERA_SYNTHESIZED;
+assign	decade_1_addr = decade_1_addr_ALTERA_SYNTHESIZED;
 
 endmodule
