@@ -79,6 +79,10 @@ void parseBluetoothData(String data) {
   }
 }
 
+// Should do 15 cycles each time
+// Fix how numbers are shown, i.e. 6 vs 600, 6 should show no number first two cycles
+// Use 0 instead of all high for no number
+// Do the card once and then stop and wait for another
 void loop() {
   if (SerialBT.available()) {
     String receivedData = SerialBT.readStringUntil('d');
