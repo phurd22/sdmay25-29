@@ -1,133 +1,37 @@
-// Copyright (C) 2024  Intel Corporation. All rights reserved.
-// Your use of Intel Corporation's design tools, logic functions 
-// and other software and tools, and any partner logic 
-// functions, and any output files from any of the foregoing 
-// (including device programming or simulation files), and any 
-// associated documentation or information are expressly subject 
-// to the terms and conditions of the Intel Program License 
-// Subscription Agreement, the Intel Quartus Prime License Agreement,
-// the Intel FPGA IP License Agreement, or other applicable license
-// agreement, including, without limitation, that your use is for
-// the sole purpose of programming logic devices manufactured by
-// Intel and sold by Intel or its authorized distributors.  Please
-// refer to the applicable agreement for further details, at
-// https://fpgasoftware.intel.com/eula.
-
-// PROGRAM		"Quartus Prime"
-// VERSION		"Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition"
-// CREATED		"Fri Mar  7 12:55:33 2025"
-
-module four_bit_counter(
-	En,
-	CLK,
-	CLRN,
-	Q
+module four_bit_counter (
+    input wire rst_n,        // Master Reset (active low, synchronous)
+    input wire clk,        // Clock Pulse (positive edge triggered)
+    input wire spe_n,        // Parallel Enable (active low)
+    input wire te,        // Count Enable (active high)
+    input wire [3:0] P,   // Parallel Data Inputs (P0-P3)
+	 output wire Q0,
+	 output wire Q1,
+	 output wire Q2,
+	 output wire Q3,
+    output wire TC        // Terminal Count (active high)
 );
 
+    // Internal signals
+    reg [3:0] count;      // Internal counter register
 
-input wire	En;
-input wire	CLK;
-input wire	CLRN;
-output wire	[3:0] Q;
+    // Synchronous reset and counting logic
+    always @(posedge clk) begin
+        if (!rst_n) begin
+            count <= 4'b0000; // Synchronous reset (active low)
+        end else if (!spe_n) begin
+            count <= P;       // Parallel load (active low)
+        end else if (te) begin
+            count <= count + 1; // Increment counter if TE is high
+        end
+    end
 
-reg	[3:0] Q_ALTERA_SYNTHESIZED;
-wire	SYNTHESIZED_WIRE_9;
-wire	SYNTHESIZED_WIRE_1;
-wire	SYNTHESIZED_WIRE_2;
-wire	SYNTHESIZED_WIRE_10;
-wire	SYNTHESIZED_WIRE_4;
-wire	SYNTHESIZED_WIRE_5;
-wire	SYNTHESIZED_WIRE_8;
+    // Assign counter outputs
+	 assign Q0 = count[0];
+	 assign Q1 = count[1];
+	 assign Q2 = count[2];
+	 assign Q3 = count[3];
 
-
-
-
-assign	SYNTHESIZED_WIRE_10 = Q_ALTERA_SYNTHESIZED[1] & SYNTHESIZED_WIRE_9;
-
-
-always@(posedge CLK or negedge CLRN or negedge CLRN)
-begin
-if (!CLRN)
-	begin
-	Q_ALTERA_SYNTHESIZED[0] <= 0;
-	end
-else
-if (!CLRN)
-	begin
-	Q_ALTERA_SYNTHESIZED[0] <= 1;
-	end
-else
-	begin
-	Q_ALTERA_SYNTHESIZED[0] <= SYNTHESIZED_WIRE_1;
-	end
-end
-
-
-always@(posedge CLK or negedge CLRN or negedge CLRN)
-begin
-if (!CLRN)
-	begin
-	Q_ALTERA_SYNTHESIZED[1] <= 0;
-	end
-else
-if (!CLRN)
-	begin
-	Q_ALTERA_SYNTHESIZED[1] <= 1;
-	end
-else
-	begin
-	Q_ALTERA_SYNTHESIZED[1] <= SYNTHESIZED_WIRE_2;
-	end
-end
-
-assign	SYNTHESIZED_WIRE_8 = Q_ALTERA_SYNTHESIZED[2] & SYNTHESIZED_WIRE_10;
-
-
-always@(posedge CLK or negedge CLRN or negedge CLRN)
-begin
-if (!CLRN)
-	begin
-	Q_ALTERA_SYNTHESIZED[2] <= 0;
-	end
-else
-if (!CLRN)
-	begin
-	Q_ALTERA_SYNTHESIZED[2] <= 1;
-	end
-else
-	begin
-	Q_ALTERA_SYNTHESIZED[2] <= SYNTHESIZED_WIRE_4;
-	end
-end
-
-
-always@(posedge CLK or negedge CLRN or negedge CLRN)
-begin
-if (!CLRN)
-	begin
-	Q_ALTERA_SYNTHESIZED[3] <= 0;
-	end
-else
-if (!CLRN)
-	begin
-	Q_ALTERA_SYNTHESIZED[3] <= 1;
-	end
-else
-	begin
-	Q_ALTERA_SYNTHESIZED[3] <= SYNTHESIZED_WIRE_5;
-	end
-end
-
-assign	SYNTHESIZED_WIRE_1 = En ^ Q_ALTERA_SYNTHESIZED[0];
-
-assign	SYNTHESIZED_WIRE_2 = SYNTHESIZED_WIRE_9 ^ Q_ALTERA_SYNTHESIZED[1];
-
-assign	SYNTHESIZED_WIRE_4 = SYNTHESIZED_WIRE_10 ^ Q_ALTERA_SYNTHESIZED[2];
-
-assign	SYNTHESIZED_WIRE_5 = SYNTHESIZED_WIRE_8 ^ Q_ALTERA_SYNTHESIZED[3];
-
-assign	SYNTHESIZED_WIRE_9 = Q_ALTERA_SYNTHESIZED[0] & En;
-
-assign	Q = Q_ALTERA_SYNTHESIZED;
+    // Terminal Count (TC) logic
+    assign TC = (count == 4'b1111) && te; // TC is high when count is 15 and TE is high
 
 endmodule

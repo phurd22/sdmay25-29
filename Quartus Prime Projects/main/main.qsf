@@ -79,4 +79,5 @@ set_global_assignment -name SOURCE_FILE eeprom.b
 set_global_assignment -name VERILOG_FILE eeprom.v
 set_global_assignment -name BDF_FILE counter_4bit_down.bdf
 set_global_assignment -name BDF_FILE addr_plus_one_4bit.bdf
+set_global_assignment -name VERILOG_FILE timing_memory.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

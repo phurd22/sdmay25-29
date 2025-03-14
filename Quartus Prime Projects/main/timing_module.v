@@ -15,112 +15,115 @@
 
 // PROGRAM		"Quartus Prime"
 // VERSION		"Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition"
-// CREATED		"Mon Mar 10 17:16:33 2025"
+// CREATED		"Thu Mar 13 23:41:30 2025"
 
 module timing_module(
-	CLK,
 	rst_n,
-	sign_bit,
-	write_n,
-	control_n,
-	data_n,
-	zero_n,
+	clk,
+	en,
+	counter_rst_n,
+	lastRead,
+	lastWrite,
+	checkInputs,
+	clearCarry,
+	write,
+	read,
 	counter_addr
 );
 
 
-input wire	CLK;
 input wire	rst_n;
-output wire	sign_bit;
-output wire	write_n;
-output wire	control_n;
-output wire	data_n;
-output wire	zero_n;
+input wire	clk;
+input wire	en;
+input wire	counter_rst_n;
+output wire	lastRead;
+output wire	lastWrite;
+output wire	checkInputs;
+output wire	clearCarry;
+output wire	write;
+output wire	read;
 output wire	[5:0] counter_addr;
 
 wire	[5:0] counter_addr_ALTERA_SYNTHESIZED;
-reg	SYNTHESIZED_WIRE_15;
-wire	SYNTHESIZED_WIRE_0;
-wire	SYNTHESIZED_WIRE_1;
-wire	SYNTHESIZED_WIRE_2;
-wire	SYNTHESIZED_WIRE_3;
-wire	SYNTHESIZED_WIRE_4;
-wire	SYNTHESIZED_WIRE_5;
-wire	SYNTHESIZED_WIRE_6;
-wire	SYNTHESIZED_WIRE_7;
-wire	SYNTHESIZED_WIRE_8;
-wire	SYNTHESIZED_WIRE_9;
+wire	[3:0] preset;
+reg	slow_clk;
 wire	SYNTHESIZED_WIRE_10;
 wire	SYNTHESIZED_WIRE_11;
+wire	SYNTHESIZED_WIRE_3;
 wire	SYNTHESIZED_WIRE_12;
-wire	SYNTHESIZED_WIRE_13;
-wire	SYNTHESIZED_WIRE_14;
+wire	SYNTHESIZED_WIRE_6;
+wire	SYNTHESIZED_WIRE_7;
 
-assign	write_n = SYNTHESIZED_WIRE_15;
-assign	data_n = SYNTHESIZED_WIRE_10;
-assign	SYNTHESIZED_WIRE_2 = 1;
-assign	SYNTHESIZED_WIRE_5 = 1;
-assign	SYNTHESIZED_WIRE_6 = 1;
+assign	SYNTHESIZED_WIRE_10 = 1;
+assign	SYNTHESIZED_WIRE_11 = 0;
+assign	SYNTHESIZED_WIRE_3 = 1;
 
 
 
 
-counter	b2v_inst(
-	.CLK(SYNTHESIZED_WIRE_15),
-	.rst_n(SYNTHESIZED_WIRE_0),
-	.count(counter_addr_ALTERA_SYNTHESIZED));
-
-
-assign	SYNTHESIZED_WIRE_1 =  ~SYNTHESIZED_WIRE_15;
-
-
-always@(posedge CLK or negedge rst_n or negedge rst_n)
+always@(posedge clk or negedge rst_n or negedge rst_n)
 begin
 if (!rst_n)
 	begin
-	SYNTHESIZED_WIRE_15 <= 0;
+	slow_clk <= 0;
 	end
 else
 if (!rst_n)
 	begin
-	SYNTHESIZED_WIRE_15 <= 1;
+	slow_clk <= 1;
 	end
 else
-	begin
-	SYNTHESIZED_WIRE_15 <= SYNTHESIZED_WIRE_1;
-	end
+	slow_clk <= slow_clk ^ SYNTHESIZED_WIRE_10;
 end
 
-assign	SYNTHESIZED_WIRE_14 = counter_addr_ALTERA_SYNTHESIZED[5] & counter_addr_ALTERA_SYNTHESIZED[4] & counter_addr_ALTERA_SYNTHESIZED[3] & counter_addr_ALTERA_SYNTHESIZED[2];
 
-assign	SYNTHESIZED_WIRE_10 = SYNTHESIZED_WIRE_2 & SYNTHESIZED_WIRE_3 & counter_addr_ALTERA_SYNTHESIZED[5] & counter_addr_ALTERA_SYNTHESIZED[4];
-
-assign	sign_bit = counter_addr_ALTERA_SYNTHESIZED[4] & counter_addr_ALTERA_SYNTHESIZED[5] & SYNTHESIZED_WIRE_4 & SYNTHESIZED_WIRE_5;
-
-assign	SYNTHESIZED_WIRE_4 = SYNTHESIZED_WIRE_6 & SYNTHESIZED_WIRE_7 & SYNTHESIZED_WIRE_8 & SYNTHESIZED_WIRE_9;
-
-assign	SYNTHESIZED_WIRE_12 = counter_addr_ALTERA_SYNTHESIZED[2] | counter_addr_ALTERA_SYNTHESIZED[3];
-
-
-assign	SYNTHESIZED_WIRE_7 = counter_addr_ALTERA_SYNTHESIZED[0] ^ counter_addr_ALTERA_SYNTHESIZED[1];
-
-assign	SYNTHESIZED_WIRE_11 = counter_addr_ALTERA_SYNTHESIZED[1] & counter_addr_ALTERA_SYNTHESIZED[0];
-
-assign	control_n =  ~SYNTHESIZED_WIRE_10;
-
-assign	SYNTHESIZED_WIRE_3 = SYNTHESIZED_WIRE_11 | SYNTHESIZED_WIRE_12;
-
-assign	zero_n = counter_addr_ALTERA_SYNTHESIZED[0] | counter_addr_ALTERA_SYNTHESIZED[2] | counter_addr_ALTERA_SYNTHESIZED[1] | counter_addr_ALTERA_SYNTHESIZED[3] | counter_addr_ALTERA_SYNTHESIZED[4] | counter_addr_ALTERA_SYNTHESIZED[5];
+timing_memory	b2v_inst1(
+	.clk(slow_clk),
+	.ce_n(SYNTHESIZED_WIRE_11),
+	.oe_n(SYNTHESIZED_WIRE_11),
+	.we_n(SYNTHESIZED_WIRE_3),
+	.addr(counter_addr_ALTERA_SYNTHESIZED),
+	.read(read),
+	.write(write),
+	.lastRead(lastRead),
+	.lastWrite(lastWrite),
+	.checkInputs(checkInputs),
+	.clearCarry(clearCarry),
+	.resetCounter_n(SYNTHESIZED_WIRE_7));
 
 
-assign	SYNTHESIZED_WIRE_8 =  ~counter_addr_ALTERA_SYNTHESIZED[2];
 
-assign	SYNTHESIZED_WIRE_9 =  ~counter_addr_ALTERA_SYNTHESIZED[3];
 
-assign	SYNTHESIZED_WIRE_0 = rst_n & SYNTHESIZED_WIRE_13;
 
-assign	SYNTHESIZED_WIRE_13 =  ~SYNTHESIZED_WIRE_14;
+
+four_bit_counter	b2v_inst6(
+	.rst_n(SYNTHESIZED_WIRE_12),
+	.clk(slow_clk),
+	.spe_n(SYNTHESIZED_WIRE_10),
+	.te(SYNTHESIZED_WIRE_6),
+	.P(preset),
+	.Q0(counter_addr_ALTERA_SYNTHESIZED[4]),
+	.Q1(counter_addr_ALTERA_SYNTHESIZED[5])
+	
+	
+	);
+
+assign	SYNTHESIZED_WIRE_12 = counter_rst_n & SYNTHESIZED_WIRE_7;
+
+
+four_bit_counter	b2v_inst92(
+	.rst_n(SYNTHESIZED_WIRE_12),
+	.clk(slow_clk),
+	.spe_n(SYNTHESIZED_WIRE_10),
+	.te(en),
+	.P(preset),
+	.Q0(counter_addr_ALTERA_SYNTHESIZED[0]),
+	.Q1(counter_addr_ALTERA_SYNTHESIZED[1]),
+	.Q2(counter_addr_ALTERA_SYNTHESIZED[2]),
+	.Q3(counter_addr_ALTERA_SYNTHESIZED[3]),
+	.TC(SYNTHESIZED_WIRE_6));
 
 assign	counter_addr = counter_addr_ALTERA_SYNTHESIZED;
+assign	preset = 4'b0000;
 
 endmodule
