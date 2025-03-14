@@ -1,0 +1,61 @@
+module ram (
+    input wire [5:0] addr,  // 6-bit address bus
+	 input wire clk,
+    input wire ce_n,        // Active low Chip Enable
+    input wire oe_n,        // Active low Output Enable
+    input wire we_n,         // Active low Write Enable
+	 output wire write_n,
+	 output wire read_n,
+	 output wire lastRead,
+	 output wire lastWrite,
+	 output wire checkInputs,
+	 output wire clearCarry
+);
+
+    // Memory array (64 locations of 5-bit memory)
+    reg [5:0] memory [0:127]; // 2^7 = 128 locations
+
+    // Internal data register
+    reg [5:0] data_out;
+
+    Initialize all memory locations to zero
+    integer i;
+    initial begin
+        for (i = 0; i < 128; i = i + 1) begin
+				if ((i % 2) == 0) begin
+					memory[i] = 6'b000001;
+				else
+					memory[i] = 6'b000010;
+				end
+        end
+		  memory[(49 << 1)] = 6'b000101;
+		  memory[(49 << 1)+1] = 6'b001110;
+		  
+		  memory[(50 << 1)] = 6'b000101;
+		  
+		  memory[(52 << 1)] = 6'b010001;
+		  memory[(52 << 1)+1] = 6'b010010;
+		  
+		  memory[(53 << 1)] = 6'b010001;
+		  
+		  memory[(52 << 1)+1] = 6'b100010;
+		  
+    end
+
+    // Tri-state buffer control
+    assign write_n = (!ce_n && !oe_n && we_n) ? data_out[0] : 1'bz;
+	 assign read_n = (!ce_n && !oe_n && we_n) ? data_out[1] : 1'bz;
+	 assign lastRead = (!ce_n && !oe_n && we_n) ? data_out[2] : 1'bz;
+	 assign lastWrite = (!ce_n && !oe_n && we_n) ? data_out[3] : 1'bz;
+	 assign checkInputs = (!ce_n && !oe_n && we_n) ? data_out[4] : 1'bz;
+	 assign clearCarry = (!ce_n && !oe_n && we_n) ? data_out[5] : 1'bz;
+
+
+    // Read operation (asynchronous)
+    always @(*) begin
+        if (!ce_n && !oe_n && we_n) begin
+            data_out <= memory[addr];
+        end
+    end
+
+endmodule

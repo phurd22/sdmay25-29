@@ -3,23 +3,23 @@
 BluetoothSerial SerialBT;
 
 // Define the pins where the LEDs are connected
-const int ledPins[5][4] = {
-  {13, 12, 14, 27}, // Group 1
-  {26, 25, 33, 32}, // Group 2
-  {15, 2, 4, 16},   // Group 3
-  {17, 5, 18, 19},  // Group 4
-  {0, 0, 0, 0}   // Group 5
+const int ledPins[5][5] = {
+  {15, 2, 4, 5, 18}, // Group 1
+  {0, 0, 0, 0, 0}, // Group 2
+  {0, 0, 0, 0, 0},   // Group 3
+  {0, 0, 0, 0, 0},  // Group 4
+  {0, 0, 0, 0, 0}   // Group 5
 };
 
-String numbers[5] = {"42", "173", "9", "543210", "0"}; // Default values
+String numbers[5] = {"0", "0", "0", "0", "0"}; // Default values
 
 void setup() {
   Serial.begin(115200);  // Debugging
   SerialBT.begin("ESP32_BT");  // Start Bluetooth with a custom name
 
-  for (int g = 0; g < 5; g++) {
-    for (int i = 0; i < 4; i++) {
-      pinMode(ledPins[g][i], OUTPUT);
+  for (int i = 0; i < 5; i++) {
+    for (int g = 0; g < 5; g++) {
+      pinMode(ledPins[i][g], OUTPUT);
     }
   }
 
@@ -40,10 +40,22 @@ void turnOnGroupLEDs(int group) {
   }
 }
 
-void clearAllLEDs() {
-  for (int g = 0; g < 5; g++) {
-    for (int i = 0; i < 4; i++) {
-      digitalWrite(ledPins[g][i], LOW);
+void clearNumLEDs() {
+  for (int i = 0; i < 5; i++) {
+    for (int g = 0; g < 4; g++) {
+      digitalWrite(ledPins[i][g], LOW);
+    }
+  }
+}
+
+void setSignLEDs() {
+  for (int i = 0; i < 5; i++) {
+    if (numbers[i].charAt(0) == '-') {
+      numbers[i].remove(0, 1);
+      digitalWrite(ledPins[i][4], HIGH);
+    }
+    else {
+      digitalWrite(ledPins[i][4], LOW);
     }
   }
 }
@@ -67,11 +79,16 @@ void parseBluetoothData(String data) {
   }
 }
 
+// Should do 15 cycles each time
+// Fix how numbers are shown, i.e. 6 vs 600, 6 should show no number first two cycles
+// Use 0 instead of all high for no number
+// Do the card once and then stop and wait for another
 void loop() {
   if (SerialBT.available()) {
     String receivedData = SerialBT.readStringUntil('d');
     Serial.println(receivedData);
     parseBluetoothData(receivedData);
+    setSignLEDs();
   }
 
   int maxLen = 0;
@@ -81,12 +98,12 @@ void loop() {
     }
   }
 
-  for (int pos = 0; pos < maxLen; pos++) { // Start from the rightmost and move left
-    clearAllLEDs(); // Clear previous state
+  for (int pos = 0; pos < maxLen; pos++) { // Start from the leftmost and move right
+    clearNumLEDs(); // Clear previous state
     for (int i = 0; i < 5; i++) {
-      int digitPos = numbers[i].length() - 1 - pos;
-      if (digitPos >= 0) {
-        displayDigit(i, numbers[i][digitPos]);
+      int numLen = numbers[i].length();
+      if (pos < numLen) {
+        displayDigit(i, numbers[i][pos]);
       } 
       else {
         turnOnGroupLEDs(i);
