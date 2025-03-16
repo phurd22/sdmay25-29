@@ -1,7 +1,3 @@
-// #include "BluetoothSerial.h"
-
-// BluetoothSerial SerialBT;
-
 #include <BLEDevice.h>
 #include <BLEUtils.h>
 #include <BLEServer.h>
@@ -11,7 +7,7 @@
 
 // Define the pins where the Bits are connected
 const int bitInputPins[5][5] = {
-  {15, 2, 4, 5, 18}, // Group 1
+  {39, 40, 41, 42, 2}, // Group 1
   {0, 0, 0, 0, 0}, // Group 2
   {0, 0, 0, 0, 0},   // Group 3
   {0, 0, 0, 0, 0},  // Group 4
@@ -23,6 +19,13 @@ String receivedData = ""; // Buffer for incoming data
 const int numberLength = 15;
 bool newData;
 
+void parseBluetoothData(String data);
+void setSignBits();
+void clearSignBits();
+void padData();
+void clearNumBits();
+void displayDigit(int group, int digit);
+
 // Callback class for handling incoming BLE writes
 class MyCallbacks : public BLECharacteristicCallbacks {
   void onWrite(BLECharacteristic *pCharacteristic) {
@@ -30,14 +33,15 @@ class MyCallbacks : public BLECharacteristicCallbacks {
 
     if (rxValue.length() > 0) {
       receivedData += rxValue;
-      // Serial.print("Received: ");
-      // Serial.flush();
 
       // Check if 'd' (end of message) is received
       if (receivedData.indexOf('d') != -1) {
         Serial.println("Received: " + receivedData); // Print the received value
         Serial.flush();
-        // do stuff with data
+
+        parseBluetoothData(receivedData);
+        newData = true;
+
         // Reset buffer
         receivedData = "";
       }
@@ -49,7 +53,6 @@ class MyCallbacks : public BLECharacteristicCallbacks {
 void setup() {
   delay(5000);
   Serial.begin(115200);
-  // SerialBT.begin("ESP32_BT");  // Start Bluetooth with a custom name
 
   newData = false;
   for (int i = 0; i < 5; i++) {
@@ -65,16 +68,11 @@ void setup() {
   BLEService *pService = pServer->createService(SERVICE_UUID);
   BLECharacteristic *pCharacteristic =
     pService->createCharacteristic(CHARACTERISTIC_UUID, BLECharacteristic::PROPERTY_READ | BLECharacteristic::PROPERTY_WRITE);
-  // Attach the write callback to handle incoming data
-  pCharacteristic->setCallbacks(new MyCallbacks());
-
+  pCharacteristic->setCallbacks(new MyCallbacks()); // Attach the write callback to handle incoming data
   pService->start();
-
   BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
   pAdvertising->addServiceUUID(SERVICE_UUID);
   pAdvertising->setScanResponse(true);
-  // pAdvertising->setMinPreferred(0x06);  // functions that help with iPhone connections issue
-  // pAdvertising->setMinPreferred(0x12);
   BLEDevice::startAdvertising();
 
   Serial.println("BLE is ready. Waiting for data...");
@@ -85,22 +83,16 @@ void loop() {
   newData = false;
   clearNumBits();
   clearSignBits();
-  // if (SerialBT.available()) {
-  //   String receivedData = SerialBT.readStringUntil('d');
-  //   Serial.println("Received data: " + receivedData);
-  //   parseBluetoothData(receivedData);
-  //   setSignBits();
-  //   padData();
-  //   newData = true;
-  // }
 
   if (newData) {
+    setSignBits();
+    padData();
     for (int pos = 0; pos < numberLength; pos++) {
       clearNumBits();
       for (int i = 0; i < 5; i++) {
         displayDigit(i, numbers[i][pos]);
       }
-      delay(250);
+      delay(500);
     }
   }
 }
@@ -115,6 +107,9 @@ void parseBluetoothData(String data) {
     }  
     numbers[index] = data.substring(startPos, endPos);
     startPos = endPos + 1;
+    if (index == 4 && numbers[index].endsWith("d")) {  // Remove trailing 'd'
+      numbers[index].remove(numbers[index].length() - 1);
+    }
     index++;
   }
 
@@ -155,7 +150,7 @@ void clearNumBits() {
 
 void setSignBits() {
   for (int i = 0; i < 5; i++) {
-    if (numbers[i].charAt(0) == '-') {
+    if (numbers[i].charAt(0) == '0') {
       numbers[i].remove(0, 1);
       digitalWrite(bitInputPins[i][4], HIGH);
     }
