@@ -8,16 +8,18 @@
 // Define the pins where the Bits are connected
 const int bitInputPins[5][5] = {
   {39, 40, 41, 42, 2}, // Group 1
-  {0, 0, 0, 0, 0}, // Group 2
-  {0, 0, 0, 0, 0},   // Group 3
-  {0, 0, 0, 0, 0},  // Group 4
-  {0, 0, 0, 0, 0}   // Group 5
+  {0, 35, 36, 37, 38}, // Group 2
+  {20, 21, 47, 48, 45},   // Group 3
+  {15, 7, 6, 5, 4},  // Group 4
+  {3, 8, 18, 17, 16}   // Group 5
 };
+
+const int buttonPin = 1;
 
 String numbers[5] = {"0", "0", "0", "0", "0"}; // Default values
 String receivedData = ""; // Buffer for incoming data
 const int numberLength = 15;
-bool newData;
+bool buttonPressed;
 
 void parseBluetoothData(String data);
 void setSignBits();
@@ -40,7 +42,6 @@ class MyCallbacks : public BLECharacteristicCallbacks {
         Serial.flush();
 
         parseBluetoothData(receivedData);
-        newData = true;
 
         // Reset buffer
         receivedData = "";
@@ -54,12 +55,13 @@ void setup() {
   delay(5000);
   Serial.begin(115200);
 
-  newData = false;
+  buttonPressed = false;
   for (int i = 0; i < 5; i++) {
     for (int g = 0; g < 5; g++) {
       pinMode(bitInputPins[i][g], OUTPUT);
     }
   }
+  pinMode(buttonPin, INPUT);
 
   // Setup for BLE
   BLEDevice::init("Base10ESP32");
@@ -78,13 +80,15 @@ void setup() {
   Serial.println("BLE is ready. Waiting for data...");
 }
 
-// Good shit, just need to make this work with a clock input instead of delay now
 void loop() {
-  newData = false;
   clearNumBits();
   clearSignBits();
 
-  if (newData) {
+  if (digitalRead(buttonPin) == HIGH) {
+    buttonPressed = true;
+  }
+
+  if (buttonPressed) {
     setSignBits();
     padData();
     for (int pos = 0; pos < numberLength; pos++) {
@@ -94,6 +98,7 @@ void loop() {
       }
       delay(500);
     }
+    buttonPressed = false;
   }
 }
 
