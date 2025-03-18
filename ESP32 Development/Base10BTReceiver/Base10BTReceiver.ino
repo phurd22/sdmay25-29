@@ -39,8 +39,6 @@ class MyCallbacks : public BLECharacteristicCallbacks {
       // Check if 'd' (end of message) is received
       if (receivedData.indexOf('d') != -1) {
         Serial.println("Received: " + receivedData); // Print the received value
-        Serial.flush();
-
         parseBluetoothData(receivedData);
 
         // Reset buffer
@@ -52,7 +50,6 @@ class MyCallbacks : public BLECharacteristicCallbacks {
 };
 
 void setup() {
-  delay(5000);
   Serial.begin(115200);
 
   buttonPressed = false;
@@ -155,7 +152,7 @@ void clearNumBits() {
 
 void setSignBits() {
   for (int i = 0; i < 5; i++) {
-    if (numbers[i].charAt(0) == '0') {
+    if (numbers[i].charAt(0) == '-') {
       numbers[i].remove(0, 1);
       digitalWrite(bitInputPins[i][4], HIGH);
     }
