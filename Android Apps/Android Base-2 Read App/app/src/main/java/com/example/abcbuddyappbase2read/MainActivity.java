@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private int currentPage;
     private int totalPages;
     private List<List<Long>> allNumbers = new ArrayList<>();
+    LinearLayout pageButtonContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +49,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         currentPage = 1;
-        totalPages = 3;
+        totalPages = 20;
 
+        pageButtonContainer = findViewById(R.id.pageButtonContainer);
         base2PunchView = findViewById(R.id.base2PunchView);
 
-        List<Long> numbers1 = Arrays.asList(-1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L,
+        List<Long> numbers1 = Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L,
                 -1L, -2L, -3L, -4L, -5L, -6L, -7L, -8L, -9L, -10L,
                 100L, 200L, 300L, 400L, 500L, 600L, 700L, 800L, 900L, 1000L);
 
@@ -65,6 +70,22 @@ public class MainActivity extends AppCompatActivity {
         allNumbers.add(numbers1);
         allNumbers.add(numbers2);
         allNumbers.add(numbers3);
+
+        for (int i = 1; i <= totalPages; i++) {
+            Button pageButton = new Button(this);
+            pageButton.setText("Page " + i);
+            pageButton.setLayoutParams(new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            ));
+            int pageIndex = i;
+            pageButton.setOnClickListener(v -> {
+                currentPage = pageIndex;
+                updatePage();
+            });
+            pageButton.setBackgroundResource(R.drawable.button_border);
+            pageButtonContainer.addView(pageButton);
+        }
 
         updatePage();
         requestBluetoothPermissions();
