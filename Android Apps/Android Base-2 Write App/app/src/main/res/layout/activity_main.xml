@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/punchcard">
 
-    <com.example.abcbuddyappbase2read.Base2PunchView
+    <com.example.abcbuddyappbase2write.Base2PunchView
         android:id="@+id/base2PunchView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
