@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -35,7 +36,10 @@ public class MainActivity extends AppCompatActivity {
     private int currentPage;
     private int totalPages;
     private List<List<Long>> allNumbers = new ArrayList<>();
-    LinearLayout pageButtonContainer;
+    private LinearLayout pageButtonContainer;
+    private Button uploadButton;
+    private Button modeButton;
+    private Button resetButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
         pageButtonContainer = findViewById(R.id.pageButtonContainer);
         base2PunchView = findViewById(R.id.base2PunchView);
+        uploadButton = findViewById(R.id.buttonUpload);
+        modeButton = findViewById(R.id.buttonMode);
+        resetButton = findViewById(R.id.buttonReset);
 
         List<Long> numbers1 = Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L,
                 -1L, -2L, -3L, -4L, -5L, -6L, -7L, -8L, -9L, -10L,
@@ -84,8 +91,30 @@ public class MainActivity extends AppCompatActivity {
                 updatePage();
             });
             pageButton.setBackgroundResource(R.drawable.button_border);
+            pageButton.setWidth(109);
             pageButtonContainer.addView(pageButton);
         }
+
+        modeButton.setOnClickListener(v -> {
+            base2PunchView.changeMode();
+        });
+
+        resetButton.setOnClickListener(v -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("Confirm Reset")
+                    .setMessage("Are you sure you want to reset?")
+                    .setPositiveButton("Cancel", (dialog, which) -> dialog.dismiss())
+                    .setNegativeButton("Yes", (dialog, which) -> Log.d("Reset", "Reset confirmed"))
+                    .setCancelable(false)
+                    .show();
+        });
+
+//        uploadButton.post(() -> {
+//            int widthPx = uploadButton.getWidth(); // Width in pixels
+//            float density = uploadButton.getResources().getDisplayMetrics().density;
+//            float widthDp = widthPx / density; // Convert to dp
+//            Log.d("ButtonWidth", "Width in dp: " + widthDp);
+//        });
 
         updatePage();
         requestBluetoothPermissions();
