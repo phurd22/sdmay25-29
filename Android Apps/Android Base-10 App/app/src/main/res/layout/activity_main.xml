@@ -19,7 +19,7 @@
 
             <TextView
                 android:id="@+id/Var1"
-                android:layout_width="269dp"
+                android:layout_width="279dp"
                 android:layout_height="wrap_content"
                 android:autoSizeMaxTextSize="60sp"
                 android:autoSizeMinTextSize="10sp"
@@ -34,48 +34,48 @@
 
             <TextView
                 android:id="@+id/Var2"
-                android:layout_width="244dp"
+                android:layout_width="158dp"
                 android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="60sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:ellipsize="end"
+                android:gravity="bottom"
+                android:maxLines="1"
                 android:text="Var2"
                 android:textAlignment="center"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="10sp"
-                android:autoSizeMaxTextSize="60sp"
-                android:autoSizeStepGranularity="2sp"
-                android:gravity="bottom"
-                android:textSize="60sp"
-                android:maxLines="1"
-                android:ellipsize="end" />
+                android:textSize="60sp" />
 
             <TextView
                 android:id="@+id/Var3"
-                android:layout_width="247dp"
+                android:layout_width="216dp"
                 android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="60sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:ellipsize="end"
+                android:gravity="bottom"
+                android:maxLines="1"
                 android:text="Var3"
                 android:textAlignment="center"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="10sp"
-                android:autoSizeMaxTextSize="60sp"
-                android:autoSizeStepGranularity="2sp"
-                android:gravity="bottom"
-                android:textSize="60sp"
-                android:maxLines="1"
-                android:ellipsize="end" />
+                android:textSize="60sp" />
 
             <TextView
                 android:id="@+id/Var4"
-                android:layout_width="240dp"
+                android:layout_width="199dp"
                 android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="60sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:ellipsize="end"
+                android:gravity="bottom"
+                android:maxLines="1"
                 android:text="Var4"
                 android:textAlignment="center"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="10sp"
-                android:autoSizeMaxTextSize="60sp"
-                android:autoSizeStepGranularity="2sp"
-                android:gravity="bottom"
-                android:textSize="60sp"
-                android:maxLines="1"
-                android:ellipsize="end" />
+                android:textSize="60sp" />
 
             <TextView
                 android:id="@+id/equal"
@@ -89,18 +89,18 @@
 
             <TextView
                 android:id="@+id/Var5"
-                android:layout_width="259dp"
+                android:layout_width="219dp"
                 android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="60sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:ellipsize="end"
+                android:gravity="bottom"
+                android:maxLines="1"
                 android:text="Var5"
                 android:textAlignment="center"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="10sp"
-                android:autoSizeMaxTextSize="60sp"
-                android:autoSizeStepGranularity="2sp"
-                android:gravity="bottom"
-                android:textSize="60sp"
-                android:maxLines="1"
-                android:ellipsize="end" />
+                android:textSize="60sp" />
 
 
         </LinearLayout>
@@ -110,17 +110,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_weight="3" />
+            android:layout_weight="1" />
 
         <GridLayout
             android:id="@+id/numpad"
-            android:layout_width="330dp"
-            android:layout_height="330dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:layout_gravity="center"
             android:layout_marginBottom="16dp"
             android:alignmentMode="alignMargins"
             android:columnCount="3"
-            android:padding="16dp"
             android:rowCount="4"
             android:useDefaultMargins="true"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -275,7 +274,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:orientation="horizontal">
 
             <Button
