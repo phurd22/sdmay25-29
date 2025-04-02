@@ -1,9 +1,9 @@
 module mux_2to1_5bit(
-	input wire [3:0] bus_a,
-	input wire [3:0] bus_b,
+	input wire [4:0] bus_a,
+	input wire [4:0] bus_b,
 	input wire sel,
 	
-	output wire [3:0] bus_out
+	output wire [4:0] bus_out
 
 );
 

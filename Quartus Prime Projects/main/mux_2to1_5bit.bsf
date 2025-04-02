@@ -27,15 +27,15 @@ https://fpgasoftware.intel.com/eula.
 	(port
 		(pt 0 32)
 		(input)
-		(text "bus_a[4..0]" (rect 0 0 46 12)(font "Arial" ))
-		(text "bus_a[4..0]" (rect 21 27 67 39)(font "Arial" ))
+		(text "bus_a[3..0]" (rect 0 0 44 12)(font "Arial" ))
+		(text "bus_a[3..0]" (rect 21 27 65 39)(font "Arial" ))
 		(line (pt 0 32)(pt 16 32)(line_width 3))
 	)
 	(port
 		(pt 0 48)
 		(input)
-		(text "bus_b[4..0]" (rect 0 0 46 12)(font "Arial" ))
-		(text "bus_b[4..0]" (rect 21 43 67 55)(font "Arial" ))
+		(text "bus_b[3..0]" (rect 0 0 44 12)(font "Arial" ))
+		(text "bus_b[3..0]" (rect 21 43 65 55)(font "Arial" ))
 		(line (pt 0 48)(pt 16 48)(line_width 3))
 	)
 	(port
@@ -48,8 +48,8 @@ https://fpgasoftware.intel.com/eula.
 	(port
 		(pt 200 32)
 		(output)
-		(text "bus_out[4..0]" (rect 0 0 53 12)(font "Arial" ))
-		(text "bus_out[4..0]" (rect 126 27 179 39)(font "Arial" ))
+		(text "bus_out[3..0]" (rect 0 0 51 12)(font "Arial" ))
+		(text "bus_out[3..0]" (rect 128 27 179 39)(font "Arial" ))
 		(line (pt 200 32)(pt 184 32)(line_width 3))
 	)
 	(drawing

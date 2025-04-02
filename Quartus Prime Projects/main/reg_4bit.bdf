@@ -56,7 +56,7 @@ https://fpgasoftware.intel.com/eula.
 	(input)
 	(rect 352 208 520 224)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "data_in[3..0]" (rect 5 0 67 12)(font "Arial" ))
+	(text "data_in[3..0]" (rect 5 0 66 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -521,7 +521,7 @@ https://fpgasoftware.intel.com/eula.
 	(pt 920 352)
 )
 (connector
-	(text "data_in[1]" (rect 712 191 729 239)(font "Intel Clear" )(vertical))
+	(text "data_in[1]" (rect 711 190 728 238)(font "Intel Clear" )(vertical))
 	(pt 728 352)
 	(pt 728 216)
 )
@@ -535,24 +535,8 @@ https://fpgasoftware.intel.com/eula.
 	(bus)
 )
 (connector
-	(text "data_in[0]" (rect 536 191 553 239)(font "Intel Clear" )(vertical))
-	(pt 552 352)
-	(pt 552 216)
-)
-(connector
 	(pt 552 352)
 	(pt 568 352)
-)
-(connector
-	(text "data_in[4..0]" (rect 520 200 579 217)(font "Intel Clear" ))
-	(pt 520 216)
-	(pt 552 216)
-	(bus)
-)
-(connector
-	(pt 552 216)
-	(pt 728 216)
-	(bus)
 )
 (connector
 	(pt 560 472)
@@ -581,6 +565,23 @@ https://fpgasoftware.intel.com/eula.
 	(pt 1176 464)
 	(pt 1416 464)
 	(bus)
+)
+(connector
+	(text "<<__$DEF_ALIAS2395>>" (rect 520 208 638 225)(font "Intel Clear" )(invisible))
+	(pt 520 216)
+	(pt 552 216)
+	(bus)
+)
+(connector
+	(text "data_in[3..0]" (rect 580 200 639 217)(font "Intel Clear" ))
+	(pt 552 216)
+	(pt 728 216)
+	(bus)
+)
+(connector
+	(text "data_in[0]" (rect 525 236 542 284)(font "Intel Clear" )(vertical))
+	(pt 552 352)
+	(pt 552 216)
 )
 (junction (pt 656 440))
 (junction (pt 784 440))

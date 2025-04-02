@@ -1,11 +1,11 @@
 module mux_4to1_5bit(
-	input wire [4:0] bus_a,
-	input wire [4:0] bus_b,
-	input wire [4:0] bus_c,
-	input wire [4:0] bus_d,
+	input wire [3:0] bus_a,
+	input wire [3:0] bus_b,
+	input wire [3:0] bus_c,
+	input wire [3:0] bus_d,
 	input wire [1:0] sel,
 	
-	output wire [4:0] bus_out
+	output wire [3:0] bus_out
 
 );
 
