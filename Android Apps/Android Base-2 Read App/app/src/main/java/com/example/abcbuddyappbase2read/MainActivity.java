@@ -1,14 +1,25 @@
 package com.example.abcbuddyappbase2read;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattCallback;
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattService;
+import android.bluetooth.BluetoothManager;
+import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothSocket;
+import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanResult;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -40,6 +51,14 @@ public class MainActivity extends AppCompatActivity {
     private Button uploadButton;
     private Button modeButton;
     private Button resetButton;
+    private BluetoothAdapter bluetoothAdapter;
+    private BluetoothGatt bluetoothGatt;
+    private final String DEVICE_NAME = "Base2ReceiverESP32"; // ESP32 BLE name
+    private final UUID SERVICE_UUID = UUID.fromString("a5f08588-fdb1-4785-b1aa-c21acec22158");
+    private final UUID CHARACTERISTIC_UUID = UUID.fromString("9317847f-cc24-4005-bb74-78b06b9757b0");
+    Context context;
+    private View topBar;
+    private View pageDivider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        context = this;
         currentPage = 1;
         totalPages = 20;
 
@@ -60,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         uploadButton = findViewById(R.id.buttonUpload);
         modeButton = findViewById(R.id.buttonMode);
         resetButton = findViewById(R.id.buttonReset);
+        topBar = findViewById(R.id.topBar);
+        pageDivider = findViewById(R.id.pageDivider);
 
         List<Long> numbers1 = Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L,
                 -1L, -2L, -3L, -4L, -5L, -6L, -7L, -8L, -9L, -10L,
@@ -95,6 +117,13 @@ public class MainActivity extends AppCompatActivity {
             pageButtonContainer.addView(pageButton);
         }
 
+        if (totalPages < 10) {
+            pageDivider.setVisibility(View.GONE);
+        }
+        if (totalPages == 0) {
+            topBar.setVisibility(View.GONE);
+        }
+        
         modeButton.setOnClickListener(v -> {
             base2PunchView.changeMode();
         });
@@ -109,6 +138,17 @@ public class MainActivity extends AppCompatActivity {
                     .show();
         });
 
+        uploadButton.setOnClickListener(v -> {
+            if (!isDeviceConnected()) {
+                Log.d("BLE", "Not connected to ESP32, starting scan...");
+                startScan(); // Will connect and run uploadNumbers();
+            }
+            else {
+                Log.d("BLE", "Connected to ESP32, uploading numbers...");
+                uploadNumbers();
+            }
+        });
+
 //        uploadButton.post(() -> {
 //            int widthPx = uploadButton.getWidth(); // Width in pixels
 //            float density = uploadButton.getResources().getDisplayMetrics().density;
@@ -120,8 +160,110 @@ public class MainActivity extends AppCompatActivity {
         requestBluetoothPermissions();
     }
 
+    @SuppressLint("MissingPermission")
+    private void uploadNumbers() {
+        String numbers = "";
+        for (int i = 0; i < 4; i++) {
+            numbers += String.valueOf(allNumbers.get(currentPage - 1).get(i));
+            if (i < 3) {
+                numbers += "x";
+            }
+        }
+        numbers += "d";
+
+        if (bluetoothGatt == null) {
+            Log.e("BLE", "Not connected to a device!");
+            return;
+        }
+
+        BluetoothGattService service = bluetoothGatt.getService(SERVICE_UUID);
+        if (service == null) {
+            Log.e("BLE", "Service not found!");
+            return;
+        }
+
+        BluetoothGattCharacteristic characteristic = service.getCharacteristic(CHARACTERISTIC_UUID);
+        if (characteristic == null) {
+            Log.e("BLE", "Characteristic not found!");
+            return;
+        }
+        Log.d("BLE", "Found service and characteristic successfully.");
+        characteristic.setValue(numbers);
+        bluetoothGatt.writeCharacteristic(characteristic);
+    }
+
     private void updatePage() {
         base2PunchView.setNumbers(allNumbers.get(currentPage - 1));
+    }
+
+    @SuppressLint("MissingPermission")
+    private ScanCallback scanCallback = new ScanCallback() {
+        @Override
+        public void onScanResult(int callbackType, ScanResult result) {
+            BluetoothDevice device = result.getDevice();
+            Log.d("BLE", "Found device: " + device.getName());
+            if (DEVICE_NAME.equals(device.getName())) {
+                Log.d("BLE", "Found ESP32, connecting...");
+                bluetoothAdapter.getBluetoothLeScanner().stopScan(this);
+                connectToDevice(device);
+            }
+        }
+    };
+
+    @SuppressLint("MissingPermission")
+    private void startScan() {
+        BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        bluetoothAdapter = bluetoothManager.getAdapter();
+
+        if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+            Log.e("BLE", "Bluetooth is disabled!");
+            return;
+        }
+
+        bluetoothAdapter.getBluetoothLeScanner().startScan(scanCallback);
+        Log.d("BLE", "Scanning for ESP32...");
+    }
+
+    @SuppressLint("MissingPermission")
+    private void connectToDevice(BluetoothDevice device) {
+        bluetoothGatt = device.connectGatt(this, false, new BluetoothGattCallback() {
+            @Override
+            public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
+                if (newState == BluetoothProfile.STATE_CONNECTED) {
+                    Log.d("BLE", "Connected to ESP32");
+                    runOnUiThread(() -> {
+                        Toast.makeText(context, "Connected to ESP32", Toast.LENGTH_SHORT).show();
+                    });
+                    gatt.discoverServices();
+                } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+                    Log.d("BLE", "Disconnected from ESP32");
+                    runOnUiThread(() -> {
+                        Toast.makeText(context, "Disconnected from ESP32", Toast.LENGTH_SHORT).show();
+                    });
+                }
+            }
+
+            @Override
+            public void onServicesDiscovered(BluetoothGatt gatt, int status) {
+                if (status == BluetoothGatt.GATT_SUCCESS) {
+                    Log.d("BLE", "Services discovered!");
+                    uploadNumbers();
+                }
+            }
+        });
+    }
+
+    @SuppressLint("MissingPermission")
+    private boolean isDeviceConnected() {
+        BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        List<BluetoothDevice> connectedDevices = bluetoothManager.getConnectedDevices(BluetoothProfile.GATT);
+
+        for (BluetoothDevice device : connectedDevices) {
+            if (DEVICE_NAME.equals(device.getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void requestBluetoothPermissions() {
