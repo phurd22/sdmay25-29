@@ -69,8 +69,8 @@ https://fpgasoftware.intel.com/eula.
 	(port
 		(pt 200 48)
 		(output)
-		(text "write" (rect 0 0 17 12)(font "Arial" ))
-		(text "write" (rect 162 43 179 55)(font "Arial" ))
+		(text "control" (rect 0 0 25 12)(font "Arial" ))
+		(text "control" (rect 154 43 179 55)(font "Arial" ))
 		(line (pt 200 48)(pt 184 48)(line_width 1))
 	)
 	(port
@@ -90,23 +90,30 @@ https://fpgasoftware.intel.com/eula.
 	(port
 		(pt 200 96)
 		(output)
-		(text "checkInputs" (rect 0 0 47 12)(font "Arial" ))
-		(text "checkInputs" (rect 132 91 179 103)(font "Arial" ))
+		(text "clearControl" (rect 0 0 47 12)(font "Arial" ))
+		(text "clearControl" (rect 132 91 179 103)(font "Arial" ))
 		(line (pt 200 96)(pt 184 96)(line_width 1))
 	)
 	(port
 		(pt 200 112)
 		(output)
-		(text "clearCarry" (rect 0 0 43 12)(font "Arial" ))
-		(text "clearCarry" (rect 136 107 179 119)(font "Arial" ))
+		(text "check" (rect 0 0 23 12)(font "Arial" ))
+		(text "check" (rect 156 107 179 119)(font "Arial" ))
 		(line (pt 200 112)(pt 184 112)(line_width 1))
 	)
 	(port
 		(pt 200 128)
 		(output)
-		(text "resetCounter_n" (rect 0 0 62 12)(font "Arial" ))
-		(text "resetCounter_n" (rect 117 123 179 135)(font "Arial" ))
+		(text "clearFlags" (rect 0 0 40 12)(font "Arial" ))
+		(text "clearFlags" (rect 139 123 179 135)(font "Arial" ))
 		(line (pt 200 128)(pt 184 128)(line_width 1))
+	)
+	(port
+		(pt 200 144)
+		(output)
+		(text "resetCounter_n" (rect 0 0 62 12)(font "Arial" ))
+		(text "resetCounter_n" (rect 117 139 179 151)(font "Arial" ))
+		(line (pt 200 144)(pt 184 144)(line_width 1))
 	)
 	(drawing
 		(rectangle (rect 16 16 184 160)(line_width 1))
