@@ -201,8 +201,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
             BluetoothDevice device = result.getDevice();
-            Log.d("BLE", "Found device: " + device.getName());
-            if (DEVICE_NAME.equals(device.getName())) {
+            String deviceName = device.getName(); // This may be null
+
+            //TODO: Use address instead of device name
+            Log.d("BLE", "Found device: " + deviceName + " [" + device.getAddress() + "]");
+            if (DEVICE_NAME.equals(deviceName)) {
                 Log.d("BLE", "Found ESP32, connecting...");
                 bluetoothAdapter.getBluetoothLeScanner().stopScan(this);
                 connectToDevice(device);
