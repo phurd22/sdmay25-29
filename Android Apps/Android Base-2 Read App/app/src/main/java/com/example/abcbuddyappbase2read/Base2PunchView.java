@@ -13,7 +13,9 @@ import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//TODO: Need to flip it top to bottom and keep it that way
+//TODO: Need to add button that flips it left to right, should start with least significant on left
+// and most significant on right (backwards from normal)
 public class Base2PunchView extends View {
 
     private final int dotRadius = 4; // Dot size for grid points
