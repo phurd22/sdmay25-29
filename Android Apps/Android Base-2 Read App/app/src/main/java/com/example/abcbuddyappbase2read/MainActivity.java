@@ -41,6 +41,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+//TODO: Highlight page button when you are on that page
 public class MainActivity extends AppCompatActivity {
 
     private Base2PunchView base2PunchView;

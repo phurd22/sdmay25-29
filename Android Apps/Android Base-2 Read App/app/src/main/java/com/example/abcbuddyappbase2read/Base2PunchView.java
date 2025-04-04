@@ -16,6 +16,8 @@ import java.util.List;
 //TODO: Need to flip it top to bottom and keep it that way
 //TODO: Need to add button that flips it left to right, should start with least significant on left
 // and most significant on right (backwards from normal)
+//TODO: Could try to make the flip button disappear when not on the dot mode
+//TODO: Need to add b0/b49 to second mode (binary 1 and 0)
 public class Base2PunchView extends View {
 
     private final int dotRadius = 4; // Dot size for grid points
