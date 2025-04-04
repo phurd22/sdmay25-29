@@ -59,6 +59,7 @@ void setup() {
   Serial.println("BLE is ready. Waiting for data...");
 }
 
+//TODO: Need to display least significant bit first, it is doing it backwards right now
 void loop() {
   
   if (newData) {
