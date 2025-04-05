@@ -60,11 +60,9 @@ void setup() {
 }
 
 void loop() {
-  
   if (newData) {
     newData = 0;
-    
-    for (int i = 0; i < 50; i++) {
+    for (int i = 49; i >= 0; i--) {
       for (int j = 0; j < 4; j++) {
         if (binaryStrings[j][i] == '1') {
           digitalWrite(bitPins[j], HIGH);
@@ -92,13 +90,6 @@ String longToBinaryString(long long num) {
 
 // Parse received data into an array of four long values
 void parseBluetoothData(String data) {
-  // int startIndex = 0, endIndex = 0, numIndex = 0;
-  
-  // while ((endIndex = data.indexOf('x', startIndex)) != -1 && numIndex < 4) {
-  //   Serial.println(data.substring(startIndex, endIndex));
-  //   parsedNumbers[numIndex++] = data.substring(startIndex, endIndex).toInt();
-  //   startIndex = endIndex + 1;
-  // }
   data.remove(data.length() - 1); // Remove trailing 'd'
   
   int firstX = data.indexOf('x');
