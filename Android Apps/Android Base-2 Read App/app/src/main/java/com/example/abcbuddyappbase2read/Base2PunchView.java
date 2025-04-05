@@ -13,11 +13,7 @@ import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.List;
-//TODO: Need to flip it top to bottom and keep it that way
-//TODO: Need to add button that flips it left to right, should start with least significant on left
-// and most significant on right (backwards from normal)
-//TODO: Could try to make the flip button disappear when not on the dot mode
-//TODO: Need to add b0/b49 to second mode (binary 1 and 0)
+
 public class Base2PunchView extends View {
 
     private final int dotRadius = 4; // Dot size for grid points
@@ -27,7 +23,8 @@ public class Base2PunchView extends View {
     private float yOffset;
     private float xSpacer;
     private float ySpacer;
-    private int mode;
+    private int mode; // 0 for dots, 1 for binary, 2 for decimal
+    private int direction; // 0 for normal, 1 for readable
 
     private List<String> bitArray = new ArrayList<>(); // Holds 50-bit binary strings
     private List<Long> numbers = new ArrayList<>(); // Holds the actual numbers
@@ -70,6 +67,7 @@ public class Base2PunchView extends View {
         binaryNumPaint.setColor(Color.BLACK);
         binaryNumPaint.setTextSize(15);
         mode = 0;
+        direction = 0;
         calculateDimensions(context);
     }
 
@@ -105,8 +103,20 @@ public class Base2PunchView extends View {
                 String bits = bitArray.get(row);
                 charIndex = 49;
                 for (int col = 0; col < numCols; col++) {
-                    float x = (float) getWidth() - xOffsetRight - (col * xSpacer);  // Start at right
-                    float y = (float) getHeight() - yOffset - (row * ySpacer); // Start from bottom
+                    float x;
+                    float y;
+                    if (mode == 0) {
+                        y = yOffset / 2 + (row * ySpacer); // Start from top
+                    }
+                    else {
+                        y = yOffset / 2 + (row * ySpacer) + 10; // Start from top
+                    }
+                    if (direction == 1 || mode == 1) {
+                        x = (float) getWidth() - xOffsetRight - (col * xSpacer);  // Start at right
+                    }
+                    else {
+                        x = xOffsetRight + 8 + (col * xSpacer); // Start at left
+                    }
                     if (bits.charAt(charIndex) == '1') {
                         if (mode == 0) {
                             canvas.drawCircle(x, y, dotRadius, dotPaint);
@@ -123,20 +133,33 @@ public class Base2PunchView extends View {
                 if (mode == 1 && row != numRows - 1) { // Draw lines between binary numbers
                     float startX = getWidth() - xOffsetRight - ((numCols - 1) * xSpacer) - 3;
                     float stopX = getWidth() - xOffsetRight + 12;
-                    float y = getHeight() - yOffset - (row * ySpacer) - (ySpacer / 2) - 5;
+                    float y = yOffset / 2 + (row * ySpacer) + 16;
                     canvas.drawLine(startX, y, stopX, y, linePaint);
                 }
             }
-            if (mode == 0) {
+            if (mode == 0 || mode == 1) {
                 drawLabels(canvas);
             }
         }
         else {
+            // Get width of widest number in array
+            float maxTextWidth = 0;
+            for (int i = 0; i < numbers.size(); i++) {
+                float width = numberPaint.measureText(String.valueOf(numbers.get(i)));
+                if (width > maxTextWidth) {
+                    maxTextWidth = width;
+                }
+            }
+
+            // Use widest width to determine where right edge of numbers should be
+            float rightEdge = (float) getWidth() / 2 + maxTextWidth / 2;
+
             for (int row = 0; row < numRows; row++) {
                 String text = String.valueOf(numbers.get(row));
                 float textWidth = numberPaint.measureText(text); // Get text width
-                float x = (float) (getWidth() / 2) - (textWidth / 2); // Center horizontally
-                float y = (float) getHeight() - yOffset - (row * ySpacer); // Start from bottom
+                //float x = (float) (getWidth() / 2) - (textWidth / 2); // Center horizontally
+                float x = rightEdge - textWidth - 30;
+                float y = yOffset / 2 + (row * ySpacer); // Start from top
                 canvas.drawText(String.valueOf(numbers.get(row)), x, y, numberPaint);
             }
         }
@@ -152,9 +175,19 @@ public class Base2PunchView extends View {
         invalidate(); // Redraw the view with new data
     }
 
+    public int getMode() {
+        return mode;
+    }
+
     public void changeMode() {
         mode = (mode + 1) % 3;
         Log.d("Base2PunchView", "Mode changed to: " + mode);
+        invalidate();
+    }
+
+    public void changeDirection() {
+        direction = (direction + 1) % 2;
+        Log.d("Base2PunchView", "Direction changed to: " + direction);
         invalidate();
     }
 
@@ -168,13 +201,35 @@ public class Base2PunchView extends View {
     }
 
     private void drawLabels(Canvas canvas) {
-        // Bottom-left: b49
-        canvas.drawText("b49", xOffsetRight - 12, (float) getHeight() - yOffset + 30, labelPaint);
+        if (direction == 0 && mode == 0) {
+            // Top-right: b49
+            canvas.drawText("b49", xOffsetRight + 49 * xSpacer - 8, yOffset - 36, labelPaint);
 
-        // Bottom-right: b0
-        canvas.drawText("b0", xOffsetRight + 49 * xSpacer - 2, (float) getHeight() - yOffset + 30, labelPaint);
+            // Top-left: b0
+            canvas.drawText("b0", xOffsetRight - 5, yOffset - 36, labelPaint);
 
-        // Bottom-most: n0
-        canvas.drawText("n0", xOffsetRight - 32, (float) getHeight() - yOffset + 7, labelPaint);
+            // Top-most: n0
+            canvas.drawText("n0", xOffsetRight - 32, yOffset - 20, labelPaint);
+        }
+        else if (mode == 0) {
+            // Top-left: b49
+            canvas.drawText("b49", xOffsetRight - 9, yOffset - 36, labelPaint);
+
+            // Top-right: b0
+            canvas.drawText("b0", xOffsetRight + 49 * xSpacer - 4, yOffset - 36, labelPaint);
+
+            // Top-most: n0
+            canvas.drawText("n0", xOffsetRight - 32, yOffset - 20, labelPaint);
+        }
+        else if (mode == 1) {
+            // Top-left: b49
+            canvas.drawText("b49", xOffsetRight - 7, yOffset - 36, labelPaint);
+
+            // Top-right: b0
+            canvas.drawText("b0", xOffsetRight + 49 * xSpacer - 1, yOffset - 36, labelPaint);
+
+            // Top-most: n0
+            canvas.drawText("n0", xOffsetRight - 30, yOffset - 14, labelPaint);
+        }
     }
 }

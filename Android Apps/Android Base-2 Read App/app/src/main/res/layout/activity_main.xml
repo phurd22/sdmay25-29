@@ -45,9 +45,19 @@
         android:layout_height="wrap_content"
         android:text="UPLOAD"
         android:layout_alignParentStart="true"
-        android:layout_above="@id/buttonMode"/>
+        android:layout_above="@id/buttonFlip"/>
 
-    <!-- Mode Button (below Upload) -->
+    <!-- Direction Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonFlip"
+        style="@style/BorderedButton"
+        android:layout_width="94dp"
+        android:layout_height="wrap_content"
+        android:text="FLIP"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/buttonMode"/>
+
+    <!-- Mode Button -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonMode"
         style="@style/BorderedButton"
@@ -57,7 +67,7 @@
         android:layout_alignParentStart="true"
         android:layout_above="@+id/buttonReset"/>
 
-    <!-- Reset Button (below Upload) -->
+    <!-- Reset Button -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonReset"
         style="@style/BorderedButton"

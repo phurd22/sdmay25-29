@@ -41,7 +41,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-//TODO: Highlight page button when you are on that page
 public class MainActivity extends AppCompatActivity {
 
     private Base2PunchView base2PunchView;
@@ -52,9 +51,13 @@ public class MainActivity extends AppCompatActivity {
     private Button uploadButton;
     private Button modeButton;
     private Button resetButton;
+    private Button flipButton;
+    private List <Button> pageButtons = new ArrayList<>();
+    ViewGroup.LayoutParams flipButtonParams;
     private BluetoothAdapter bluetoothAdapter;
     private BluetoothGatt bluetoothGatt;
-    private final String DEVICE_NAME = "Base2ReceiverESP32"; // ESP32 BLE name
+    //private final String DEVICE_NAME = "Base2ReceiverESP32"; // ESP32 BLE name
+    private final String DEVICE_ADDRESS = "94:A9:90:0A:4F:E9"; // ESP32 BLE address
     private final UUID SERVICE_UUID = UUID.fromString("a5f08588-fdb1-4785-b1aa-c21acec22158");
     private final UUID CHARACTERISTIC_UUID = UUID.fromString("9317847f-cc24-4005-bb74-78b06b9757b0");
     Context context;
@@ -80,13 +83,15 @@ public class MainActivity extends AppCompatActivity {
         base2PunchView = findViewById(R.id.base2PunchView);
         uploadButton = findViewById(R.id.buttonUpload);
         modeButton = findViewById(R.id.buttonMode);
+        flipButton = findViewById(R.id.buttonFlip);
+        flipButtonParams = flipButton.getLayoutParams();
         resetButton = findViewById(R.id.buttonReset);
         topBar = findViewById(R.id.topBar);
         pageDivider = findViewById(R.id.pageDivider);
 
-        List<Long> numbers1 = Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L,
+        List<Long> numbers1 = Arrays.asList(-1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L,
                 -1L, -2L, -3L, -4L, -5L, -6L, -7L, -8L, -9L, -10L,
-                100L, 200L, 300L, 400L, 500L, 600L, 700L, 800L, 900L, 1000L);
+                100L, 200L, 300L, 400L, 500L, 600L, 700L, 800L, 900L, -1L);
 
         List<Long> numbers2 = Arrays.asList(-1L, 20L, 30L, 40L, 50L, 60L, 70L, 80L, 90L, 100L,
                 100L, 200L, 300L, 400L, 500L, 600L, 700L, 800L, 900L, 1000L,
@@ -109,15 +114,22 @@ public class MainActivity extends AppCompatActivity {
                     ViewGroup.LayoutParams.WRAP_CONTENT
             ));
             int pageIndex = i;
+            pageButtons.add(pageButton);
             pageButton.setOnClickListener(v -> {
                 currentPage = pageIndex;
                 updatePage();
+                for (Button b : pageButtons) {
+                    b.setBackgroundResource(R.drawable.button_border);
+                }
+                pageButton.setBackgroundResource(R.drawable.selected_button_border);
             });
             pageButton.setBackgroundResource(R.drawable.button_border);
             pageButton.setWidth(109);
             pageButtonContainer.addView(pageButton);
         }
+        pageButtons.get(0).setBackgroundResource(R.drawable.selected_button_border);
 
+        // 9 for if flip button is visible
         if (totalPages < 10) {
             pageDivider.setVisibility(View.GONE);
         }
@@ -127,6 +139,18 @@ public class MainActivity extends AppCompatActivity {
 
         modeButton.setOnClickListener(v -> {
             base2PunchView.changeMode();
+            if (base2PunchView.getMode() == 0) {
+                flipButtonParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                flipButton.setLayoutParams(flipButtonParams);
+            }
+            else {
+                flipButtonParams.height = 0;
+                flipButton.setLayoutParams(flipButtonParams);
+            }
+        });
+
+        flipButton.setOnClickListener(v -> {
+            base2PunchView.changeDirection();
         });
 
         resetButton.setOnClickListener(v -> {
@@ -203,10 +227,10 @@ public class MainActivity extends AppCompatActivity {
         public void onScanResult(int callbackType, ScanResult result) {
             BluetoothDevice device = result.getDevice();
             String deviceName = device.getName(); // This may be null
+            String deviceAddress = device.getAddress();
 
-            //TODO: Use address instead of device name
-            Log.d("BLE", "Found device: " + deviceName + " [" + device.getAddress() + "]");
-            if (DEVICE_NAME.equals(deviceName)) {
+            Log.d("BLE", "Found device: " + deviceName + " [" + deviceAddress + "]");
+            if (DEVICE_ADDRESS.equals(deviceAddress)) {
                 Log.d("BLE", "Found ESP32, connecting...");
                 bluetoothAdapter.getBluetoothLeScanner().stopScan(this);
                 connectToDevice(device);
@@ -263,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
         List<BluetoothDevice> connectedDevices = bluetoothManager.getConnectedDevices(BluetoothProfile.GATT);
 
         for (BluetoothDevice device : connectedDevices) {
-            if (DEVICE_NAME.equals(device.getName())) {
+            if (DEVICE_ADDRESS.equals(device.getAddress())) {
                 return true;
             }
         }

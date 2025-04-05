@@ -13,8 +13,6 @@ import android.view.WindowManager;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: LSB should be on left and MSB should be on right
-//TODO: Flip top to bottom, first coefficient is on top not bottom
 //TODO: Have dots update as you receive info from machine and send to read tablet
 // when the page is full
 public class Base2PunchView extends View {
@@ -83,8 +81,8 @@ public class Base2PunchView extends View {
             charIndex = 49;
             for (int col = 0; col < numCols; col++) {
                 if (bits.charAt(charIndex) == '1') {
-                    float x = (float)getWidth() - xOffset - (col * xSpacer);  // Start at right
-                    float y = (float)getHeight() - yOffset - (row * ySpacer); // Start from bottom
+                    float x = xOffset / 2 + (col * xSpacer) + 21; // Start at left
+                    float y = yOffset / 2 + (row * ySpacer) + 10; // Start from top
                     canvas.drawCircle(x, y, dotRadius, dotPaint);
                 }
                 charIndex--;
@@ -100,7 +98,6 @@ public class Base2PunchView extends View {
             bitArray.add(toTwosComplement50Bit(number));
         }
         Log.d("Base2PunchView", numbers.toString());
-//        this.currentPage = currentPage;
         invalidate(); // Redraw the view with new data
     }
 
@@ -119,13 +116,13 @@ public class Base2PunchView extends View {
         textPaint.setTextSize(20);
         int numRows = bitArray.size();
 
-        // Bottom-left: b49
-        canvas.drawText("b49", xOffset - 15, (float)getHeight() - yOffset + 30, textPaint);
+        // Top-right: b49
+        canvas.drawText("b49", xOffset + 49 * xSpacer - 16, yOffset - 30, textPaint);
 
-        // Bottom-right: b0
-        canvas.drawText("b0", xOffset + 49 * xSpacer - 10, (float)getHeight() - yOffset + 30, textPaint);
+        // Top-left: b0
+        canvas.drawText("b0", xOffset - 13, yOffset - 30, textPaint);
 
-        // Bottom-most: n0
-        canvas.drawText("n0", xOffset - 35, (float)getHeight() - yOffset + 7, textPaint);
+        // Top-most: n0
+        canvas.drawText("n0", xOffset - 35, yOffset - 10, textPaint);
     }
 }
