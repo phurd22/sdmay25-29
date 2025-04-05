@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         if (totalPages == 0) {
             topBar.setVisibility(View.GONE);
         }
-        
+
         modeButton.setOnClickListener(v -> {
             base2PunchView.changeMode();
         });
