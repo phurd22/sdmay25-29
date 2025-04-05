@@ -13,6 +13,10 @@ import android.view.WindowManager;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: LSB should be on left and MSB should be on right
+//TODO: Flip top to bottom, first coefficient is on top not bottom
+//TODO: Have dots update as you receive info from machine and send to read tablet
+// when the page is full
 public class Base2PunchView extends View {
 
     private final int dotRadius = 4; // Dot size for grid points
