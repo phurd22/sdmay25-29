@@ -13,9 +13,7 @@ public class Drum {
     }
 
     // Get a state of specific contact
-    public boolean getContact(int band, int position) {
-        return bands[band][position];
-    }
+    public boolean getContact(int band, int position) { return bands[band][position]; }
 
     // Set a state of a specific contact
     public void setContact(int band, int position, boolean value) {
