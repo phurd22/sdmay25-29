@@ -834,7 +834,7 @@ public class ControlPanel {
                 // This sets selectedCoefficient + returns CA-value for that column
                 BigInteger val = controlPanelInstance.machineController.applyMask(maskCards.get(sel));
 
-                // Old approach: just set a label:
+                // Old approach: just set a l   abel:
                 // controlPanelInstance.odometerLabel.setText("Odometer: " + val);
 
                 // NEW approach: hand this value to our mechanical odometer
