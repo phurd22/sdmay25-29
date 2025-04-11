@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         topBar = findViewById(R.id.topBar);
         pageDivider = findViewById(R.id.pageDivider);
 
-        List<Long> numbers1 = Arrays.asList(-1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L,
+        List<Long> numbers1 = Arrays.asList(-1L, 750599937895082L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L,
                 -1L, -2L, -3L, -4L, -5L, -6L, -7L, -8L, -9L, -10L,
                 100L, 200L, 300L, 400L, 500L, 600L, 700L, 800L, 900L, -1L);
 
