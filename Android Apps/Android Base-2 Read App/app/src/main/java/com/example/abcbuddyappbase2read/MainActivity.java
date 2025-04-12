@@ -215,6 +215,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d("BLE", "Found service and characteristic successfully.");
         characteristic.setValue(numbers);
         bluetoothGatt.writeCharacteristic(characteristic);
+        runOnUiThread(() -> {
+            Toast.makeText(context, "Successfully Uploaded", Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void updatePage() {
