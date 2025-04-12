@@ -16,22 +16,22 @@ import java.util.List;
 
 public class Base2PunchView extends View {
 
-    private OnPageChangeListener pageChangeListener;
-
-    private final int dotRadius = 8; // Dot size for grid points
-    private int xOffset;
-    private int botYOffset;
-    private int topYOffset;
-    private int xSpacer;
-    private int ySpacer;
-    private boolean drawLeftArrow;
-    private boolean drawRightArrow;
-
-    private int currentPage = 1;
-    private int totalPages = 1;
+    private final int dotRadius = 4; // Dot size for grid points
+    private float xOffsetRight;
+    private float xOffsetLeft;
+    private float totalXOffset;
+    private float yOffset;
+    private float xSpacer;
+    private float ySpacer;
+    private int mode;
 
     private List<String> bitArray = new ArrayList<>(); // Holds 50-bit binary strings
+    private List<Long> numbers = new ArrayList<>(); // Holds the actual numbers
     private Paint dotPaint;
+    private Paint linePaint;
+    private Paint labelPaint;
+    private Paint numberPaint;
+    private Paint binaryNumPaint;
 
     public Base2PunchView(Context context) {
         super(context);
@@ -52,17 +52,21 @@ public class Base2PunchView extends View {
         dotPaint = new Paint();
         dotPaint.setColor(Color.BLACK);
         dotPaint.setStyle(Paint.Style.FILL);
-
+        linePaint = new Paint();
+        linePaint.setColor(Color.BLACK);
+        linePaint.setStrokeWidth((float)0.5);
+        linePaint.setStyle(Paint.Style.STROKE);
+        labelPaint = new Paint();
+        labelPaint.setColor(Color.BLACK);
+        labelPaint.setTextSize(20);
+        numberPaint = new Paint();
+        numberPaint.setColor(Color.BLACK);
+        numberPaint.setTextSize(20);
+        binaryNumPaint = new Paint();
+        binaryNumPaint.setColor(Color.BLACK);
+        binaryNumPaint.setTextSize(15);
+        mode = 0;
         calculateDimensions(context);
-    }
-
-    public void setOnPageChangeListener(OnPageChangeListener pageChangeListener) {
-        this.pageChangeListener = pageChangeListener;
-    }
-
-    public interface OnPageChangeListener {
-        void onPreviousPage();
-        void onNextPage();
     }
 
     private void calculateDimensions(Context context) {
@@ -72,74 +76,82 @@ public class Base2PunchView extends View {
             windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         }
 
-        int screenWidth = displayMetrics.widthPixels;
-        int screenHeight = displayMetrics.heightPixels;
+        float screenWidth = (float)displayMetrics.widthPixels;
+        float screenHeight = (float)displayMetrics.heightPixels;
+        Log.d("Base2PunchView", "Screen width: " + screenWidth + ", screen height: " + screenHeight);
 
-        xOffset = screenWidth / 10;
-        botYOffset = screenHeight / 20;
-        topYOffset = screenHeight / 33;
-        xSpacer = (screenWidth - 2 * xOffset) / 29;
-        ySpacer = (screenHeight - (botYOffset + topYOffset)) / 49;
+        xOffsetRight = screenWidth / 30;
+        xOffsetLeft = screenWidth / 8;
+        totalXOffset = xOffsetRight + xOffsetLeft;
+        yOffset = screenHeight / 15;
+        xSpacer = (screenWidth - totalXOffset) / 49;
+        ySpacer = (screenHeight - 2 * yOffset) / 29;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        for (int row = 0; row < bitArray.size(); row++) {
-            String bits = bitArray.get(row);
-            for (int col = 0; col < bits.length(); col++) {
-                if (bits.charAt(col) == '1') {
-                    float x = xOffset + row * xSpacer;
-                    float y = topYOffset + col * ySpacer;
-                    canvas.drawCircle(x, y, dotRadius, dotPaint);
+        int numRows = bitArray.size();
+        int numCols = 50;
+        int charIndex;
+
+        if (mode == 0 || mode == 1) {
+            for (int row = 0; row < numRows; row++) {
+                String bits = bitArray.get(row);
+                charIndex = 49;
+                for (int col = 0; col < numCols; col++) {
+                    float x = (float) getWidth() - xOffsetRight - (col * xSpacer);  // Start at right
+                    float y = (float) getHeight() - yOffset - (row * ySpacer); // Start from bottom
+                    if (bits.charAt(charIndex) == '1') {
+                        if (mode == 0) {
+                            canvas.drawCircle(x, y, dotRadius, dotPaint);
+                        }
+                        else {
+                            canvas.drawText("1", x, y, binaryNumPaint);
+                        }
+                    }
+                    else if (mode == 1) {
+                        canvas.drawText("0", x, y, binaryNumPaint);
+                    }
+                    charIndex--;
+                }
+                if (mode == 1 && row != numRows - 1) { // Draw lines between binary numbers
+                    float startX = getWidth() - xOffsetRight - ((numCols - 1) * xSpacer) - 3;
+                    float stopX = getWidth() - xOffsetRight + 12;
+                    float y = getHeight() - yOffset - (row * ySpacer) - (ySpacer / 2) - 5;
+                    canvas.drawLine(startX, y, stopX, y, linePaint);
                 }
             }
-        }
-
-        drawLabels(canvas);
-        drawNavigationIndicators(canvas);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-            float touchX = event.getX();
-            float touchY = event.getY();
-            float arrowSize = xOffset - xOffset / 4; // Define the area for touch detection
-
-            if (touchX < arrowSize && touchY > getHeight() / 2 - botYOffset && touchY < getHeight() / 2 + botYOffset) {
-                // Left arrow tapped
-                if (pageChangeListener != null) {
-                    pageChangeListener.onPreviousPage();
-                }
-                return true;
-            } else if (touchX > getWidth() - arrowSize && touchY > getHeight() / 2 - botYOffset && touchY < getHeight() / 2 + botYOffset) {
-                // Right arrow tapped
-                if (pageChangeListener != null) {
-                    pageChangeListener.onNextPage();
-                }
-                return true;
+            if (mode == 0) {
+                drawLabels(canvas);
             }
         }
-        else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            return true;
+        else {
+            for (int row = 0; row < numRows; row++) {
+                String text = String.valueOf(numbers.get(row));
+                float textWidth = numberPaint.measureText(text); // Get text width
+                float x = (float) (getWidth() / 2) - (textWidth / 2); // Center horizontally
+                float y = (float) getHeight() - yOffset - (row * ySpacer); // Start from bottom
+                canvas.drawText(String.valueOf(numbers.get(row)), x, y, numberPaint);
+            }
         }
-        return super.onTouchEvent(event);
     }
 
-    public void setNumbers(List<Long> numbers, int currentPage, int totalPages) {
+    public void setNumbers(List<Long> numbers) {
         bitArray.clear();
-        Log.d("Base2PunchView", "HELLO???");
         for (long number : numbers) {
             bitArray.add(toTwosComplement50Bit(number));
-            Log.d("Base2PunchView", "Number: " + number);
         }
+        this.numbers = numbers;
         Log.d("Base2PunchView", numbers.toString());
-        Log.d("Base2PunchView", "Done with loop");
-        this.currentPage = currentPage;
-        this.totalPages = totalPages;
         invalidate(); // Redraw the view with new data
+    }
+
+    public void changeMode() {
+        mode = (mode + 1) % 3;
+        Log.d("Base2PunchView", "Mode changed to: " + mode);
+        invalidate();
     }
 
     private String toTwosComplement50Bit(long number) {
@@ -152,40 +164,13 @@ public class Base2PunchView extends View {
     }
 
     private void drawLabels(Canvas canvas) {
-        Paint textPaint = new Paint();
-        textPaint.setColor(Color.BLACK);
-        textPaint.setTextSize(45);
+        // Bottom-left: b49
+        canvas.drawText("b49", xOffsetRight - 12, (float) getHeight() - yOffset + 30, labelPaint);
 
-        canvas.drawText("b0", xOffset / 2, (topYOffset + ySpacer * 50) - 25, textPaint);
-        canvas.drawText("b49", xOffset / 2 - 20, topYOffset + 10, textPaint);
-        canvas.drawText("n0", xOffset - 25, topYOffset + 50 * ySpacer + 17, textPaint);
-    }
+        // Bottom-right: b0
+        canvas.drawText("b0", xOffsetRight + 49 * xSpacer - 2, (float) getHeight() - yOffset + 30, labelPaint);
 
-    private void drawNavigationIndicators(Canvas canvas) {
-        Paint textPaint = new Paint();
-        textPaint.setColor(Color.BLACK);
-        textPaint.setTextSize(60);
-
-        // Draw left arrow
-        if (drawLeftArrow) {
-            canvas.drawText("<", xOffset / 4, getHeight() / 2, textPaint);
-        }
-
-        // Draw right arrow
-        if (drawRightArrow) {
-            canvas.drawText(">", getWidth() - xOffset / 2, getHeight() / 2, textPaint);
-        }
-
-        // Draw page count in bottom right
-        String pageText = currentPage + " / " + totalPages;
-        canvas.drawText(pageText, getWidth() - xOffset, getHeight() - botYOffset / 2 + 15, textPaint);
-    }
-
-    public void setDrawLeftArrow(boolean drawLeftArrow) {
-        this.drawLeftArrow = drawLeftArrow;
-    }
-
-    public void setDrawRightArrow(boolean drawRightArrow) {
-        this.drawRightArrow = drawRightArrow;
+        // Bottom-most: n0
+        canvas.drawText("n0", xOffsetRight - 32, (float) getHeight() - yOffset + 7, labelPaint);
     }
 }

@@ -1,62 +1,101 @@
-#include "BluetoothSerial.h"
+#include <BLEDevice.h>
+#include <BLEUtils.h>
+#include <BLEServer.h>
 
-BluetoothSerial SerialBT;
+#define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
+#define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
-// Define the pins where the LEDs are connected
-const int ledPins[5][5] = {
-  {15, 2, 4, 5, 18}, // Group 1
-  {0, 0, 0, 0, 0}, // Group 2
-  {0, 0, 0, 0, 0},   // Group 3
-  {0, 0, 0, 0, 0},  // Group 4
-  {0, 0, 0, 0, 0}   // Group 5
+// Define the pins where the Bits are connected
+const int bitInputPins[5][5] = {
+  {39, 40, 41, 42, 2}, // Group 1
+  {0, 35, 36, 37, 38}, // Group 2
+  {20, 21, 47, 48, 45},   // Group 3
+  {15, 7, 6, 5, 4},  // Group 4
+  {3, 8, 18, 17, 16}   // Group 5
 };
 
+const int buttonPin = 1;
+
 String numbers[5] = {"0", "0", "0", "0", "0"}; // Default values
+String receivedData = ""; // Buffer for incoming data
+const int numberLength = 15;
+bool buttonPressed;
+
+void parseBluetoothData(String data);
+void setSignBits();
+void clearSignBits();
+void padData();
+void clearNumBits();
+void displayDigit(int group, int digit);
+
+// Callback class for handling incoming BLE writes
+class MyCallbacks : public BLECharacteristicCallbacks {
+  void onWrite(BLECharacteristic *pCharacteristic) {
+    String rxValue = pCharacteristic->getValue();
+
+    if (rxValue.length() > 0) {
+      receivedData += rxValue;
+
+      // Check if 'd' (end of message) is received
+      if (receivedData.indexOf('d') != -1) {
+        Serial.println("Received: " + receivedData); // Print the received value
+        parseBluetoothData(receivedData);
+
+        // Reset buffer
+        receivedData = "";
+      }
+      
+    }
+  }
+};
 
 void setup() {
-  Serial.begin(115200);  // Debugging
-  SerialBT.begin("ESP32_BT");  // Start Bluetooth with a custom name
+  Serial.begin(115200);
 
+  buttonPressed = false;
   for (int i = 0; i < 5; i++) {
     for (int g = 0; g < 5; g++) {
-      pinMode(ledPins[i][g], OUTPUT);
+      pinMode(bitInputPins[i][g], OUTPUT);
     }
   }
+  pinMode(buttonPin, INPUT);
 
-  Serial.println("Bluetooth is ready. Waiting for data...");
+  // Setup for BLE
+  BLEDevice::init("Base10ESP32");
+  BLEDevice::setMTU(100);
+  BLEServer *pServer = BLEDevice::createServer();
+  BLEService *pService = pServer->createService(SERVICE_UUID);
+  BLECharacteristic *pCharacteristic =
+    pService->createCharacteristic(CHARACTERISTIC_UUID, BLECharacteristic::PROPERTY_READ | BLECharacteristic::PROPERTY_WRITE);
+  pCharacteristic->setCallbacks(new MyCallbacks()); // Attach the write callback to handle incoming data
+  pService->start();
+  BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
+  pAdvertising->addServiceUUID(SERVICE_UUID);
+  pAdvertising->setScanResponse(true);
+  BLEDevice::startAdvertising();
+
+  Serial.println("BLE is ready. Waiting for data...");
 }
 
-void displayDigit(int group, int digit) {
-  int value = digit - '0';  // Convert char to integer
+void loop() {
+  clearNumBits();
+  clearSignBits();
 
-  for (int i = 0; i < 4; i++) {
-    digitalWrite(ledPins[group][i], (value >> i) & 1);
+  if (digitalRead(buttonPin) == HIGH) {
+    buttonPressed = true;
   }
-}
 
-void turnOnGroupLEDs(int group) {
-  for (int i = 0; i < 4; i++) {
-    digitalWrite(ledPins[group][i], HIGH);
-  }
-}
-
-void clearNumLEDs() {
-  for (int i = 0; i < 5; i++) {
-    for (int g = 0; g < 4; g++) {
-      digitalWrite(ledPins[i][g], LOW);
+  if (buttonPressed) {
+    setSignBits();
+    padData();
+    for (int pos = 0; pos < numberLength; pos++) {
+      clearNumBits();
+      for (int i = 0; i < 5; i++) {
+        displayDigit(i, numbers[i][pos]);
+      }
+      delay(500);
     }
-  }
-}
-
-void setSignLEDs() {
-  for (int i = 0; i < 5; i++) {
-    if (numbers[i].charAt(0) == '-') {
-      numbers[i].remove(0, 1);
-      digitalWrite(ledPins[i][4], HIGH);
-    }
-    else {
-      digitalWrite(ledPins[i][4], LOW);
-    }
+    buttonPressed = false;
   }
 }
 
@@ -70,6 +109,9 @@ void parseBluetoothData(String data) {
     }  
     numbers[index] = data.substring(startPos, endPos);
     startPos = endPos + 1;
+    if (index == 4 && numbers[index].endsWith("d")) {  // Remove trailing 'd'
+      numbers[index].remove(numbers[index].length() - 1);
+    }
     index++;
   }
 
@@ -79,36 +121,49 @@ void parseBluetoothData(String data) {
   }
 }
 
-// Should do 15 cycles each time
-// Fix how numbers are shown, i.e. 6 vs 600, 6 should show no number first two cycles
-// Use 0 instead of all high for no number
-// Do the card once and then stop and wait for another
-void loop() {
-  if (SerialBT.available()) {
-    String receivedData = SerialBT.readStringUntil('d');
-    Serial.println(receivedData);
-    parseBluetoothData(receivedData);
-    setSignLEDs();
-  }
-
-  int maxLen = 0;
+void padData() {
   for (int i = 0; i < 5; i++) {
-    if (numbers[i].length() > maxLen) {
-      maxLen = numbers[i].length();
+    while (numbers[i].length() < numberLength) {
+      numbers[i] = "0" + numbers[i];
     }
   }
+  Serial.println("Padded Numbers:");
+  for (int i = 0; i < 5; i++) {
+    Serial.println(numbers[i]);
+  }
+  Serial.println();
+}
 
-  for (int pos = 0; pos < maxLen; pos++) { // Start from the leftmost and move right
-    clearNumLEDs(); // Clear previous state
-    for (int i = 0; i < 5; i++) {
-      int numLen = numbers[i].length();
-      if (pos < numLen) {
-        displayDigit(i, numbers[i][pos]);
-      } 
-      else {
-        turnOnGroupLEDs(i);
-      }
+void displayDigit(int group, int digit) {
+  int value = digit - '0';  // Convert char to integer
+
+  for (int i = 0; i < 4; i++) {
+    digitalWrite(bitInputPins[group][i], (value >> i) & 1);
+  }
+}
+
+void clearNumBits() {
+  for (int i = 0; i < 5; i++) {
+    for (int g = 0; g < 4; g++) {
+      digitalWrite(bitInputPins[i][g], LOW);
     }
-    delay(1000);
+  }
+}
+
+void setSignBits() {
+  for (int i = 0; i < 5; i++) {
+    if (numbers[i].charAt(0) == '-') {
+      numbers[i].remove(0, 1);
+      digitalWrite(bitInputPins[i][4], HIGH);
+    }
+    else {
+      digitalWrite(bitInputPins[i][4], LOW);
+    }
+  }
+}
+
+void clearSignBits() {
+  for (int i = 0; i < 5; i++) {
+    digitalWrite(bitInputPins[i][4], LOW);
   }
 }

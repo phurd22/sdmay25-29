@@ -48,8 +48,8 @@ https://fpgasoftware.intel.com/eula.
 	(port
 		(pt 224 32)
 		(output)
-		(text "card_out[19..0]" (rect 0 0 59 12)(font "Arial" ))
-		(text "card_out[19..0]" (rect 144 27 203 39)(font "Arial" ))
+		(text "card_out[15..0]" (rect 0 0 59 12)(font "Arial" ))
+		(text "card_out[15..0]" (rect 144 27 203 39)(font "Arial" ))
 		(line (pt 224 32)(pt 208 32)(line_width 3))
 	)
 	(drawing

@@ -15,7 +15,7 @@
 
 // PROGRAM		"Quartus Prime"
 // VERSION		"Version 23.1std.1 Build 993 05/14/2024 SC Standard Edition"
-// CREATED		"Mon Mar 10 16:49:46 2025"
+// CREATED		"Tue Apr  1 18:05:43 2025"
 
 module main(
 	AddSubSrc,
@@ -27,6 +27,10 @@ module main(
 	rst_keyboard_n,
 	Shift,
 	mask,
+	en,
+	counter_rst_n,
+	rst_carriage_n,
+	ReadBase10_button,
 	add_sub_test,
 	ASMSrc,
 	base_2,
@@ -45,56 +49,62 @@ input wire	rst_carry_n;
 input wire	rst_keyboard_n;
 input wire	Shift;
 input wire	mask;
-input wire	[4:0] add_sub_test;
+input wire	en;
+input wire	counter_rst_n;
+input wire	rst_carriage_n;
+input wire	ReadBase10_button;
+input wire	[3:0] add_sub_test;
 input wire	[1:0] ASMSrc;
-input wire	[4:0] base_2;
-input wire	[4:0] base_conversion_sign;
+input wire	[3:0] base_2;
+input wire	[3:0] base_conversion_sign;
 input wire	[1:0] card_slt;
-output wire	[4:0] sum;
+output wire	[3:0] sum;
 
-wire	[4:0] add_sub;
+wire	[3:0] add_sub;
 wire	[5:0] addr_1;
-wire	[4:0] base_10;
-wire	[19:0] card_data;
-wire	[4:0] carry;
-wire	[4:0] carry_in;
+wire	[3:0] base_10;
+wire	[15:0] card_data;
+wire	[3:0] carry;
+wire	[3:0] carry_in;
 wire	ce_n;
-wire	[4:0] counter;
+wire	checkInputs;
+wire	clearCarry;
+wire	[3:0] counter;
 wire	[5:0] counter_addr;
 wire	[3:0] decade_count;
-wire	[4:0] keyboard;
+wire	[3:0] keyboard;
 wire	[5:0] keyboard_addr;
-wire	[4:0] keyboard_ram;
-wire	[4:0] keyboard_reg;
-wire	[4:0] keyboard_write;
-wire	read_n;
-wire	[4:0] sum_ALTERA_SYNTHESIZED;
-wire	[4:0] sum_reg;
-wire	write_n;
-wire	[4:0] zero;
-wire	zero_n;
-wire	SYNTHESIZED_WIRE_0;
-wire	SYNTHESIZED_WIRE_23;
-wire	SYNTHESIZED_WIRE_24;
+wire	[3:0] keyboard_ram;
+wire	[3:0] keyboard_reg;
+wire	[3:0] keyboard_write;
+wire	lastRead;
+wire	lastWrite;
+wire	read;
+wire	ReadBase10;
+wire	ReadBase10_n;
+wire	[3:0] sum_ALTERA_SYNTHESIZED;
+wire	[3:0] sum_reg;
+wire	write;
+wire	[3:0] zero;
+wire	SYNTHESIZED_WIRE_15;
+wire	SYNTHESIZED_WIRE_1;
 wire	SYNTHESIZED_WIRE_16;
-wire	SYNTHESIZED_WIRE_25;
-wire	SYNTHESIZED_WIRE_18;
-wire	SYNTHESIZED_WIRE_20;
-wire	SYNTHESIZED_WIRE_22;
+wire	SYNTHESIZED_WIRE_17;
+wire	SYNTHESIZED_WIRE_11;
+wire	SYNTHESIZED_WIRE_12;
+wire	SYNTHESIZED_WIRE_14;
 
-assign	SYNTHESIZED_WIRE_23 = 0;
-assign	SYNTHESIZED_WIRE_24 = 1;
-
-
+assign	SYNTHESIZED_WIRE_16 = 0;
+assign	SYNTHESIZED_WIRE_17 = 1;
 
 
-AdderSubtractor	b2v_inst(
-	.X(counter[4]),
-	.Y(keyboard[4]),
-	.Cin(carry_in[4]),
-	.AddSub(add_sub[4]),
-	.S(sum_ALTERA_SYNTHESIZED[4]),
-	.Cout(carry[4]));
+
+
+reg_4bit	b2v_inst(
+	.clk(SYNTHESIZED_WIRE_15),
+	.rst_n(SYNTHESIZED_WIRE_1),
+	.data_in(sum_ALTERA_SYNTHESIZED),
+	.data_out(sum_reg));
 
 
 AdderSubtractor	b2v_inst1(
@@ -105,13 +115,11 @@ AdderSubtractor	b2v_inst1(
 	.S(sum_ALTERA_SYNTHESIZED[3]),
 	.Cout(carry[3]));
 
-assign	SYNTHESIZED_WIRE_22 = rst_n & rst_keyboard_n;
+assign	SYNTHESIZED_WIRE_14 = rst_n & rst_keyboard_n;
 
-assign	SYNTHESIZED_WIRE_18 = rst_n & rst_counter_n;
+assign	SYNTHESIZED_WIRE_1 = rst_n & rst_counter_n;
 
-assign	SYNTHESIZED_WIRE_25 = clk & SYNTHESIZED_WIRE_0 & write_n;
-
-assign	SYNTHESIZED_WIRE_16 = Shift & write_n;
+assign	SYNTHESIZED_WIRE_12 = Shift & read;
 
 
 mux_4to1_5bit	b2v_inst13(
@@ -125,9 +133,9 @@ mux_4to1_5bit	b2v_inst13(
 
 
 eeprom	b2v_inst15(
-	.ce_n(SYNTHESIZED_WIRE_23),
-	.oe_n(SYNTHESIZED_WIRE_23),
-	.we_n(SYNTHESIZED_WIRE_24),
+	.ce_n(SYNTHESIZED_WIRE_16),
+	.oe_n(ReadBase10_n),
+	.we_n(SYNTHESIZED_WIRE_17),
 	.decade(decade_count),
 	.digit(card_data[3:0]),
 	.time_slot(counter_addr),
@@ -135,9 +143,9 @@ eeprom	b2v_inst15(
 
 
 eeprom	b2v_inst16(
-	.ce_n(SYNTHESIZED_WIRE_23),
-	.oe_n(SYNTHESIZED_WIRE_23),
-	.we_n(SYNTHESIZED_WIRE_24),
+	.ce_n(SYNTHESIZED_WIRE_16),
+	.oe_n(ReadBase10_n),
+	.we_n(SYNTHESIZED_WIRE_17),
 	.decade(decade_count),
 	.digit(card_data[7:4]),
 	.time_slot(counter_addr),
@@ -145,9 +153,9 @@ eeprom	b2v_inst16(
 
 
 eeprom	b2v_inst17(
-	.ce_n(SYNTHESIZED_WIRE_23),
-	.oe_n(SYNTHESIZED_WIRE_23),
-	.we_n(SYNTHESIZED_WIRE_24),
+	.ce_n(SYNTHESIZED_WIRE_16),
+	.oe_n(ReadBase10_n),
+	.we_n(SYNTHESIZED_WIRE_17),
 	.decade(decade_count),
 	.digit(card_data[11:8]),
 	.time_slot(counter_addr),
@@ -155,9 +163,9 @@ eeprom	b2v_inst17(
 
 
 eeprom	b2v_inst18(
-	.ce_n(SYNTHESIZED_WIRE_23),
-	.oe_n(SYNTHESIZED_WIRE_23),
-	.we_n(SYNTHESIZED_WIRE_24),
+	.ce_n(SYNTHESIZED_WIRE_16),
+	.oe_n(ReadBase10_n),
+	.we_n(SYNTHESIZED_WIRE_17),
 	.decade(decade_count),
 	.digit(card_data[15:12]),
 	.time_slot(counter_addr),
@@ -175,29 +183,31 @@ AdderSubtractor	b2v_inst2(
 
 
 timing_module	b2v_inst20(
-	.CLK(clk),
+	.clk(clk),
+	.en(en),
 	.rst_n(rst_n),
-	.write_n(write_n),
-	.control_n(SYNTHESIZED_WIRE_0),
+	.counter_rst_n(counter_rst_n),
+	.read(read),
+	.write(write),
 	
+	.lastWrite(lastWrite),
+	.checkInputs(checkInputs),
 	
-	.zero_n(zero_n),
 	.counter_addr(counter_addr));
 
+assign	ReadBase10_n =  ~ReadBase10;
 
-eeprom	b2v_inst21(
-	.ce_n(SYNTHESIZED_WIRE_23),
-	.oe_n(SYNTHESIZED_WIRE_23),
-	.we_n(SYNTHESIZED_WIRE_24),
-	.decade(decade_count),
-	.digit(card_data[19:16]),
-	.time_slot(counter_addr),
-	.data(base_10[4]));
+
+reg_4bit	b2v_inst21(
+	.clk(SYNTHESIZED_WIRE_15),
+	.rst_n(SYNTHESIZED_WIRE_11),
+	.data_in(carry),
+	.data_out(carry_in));
 
 
 
 mux_2to1_6bit	b2v_inst23(
-	.sel(SYNTHESIZED_WIRE_16),
+	.sel(SYNTHESIZED_WIRE_12),
 	.bus_a(counter_addr),
 	.bus_b(addr_1),
 	.bus_out(keyboard_addr));
@@ -211,25 +221,13 @@ mux_2to1_5bit	b2v_inst25(
 	.bus_out(keyboard_write));
 
 
-reg_5bit	b2v_inst26(
-	.clk(SYNTHESIZED_WIRE_25),
-	.rst_n(SYNTHESIZED_WIRE_18),
-	.data_in(sum_ALTERA_SYNTHESIZED),
-	.data_out(sum_reg));
-
-
-reg_5bit	b2v_inst27(
-	.clk(SYNTHESIZED_WIRE_25),
-	.rst_n(SYNTHESIZED_WIRE_20),
-	.data_in(carry),
-	.data_out(carry_in));
-
-
-reg_5bit	b2v_inst28(
-	.clk(SYNTHESIZED_WIRE_25),
-	.rst_n(SYNTHESIZED_WIRE_22),
+reg_4bit	b2v_inst26(
+	.clk(SYNTHESIZED_WIRE_15),
+	.rst_n(SYNTHESIZED_WIRE_14),
 	.data_in(keyboard_ram),
 	.data_out(keyboard_reg));
+
+assign	SYNTHESIZED_WIRE_15 = clk & read;
 
 
 mux_2to1_5bit	b2v_inst29(
@@ -249,8 +247,10 @@ AdderSubtractor	b2v_inst3(
 
 
 counter_4bit_down	b2v_inst30(
-	.en_n(zero_n),
 	.rst_n(rst_n),
+	.clk(write),
+	.reset_carriage_n(rst_carriage_n),
+	.lastRead(lastWrite),
 	.count_n(decade_count));
 
 
@@ -259,6 +259,15 @@ punch_cards	b2v_inst31(
 	.card_addr(decade_count),
 	.card_slt(card_slt),
 	.card_out(card_data));
+
+
+input_reg	b2v_inst34(
+	.checkInputs(checkInputs),
+	.ReadBase10_button(ReadBase10_button),
+	.clk(clk),
+	.rst_n(rst_n),
+	.clearInputs(lastWrite),
+	.ReadBase10(ReadBase10));
 
 
 AdderSubtractor	b2v_inst4(
@@ -272,8 +281,8 @@ AdderSubtractor	b2v_inst4(
 
 ram	b2v_inst5(
 	.ce_n(ce_n),
-	.oe_n(read_n),
-	.we_n(write_n),
+	.oe_n(write),
+	.we_n(read),
 	.addr(counter_addr),
 	.data(counter)
 	);
@@ -281,32 +290,30 @@ ram	b2v_inst5(
 
 ram	b2v_inst6(
 	.ce_n(ce_n),
-	.oe_n(read_n),
-	.we_n(write_n),
+	.oe_n(write),
+	.we_n(read),
 	.addr(keyboard_addr),
 	.data(keyboard_ram)
 	);
 
 
 ram_buff	b2v_inst7(
-	.en_n(write_n),
+	.en_n(read),
 	.data_in(sum_reg),
 	.data_out(counter));
 
 
 ram_buff	b2v_inst8(
-	.en_n(write_n),
+	.en_n(read),
 	.data_in(keyboard_write),
 	.data_out(keyboard_ram));
 
-assign	SYNTHESIZED_WIRE_20 = rst_n & rst_carry_n;
+assign	SYNTHESIZED_WIRE_11 = rst_n & rst_carry_n;
 
 
 addr_plus_one	b2v_inst90(
 	.counter_addr(counter_addr),
 	.keyboard_addr(addr_1));
-
-assign	read_n =  ~write_n;
 
 assign	sum = sum_ALTERA_SYNTHESIZED;
 assign	ce_n = 0;
@@ -314,6 +321,5 @@ assign	zero[3] = 0;
 assign	zero[2] = 0;
 assign	zero[1] = 0;
 assign	zero[0] = 0;
-assign	zero[4] = 0;
 
 endmodule

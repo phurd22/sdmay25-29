@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ABC Buddy App Base-2 Read"
+rootProject.name = "ABC Base-2 Read"
 include ':app'

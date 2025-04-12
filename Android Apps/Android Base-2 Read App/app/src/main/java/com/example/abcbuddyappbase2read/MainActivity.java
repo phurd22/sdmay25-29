@@ -9,8 +9,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -32,17 +36,15 @@ public class MainActivity extends AppCompatActivity {
     private int currentPage;
     private int totalPages;
     private List<List<Long>> allNumbers = new ArrayList<>();
-    private static final String ESP32_MAC_ADDRESS = "08:A6:F7:BC:5E:C6";
-    private static final UUID ESP32_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    private BluetoothAdapter bluetoothAdapter;
-    private BluetoothSocket bluetoothSocket;
-    private InputStream inputStream;
-    private Handler handler;
+    private LinearLayout pageButtonContainer;
+    private Button uploadButton;
+    private Button modeButton;
+    private Button resetButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base2punch);
+        setContentView(R.layout.activity_main);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.base2punch), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -51,10 +53,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         currentPage = 1;
-        totalPages = 3;
+        totalPages = 20;
 
+        pageButtonContainer = findViewById(R.id.pageButtonContainer);
         base2PunchView = findViewById(R.id.base2PunchView);
-        handler = new Handler(Looper.getMainLooper());
+        uploadButton = findViewById(R.id.buttonUpload);
+        modeButton = findViewById(R.id.buttonMode);
+        resetButton = findViewById(R.id.buttonReset);
 
         List<Long> numbers1 = Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L,
                 -1L, -2L, -3L, -4L, -5L, -6L, -7L, -8L, -9L, -10L,
@@ -73,98 +78,50 @@ public class MainActivity extends AppCompatActivity {
         allNumbers.add(numbers2);
         allNumbers.add(numbers3);
 
+        for (int i = 1; i <= totalPages; i++) {
+            Button pageButton = new Button(this);
+            pageButton.setText("Page " + i);
+            pageButton.setLayoutParams(new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            ));
+            int pageIndex = i;
+            pageButton.setOnClickListener(v -> {
+                currentPage = pageIndex;
+                updatePage();
+            });
+            pageButton.setBackgroundResource(R.drawable.button_border);
+            pageButton.setWidth(109);
+            pageButtonContainer.addView(pageButton);
+        }
+
+        modeButton.setOnClickListener(v -> {
+            base2PunchView.changeMode();
+        });
+
+        resetButton.setOnClickListener(v -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("Confirm Reset")
+                    .setMessage("Are you sure you want to reset?")
+                    .setPositiveButton("Cancel", (dialog, which) -> dialog.dismiss())
+                    .setNegativeButton("Yes", (dialog, which) -> Log.d("Reset", "Reset confirmed"))
+                    .setCancelable(false)
+                    .show();
+        });
+
+//        uploadButton.post(() -> {
+//            int widthPx = uploadButton.getWidth(); // Width in pixels
+//            float density = uploadButton.getResources().getDisplayMetrics().density;
+//            float widthDp = widthPx / density; // Convert to dp
+//            Log.d("ButtonWidth", "Width in dp: " + widthDp);
+//        });
+
         updatePage();
         requestBluetoothPermissions();
-        connectToESP32();
-
-        base2PunchView.setOnPageChangeListener(new Base2PunchView.OnPageChangeListener() {
-            @Override
-            public void onPreviousPage() {
-                if (currentPage > 1) {
-                    currentPage--;
-                    updatePage();
-                }
-            }
-
-            @Override
-            public void onNextPage() {
-                if (currentPage < totalPages) {
-                    currentPage++;
-                    updatePage();
-                }
-            }
-        });
-    }
-
-    private void listenForData() {
-        new Thread(() -> {
-            byte[] buffer = new byte[240];
-            int bytesRead = 0;
-            while (true) {
-                try {
-                    while (bytesRead < 240) { // Keep reading until we get 240 bytes
-                        int result = inputStream.read(buffer, bytesRead, 240 - bytesRead);
-                        if (result == -1) break; // End of stream
-                        bytesRead += result;
-                    }
-                    allNumbers.add(new ArrayList<>());
-                    ByteBuffer byteBuffer = ByteBuffer.wrap(buffer);
-                    for (int i = 0; i < 30; ++i) {
-                        allNumbers.get(allNumbers.size() - 1).add(byteBuffer.getLong());
-                    }
-
-                    for (Long value : allNumbers.get(allNumbers.size() - 1)) {
-                        Log.d("Bluetooth", "Received: " + value);
-                    }
-
-                    totalPages += 1;
-                    Log.d("AllNumbers", "allNumbers size: " + allNumbers.size());
-                    Log.d("AllNumbers", allNumbers.get(allNumbers.size() - 1).toString());
-                    handler.post(this::updatePage);
-                    bytesRead = 0;
-                } catch (IOException e) {
-                    Log.e("Bluetooth", "Error reading data", e);
-                    break;
-                }
-            }
-        }).start();
     }
 
     private void updatePage() {
-        base2PunchView.setDrawLeftArrow(true);
-        base2PunchView.setDrawRightArrow(true);
-        if (currentPage == 1) {
-            base2PunchView.setDrawLeftArrow(false);
-        }
-        if (currentPage == totalPages) {
-            base2PunchView.setDrawRightArrow(false);
-        }
-        Log.d("Base2PunchView", allNumbers.get(currentPage - 1).toString());
-        base2PunchView.setNumbers(allNumbers.get(currentPage - 1), currentPage, totalPages);
-    }
-
-    private void connectToESP32() {
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (bluetoothAdapter == null) {
-            Toast.makeText(this, "Bluetooth not supported", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        BluetoothDevice device = bluetoothAdapter.getRemoteDevice(ESP32_MAC_ADDRESS);
-        try {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "You have to accept bluetooth permissions, clear app storage and cache and try again.", Toast.LENGTH_LONG).show();
-                return;
-            }
-            bluetoothSocket = device.createRfcommSocketToServiceRecord(ESP32_UUID);
-            bluetoothSocket.connect();
-            inputStream = bluetoothSocket.getInputStream();
-            Toast.makeText(this, "Connected to ESP32", Toast.LENGTH_SHORT).show();
-            listenForData();
-        } catch (IOException e) {
-            Log.e("Bluetooth", "Connection failed", e);
-            Toast.makeText(this, "Failed to connect", Toast.LENGTH_LONG).show();
-        }
+        base2PunchView.setNumbers(allNumbers.get(currentPage - 1));
     }
 
     private void requestBluetoothPermissions() {
