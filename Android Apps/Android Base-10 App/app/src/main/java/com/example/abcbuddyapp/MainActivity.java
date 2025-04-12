@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private int currentVariableIndex; // Tracks the variable being assigned (x, y, z, etc.)
     private BluetoothAdapter bluetoothAdapter;
     private BluetoothGatt bluetoothGatt;
-    private final String DEVICE_NAME = "Base10ESP32"; // ESP32 BLE name
+    private final String DEVICE_ADDRESS = "94:A9:90:08:9E:85";
+    //private final String DEVICE_NAME = "Base10ESP32"; // ESP32 BLE name
     private final UUID SERVICE_UUID = UUID.fromString("4fafc201-1fb5-459e-8fcc-c5c9c331914b");
     private final UUID CHARACTERISTIC_UUID = UUID.fromString("beb5483e-36e1-4688-b7f5-ea07361b26a8");
     Context context;
@@ -87,9 +88,18 @@ public class MainActivity extends AppCompatActivity {
         Button clearButton = findViewById(R.id.buttonClear);
         clearButton.setOnClickListener(v -> clearEquation());
         Button uploadButton = findViewById(R.id.submitButton);
-        uploadButton.setOnClickListener(v -> uploadEquation());
-        Button connectButton = findViewById(R.id.esp32Button);
-        connectButton.setOnClickListener(v -> startScan());
+        uploadButton.setOnClickListener(v -> {
+            if (!isDeviceConnected()) {
+                Log.d("BLE", "Not connected to ESP32, starting scan...");
+                startScan(); // Will connect and run uploadNumbers();
+            }
+            else {
+                Log.d("BLE", "Connected to ESP32, uploading numbers...");
+                uploadEquation();
+            }
+        });
+//        Button connectButton = findViewById(R.id.esp32Button);
+//        connectButton.setOnClickListener(v -> startScan());
 
         requestBluetoothPermissions();
     }
@@ -189,12 +199,69 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("MissingPermission")
+    private void uploadEquation() {
+        String equation = "";
+        String number = "";
+        for (int i = 0; i < variableTextViews.length; i++) {
+            number = variableTextViews[i].getText().toString();
+            if (!number.isEmpty()) {
+                number = number.substring(0, number.length() - 1);
+            }
+            if (isNumeric(number)) {
+                equation += number;
+            } else {
+                equation += "0";
+            }
+            if (i == variableTextViews.length - 1) {
+                equation += "d";
+            }
+            else {
+                equation += "x";
+            }
+        }
+//        equation = variableTextViews[0].getText().toString();
+//        equation += variableTextViews[1].getText().toString();
+//        equation += variableTextViews[2].getText().toString();
+//        equation += variableTextViews[3].getText().toString();
+//        equation += variableTextViews[4].getText().toString();
+//        equation = equation.replaceAll("[^0-9x-]", "x");
+//        equation = equation.substring(0, equation.length() - 1) + "d";
+        Log.d("Test", "Equation: " + equation);
+
+        if (bluetoothGatt == null) {
+            Log.e("BLE", "Not connected to a device!");
+            return;
+        }
+
+        BluetoothGattService service = bluetoothGatt.getService(SERVICE_UUID);
+        if (service == null) {
+            Log.e("BLE", "Service not found!");
+            return;
+        }
+
+        BluetoothGattCharacteristic characteristic = service.getCharacteristic(CHARACTERISTIC_UUID);
+        if (characteristic == null) {
+            Log.e("BLE", "Characteristic not found!");
+            return;
+        }
+        Log.d("BLE", "Found service and characteristic successfully.");
+        characteristic.setValue(equation);
+        bluetoothGatt.writeCharacteristic(characteristic);
+        runOnUiThread(() -> {
+            Toast.makeText(context, "Successfully Uploaded", Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    @SuppressLint("MissingPermission")
     private ScanCallback scanCallback = new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
             BluetoothDevice device = result.getDevice();
-            Log.d("BLE", "Found device: " + device.getName());
-            if (DEVICE_NAME.equals(device.getName())) {
+            String deviceName = device.getName(); // This may be null
+            String deviceAddress = device.getAddress();
+
+            Log.d("BLE", "Found device: " + deviceName + " [" + deviceAddress + "]");
+            if (DEVICE_ADDRESS.equals(deviceAddress)) {
                 Log.d("BLE", "Found ESP32, connecting...");
                 bluetoothAdapter.getBluetoothLeScanner().stopScan(this);
                 connectToDevice(device);
@@ -223,11 +290,15 @@ public class MainActivity extends AppCompatActivity {
             public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
                 if (newState == BluetoothProfile.STATE_CONNECTED) {
                     Log.d("BLE", "Connected to ESP32");
-                    Looper.prepare();
-                    Toast.makeText(context, "Connected to ESP32", Toast.LENGTH_SHORT).show();
+                    runOnUiThread(() -> {
+                        Toast.makeText(context, "Connected to ESP32", Toast.LENGTH_SHORT).show();
+                    });
                     gatt.discoverServices();
                 } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                     Log.d("BLE", "Disconnected from ESP32");
+                    runOnUiThread(() -> {
+                        Toast.makeText(context, "Disconnected from ESP32", Toast.LENGTH_SHORT).show();
+                    });
                 }
             }
 
@@ -235,42 +306,23 @@ public class MainActivity extends AppCompatActivity {
             public void onServicesDiscovered(BluetoothGatt gatt, int status) {
                 if (status == BluetoothGatt.GATT_SUCCESS) {
                     Log.d("BLE", "Services discovered!");
+                    uploadEquation();
                 }
             }
         });
     }
 
     @SuppressLint("MissingPermission")
-    private void uploadEquation() {
-        String equation = "";
-        equation = variableTextViews[0].getText().toString();
-        equation += variableTextViews[1].getText().toString();
-        equation += variableTextViews[2].getText().toString();
-        equation += variableTextViews[3].getText().toString();
-        equation += variableTextViews[4].getText().toString();
-        equation = equation.replaceAll("[^0-9x-]", "x");
-        equation = equation.substring(0, equation.length() - 1) + "d";
-        Log.d("Test", "Equation: " + equation);
+    private boolean isDeviceConnected() {
+        BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        List<BluetoothDevice> connectedDevices = bluetoothManager.getConnectedDevices(BluetoothProfile.GATT);
 
-        if (bluetoothGatt == null) {
-            Log.e("BLE", "Not connected to a device!");
-            return;
+        for (BluetoothDevice device : connectedDevices) {
+            if (DEVICE_ADDRESS.equals(device.getAddress())) {
+                return true;
+            }
         }
-
-        BluetoothGattService service = bluetoothGatt.getService(SERVICE_UUID);
-        if (service == null) {
-            Log.e("BLE", "Service not found!");
-            return;
-        }
-
-        BluetoothGattCharacteristic characteristic = service.getCharacteristic(CHARACTERISTIC_UUID);
-        if (characteristic == null) {
-            Log.e("BLE", "Characteristic not found!");
-            return;
-        }
-        Log.d("BLE", "Found service and characteristic successfully.");
-        characteristic.setValue(equation);
-        bluetoothGatt.writeCharacteristic(characteristic);
+        return false;
     }
 
     private void requestBluetoothPermissions() {
@@ -290,6 +342,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (!neededPermissions.isEmpty()) {
             ActivityCompat.requestPermissions(this, neededPermissions.toArray(new String[0]), 1);
+        }
+    }
+
+    public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
         }
     }
 }
