@@ -67,7 +67,7 @@ void setup() {
 }
 
 void loop() {
-  Serial.println("hi");
+  // Get clock edge
   prevClkValue = currClkValue;
   if (digitalRead(clkPin) == HIGH) {
     currClkValue = 1;
@@ -75,7 +75,6 @@ void loop() {
   else {
     currClkValue = 0;
   }
-
   if (prevClkValue == 0 && currClkValue == 1) {
     newPosEdge = 1;
   }
