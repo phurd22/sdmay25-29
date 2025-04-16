@@ -2,24 +2,15 @@ package src.main.java.drum;
 
 import java.util.Arrays;
 
-public class Carry {
-    private boolean[] carryBits;  // e.g. length 30
-    private static final int NUM_BANDS = 30;
+public class Carry extends Drum {
+    public static final int BAND_COUNT = 30;
+    public static final int BIT_COUNT = 1;
 
     public Carry() {
-        carryBits = new boolean[NUM_BANDS];
+        super(BAND_COUNT, BIT_COUNT);
     }
 
-    // Clear all carry bits to false
-    public void clearAll() {
-        Arrays.fill(carryBits, false);
-    }
-
-    // Accessors
-    public boolean getCarry(int bandIndex) {
-        return carryBits[bandIndex];
-    }
-    public void setCarry(int bandIndex, boolean value) {
-        carryBits[bandIndex] = value;
+    public boolean getCarry(int i) {
+        return data[i][0];
     }
 }
