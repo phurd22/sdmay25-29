@@ -1,58 +1,99 @@
 package src.main.java.drum;
 
-import java.util.Arrays;
-
 public class Drum {
+    protected final int bands;
+    protected final int bits;
+    protected final boolean[][] data;
 
-    public static final int NUM_BANDS = 30;                         // Coefficients
-    public static final int BITS_PER_BAND = 50;               // Bits
-    protected final boolean[][] data;                    // 2D array representing contacts
-
-    // Constructor
-    public Drum() {
-        data = new boolean[NUM_BANDS][BITS_PER_BAND];
+    public Drum(int bands, int bits) {
+        this.bands = bands;
+        this.bits = bits;
+        // Initialize all bits to false (0)
+        this.data = new boolean[bands][bits];
     }
 
-    // Returns entire 2D array
-    public boolean[][] getData() {
-        return data;
+    public int getBandCount() {
+        return bands;
     }
 
-    // Returns 50-bit array for specific band
-    public boolean[] getBand(int bandIndex) {
-        return data[bandIndex];
+    public int getBitCount() {
+        return bits;
     }
 
-    // Clears entire drum to false (0)
-    public void clearAll() {
-        for (int band = 0; band < NUM_BANDS; band++) {
-            Arrays.fill(data[band], false);
+    public boolean getBit(int band, int position) {
+        if (band < 0 || band >= bands || position < 0 || position >= bits) {
+            throw new IndexOutOfBoundsException("Invalid band or position index");
+        }
+        return data[band][position];
+    }
+
+    public boolean[] getBand(int band) {
+        return data[band];
+    }
+
+    public void setBit(int band, int position, boolean value) {
+        if (band < 0 || band >= bands || position < 0 || position >= bits) {
+            throw new IndexOutOfBoundsException("Invalid band or position index");
+        }
+        data[band][position] = value;
+    }
+
+    public void clear() {
+        for (int i = 0; i < bands; i++) {
+            for (int j = 0; j < bits; j++) {
+                data[i][j] = false;
+            }
         }
     }
 
-    // Clears one band to false (0)
-    public void clearBand(int bandIndex) {
-        Arrays.fill(data[bandIndex], false);
-    }
-
-    // Returns true if every bit is false (0)
-    public boolean bandIsZero(int bandIndex) {
-        for (boolean bit : data[bandIndex]) {
-            if (bit) return false;
+    public boolean isZero(int band) {
+        for (int i = 0; i < bits; ++i) {
+            if (data[band][i]) return false;
         }
         return true;
     }
 
-    // Returns true if MSB is set, meaning negative
-    public boolean bandIsNegative(int bandIndex) {
-        return data[bandIndex][BITS_PER_BAND - 1]; // index 49
+    public boolean[][] getData() {
+        return data;
     }
 
-    // Transfer CA to KA
-    public void transfer(Drum KA) {
-        boolean[][] src = KA.data;
-        for (int b = 0; b < NUM_BANDS; b++) {
-            System.arraycopy(src[b], 0, this.data[b], 0, BITS_PER_BAND);
+    public void transfer(KA ka) {
+        for (int band = 0; band < this.data.length; band++) {
+            for (int bit = 0; bit < this.data[band].length; bit++) {
+                ka.data[band][bit] = this.data[band][bit];
+            }
+        }
+    }
+
+    //LSB on the Right
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < bands; i++) {
+            sb.append(String.format("Band %2d: ", i));
+            for (int j = bits - 1; j >= 0; j--) {
+                sb.append(data[i][j] ? '1' : '0');
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
+    public void printData() {
+        final String RED = "\u001B[31m";
+        final String GREEN = "\u001B[32m";
+        final String RESET = "\u001B[0m";
+
+        for (int i = 0; i < bands; i++) {
+            for (int j = 0; j < bits; j++) {
+                if (data[i][j]) {
+                    // Print 1 in green
+                    System.out.print(GREEN + "1" + RESET);
+                } else {
+                    // Print 0 in red
+                    System.out.print(RED + "0" + RESET);
+                }
+            }
+            System.out.println();
         }
     }
 }

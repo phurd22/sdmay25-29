@@ -1,69 +1,183 @@
 package src.main.java.drum;
 
-import java.util.HashMap;
-import java.util.Map;
+import src.main.java.ABCMachine;
+import src.main.java.asm.AddSubMechanism;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
 
 public class Conversion {
+    private static boolean[][] lookUpTable;
+    private static ABCMachine abc;
 
-    private static final long[] POW10 = {
-            1L,
-            10L,
-            100L,
-            1000L,
-            10000L,
-            100000L,
-            1000000L,
-            10000000L,
-            100000000L,
-            1000000000L,
-            10000000000L,
-            100000000000L,
-            1000000000000L,
-            10000000000000L,
-            100000000000000L
-    };
+    public Conversion(ABCMachine abc) {
+        String filePath = "C:\\Users\\willi\\OneDrive\\Desktop\\convdrum.csv";
+        lookUpTable = readCsvToBooleanArray(filePath);
+        Conversion.abc = abc;
+    }
+    //------------------------------------------USING CSV FILE----------------------------------------------------------
+    public static boolean[][] readCsvToBooleanArray(String filePath) {
+        List<boolean[]> rows = new ArrayList<>();
 
-    /**
-     * Returns the bit (0 or 1) from the "conversion drum"
-     * for the given digit, decade, and timestep.
-     *
-     * @param digit   0..9 (the decimal digit)
-     * @param decade  0..14 (10^decade is the multiplier)
-     * @param timestep 0..59 (bit position in the 60-step rotation)
-     * @return 0 or 1, the bit for (digit * 10^decade) at the given timestep
-     *         (LSB = timestep 0). Returns 0 for timesteps >= 50.
-     */
-    public static int getBit(int digit, int decade, int timestep) {
-        // If the drum is only 50 bits wide, timesteps 50..59 are empty => return 0
-        if (timestep >= 50) {
-            return 0;
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                // Use split with limit -1 to include trailing empty fields.
+                String[] tokens = line.split(",", -1);
+                boolean[] boolRow = new boolean[tokens.length];
+                for (int i = 0; i < tokens.length; i++) {
+                    // "1" represents true, everything else (or empty) represents false.
+                    boolRow[i] = tokens[i].trim().equals("1");
+                }
+                rows.add(boolRow);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        // Validate input ranges (digit in 0..9, decade in 0..14).
-        // You could throw an exception or just clamp:
-        if (digit < 0 || digit > 9) return 0;
-        if (decade < 0 || decade > 14) return 0;
-        if (timestep < 0 || timestep > 59) return 0; // out of normal range
-
-        // Compute the long value for (digit * 10^decade).
-        long value = digit * POW10[decade];
-
-        // Extract the bit at position 'timestep' (LSB = index 0).
-        // If that bit is set, return 1; otherwise 0.
-        long mask = 1L << timestep;
-        return ((value & mask) != 0) ? 1 : 0;
-    }
-
-    public static boolean[] build50BitsFromConversion(int digit, int decade) {
-        // 50 bits for the ABC’s representation
-        boolean[] bits = new boolean[50];
-        // The conversion drum function returns 0 or 1 for each timestep in [0..59],
-        // but we only need [0..49] for the 50 actual bits (timesteps ≥ 50 are always 0).
-        for (int t = 0; t < 50; t++) {
-            int bitVal = getBit(digit, decade, t); // 0 or 1
-            bits[t] = (bitVal == 1);
+        // Convert the list to a 2D boolean array.
+        int numRows = rows.size();
+        if (numRows != 60) {
+            System.err.println("Warning: Expected 60 rows (indices from -4 to 55) but found " + numRows);
         }
-        return bits;
+        boolean[][] dataArray = new boolean[numRows][];
+        for (int i = 0; i < numRows; i++) {
+            dataArray[i] = rows.get(i);
+        }
+        return dataArray;
     }
 
+    public static boolean[] getRowByOriginalIndex(boolean[][] array, int originalIndex) {
+        int offset = 4;
+        int index = originalIndex + offset;
+        if (index < 0 || index >= array.length) {
+            throw new IndexOutOfBoundsException("Invalid row index: " + originalIndex);
+        }
+        return array[index];
+    }
+
+    public static void printBooleanArrayAsNumbers(boolean[][] data) {
+        String ANSI_RESET = "\u001B[0m";
+        String ANSI_GREEN = "\u001B[32m";
+        String ANSI_RED = "\u001B[31m";
+        int j = -4;
+        for (boolean[] row : data) {
+            System.out.print(j + ": ");
+            ++j;
+            for (int i = 0; i < row.length; i++) {
+                // Choose color based on the boolean value
+                if (row[i]) {
+                    System.out.print(ANSI_GREEN + "1" + ANSI_RESET);
+                } else {
+                    System.out.print(ANSI_RED + "0" + ANSI_RESET);
+                }
+                // Print comma separator if not the last element of the row
+                if (i < row.length - 1) {
+                    System.out.print(", ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public boolean[] convert(String decimal, int startBandIndex) {
+        //--------------------------PADDING-----------------------------------
+        // check if number is negative
+        boolean isNegative = decimal.startsWith("-");
+
+        // remove negative sign if it is
+        String number = isNegative ? decimal.substring(1) : decimal;
+
+        // parse number
+        java.math.BigInteger pieced = new java.math.BigInteger(number);
+
+        // pad with 0's making it 15 digits long
+        String padded = String.format("%015d", pieced);
+
+        //----------------------PADDING DONE-----------------------------------
+        //----------------------START LOOKUP-----------------------------------\
+        boolean[] band = new boolean[50];
+        int colIndex = 0;
+        int brushOffset = 0;
+        for (int decade = 14; decade >= 0; --decade) {
+            band = new boolean[50];
+            int digit = Character.getNumericValue(padded.charAt(14 - decade));
+            long value = (long) (Character.getNumericValue(padded.charAt(14 - decade)) * (Math.pow(10, decade)));
+
+            // start lookup on csv file
+            if (digit != 0) {
+                if (decade > 0) {
+                    if (value % 9 == 0) {
+                        colIndex = 32 + (decade * 2);
+                        brushOffset = 4;
+                    } else if (value % 7 == 0) {
+                        colIndex = 31 + (decade * 2);
+                        brushOffset = 4;
+                    } else if (value % 3 == 0) {
+                        colIndex = 16 + decade;
+                        brushOffset = 5 - (digit / 3);
+                    } else if (value % 5 == 0) {
+                        int tempValue = 5;
+                        colIndex = 1 + decade;
+                        if (digit != 5) {
+                            tempValue = digit * 10;
+                            colIndex = decade;
+                        }
+                        brushOffset = (int) (4 - (Math.log(tempValue / 5.0) / Math.log(2)));
+                    }
+                } else {
+                    if (value % 9 == 0) {           // 9
+                        colIndex = 32;
+                        brushOffset = 4;
+                    } else if (value % 7 == 0) {    // 7
+                        colIndex = 31;
+                        brushOffset = 4;
+                    } else if (value % 3 == 0) {    // 3, 6
+                        colIndex = 16;
+                        brushOffset = 5 - (digit / 3);
+                    } else if (value % 5 == 0) {    // 5
+                        int tempValue = 5;
+                        if (digit != 5) {
+                            tempValue = digit * 10;
+                        }
+                        colIndex = 1;
+                        brushOffset = (int) (4 - (Math.log(tempValue / 5.0) / Math.log(2)));
+                    } else {                        // 1, 2, 4, 8
+                        colIndex = 0;
+                        brushOffset = (int) (4 - (Math.log(digit) / Math.log(2)));
+                    }
+                }
+                tableLookup(colIndex, brushOffset, band);
+                abc.adder.addSubWithCard(abc.ca, band, abc.carryDrum, startBandIndex, isNegative);
+            }
+        }
+        if (isNegative) {
+            boolean[] extraOne = new boolean[50];
+            extraOne[49] = true;
+            AddSubMechanism.addSubWithCard(abc.ca, extraOne, abc.carryDrum, startBandIndex, !isNegative);
+        }
+        return band;
+    }
+
+    public void tableLookup(int colIndex, int brushOffset, boolean[] temp) {
+        for (int timeStep = 0; timeStep < 50; ++timeStep) {
+            temp[timeStep] = lookUpTable[49 - timeStep + brushOffset][colIndex];
+        }
+    }
+
+    public boolean[] addArrays(boolean[] band, boolean[] temp) {
+        boolean[] result = new boolean[50];
+        boolean carry = false;
+        // Start from LSB
+        for (int i = 49; i >= 0; --i) {
+            boolean sumBit = (band[i] ^ temp[i]) ^ carry;
+            boolean newCarry = (band[i] && temp[i]) || (band[i] && carry) || (temp[i] && carry);
+
+            result[i] = sumBit;
+            carry = newCarry;
+        }
+        return result;
+    }
 }
