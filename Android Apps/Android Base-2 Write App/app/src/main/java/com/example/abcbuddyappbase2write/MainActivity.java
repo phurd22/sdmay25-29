@@ -11,6 +11,7 @@ import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
+import android.bluetooth.BluetoothSocket;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
 import android.content.Context;
@@ -26,6 +27,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
     private long lastUpdateTime;
     Context context;
 
+    // Tablet to tablet bluetooth variables
+//    private final UUID Tablet_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+//    private BluetoothDevice receiverDevice;
+//    private BluetoothAdapter tabletBluetoothAdapter;
+//    private BluetoothSocket socket;
+//    private OutputStream outputStream;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
         binaryIndex = 49;
         binaryStringArray = new ArrayList<>();
         lastUpdateTime = 0;
+//        tabletBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+//        receiverDevice = tabletBluetoothAdapter.getRemoteDevice("0B:0B:01:04:48:35");
+
+//        new ConnectThread().start();
 
         resetBinaryStrings();
         updatePage();
@@ -82,13 +96,40 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void resetBinaryStrings() {
+//    @SuppressLint("MissingPermission")
+//    private class ConnectThread extends Thread {
+//        public void run() {
+//            try {
+//                socket = receiverDevice.createRfcommSocketToServiceRecord(Tablet_UUID);
+//                tabletBluetoothAdapter.cancelDiscovery();
+//                socket.connect();
+//
+//                outputStream = socket.getOutputStream();
+//                String messageToSend = "Hello from sender!\n";
+//                outputStream.write(messageToSend.getBytes());
+//
+//                //socket.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+
+    private void resetBinaryStrings() {
         binaryStringArray.clear();
         String binaryString = "00000000000000000000000000000000000000000000000000";
         for (int i = 0; i < 4; i++) {
             binaryStringArray.add(binaryString);
         }
     }
+
+//    private void sendMessage(String message) {
+//        try {
+//            outputStream.write(message.getBytes());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private void updatePage() {
         for (int i = 0; i < 4; i++) {
@@ -207,21 +248,38 @@ public class MainActivity extends AppCompatActivity {
                 }
                 lastUpdateTime = currentTime;
 
+                Log.d("BLE", "-----------------------------------------------------");
                 Log.d("BLE", "Received from ESP32: " + value);
-                if (binaryIndex < 0) {
-                    Log.d("Binary Strings", "Resetting Page");
-                    resetBinaryStrings();
-                    binaryIndex = 49;
-                }
                 for (int i = 0; i < 4; i++) {
                     String newString = binaryStringArray.get(i);
                     StringBuilder sb = new StringBuilder(newString);
                     sb.setCharAt(binaryIndex, value.charAt(i));
                     binaryStringArray.set(i, sb.toString());
                 }
-                binaryIndex--;
                 Log.d("Binary Strings", "Binary Index: " + binaryIndex);
+                binaryIndex--;
                 runOnUiThread(MainActivity.this::updatePage);
+                if (binaryIndex < 0) {
+                    Log.d("Binary Strings", "Resetting Page");
+                    // Construct and send bluetooth message here
+                    String message = "";
+                    for (int i = 0; i < 4; i++) {
+                        binaryToLongTwosComplement(binaryStringArray.get(i));
+                        if (i < 3) {
+                            message += String.valueOf(binaryToLongTwosComplement(binaryStringArray.get(i)));
+                            message += "x";
+                        }
+                        else {
+                            message += String.valueOf(binaryToLongTwosComplement(binaryStringArray.get(i)));
+                            message += "d";
+                        }
+                    }
+                    String finalMessage = message;
+                    Log.d("BLE", "Sending message: " + finalMessage);
+//                    runOnUiThread(() -> sendMessage(finalMessage));
+                    resetBinaryStrings();
+                    binaryIndex = 49;
+                }
             }
         });
     }
@@ -258,4 +316,15 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, neededPermissions.toArray(new String[0]), 1);
         }
     }
+
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        try {
+//            if (socket != null) socket.close();
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
