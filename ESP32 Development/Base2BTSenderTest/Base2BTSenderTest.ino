@@ -6,6 +6,9 @@
 #define CHARACTERISTIC_UUID "9d5a6f5c-e32c-429f-9faa-8209e6f2dda4"
 
 BLECharacteristic *pCharacteristic;
+const int sendPin = 14;
+int send = 0;
+int count = 0;
 
 // Callback class for handling incoming BLE writes
 // class MyCallbacks : public BLECharacteristicCallbacks {
@@ -23,8 +26,10 @@ String generateRandomBinaryString(int length) {
 void setup() {
   Serial.begin(115200);
 
+  pinMode(sendPin, INPUT);
+
   // Setup for BLE
-  BLEDevice::init("Base2ReceiverESP32");
+  BLEDevice::init("Base2SenderESP32");
   BLEDevice::setMTU(100);
   BLEServer *pServer = BLEDevice::createServer();
   BLEService *pService = pServer->createService(SERVICE_UUID);
@@ -46,13 +51,37 @@ void setup() {
 
 
 void loop() {
-  static unsigned long lastSent = 0;
-  if (millis() - lastSent > 500) {
-    lastSent = millis();
-    String binString = generateRandomBinaryString(4);
-    pCharacteristic->setValue(binString.c_str());
-    pCharacteristic->notify();
-    Serial.print("Sent: ");
-    Serial.println(binString);
+  unsigned long lastSent = 0;
+  unsigned long time = 0;
+
+  if (digitalRead(sendPin) == HIGH) {
+    send = 1;
   }
+
+  if (send == 1) {
+    for (int i = 0; i < 50; i++) {
+      String binString = generateRandomBinaryString(4);
+      pCharacteristic->setValue(binString.c_str());
+      pCharacteristic->notify();
+      Serial.print("Sent: ");
+      Serial.println(binString);
+      delay(250);
+    }
+    send = 0;
+  }
+
+  // time = millis();
+  // if (time - lastSent > 250 && send == 1) {
+  //   lastSent = time;
+  //   String binString = generateRandomBinaryString(4);
+  //   pCharacteristic->setValue(binString.c_str());
+  //   pCharacteristic->notify();
+  //   Serial.print("Sent: ");
+  //   Serial.println(binString);
+  //   count++;
+  //   if (count == 50) {
+  //     count = 0;
+  //     send = 0;
+  //   }
+  // }
 }
