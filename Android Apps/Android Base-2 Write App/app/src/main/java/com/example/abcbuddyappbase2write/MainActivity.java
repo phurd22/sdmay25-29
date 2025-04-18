@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private final long BTDebounceDelay = 10;
     private long lastUpdateTime;
     Context context;
+    private TCPClientThread clientThread;
+    private final String serverIp = "192.168.69.47";
 
     // Tablet to tablet bluetooth variables
 //    private final UUID Tablet_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
@@ -260,7 +262,7 @@ public class MainActivity extends AppCompatActivity {
                 binaryIndex--;
                 runOnUiThread(MainActivity.this::updatePage);
                 if (binaryIndex < 0) {
-                    Log.d("Binary Strings", "Resetting Page");
+                    Log.d("Binary Strings", "Resetting Strings");
                     // Construct and send bluetooth message here
                     String message = "";
                     for (int i = 0; i < 4; i++) {
@@ -276,6 +278,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                     String finalMessage = message;
                     Log.d("BLE", "Sending message: " + finalMessage);
+                    clientThread = new TCPClientThread(serverIp, finalMessage);
+                    clientThread.start();
 //                    runOnUiThread(() -> sendMessage(finalMessage));
                     resetBinaryStrings();
                     binaryIndex = 49;
@@ -304,6 +308,9 @@ public class MainActivity extends AppCompatActivity {
         permissions.add(android.Manifest.permission.BLUETOOTH_CONNECT);
         permissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
         permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        permissions.add(Manifest.permission.INTERNET);
+        permissions.add(Manifest.permission.ACCESS_NETWORK_STATE);
+        permissions.add(Manifest.permission.ACCESS_WIFI_STATE);
 
         List<String> neededPermissions = new ArrayList<>();
         for (String perm : permissions) {

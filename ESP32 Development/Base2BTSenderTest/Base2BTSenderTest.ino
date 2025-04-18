@@ -49,13 +49,15 @@ void setup() {
   Serial.println("BLE is ready. Waiting for data...");
 }
 
-
+// TODO: Going to need some logic to hold onto bits and only send every ~50 ms or else it gets 
+// too fast for the BLE connection. Only send when you have new buffered data.
 void loop() {
   unsigned long lastSent = 0;
   unsigned long time = 0;
 
   if (digitalRead(sendPin) == HIGH) {
     send = 1;
+    Serial.println("whyyy");
   }
 
   if (send == 1) {
@@ -65,7 +67,7 @@ void loop() {
       pCharacteristic->notify();
       Serial.print("Sent: ");
       Serial.println(binString);
-      delay(250);
+      delay(50);
     }
     send = 0;
   }
