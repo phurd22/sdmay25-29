@@ -50,15 +50,6 @@ public class MainActivity extends AppCompatActivity {
     private final long BTDebounceDelay = 10;
     private long lastUpdateTime;
     Context context;
-    private TCPClientThread clientThread;
-    private final String serverIp = "192.168.69.47";
-
-    // Tablet to tablet bluetooth variables
-//    private final UUID Tablet_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-//    private BluetoothDevice receiverDevice;
-//    private BluetoothAdapter tabletBluetoothAdapter;
-//    private BluetoothSocket socket;
-//    private OutputStream outputStream;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +68,6 @@ public class MainActivity extends AppCompatActivity {
         binaryIndex = 49;
         binaryStringArray = new ArrayList<>();
         lastUpdateTime = 0;
-//        tabletBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-//        receiverDevice = tabletBluetoothAdapter.getRemoteDevice("0B:0B:01:04:48:35");
-
-//        new ConnectThread().start();
 
         resetBinaryStrings();
         updatePage();
@@ -98,25 +85,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    @SuppressLint("MissingPermission")
-//    private class ConnectThread extends Thread {
-//        public void run() {
-//            try {
-//                socket = receiverDevice.createRfcommSocketToServiceRecord(Tablet_UUID);
-//                tabletBluetoothAdapter.cancelDiscovery();
-//                socket.connect();
-//
-//                outputStream = socket.getOutputStream();
-//                String messageToSend = "Hello from sender!\n";
-//                outputStream.write(messageToSend.getBytes());
-//
-//                //socket.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-
     private void resetBinaryStrings() {
         binaryStringArray.clear();
         String binaryString = "00000000000000000000000000000000000000000000000000";
@@ -124,14 +92,6 @@ public class MainActivity extends AppCompatActivity {
             binaryStringArray.add(binaryString);
         }
     }
-
-//    private void sendMessage(String message) {
-//        try {
-//            outputStream.write(message.getBytes());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     private void updatePage() {
         for (int i = 0; i < 4; i++) {
@@ -278,9 +238,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                     String finalMessage = message;
                     Log.d("BLE", "Sending message: " + finalMessage);
-                    clientThread = new TCPClientThread(serverIp, finalMessage);
-                    clientThread.start();
-//                    runOnUiThread(() -> sendMessage(finalMessage));
                     resetBinaryStrings();
                     binaryIndex = 49;
                 }
@@ -311,6 +268,7 @@ public class MainActivity extends AppCompatActivity {
         permissions.add(Manifest.permission.INTERNET);
         permissions.add(Manifest.permission.ACCESS_NETWORK_STATE);
         permissions.add(Manifest.permission.ACCESS_WIFI_STATE);
+        permissions.add(Manifest.permission.CHANGE_WIFI_STATE);
 
         List<String> neededPermissions = new ArrayList<>();
         for (String perm : permissions) {
@@ -323,15 +281,4 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, neededPermissions.toArray(new String[0]), 1);
         }
     }
-
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        try {
-//            if (socket != null) socket.close();
-//        }
-//        catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

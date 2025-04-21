@@ -13,8 +13,6 @@ import android.view.WindowManager;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: Have dots update as you receive info from machine and send to read tablet
-// when the page is full
 public class Base2PunchView extends View {
 
     private final int dotRadius = 4; // Dot size for grid points
@@ -97,7 +95,7 @@ public class Base2PunchView extends View {
         for (long number : numbers) {
             bitArray.add(toTwosComplement50Bit(number));
         }
-        Log.d("Base2PunchView", numbers.toString());
+//        Log.d("Base2PunchView", numbers.toString());
         invalidate(); // Redraw the view with new data
     }
 

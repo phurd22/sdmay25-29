@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
     Context context;
     private View topBar;
     private View pageDivider;
-    private TCPServerThread serverThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,19 +90,6 @@ public class MainActivity extends AppCompatActivity {
         resetButton = findViewById(R.id.buttonReset);
         topBar = findViewById(R.id.topBar);
         pageDivider = findViewById(R.id.pageDivider);
-
-        serverThread = new TCPServerThread(message -> {
-            runOnUiThread(() -> {
-                // Do something with the received message
-                Log.d("MAIN", "Message from TCP: " + message);
-
-                // Example: Update UI or pass to BLE device
-//                Toast.makeText(this, "Received: " + message, Toast.LENGTH_SHORT).show();
-            });
-        });
-
-        Log.d("TCPServer", "Starting server thread...");
-        serverThread.start();
 
         List<Long> numbers1 = Arrays.asList(-1L, 750599937895082L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L,
                 -1L, -2L, -3L, -4L, -5L, -6L, -7L, -8L, -9L, -10L,
@@ -199,18 +185,6 @@ public class MainActivity extends AppCompatActivity {
 
         updatePage();
         requestBluetoothPermissions();
-
-        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        DhcpInfo dhcp = wifiManager.getDhcpInfo();
-
-        int gateway = dhcp.gateway;
-        int ip = dhcp.ipAddress;
-
-        String gatewayIp = String.format("%d.%d.%d.%d", (gateway & 0xff), (gateway >> 8 & 0xff), (gateway >> 16 & 0xff), (gateway >> 24 & 0xff));
-        String clientIp = String.format("%d.%d.%d.%d", (ip & 0xff), (ip >> 8 & 0xff), (ip >> 16 & 0xff), (ip >> 24 & 0xff));
-
-        Log.d("IP", "Client IP: " + clientIp);
-        Log.d("IP", "Gateway IP: " + gatewayIp);
     }
 
     @SuppressLint("MissingPermission")
@@ -335,6 +309,7 @@ public class MainActivity extends AppCompatActivity {
         permissions.add(Manifest.permission.INTERNET);
         permissions.add(Manifest.permission.ACCESS_NETWORK_STATE);
         permissions.add(Manifest.permission.ACCESS_WIFI_STATE);
+        permissions.add(Manifest.permission.CHANGE_WIFI_STATE);
 
         List<String> neededPermissions = new ArrayList<>();
         for (String perm : permissions) {
@@ -345,14 +320,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (!neededPermissions.isEmpty()) {
             ActivityCompat.requestPermissions(this, neededPermissions.toArray(new String[0]), 1);
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (serverThread != null) {
-            serverThread.stopServer();
         }
     }
 }
