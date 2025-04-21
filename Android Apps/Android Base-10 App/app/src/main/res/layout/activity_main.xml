@@ -127,7 +127,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <!-- Button 1 -->
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -135,11 +135,11 @@
                 android:layout_rowWeight="1"
                 android:layout_column="0"
                 android:layout_columnWeight="1"
-                android:backgroundTint="@color/punchNumpad"
+                android:background="@drawable/button_border_selector"
                 android:text="1" />
 
             <!-- Button 2 -->
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -147,11 +147,11 @@
                 android:layout_rowWeight="1"
                 android:layout_column="1"
                 android:layout_columnWeight="1"
-                android:backgroundTint="@color/punchNumpad"
+                android:background="@drawable/button_border_selector"
                 android:text="2" />
 
             <!-- Button 3 -->
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button3"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -159,11 +159,11 @@
                 android:layout_rowWeight="1"
                 android:layout_column="2"
                 android:layout_columnWeight="1"
-                android:backgroundTint="@color/punchNumpad"
+                android:background="@drawable/button_border_selector"
                 android:text="3" />
 
             <!-- Button 4 -->
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button4"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -171,11 +171,11 @@
                 android:layout_rowWeight="1"
                 android:layout_column="0"
                 android:layout_columnWeight="1"
-                android:backgroundTint="@color/punchNumpad"
+                android:background="@drawable/button_border_selector"
                 android:text="4" />
 
             <!-- Button 5 -->
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button5"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -183,11 +183,11 @@
                 android:layout_rowWeight="1"
                 android:layout_column="1"
                 android:layout_columnWeight="1"
-                android:backgroundTint="@color/punchNumpad"
+                android:background="@drawable/button_border_selector"
                 android:text="5" />
 
             <!-- Button 6 -->
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button6"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -195,11 +195,11 @@
                 android:layout_rowWeight="1"
                 android:layout_column="2"
                 android:layout_columnWeight="1"
-                android:backgroundTint="@color/punchNumpad"
+                android:background="@drawable/button_border_selector"
                 android:text="6" />
 
             <!-- Button 7 -->
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button7"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -207,11 +207,11 @@
                 android:layout_rowWeight="1"
                 android:layout_column="0"
                 android:layout_columnWeight="1"
-                android:backgroundTint="@color/punchNumpad"
+                android:background="@drawable/button_border_selector"
                 android:text="7" />
 
             <!-- Button 8 -->
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button8"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -219,11 +219,11 @@
                 android:layout_rowWeight="1"
                 android:layout_column="1"
                 android:layout_columnWeight="1"
-                android:backgroundTint="@color/punchNumpad"
+                android:background="@drawable/button_border_selector"
                 android:text="8" />
 
             <!-- Button 9 -->
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button9"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -231,11 +231,11 @@
                 android:layout_rowWeight="1"
                 android:layout_column="2"
                 android:layout_columnWeight="1"
-                android:backgroundTint="@color/punchNumpad"
+                android:background="@drawable/button_border_selector"
                 android:text="9" />
 
             <!-- Button 10 -->
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/buttonClear"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -243,11 +243,11 @@
                 android:layout_rowWeight="1"
                 android:layout_column="0"
                 android:layout_columnWeight="1"
-                android:backgroundTint="@color/punchNumpad"
+                android:background="@drawable/button_border_selector"
                 android:text="C" />
 
             <!-- Button 11 -->
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button0"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -255,11 +255,11 @@
                 android:layout_rowWeight="1"
                 android:layout_column="1"
                 android:layout_columnWeight="1"
-                android:backgroundTint="@color/punchNumpad"
+                android:background="@drawable/button_border_selector"
                 android:text="0" />
 
             <!-- Button 12 -->
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/buttonVariable"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -267,7 +267,7 @@
                 android:layout_rowWeight="1"
                 android:layout_column="2"
                 android:layout_columnWeight="1"
-                android:backgroundTint="@color/punchNumpad"
+                android:background="@drawable/button_border_selector"
                 android:text="X" />
 
         </GridLayout>
@@ -277,20 +277,12 @@
             android:layout_height="40dp"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/esp32Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/punchNumpad"
-                android:text="Connect to ESP32" />
-
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/submitButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/punchNumpad"
+                android:background="@drawable/button_border_selector"
                 android:text="Upload Equation" />
         </LinearLayout>
 
