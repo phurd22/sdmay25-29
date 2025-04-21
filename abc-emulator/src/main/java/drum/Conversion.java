@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+import static src.main.java.asm.AddSubMechanism.addSubWithCard;
+
 public class Conversion {
     private static boolean[][] lookUpTable;
     private static ABCMachine abc;
@@ -49,38 +51,58 @@ public class Conversion {
         return dataArray;
     }
 
-    public static boolean[] getRowByOriginalIndex(boolean[][] array, int originalIndex) {
-        int offset = 4;
-        int index = originalIndex + offset;
-        if (index < 0 || index >= array.length) {
-            throw new IndexOutOfBoundsException("Invalid row index: " + originalIndex);
+    public void convert(int decade, int digit, boolean addSubMode, int bandIndex) {
+        boolean[] band = new boolean[50];
+        int colIndex = 0;
+        int brushOffset = 0;
+        long value = (long) (digit * (Math.pow(10, decade)));
+
+        if (decade > 0) {
+            if (value % 9 == 0) {
+                colIndex = 32 + (decade * 2);
+                brushOffset = 4;
+            } else if (value % 7 == 0) {
+                colIndex = 31 + (decade * 2);
+                brushOffset = 4;
+            } else if (value % 3 == 0) {
+                colIndex = 16 + decade;
+                brushOffset = 5 - (digit / 3);
+            } else if (value % 5 == 0) {
+                int tempValue = 5;
+                colIndex = 1 + decade;
+                if (digit != 5) {
+                    tempValue = digit * 10;
+                    colIndex = decade;
+                }
+                brushOffset = (int) (4 - (Math.log(tempValue / 5.0) / Math.log(2)));
+            }
+        } else {
+            if (value % 9 == 0) {           // 9
+                colIndex = 32;
+                brushOffset = 4;
+            } else if (value % 7 == 0) {    // 7
+                colIndex = 31;
+                brushOffset = 4;
+            } else if (value % 3 == 0) {    // 3, 6
+                colIndex = 16;
+                brushOffset = 5 - (digit / 3);
+            } else if (value % 5 == 0) {    // 5
+                int tempValue = 5;
+                if (digit != 5) {
+                    tempValue = digit * 10;
+                }
+                colIndex = 1;
+                brushOffset = (int) (4 - (Math.log(tempValue / 5.0) / Math.log(2)));
+            } else {                        // 1, 2, 4, 8
+                colIndex = 0;
+                brushOffset = (int) (4 - (Math.log(digit) / Math.log(2)));
+            }
         }
-        return array[index];
+        tableLookup(colIndex, brushOffset, band);
+        addSubWithCard(abc.ca, band, abc.carryDrum, bandIndex, addSubMode);
     }
 
-    public static void printBooleanArrayAsNumbers(boolean[][] data) {
-        String ANSI_RESET = "\u001B[0m";
-        String ANSI_GREEN = "\u001B[32m";
-        String ANSI_RED = "\u001B[31m";
-        int j = -4;
-        for (boolean[] row : data) {
-            System.out.print(j + ": ");
-            ++j;
-            for (int i = 0; i < row.length; i++) {
-                // Choose color based on the boolean value
-                if (row[i]) {
-                    System.out.print(ANSI_GREEN + "1" + ANSI_RESET);
-                } else {
-                    System.out.print(ANSI_RED + "0" + ANSI_RESET);
-                }
-                // Print comma separator if not the last element of the row
-                if (i < row.length - 1) {
-                    System.out.print(", ");
-                }
-            }
-            System.out.println();
-        }
-    }
+
 
     public boolean[] convert(String decimal, int startBandIndex) {
         //--------------------------PADDING-----------------------------------
@@ -150,13 +172,8 @@ public class Conversion {
                     }
                 }
                 tableLookup(colIndex, brushOffset, band);
-                abc.adder.addSubWithCard(abc.ca, band, abc.carryDrum, startBandIndex, isNegative);
+                addSubWithCard(abc.ca, band, abc.carryDrum, startBandIndex, isNegative);
             }
-        }
-        if (isNegative) {
-            boolean[] extraOne = new boolean[50];
-            extraOne[49] = true;
-            AddSubMechanism.addSubWithCard(abc.ca, extraOne, abc.carryDrum, startBandIndex, !isNegative);
         }
         return band;
     }
@@ -167,17 +184,27 @@ public class Conversion {
         }
     }
 
-    public boolean[] addArrays(boolean[] band, boolean[] temp) {
-        boolean[] result = new boolean[50];
-        boolean carry = false;
-        // Start from LSB
-        for (int i = 49; i >= 0; --i) {
-            boolean sumBit = (band[i] ^ temp[i]) ^ carry;
-            boolean newCarry = (band[i] && temp[i]) || (band[i] && carry) || (temp[i] && carry);
-
-            result[i] = sumBit;
-            carry = newCarry;
+    public static void printBooleanArrayAsNumbers(boolean[][] data) {
+        String ANSI_RESET = "\u001B[0m";
+        String ANSI_GREEN = "\u001B[32m";
+        String ANSI_RED = "\u001B[31m";
+        int j = -4;
+        for (boolean[] row : data) {
+            System.out.print(j + ": ");
+            ++j;
+            for (int i = 0; i < row.length; i++) {
+                // Choose color based on the boolean value
+                if (row[i]) {
+                    System.out.print(ANSI_GREEN + "1" + ANSI_RESET);
+                } else {
+                    System.out.print(ANSI_RED + "0" + ANSI_RESET);
+                }
+                // Print comma separator if not the last element of the row
+                if (i < row.length - 1) {
+                    System.out.print(", ");
+                }
+            }
+            System.out.println();
         }
-        return result;
     }
 }
