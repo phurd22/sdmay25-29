@@ -14,9 +14,16 @@ import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothSocket;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.net.wifi.WpsInfo;
+import android.net.wifi.p2p.WifiP2pConfig;
+import android.net.wifi.p2p.WifiP2pDevice;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -29,6 +36,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
     private final long BTDebounceDelay = 10;
     private long lastUpdateTime;
     Context context;
+    private BroadcastReceiver receiver;
+    private final IntentFilter intentFilter = new IntentFilter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +86,26 @@ public class MainActivity extends AppCompatActivity {
         binaryStringArray = new ArrayList<>();
         lastUpdateTime = 0;
 
+        // Setup intent filters
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
+
+        WifiP2pManager manager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
+        WifiP2pManager.Channel channel = manager.initialize(this, getMainLooper(), null);
+
+        // Create and connect sender
+        WiFiDirectSender sender = new WiFiDirectSender(this, manager, channel);
+        sender.discoverAndConnect();
+
+        // Set up receiver with sender's listeners
+        receiver = new WiFiDirectBroadcastReceiver(
+                manager, channel,
+                sender.getPeerListListener(),
+                sender.getConnectionListener("Hello from sender!") // Change message here!
+        );
+
         resetBinaryStrings();
         updatePage();
         requestBluetoothPermissions();
@@ -83,6 +120,18 @@ public class MainActivity extends AppCompatActivity {
         else {
             Toast.makeText(this, "Already connected to ESP32", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(receiver, intentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(receiver);
     }
 
     private void resetBinaryStrings() {
@@ -269,6 +318,7 @@ public class MainActivity extends AppCompatActivity {
         permissions.add(Manifest.permission.ACCESS_NETWORK_STATE);
         permissions.add(Manifest.permission.ACCESS_WIFI_STATE);
         permissions.add(Manifest.permission.CHANGE_WIFI_STATE);
+        permissions.add(Manifest.permission.NEARBY_WIFI_DEVICES);
 
         List<String> neededPermissions = new ArrayList<>();
         for (String perm : permissions) {

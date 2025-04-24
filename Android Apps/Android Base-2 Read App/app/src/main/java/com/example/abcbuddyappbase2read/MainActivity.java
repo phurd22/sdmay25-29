@@ -13,10 +13,16 @@ import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothSocket;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.DhcpInfo;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
+import android.net.wifi.p2p.WifiP2pInfo;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -35,8 +41,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,7 +75,38 @@ public class MainActivity extends AppCompatActivity {
     Context context;
     private View topBar;
     private View pageDivider;
+    private BroadcastReceiver receiver;
+    private final IntentFilter intentFilter = new IntentFilter();
+    private WifiP2pManager manager;
+    private WifiP2pManager.Channel channel;
+    private WiFiDirectReceiver receiverObj;
+    private final BroadcastReceiver wifiP2pReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
+                NetworkInfo networkInfo = (NetworkInfo) intent.getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
+                if (networkInfo != null && networkInfo.isConnected()) {
+                    // Group formed successfully, handle connection info
+                    WifiP2pInfo wifiP2pInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_WIFI_P2P_INFO);
+                    if (wifiP2pInfo != null) {
+                        Log.d("WiFiReceiver", "Group formed. Am I Group Owner? " + wifiP2pInfo.isGroupOwner);
+                        // Pass the info to the ConnectionInfoListener
+                        receiverObj.getConnectionListener().onConnectionInfoAvailable(wifiP2pInfo);
 
+                        if (wifiP2pInfo.isGroupOwner) {
+                            new ServerThread().start();  // Start server thread if group owner
+                        }
+                    }
+                } else {
+                    Log.d("WiFiReceiver", "Group not formed or disconnected.");
+                }
+            }
+        }
+    };
+
+
+    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +131,38 @@ public class MainActivity extends AppCompatActivity {
         resetButton = findViewById(R.id.buttonReset);
         topBar = findViewById(R.id.topBar);
         pageDivider = findViewById(R.id.pageDivider);
+
+        // Setup intent filters
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
+
+        WifiP2pManager manager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
+        WifiP2pManager.Channel channel = manager.initialize(this, getMainLooper(), null);
+
+        manager.createGroup(channel, new WifiP2pManager.ActionListener() {
+            @Override
+            public void onSuccess() {
+                Log.d("WiFiDirectReceiver", "Group created successfully");
+            }
+
+            @Override
+            public void onFailure(int reason) {
+                Log.d("WiFiDirectReceiver", "Group creation failed: " + reason);
+            }
+        });
+
+        // Create and connect receiver
+        WiFiDirectReceiver receiverObj = new WiFiDirectReceiver(this, manager, channel);
+        receiverObj.discoverAndConnect();
+
+        // Set up receiver with receiver's listeners
+        receiver = new WiFiDirectBroadcastReceiver(
+                manager, channel,
+                receiverObj.getPeerListListener(),
+                receiverObj.getConnectionListener()
+        );
 
         List<Long> numbers1 = Arrays.asList(-1L, 750599937895082L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L,
                 -1L, -2L, -3L, -4L, -5L, -6L, -7L, -8L, -9L, -10L,
@@ -310,6 +383,7 @@ public class MainActivity extends AppCompatActivity {
         permissions.add(Manifest.permission.ACCESS_NETWORK_STATE);
         permissions.add(Manifest.permission.ACCESS_WIFI_STATE);
         permissions.add(Manifest.permission.CHANGE_WIFI_STATE);
+        permissions.add(Manifest.permission.NEARBY_WIFI_DEVICES);
 
         List<String> neededPermissions = new ArrayList<>();
         for (String perm : permissions) {
@@ -320,6 +394,23 @@ public class MainActivity extends AppCompatActivity {
 
         if (!neededPermissions.isEmpty()) {
             ActivityCompat.requestPermissions(this, neededPermissions.toArray(new String[0]), 1);
+        }
+    }
+
+    private static class ServerThread extends Thread {
+        public void run() {
+            try (ServerSocket serverSocket = new ServerSocket(5050)) {
+                Log.d("MainActivityServer", "Server started, waiting for client...");
+                Socket client = serverSocket.accept();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    Log.d("MainActivityServer", "Received: " + line);
+                }
+                client.close();
+            } catch (Exception e) {
+                Log.e("MainActivityServer", "Receive error", e);
+            }
         }
     }
 }
