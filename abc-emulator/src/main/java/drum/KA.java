@@ -11,37 +11,23 @@ public class KA extends Drum {
     }
 
     public void shiftRight() {
-        for (int j = 0; j < data.length; j++) {
-            boolean oldSign = data[j][49];  // save the current sign bit
-            // Shift bits [0..48] to the right by 1 (LSB is dropped, bit i+1 becomes bit i)
-            for (int i = 0; i < 49; i++) {
-                data[j][i] = data[j][i + 1];
+        for (int band = 0; band < data.length; ++band) {
+            boolean sign = data[band][MSB];
+            for (int bit = LSB; bit > MSB; --bit) {
+                data[band][bit] = data[band][bit - 1];
             }
-            // Fill the MSB with the old sign bit to preserve sign (arithmetic shift)
-            data[j][49] = oldSign;
+            data[band][MSB] = sign;
         }
         ++shiftCount;
     }
 
     public void shiftLeft() {
-        for (int j = 0; j < data.length; j++) {
-            // Save the current sign bit from this band
-            boolean oldSign = data[j][49];
-
-            // Shift bits [1..49] to the left by 1
-            // so bit i-1 moves into bit i
-            for (int i = 49; i > 0; i--) {
-                data[j][i] = data[j][i - 1];
+        for (int band = 0; band < data.length; ++band) {
+            for (int bit = MSB; bit < LSB; ++bit) {
+                data[band][bit] = data[band][bit + 1];
             }
-
-            // Typically we fill the new LSB (bit 0) with false (0)
-            // but if you have special rules, you could do that here
-            data[j][0] = false;
-
-            // Restore the original sign bit (arithmetic shift)
-            data[j][49] = oldSign;
+            data[band][LSB] = false;
         }
-        ++shiftCount;
     }
 
     // Reset shift counter

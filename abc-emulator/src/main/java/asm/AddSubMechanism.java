@@ -2,41 +2,41 @@ package src.main.java.asm;
 
 import src.main.java.drum.CA;
 import src.main.java.drum.Carry;
+import src.main.java.drum.Drum;
 import src.main.java.drum.KA;
 
 public class AddSubMechanism {
 
+    public static final int MSB = 0;
+    public static final int LSB = 49;
+
     public void operation(CA ca, KA ka, Carry carryDrum, boolean addSubMode, int selectedCoefficiennt) {
-        carryDrum.clear();
         while (!ca.isZero(selectedCoefficiennt)) {
+            carryDrum.clear();
             boolean sign = ca.getData()[selectedCoefficiennt][0];
             addSubWithKA(ca, ka, carryDrum, addSubMode);
             if (sign != ca.getData()[selectedCoefficiennt][0]) {
-                System.out.println("Swap");
                 addSubMode = !addSubMode;
                 if (ka.getShiftCount() == 50){
                     break;
                 }
-                ka.shiftLeft();
+                ka.shiftRight();
             }
         }
+        ka.resetShiftCount();
     }
 
     public static void addSubWithKA(CA ca, KA ka, Carry carryDrum, boolean addSubMode) {
         for (int band = 0; band < 30; ++band) {
-            carryDrum.clear();
             processBand(ca.getData()[band], ka.getData()[band], carryDrum, band, addSubMode);
-            if (addSubMode) {
-                boolean[] extraOne = new boolean[50];
-                extraOne[49] = true;
-                processBand(ca.getData()[band], extraOne, carryDrum, band, !addSubMode);
-            }
         }
     }
 
-    public static void addSubWithCard(CA ca, boolean[] card, Carry carryDrum, int bandIndex, boolean addSubMode) {
+    public void addSubWithCard(CA ca, boolean[] card, Carry carryDrum, int bandIndex, boolean addSubMode) {
+        carryDrum.clear();
         processBand(ca.getData()[bandIndex], card, carryDrum, bandIndex, addSubMode);
     }
+
 
     public static void processBand(boolean[] caBand, boolean[] kaCardBand, Carry carryDrum, int bandIndex, boolean addSubMode) {
         boolean carryIn = carryDrum.getData()[bandIndex][0];
@@ -58,13 +58,13 @@ public class AddSubMechanism {
     }
 
     public static ASMResult addSubBit(boolean X, boolean Y, boolean carryIn, boolean addSub) {
-        // Invert Y if we are doing subtraction
-        boolean yPrime = Y ^ addSub;
-
-        // Perform the usual 3-input full-adder on X, yPrime, and carryIn
-        boolean sum = X ^ yPrime ^ carryIn;
-        boolean carryOut = (X && yPrime) || (X && carryIn) || (yPrime && carryIn);
-
+        boolean carryOut;
+        boolean sum = X ^ Y ^ carryIn;
+        if (!addSub) {
+            carryOut = (X && Y) || (X && carryIn) || (carryIn && Y);
+        } else{
+            carryOut = ((!X) && Y) || ((!X) && carryIn) || (carryIn && Y);
+        }
         return new ASMResult(sum, carryOut);
     }
 }

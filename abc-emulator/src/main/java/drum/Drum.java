@@ -1,6 +1,10 @@
 package src.main.java.drum;
 
+import java.math.BigInteger;
+
 public class Drum {
+    public static final int MSB = 0;
+    public static final int LSB = 49;
     protected final int bands;
     protected final int bits;
     protected final boolean[][] data;
@@ -93,7 +97,30 @@ public class Drum {
                     System.out.print(RED + "0" + RESET);
                 }
             }
+            System.out.print(": " + toBigInteger(i));
             System.out.println();
         }
+    }
+
+    public Drum deepCopy() {
+        Drum clone = new Drum(bands, bits);
+        for (int b = 0; b < bands; b++)
+            clone.data[b] = this.data[b].clone();
+        return clone;
+    }
+
+    public BigInteger toBigInteger(int band) {
+        if (data[band] == null || data[band].length != 50)
+            throw new IllegalArgumentException("Array must be 50 bits long");
+
+        BigInteger value = BigInteger.ZERO;
+        for (int i = 0; i < 50; i++) {
+            value = value.shiftLeft(1);
+            if (data[band][i]) value = value.add(BigInteger.ONE);
+        }
+        if (data[band][0]) {                  // negative → two’s‑complement adjust
+            value = value.subtract(BigInteger.ONE.shiftLeft(50));
+        }
+        return value;
     }
 }
