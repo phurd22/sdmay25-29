@@ -10,6 +10,8 @@ const int sendPin = 14;
 int send = 0;
 int count = 0;
 
+BLEServer *pServer = nullptr;
+
 // Callback class for handling incoming BLE writes
 // class MyCallbacks : public BLECharacteristicCallbacks {
 
@@ -23,6 +25,17 @@ String generateRandomBinaryString(int length) {
   return result;
 }
 
+class MyServerCallbacks : public BLEServerCallbacks {
+  void onConnect(BLEServer* pServer) {
+    Serial.println("Client connected");
+  }
+
+  void onDisconnect(BLEServer* pServer) {
+    Serial.println("Client disconnected, restarting advertising...");
+    BLEDevice::startAdvertising(); // Restart advertising so Android can reconnect
+  }
+};
+
 void setup() {
   Serial.begin(115200);
 
@@ -31,7 +44,8 @@ void setup() {
   // Setup for BLE
   BLEDevice::init("Base2SenderESP32");
   BLEDevice::setMTU(100);
-  BLEServer *pServer = BLEDevice::createServer();
+  pServer = BLEDevice::createServer();
+  pServer->setCallbacks(new MyServerCallbacks());
   BLEService *pService = pServer->createService(SERVICE_UUID);
   pCharacteristic = pService->createCharacteristic(
     CHARACTERISTIC_UUID,

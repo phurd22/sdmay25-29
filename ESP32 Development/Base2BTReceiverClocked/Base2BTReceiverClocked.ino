@@ -19,6 +19,8 @@ int prevClkValue = 0;
 int currClkValue = 0;
 int newPosEdge = 0;
 
+BLEServer *pServer = nullptr;
+
 // Callback class for handling incoming BLE writes
 class MyCallbacks : public BLECharacteristicCallbacks {
   String receivedData = ""; // Buffer for incoming data
@@ -41,6 +43,17 @@ class MyCallbacks : public BLECharacteristicCallbacks {
   }
 };
 
+class MyServerCallbacks : public BLEServerCallbacks {
+  void onConnect(BLEServer* pServer) {
+    Serial.println("Client connected");
+  }
+
+  void onDisconnect(BLEServer* pServer) {
+    Serial.println("Client disconnected, restarting advertising...");
+    BLEDevice::startAdvertising(); // Restart advertising so Android can reconnect
+  }
+};
+
 void setup() {
   Serial.begin(115200);
 
@@ -52,7 +65,8 @@ void setup() {
   // Setup for BLE
   BLEDevice::init("Base2ReceiverESP32");
   BLEDevice::setMTU(100);
-  BLEServer *pServer = BLEDevice::createServer();
+  pServer = BLEDevice::createServer();
+  pServer->setCallbacks(new MyServerCallbacks());
   BLEService *pService = pServer->createService(SERVICE_UUID);
   BLECharacteristic *pCharacteristic =
     pService->createCharacteristic(CHARACTERISTIC_UUID, BLECharacteristic::PROPERTY_READ | BLECharacteristic::PROPERTY_WRITE);

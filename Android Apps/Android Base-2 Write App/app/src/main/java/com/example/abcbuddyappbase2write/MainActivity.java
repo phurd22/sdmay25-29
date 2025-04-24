@@ -50,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
     private final long BTDebounceDelay = 10;
     private long lastUpdateTime;
     Context context;
+    private BluetoothSocket classicSocket;
+    private final UUID CLASSIC_UUID = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
+    private final String READ_TABLET_MAC = "0B:0B:01:04:48:35";
+    private boolean sendingData = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,48 @@ public class MainActivity extends AppCompatActivity {
         else {
             Toast.makeText(this, "Already connected to ESP32", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @SuppressLint("MissingPermission")
+    public void relayDataToAndroidDevice(String message) {
+        sendingData = true;
+        Log.d("Relay", "Starting data relay to Android device");
+
+        // Disconnect from ESP32
+        if (bluetoothGatt != null) {
+            Log.d("Relay", "Disconnecting from ESP32");
+            bluetoothGatt.disconnect();
+        }
+
+        // Send via Classic Bluetooth (in new thread)
+        new Thread(() -> {
+            try {
+                BluetoothDevice otherDevice = bluetoothAdapter.getRemoteDevice(READ_TABLET_MAC);
+                classicSocket = otherDevice.createRfcommSocketToServiceRecord(CLASSIC_UUID);
+                bluetoothAdapter.cancelDiscovery();
+                classicSocket.connect();
+
+                OutputStream outputStream = classicSocket.getOutputStream();
+                outputStream.write(message.getBytes(StandardCharsets.UTF_8));
+                outputStream.flush();
+                Thread.sleep(100);
+
+                Log.d("Relay", "Data sent to Android device: " + message);
+                classicSocket.close();
+
+            } catch (IOException e) {
+                Log.e("Relay", "Error sending data over classic Bluetooth", e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            // Reconnect to ESP32 (BLE)
+            runOnUiThread(() -> {
+                Log.d("Relay", "Reconnecting to ESP32...");
+                startScan(); // Start scanning to reconnect
+            });
+            sendingData = false;
+        }).start();
     }
 
     private void resetBinaryStrings() {
@@ -171,7 +217,9 @@ public class MainActivity extends AppCompatActivity {
                     // Restart scanning
                     bluetoothGatt.close(); // release resources
                     bluetoothGatt = null;
-                    runOnUiThread(() -> startScan());
+                    if (!sendingData) {
+                        runOnUiThread(() -> startScan());
+                    }
                 }
             }
 
@@ -237,7 +285,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                     String finalMessage = message;
-                    Log.d("BLE", "Sending message: " + finalMessage);
+                    Log.d("ClassicBT", "Sending message: " + finalMessage);
+                    relayDataToAndroidDevice(finalMessage);
                     resetBinaryStrings();
                     binaryIndex = 49;
                 }
@@ -279,6 +328,22 @@ public class MainActivity extends AppCompatActivity {
 
         if (!neededPermissions.isEmpty()) {
             ActivityCompat.requestPermissions(this, neededPermissions.toArray(new String[0]), 1);
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (bluetoothGatt != null) {
+            bluetoothGatt.close();
+        }
+        if (classicSocket != null) {
+            try {
+                classicSocket.close();
+            } catch (IOException e) {
+                Log.e("Cleanup", "Error closing classic BT socket", e);
+            }
         }
     }
 }
