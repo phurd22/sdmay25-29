@@ -71,9 +71,6 @@ public class MainActivity extends AppCompatActivity {
     private volatile boolean listening = false;
     private Thread classicListenerThread;
 
-    //TODO: GET RID OF THE EMPTY PAGES, START WITH ONE PAGE WITH COOL PATTERN FOR ALL FOUR NUMBERS
-    // ADD PAGES WHEN RECEIVING FROM BLUETOOTH, THAT IS ALL
-
     @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         context = this;
-        currentPage = 0;
-        totalPages = 0;
+        currentPage = 1;
+        totalPages = 1;
 
         pageButtonContainer = findViewById(R.id.pageButtonContainer);
         base2PunchView = findViewById(R.id.base2PunchView);
@@ -100,9 +97,9 @@ public class MainActivity extends AppCompatActivity {
         topBar = findViewById(R.id.topBar);
         pageDivider = findViewById(R.id.pageDivider);
 
-//        List<Long> numbers1 = Arrays.asList(-1L, 750599937895082L, 900719925474099L, 1059670500557763L, 5L, 6L, 7L, 8L, 9L, 10L,
-//                -1L, -2L, -3L, -4L, -5L, -6L, -7L, -8L, -9L, -10L,
-//                100L, 200L, 300L, 400L, 500L, 600L, 700L, 800L, 900L, -1L);
+        List<Long> numbers1 = Arrays.asList(-1L, 750599937895082L, 900719925474099L, 1059670500557763L, 5L, 6L, 7L, 8L, 9L, 10L,
+                -1L, -2L, -3L, -4L, -5L, -6L, -7L, -8L, -9L, -10L,
+                100L, 200L, 300L, 400L, 500L, 600L, 700L, 800L, 900L, -1L);
 
 //        List<Long> numbers2 = Arrays.asList(-1L, 20L, 30L, 40L, 50L, 60L, 70L, 80L, 90L, 100L,
 //                100L, 200L, 300L, 400L, 500L, 600L, 700L, 800L, 900L, 1000L,
@@ -113,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 //                1048576L, 2097152L, 4194304L, 8388608L, 16777216L, 33554432L, 67108864L,
 //                134217728L, 268435456L, 536870912L);
 
-//        allNumbers.add(numbers1);
+        allNumbers.add(numbers1);
 //        allNumbers.add(numbers2);
 //        allNumbers.add(numbers3);
 
@@ -171,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                     .setTitle("Confirm Reset")
                     .setMessage("Are you sure you want to reset?")
                     .setPositiveButton("Cancel", (dialog, which) -> dialog.dismiss())
-                    .setNegativeButton("Yes", (dialog, which) -> Log.d("Reset", "Reset confirmed"))
+                    .setNegativeButton("Yes", (dialog, which) -> reset())
                     .setCancelable(false)
                     .show();
         });
@@ -212,6 +209,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void reset() {
+        Log.d("Reset", "Reset confirmed");
+        pageDivider.setVisibility(View.GONE);
+        topBar.setVisibility(View.GONE);
         currentPage = 0;
         totalPages = 0;
         allNumbers.clear();
