@@ -7,8 +7,12 @@
 
 BLECharacteristic *pCharacteristic;
 const int sendPin = 14;
-int send = 0;
-int count = 0;
+int send;
+int count;
+unsigned long lastNewValue;
+unsigned long lastSent;
+unsigned long timer;
+String binaryBuffer = "";
 
 BLEServer *pServer = nullptr;
 
@@ -39,6 +43,12 @@ class MyServerCallbacks : public BLEServerCallbacks {
 void setup() {
   Serial.begin(115200);
 
+  send = 0;
+  count = 0;
+  lastNewValue = 0;
+  lastSent = 0;
+  timer = 0;
+
   pinMode(sendPin, INPUT);
 
   // Setup for BLE
@@ -66,40 +76,46 @@ void setup() {
 // TODO: Going to need some logic to hold onto bits and only send every ~100 ms or else it gets 
 // too fast for the BLE connection. Only send when you have new buffered data.
 void loop() {
-  unsigned long lastSent = 0;
-  unsigned long time = 0;
-
   if (digitalRead(sendPin) == HIGH) {
     send = 1;
   }
 
-  if (send == 1) {
-    for (int i = 0; i < 50; i++) {
-      String binString = generateRandomBinaryString(4);
-      pCharacteristic->setValue(binString.c_str());
-      pCharacteristic->notify();
-      Serial.print("Sent: ");
-      Serial.println(binString);
-      Serial.print("Index: ");
-      Serial.println(i);
-      Serial.println("-------------------------------------");
-      delay(100);
-    }
-    send = 0;
-  }
-
-  // time = millis();
-  // if (time - lastSent > 250 && send == 1) {
-  //   lastSent = time;
-  //   String binString = generateRandomBinaryString(4);
-  //   pCharacteristic->setValue(binString.c_str());
-  //   pCharacteristic->notify();
-  //   Serial.print("Sent: ");
-  //   Serial.println(binString);
-  //   count++;
-  //   if (count == 50) {
-  //     count = 0;
-  //     send = 0;
+  // if (send == 1) {
+  //   for (int i = 0; i < 50; i++) {
+  //     String binString = generateRandomBinaryString(4);
+  //     pCharacteristic->setValue(binString.c_str());
+  //     pCharacteristic->notify();
+  //     Serial.print("Sent: ");
+  //     Serial.println(binString);
+  //     Serial.print("Index: ");
+  //     Serial.println(i);
+  //     Serial.println("-------------------------------------");
+  //     delay(100);
   //   }
+  //   send = 0;
   // }
+
+  timer = millis();
+  if (timer - lastNewValue > 20 && send == 1 && count < 50) {
+    lastNewValue = timer;
+    binaryBuffer += generateRandomBinaryString(4);
+    count++;
+  }
+  if (timer - lastSent > 100 && send == 1) {
+    lastSent = timer;
+    // String binString = generateRandomBinaryString(4);
+    pCharacteristic->setValue(binaryBuffer.c_str());
+    pCharacteristic->notify();
+    Serial.print("Sent: ");
+    Serial.println(binaryBuffer);
+    Serial.print("Count: ");
+    Serial.println(count);
+    Serial.println("---------------------------------------");
+    binaryBuffer = "";
+    // count++;
+    if (count == 50) {
+      count = 0;
+      send = 0;
+    }
+  }
 }

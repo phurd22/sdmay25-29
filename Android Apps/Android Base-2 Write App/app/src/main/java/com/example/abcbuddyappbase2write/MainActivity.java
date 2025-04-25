@@ -258,16 +258,22 @@ public class MainActivity extends AppCompatActivity {
                 }
                 lastUpdateTime = currentTime;
 
+                // String format is a binary number of unknown length, but with length divisible by 4,
+                // add first four to respective binary string from binaryStringArray, and continue
+                // until out of values in the message string.
                 Log.d("BLE", "-----------------------------------------------------");
                 Log.d("BLE", "Received from ESP32: " + value);
-                for (int i = 0; i < 4; i++) {
-                    String newString = binaryStringArray.get(i);
+                for (int i = 0; i < value.length(); i++) {
+                    String newString = binaryStringArray.get(i % 4);
                     StringBuilder sb = new StringBuilder(newString);
                     sb.setCharAt(binaryIndex, value.charAt(i));
-                    binaryStringArray.set(i, sb.toString());
+                    binaryStringArray.set(i % 4, sb.toString());
+                    if (i % 4 == 3) {
+                        binaryIndex--;
+                    }
                 }
                 Log.d("Binary Strings", "Binary Index: " + binaryIndex);
-                binaryIndex--;
+//                binaryIndex--;
                 runOnUiThread(MainActivity.this::updatePage);
                 if (binaryIndex < 0) {
                     Log.d("Binary Strings", "Resetting Strings");
