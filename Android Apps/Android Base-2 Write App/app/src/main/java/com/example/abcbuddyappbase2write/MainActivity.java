@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Long> numbers;
     private BluetoothAdapter bluetoothAdapter;
     private BluetoothGatt bluetoothGatt;
-    private final String DEVICE_ADDRESS = "94:A9:90:0A:4F:E9"; // ESP32 BLE address
+    private final String DEVICE_ADDRESS = "CC:8D:A2:ED:CF:11"; // ESP32 BLE address
     private final UUID SERVICE_UUID = UUID.fromString("246ccada-310c-46a4-9881-3d2feb165646");
     private final UUID CHARACTERISTIC_UUID = UUID.fromString("9d5a6f5c-e32c-429f-9faa-8209e6f2dda4");
     private ArrayList<String> binaryStringArray;

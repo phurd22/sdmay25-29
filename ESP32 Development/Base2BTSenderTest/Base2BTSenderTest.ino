@@ -6,7 +6,7 @@
 #define CHARACTERISTIC_UUID "9d5a6f5c-e32c-429f-9faa-8209e6f2dda4"
 
 BLECharacteristic *pCharacteristic;
-const int sendPin = 14;
+const int sendPin = 13;
 int send;
 int count;
 unsigned long lastNewValue;
