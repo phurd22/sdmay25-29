@@ -14,19 +14,23 @@ const int bitInputPins[4][5] = {
   //{3, 8, 18, 17, 16}   // Group 5
 };
 
-const int buttonPin = 1;
+// const int buttonPin = 1;
 
 String numbers[4] = {"0", "0", "0", "0"}; // Default values
 String receivedData = ""; // Buffer for incoming data
-const int clkPin = 14;
+// const int clkPin = 14;
 const int numberLength = 15;
+// const int goPin = UNKNOWN;
 bool buttonPressed;
 int prevClkValue = 0;
 int currClkValue = 0;
 int newPosEdge = 0;
 int fourBitCounter = 0;
 const int rstPin = 13;
-const int counterBitPins[4] = {12, 11, 10, 9};
+const int counterFourBitPins[4] = {12, 11, 10, 9};  // b3, b2, b1, b0
+int counterValue = 0;
+int prevCounterValue = 0;
+int newData = 0;
 
 void parseBluetoothData(String data);
 void setSignBits();
@@ -35,6 +39,7 @@ void padData();
 void clearNumBits();
 void displayDigit(int group, int digit);
 void displayCounter();
+int readInputCounter();
 
 // Callback class for handling incoming BLE writes
 class MyCallbacks : public BLECharacteristicCallbacks {
@@ -48,6 +53,8 @@ class MyCallbacks : public BLECharacteristicCallbacks {
       if (receivedData.indexOf('d') != -1) {
         Serial.println("Received: " + receivedData); // Print the received value
         parseBluetoothData(receivedData);
+        padData();
+        newData = 1;
 
         // Reset buffer
         receivedData = "";
@@ -67,9 +74,9 @@ void setup() {
     }
   }
   for (int i = 0; i < 4; i++) {
-    pinMode(counterBitPins[i], OUTPUT);
+    pinMode(counterFourBitPins[i], INPUT);
   }
-  pinMode(buttonPin, INPUT);
+  // pinMode(buttonPin, INPUT);
   pinMode(clkPin, INPUT);
   pinMode(rstPin, INPUT);
 
@@ -91,66 +98,68 @@ void setup() {
 }
 
 void loop() {
+  prevCounterValue = counterValue;
+  counterValue = readInputCounter();
+  if (counterValue != prevCounterValue && newData) {
+    // Need to figure out how counter is working, should only start when is at highest value
+    // When to reset newData variable and clear the bits?
+  }
+
   clearNumBits();
   clearSignBits();
 
   // Get clock edge
-  prevClkValue = currClkValue;
-  if (digitalRead(clkPin) == HIGH) {
-    currClkValue = 1;
-  }  
-  else {
-    currClkValue = 0;
-  }
-  if (prevClkValue == 0 && currClkValue == 1) {
-    newPosEdge = 1;
-  }
-  else {
-    newPosEdge = 0;
-  }
+  // prevClkValue = currClkValue;
+  // if (digitalRead(clkPin) == HIGH) {
+  //   currClkValue = 1;
+  // }  
+  // else {
+  //   currClkValue = 0;
+  // }
+  // if (prevClkValue == 0 && currClkValue == 1) {
+  //   newPosEdge = 1;
+  // }
+  // else {
+  //   newPosEdge = 0;
+  // }
 
-  if (newPosEdge) {
-    if (digitalRead(rstPin) == LOW) {
-      fourBitCounter = 0;
-    }
-    else {
-      if (fourBitCounter + 1 > 15) {
-        fourBitCounter = 0;
-      }
-      else {
-        fourBitCounter++;
-      }
-    }
-    displayCounter();
-  }
+  // if (newPosEdge) {
+  //   if (digitalRead(rstPin) == LOW) {
+  //     fourBitCounter = 0;
+  //   }
+  //   else {
+  //     if (fourBitCounter + 1 > 15) {
+  //       fourBitCounter = 0;
+  //     }
+  //     else {
+  //       fourBitCounter++;
+  //     }
+  //   }
+  //   displayCounter();
+  // }
 
-  if (digitalRead(buttonPin) == HIGH) {
-    buttonPressed = true;
-  }
+  // if (digitalRead(buttonPin) == HIGH) {
+  //   buttonPressed = true;
+  // }
 
-  if (buttonPressed) {
-    setSignBits();
-    padData();
-    for (int pos = 0; pos < numberLength; pos++) {
-      clearNumBits();
-      for (int i = 0; i < 4; i++) {
-        displayDigit(i, numbers[i][pos]);
-      }
-      delay(500);
-    }
-    buttonPressed = false;
-  }
+  // if (buttonPressed) {
+  //   setSignBits();
+  //   padData();
+  //   for (int pos = 0; pos < numberLength; pos++) {
+  //     clearNumBits();
+  //     for (int i = 0; i < 4; i++) {
+  //       displayDigit(i, numbers[i][pos]);
+  //     }
+  //     delay(500);
+  //   }
+  //   buttonPressed = false;
+  // }
 }
 
-void displayCounter() {
-  for (int i = 0; i < 4; i++) {
-    if ((fourBitCounter >> i) & 1) {
-      digitalWrite(counterBitPins[i], HIGH);
-    }
-    else {
-      digitalWrite(counterBitPins[i], LOW);
-    }
-  }
+int readInputCounter() {
+  int value = (digitalRead(counterFourBitPins[0]) << 3) | (digitalRead(counterFourBitPins[1]) << 2) | 
+         (digitalRead(counterFourBitPins[2]) << 1) | (digitalRead(counterFourBitPins[3]));
+  return value;
 }
 
 void parseBluetoothData(String data) {
@@ -193,14 +202,6 @@ void displayDigit(int group, int digit) {
 
   for (int i = 0; i < 4; i++) {
     digitalWrite(bitInputPins[group][i], (value >> i) & 1);
-  }
-}
-
-void clearNumBits() {
-  for (int i = 0; i < 4; i++) {
-    for (int g = 0; g < 4; g++) {
-      digitalWrite(bitInputPins[i][g], LOW);
-    }
   }
 }
 
