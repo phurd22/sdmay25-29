@@ -18,19 +18,21 @@ const int bitInputPins[4][5] = {
 
 String numbers[4] = {"0", "0", "0", "0"}; // Default values
 String receivedData = ""; // Buffer for incoming data
-// const int clkPin = 14;
 const int numberLength = 15;
-// const int goPin = UNKNOWN;
-bool buttonPressed;
-int prevClkValue = 0;
-int currClkValue = 0;
-int newPosEdge = 0;
-int fourBitCounter = 0;
-const int rstPin = 13;
-const int counterFourBitPins[4] = {12, 11, 10, 9};  // b3, b2, b1, b0
+// bool buttonPressed;
+// int prevClkValue = 0;
+// int currClkValue = 0;
+// int newPosEdge = 0;
+// int fourBitCounter = 0;
+const int goPin = 13;
+const int counterFourBitPins[4] = {9, 10, 11, 12};  // b3, b2, b1, b0
 int counterValue = 0;
-int prevCounterValue = 0;
+// int prevCounterValue = 0;
 int newData = 0;
+int displaying = 0;
+int initialNum = 1;
+int endOfCycle = 0;
+int skipLoop = 0;
 
 void parseBluetoothData(String data);
 void setSignBits();
@@ -38,7 +40,7 @@ void clearSignBits();
 void padData();
 void clearNumBits();
 void displayDigit(int group, int digit);
-void displayCounter();
+// void displayCounter();
 int readInputCounter();
 
 // Callback class for handling incoming BLE writes
@@ -53,13 +55,12 @@ class MyCallbacks : public BLECharacteristicCallbacks {
       if (receivedData.indexOf('d') != -1) {
         Serial.println("Received: " + receivedData); // Print the received value
         parseBluetoothData(receivedData);
-        padData();
+        // padData();
         newData = 1;
 
         // Reset buffer
         receivedData = "";
       }
-      
     }
   }
 };
@@ -67,7 +68,7 @@ class MyCallbacks : public BLECharacteristicCallbacks {
 void setup() {
   Serial.begin(115200);
 
-  buttonPressed = false;
+  // buttonPressed = false;
   for (int i = 0; i < 4; i++) {
     for (int g = 0; g < 5; g++) {
       pinMode(bitInputPins[i][g], OUTPUT);
@@ -77,8 +78,10 @@ void setup() {
     pinMode(counterFourBitPins[i], INPUT);
   }
   // pinMode(buttonPin, INPUT);
-  pinMode(clkPin, INPUT);
-  pinMode(rstPin, INPUT);
+  // pinMode(clkPin, INPUT);
+  pinMode(goPin, INPUT);
+  clearNumBits();
+  clearSignBits();
 
   // Setup for BLE
   BLEDevice::init("Base10ESP32");
@@ -98,15 +101,65 @@ void setup() {
 }
 
 void loop() {
-  prevCounterValue = counterValue;
-  counterValue = readInputCounter();
-  if (counterValue != prevCounterValue && newData) {
-    // Need to figure out how counter is working, should only start when is at highest value
-    // When to reset newData variable and clear the bits?
+  // counter goes 14 to 0
+  skipLoop = 0;
+  if (counterValue != readInputCounter() + 1) {
+    skipLoop = 1;
+  }
+  if (counterValue == 0 && readInputCounter() != 14) {
+    skipLoop = 1;
   }
 
-  clearNumBits();
-  clearSignBits();
+  // Skip the loop if getting erroneous read from inputs
+  // Also, only perform loop if on next counter value
+  if (!skipLoop) {
+    counterValue = readInputCounter();
+    Serial.print("Counter: ");
+    Serial.println(counterValue);
+    // Serial.print("PrevCounter: ");
+    // Serial.println(prevCounterValue);
+
+    // Reset when cycle is finished
+    if (endOfCycle && counterValue == 14) {
+      endOfCycle = 0;
+      displaying = 0;
+      newData = 0;
+      clearNumBits();
+      clearSignBits();
+    }
+
+    if (digitalRead(goPin) == HIGH && counterValue == 14 && newData) {
+      displaying = 1;
+    }
+
+    // At start of cycle display first digit
+    if (counterValue == 14 && initialNum && displaying) {
+      initialNum = 0;
+      setSignBits();
+      padData();
+
+      for (int i = 0; i < 4; i++) {
+        displayDigit(i, numbers[i][14 - counterValue]);
+      }
+    }
+
+    // On next counter value display new digit
+    if (displaying && counterValue != 14) {
+      initialNum = 1;
+      clearNumBits();
+
+      for (int i = 0; i < 4; i++) {
+        displayDigit(i, numbers[i][14 - counterValue]);
+      }
+
+      if (counterValue == 0) {
+        endOfCycle = 1;
+      }
+    }
+  }
+  
+  // clearNumBits();
+  // clearSignBits();
 
   // Get clock edge
   // prevClkValue = currClkValue;
@@ -213,6 +266,14 @@ void setSignBits() {
     }
     else {
       digitalWrite(bitInputPins[i][4], LOW);
+    }
+  }
+}
+
+void clearNumBits() {
+  for (int i = 0; i < 4; i++) {
+    for (int g = 0; g < 4; g++) {
+      digitalWrite(bitInputPins[i][g], LOW);
     }
   }
 }
