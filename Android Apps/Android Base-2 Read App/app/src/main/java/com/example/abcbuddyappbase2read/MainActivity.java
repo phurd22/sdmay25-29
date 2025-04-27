@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
     private static final UUID CLASSIC_BT_UUID = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
     private volatile boolean listening = false;
     private Thread classicListenerThread;
+    private boolean sendingToESP = false;
+    private boolean destroying = false;
 
     @SuppressLint("MissingPermission")
     @Override
@@ -86,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         currentPage = 1;
         totalPages = 1;
+        destroying = false;
 
         pageButtonContainer = findViewById(R.id.pageButtonContainer);
         base2PunchView = findViewById(R.id.base2PunchView);
@@ -101,18 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L,
                 0L, 0L, 0L, 0L, 0L);
 
-//        List<Long> numbers2 = Arrays.asList(-1L, 20L, 30L, 40L, 50L, 60L, 70L, 80L, 90L, 100L,
-//                100L, 200L, 300L, 400L, 500L, 600L, 700L, 800L, 900L, 1000L,
-//                1001L, 1100L, 1200L, 1300L, 1400L, 1500L, 1600L, 1700L, 1800L, 1900L);
-//
-//        List<Long> numbers3 = Arrays.asList(1L, 2L, 4L, 8L, 16L, 32L, 64L, 128L, 256L, 512L,
-//                1024L, 2048L, 4096L, 8192L, 16384L, 32768L, 65536L, 131072L, 262144L, 524288L,
-//                1048576L, 2097152L, 4194304L, 8388608L, 16777216L, 33554432L, 67108864L,
-//                134217728L, 268435456L, 536870912L);
-
         allNumbers.add(numbers1);
-//        allNumbers.add(numbers2);
-//        allNumbers.add(numbers3);
 
         for (int i = 1; i <= totalPages; i++) {
             Button pageButton = new Button(this);
@@ -139,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
             pageButtons.get(0).setBackgroundResource(R.drawable.selected_button_border);
         }
 
-        // 9 for if flip button is visible
         if (totalPages < 10) {
             pageDivider.setVisibility(View.GONE);
         }
@@ -175,10 +166,11 @@ public class MainActivity extends AppCompatActivity {
 
         uploadButton.setOnClickListener(v -> {
             if (totalPages > 0) {
+                sendingToESP = true;
                 if (serverSocket != null) {
                     try {
                         serverSocket.close();
-                        Log.d("ClassicBT", "Closed classic BT socket");
+                        Log.d("ClassicBT", "Closed server BT socket");
                     } catch (IOException e) {
                         Log.e("ClassicBT", "Error closing classic BT socket", e);
                     }
@@ -221,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addPage(String message, int pageNumber) {
+        Log.d("AddPage", "Adding page number " + pageNumber);
         totalPages++;
         final int finalPageNumber = pageNumber;
         String[] numbers = message.substring(0, message.length() - 1).split("x");
@@ -257,7 +250,7 @@ public class MainActivity extends AppCompatActivity {
             updatePage();
         }
 
-        if (totalPages > 10) {
+        if (totalPages > 9) {
             pageDivider.setVisibility(View.VISIBLE);
         }
         if (totalPages > 0) {
@@ -278,22 +271,76 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("MissingPermission")
     private void startClassicBluetoothListener() {
+        if (listening || destroying) {
+            return;
+        }
         classicListenerThread = new Thread(() -> {
-            try {
-                BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-                serverSocket = adapter.listenUsingRfcommWithServiceRecord("ABC_Base2_Read", CLASSIC_BT_UUID);
-                listening = true;
-                Log.d("ClassicBT", "Listening for classic Bluetooth...");
-                classicSocket = serverSocket.accept(); // Blocking
-                Log.d("ClassicBT", "Connected to classic BT device");
-                handleClassicBluetoothData(classicSocket.getInputStream());
-            } catch (IOException e) {
-                Log.e("ClassicBT", "Error listening for BT connection", e);
-            } finally {
-                listening = false;
+            BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+            while (!destroying) {
+                try {
+                    serverSocket = adapter.listenUsingRfcommWithServiceRecord("ABC_Base2_Read", CLASSIC_BT_UUID);
+                    listening = true;
+                    Log.d("ClassicBT", "Listening for classic Bluetooth...");
+                    classicSocket = serverSocket.accept(); // Blocking call
+                    Log.d("ClassicBT", "Connected to classic BT device");
+
+                    handleClassicBluetoothData(classicSocket.getInputStream());
+
+                } catch (IOException e) {
+                    Log.e("ClassicBT", "Error listening for BT connection", e);
+                    if (destroying || sendingToESP) {
+                        Log.d("ClassicBT", "Server stopped because app is destroying or sending to ESP.");
+                        Log.d("ClassicBT", "Sending to ESP: " + sendingToESP);
+                        Log.d("ClassicBT", "Destroying: " + destroying);
+                        break; // stop thread gracefully
+                    }
+                } finally {
+                    listening = false;
+                    closeClassicSockets(); // Clean up
+                }
             }
         });
         classicListenerThread.start();
+    }
+
+    private void closeClassicSockets() {
+        try {
+            if (serverSocket != null) {
+                serverSocket.close();
+                serverSocket = null;
+            }
+        } catch (IOException e) {
+            Log.e("ClassicBT", "Error closing server socket", e);
+        }
+
+        try {
+            if (classicSocket != null) {
+                classicSocket.close();
+                classicSocket = null;
+            }
+        } catch (IOException e) {
+            Log.e("ClassicBT", "Error closing classic socket", e);
+        }
+    }
+
+    private void restartClassicBluetoothListener() {
+        if (classicListenerThread != null && classicListenerThread.isAlive()) {
+            destroying = true;
+            try {
+                if (serverSocket != null) {
+                    serverSocket.close();
+                }
+            } catch (IOException e) {
+                Log.e("ClassicBT", "Error closing server socket during restart", e);
+            }
+            try {
+                classicListenerThread.join();
+            } catch (InterruptedException e) {
+                Log.e("ClassicBT", "Listener thread interrupted", e);
+            }
+        }
+        destroying = false;
+        startClassicBluetoothListener();
     }
 
     private void handleClassicBluetoothData(InputStream inputStream) {
@@ -318,21 +365,15 @@ public class MainActivity extends AppCompatActivity {
             }
         } catch (IOException e) {
             Log.e("ClassicBT", "Error reading input stream", e);
-        } finally {
-            try {
-                if (classicSocket != null && classicSocket.isConnected()) {
-                    classicSocket.close();
-                }
-                if (serverSocket != null) {
-                    serverSocket.close(); // Ensure it’s closed before reopening
-                }
-            } catch (IOException e) {
-                Log.e("ClassicBT", "Error closing socket", e);
-            }
-
-            // Restart listener in background
-            new Handler(Looper.getMainLooper()).postDelayed(this::startClassicBluetoothListener, 200); // slight delay helps
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("Destroy", "Time to destroy");
+        destroying = true;
+        closeClassicSockets();
     }
 
     @SuppressLint("MissingPermission")
@@ -420,7 +461,7 @@ public class MainActivity extends AppCompatActivity {
                     gatt.close();
                     runOnUiThread(() -> {
                         Toast.makeText(context, "Disconnected from ESP32", Toast.LENGTH_SHORT).show();
-                        startClassicBluetoothListener();
+                        restartClassicBluetoothListener();
                     });
                 }
             }
@@ -442,6 +483,7 @@ public class MainActivity extends AppCompatActivity {
                     });
 
                     gatt.disconnect(); // Initiate disconnect after writing
+                    sendingToESP = false;
                 } else {
                     Log.e("BLE", "Failed to send data");
                 }

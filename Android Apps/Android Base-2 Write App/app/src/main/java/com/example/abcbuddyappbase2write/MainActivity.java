@@ -81,12 +81,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (!isDeviceConnected()) {
-            startScan();
-        }
-        else {
-            Toast.makeText(this, "Already connected to ESP32", Toast.LENGTH_SHORT).show();
-        }
+        startScan();
     }
 
     @SuppressLint("MissingPermission")
@@ -273,7 +268,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 Log.d("Binary Strings", "Binary Index: " + binaryIndex);
-//                binaryIndex--;
                 runOnUiThread(MainActivity.this::updatePage);
                 if (binaryIndex < 0) {
                     Log.d("Binary Strings", "Resetting Strings");
