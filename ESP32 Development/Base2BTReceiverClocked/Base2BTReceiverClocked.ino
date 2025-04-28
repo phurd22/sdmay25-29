@@ -5,21 +5,22 @@
 #define SERVICE_UUID        "a5f08588-fdb1-4785-b1aa-c21acec22158"
 #define CHARACTERISTIC_UUID "9317847f-cc24-4005-bb74-78b06b9757b0"
 
-String longToBinaryString(long long num);
-void parseBluetoothData(String data);
-int allLow();
-
 const int bitPins[4] = {1, 2, 42, 41}; // Pins where bits are output
-const int clkPin = 14;
-int count = 49;
+const int goPin = 14;
+const int counterSixBitPins[6] = {46, 9, 10, 11, 12, 13};
 long long parsedNumbers[4]; // Array to store parsed long values
 String binaryStrings[4] = {"", "", "", ""}; // String array that holds 50 but numbers
 int newData = 0;
-int prevClkValue = 0;
-int currClkValue = 0;
-int newPosEdge = 0;
+int skipLoop = 0;
+int counterValue = 63;
+int displaying = 0;
+int endOfCycle = 0;
 
 BLEServer *pServer = nullptr;
+
+String longToBinaryString(long long num);
+void parseBluetoothData(String data);
+int readInputCounter();
 
 // Callback class for handling incoming BLE writes
 class MyCallbacks : public BLECharacteristicCallbacks {
@@ -34,6 +35,7 @@ class MyCallbacks : public BLECharacteristicCallbacks {
       if (receivedData.indexOf('d') != -1) {
         Serial.println("Received: " + receivedData); // Print the received value
         parseBluetoothData(receivedData);
+        newData = 1;
 
         // Reset buffer
         receivedData = "";
@@ -59,8 +61,12 @@ void setup() {
 
   for (int i = 0; i < 4; i++) {
     pinMode(bitPins[i], OUTPUT);
+    digitalWrite(bitPins[i], LOW);
   }
-  pinMode(clkPin, INPUT);
+  for (int i = 0; i < 6; i++) {
+    pinMode(counterSixBitPins[i], INPUT);
+  }
+  pinMode(goPin, INPUT);
 
   // Setup for BLE
   BLEDevice::init("Base2ReceiverESP32");
@@ -81,40 +87,51 @@ void setup() {
 }
 
 void loop() {
-  // Get clock edge
-  prevClkValue = currClkValue;
-  if (digitalRead(clkPin) == HIGH) {
-    currClkValue = 1;
+  // counter goes 0 to 63
+  skipLoop = 0;
+  if (counterValue != 63 && counterValue != readInputCounter() - 1) { // TODO: will need to change 63 to 59
+    skipLoop = 1;
   }
-  else {
-    currClkValue = 0;
-  }
-  if (prevClkValue == 0 && currClkValue == 1) {
-    newPosEdge = 1;
-  }
-  else {
-    newPosEdge = 0;
+  if (counterValue == 63 && readInputCounter() != 0) { // TODO: will need to change 63 to 59
+    skipLoop = 1;
   }
 
-  if (!newData && newPosEdge && !allLow()) {
-    for (int i = 0; i < 4; i++) {
-      digitalWrite(bitPins[i], LOW);
-    }
-  }
+  // Skip the loop if getting erroneous read from inputs
+  // Also, only perform the loop if on the next counter value
+  if (!skipLoop) {
+    counterValue = readInputCounter();
+    Serial.print("Counter: ");
+    Serial.println(counterValue);
 
-  if (newData && newPosEdge) {
-    for (int i = 0; i < 4; i++) {
-      if (binaryStrings[i][count] == '1') {
-        digitalWrite(bitPins[i], HIGH);
-      }
-      else {
+    // Reset when cycle is finished
+    if (endOfCycle && counterValue == 50) {
+      endOfCycle = 0;
+      displaying = 0;
+      for (int i = 0; i < 4; i++) {
         digitalWrite(bitPins[i], LOW);
       }
     }
-    count--;
-    if (count == -1) {
+
+    // Set boolean variables when at start of output cycle
+    if (digitalRead(goPin) == HIGH && counterValue == 0 && newData) {
+      displaying = 1;
       newData = 0;
-      count = 49;
+    }
+
+    // Display the bit outputs
+    if (displaying) {
+      for (int i = 0; i < 4; i++) {
+        if (binaryStrings[i][49 - counterValue] == '1') {
+          digitalWrite(bitPins[i], HIGH);
+        }
+        else {
+          digitalWrite(bitPins[i], LOW);
+        }
+      }
+      
+      if (counterValue == 49) {
+        endOfCycle = 1;
+      }
     }
   }
 }
@@ -126,6 +143,14 @@ String longToBinaryString(long long num) {
     binaryString += ((num >> i) & 1) ? '1' : '0';
   }
   return binaryString;
+}
+
+// Takes the 6-bit counter input and returns an int
+int readInputCounter() {
+  int value = (digitalRead(counterSixBitPins[0]) << 5) | (digitalRead(counterSixBitPins[1]) << 4) | 
+          (digitalRead(counterSixBitPins[2]) << 3) | (digitalRead(counterSixBitPins[3]) << 2) | 
+          (digitalRead(counterSixBitPins[4]) << 1) | (digitalRead(counterSixBitPins[5]));
+  return value;
 }
 
 // Parse received data into an array of four long values
@@ -148,16 +173,4 @@ void parseBluetoothData(String data) {
     Serial.print(" -> Binary: ");
     Serial.println(binaryStrings[i]);
   }
-  newData = 1;
-}
-
-int allLow() {
-  int allLow = 1;
-  for (int i = 0; i < 4; i++) {
-    if (digitalRead(bitPins[i]) == HIGH) {
-      allLow = 0;
-      break;
-    }
-  }
-  return allLow;
 }

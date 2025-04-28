@@ -9,25 +9,16 @@
 const int bitInputPins[4][5] = {
   {39, 40, 41, 42, 2}, // Group 1
   {0, 35, 36, 37, 38}, // Group 2
-  {20, 21, 47, 48, 45},   // Group 3
+  {19, 21, 47, 48, 45},   // Group 3 // changed 20 to 19
   {15, 7, 6, 5, 4}  // Group 4
-  //{3, 8, 18, 17, 16}   // Group 5
 };
-
-// const int buttonPin = 1;
 
 String numbers[4] = {"0", "0", "0", "0"}; // Default values
 String receivedData = ""; // Buffer for incoming data
 const int numberLength = 15;
-// bool buttonPressed;
-// int prevClkValue = 0;
-// int currClkValue = 0;
-// int newPosEdge = 0;
-// int fourBitCounter = 0;
-const int goPin = 13;
-const int counterFourBitPins[4] = {9, 10, 11, 12};  // b3, b2, b1, b0
+const int goPin = 14;
+const int counterFourBitPins[4] = {10, 11, 12, 13};  // b3, b2, b1, b0
 int counterValue = 0;
-// int prevCounterValue = 0;
 int newData = 0;
 int displaying = 0;
 int initialNum = 1;
@@ -40,7 +31,6 @@ void clearSignBits();
 void padData();
 void clearNumBits();
 void displayDigit(int group, int digit);
-// void displayCounter();
 int readInputCounter();
 
 // Callback class for handling incoming BLE writes
@@ -55,7 +45,6 @@ class MyCallbacks : public BLECharacteristicCallbacks {
       if (receivedData.indexOf('d') != -1) {
         Serial.println("Received: " + receivedData); // Print the received value
         parseBluetoothData(receivedData);
-        // padData();
         newData = 1;
 
         // Reset buffer
@@ -68,7 +57,6 @@ class MyCallbacks : public BLECharacteristicCallbacks {
 void setup() {
   Serial.begin(115200);
 
-  // buttonPressed = false;
   for (int i = 0; i < 4; i++) {
     for (int g = 0; g < 5; g++) {
       pinMode(bitInputPins[i][g], OUTPUT);
@@ -77,8 +65,6 @@ void setup() {
   for (int i = 0; i < 4; i++) {
     pinMode(counterFourBitPins[i], INPUT);
   }
-  // pinMode(buttonPin, INPUT);
-  // pinMode(clkPin, INPUT);
   pinMode(goPin, INPUT);
   clearNumBits();
   clearSignBits();
@@ -103,10 +89,10 @@ void setup() {
 void loop() {
   // counter goes 14 to 0
   skipLoop = 0;
-  if (counterValue != readInputCounter() + 1) {
+  if (counterValue != 0 && counterValue != readInputCounter() + 1) {
     skipLoop = 1;
   }
-  if (counterValue == 0 && readInputCounter() != 14) {
+  if (counterValue == 0 && readInputCounter() != 15) { // TODO: Will need to be changed to 14 when set up on circuit
     skipLoop = 1;
   }
 
@@ -116,25 +102,23 @@ void loop() {
     counterValue = readInputCounter();
     Serial.print("Counter: ");
     Serial.println(counterValue);
-    // Serial.print("PrevCounter: ");
-    // Serial.println(prevCounterValue);
 
     // Reset when cycle is finished
-    if (endOfCycle && counterValue == 14) {
+    if (endOfCycle && counterValue == 15) { // TODO: Switch to 14 when circuit is set up
       endOfCycle = 0;
       displaying = 0;
-      newData = 0;
       clearNumBits();
       clearSignBits();
     }
 
+    // Set boolean variables when at start of output cycle
     if (digitalRead(goPin) == HIGH && counterValue == 14 && newData) {
       displaying = 1;
+      newData = 0;
     }
 
     // At start of cycle display first digit
-    if (counterValue == 14 && initialNum && displaying) {
-      initialNum = 0;
+    if (counterValue == 14 && displaying) {
       setSignBits();
       padData();
 
@@ -145,7 +129,6 @@ void loop() {
 
     // On next counter value display new digit
     if (displaying && counterValue != 14) {
-      initialNum = 1;
       clearNumBits();
 
       for (int i = 0; i < 4; i++) {
@@ -157,64 +140,16 @@ void loop() {
       }
     }
   }
-  
-  // clearNumBits();
-  // clearSignBits();
-
-  // Get clock edge
-  // prevClkValue = currClkValue;
-  // if (digitalRead(clkPin) == HIGH) {
-  //   currClkValue = 1;
-  // }  
-  // else {
-  //   currClkValue = 0;
-  // }
-  // if (prevClkValue == 0 && currClkValue == 1) {
-  //   newPosEdge = 1;
-  // }
-  // else {
-  //   newPosEdge = 0;
-  // }
-
-  // if (newPosEdge) {
-  //   if (digitalRead(rstPin) == LOW) {
-  //     fourBitCounter = 0;
-  //   }
-  //   else {
-  //     if (fourBitCounter + 1 > 15) {
-  //       fourBitCounter = 0;
-  //     }
-  //     else {
-  //       fourBitCounter++;
-  //     }
-  //   }
-  //   displayCounter();
-  // }
-
-  // if (digitalRead(buttonPin) == HIGH) {
-  //   buttonPressed = true;
-  // }
-
-  // if (buttonPressed) {
-  //   setSignBits();
-  //   padData();
-  //   for (int pos = 0; pos < numberLength; pos++) {
-  //     clearNumBits();
-  //     for (int i = 0; i < 4; i++) {
-  //       displayDigit(i, numbers[i][pos]);
-  //     }
-  //     delay(500);
-  //   }
-  //   buttonPressed = false;
-  // }
 }
 
+// Takes the 4-bit counter input and returns as int
 int readInputCounter() {
   int value = (digitalRead(counterFourBitPins[0]) << 3) | (digitalRead(counterFourBitPins[1]) << 2) | 
          (digitalRead(counterFourBitPins[2]) << 1) | (digitalRead(counterFourBitPins[3]));
   return value;
 }
 
+// Parse received data into numbers String array
 void parseBluetoothData(String data) {
   int index = 0;
   int startPos = 0;
@@ -237,6 +172,7 @@ void parseBluetoothData(String data) {
   }
 }
 
+// Add 0s to front of numbers Strings until they are 'numberLength' long
 void padData() {
   for (int i = 0; i < 4; i++) {
     while (numbers[i].length() < numberLength) {
@@ -250,6 +186,7 @@ void padData() {
   Serial.println();
 }
 
+// Write the specified to the output pins speecified by pin group number
 void displayDigit(int group, int digit) {
   int value = digit - '0';  // Convert char to integer
 
@@ -258,6 +195,7 @@ void displayDigit(int group, int digit) {
   }
 }
 
+// Write to all 4 sign bits
 void setSignBits() {
   for (int i = 0; i < 4; i++) {
     if (numbers[i].charAt(0) == '-') {
@@ -270,6 +208,7 @@ void setSignBits() {
   }
 }
 
+// Clear all the digit bit outputs
 void clearNumBits() {
   for (int i = 0; i < 4; i++) {
     for (int g = 0; g < 4; g++) {
@@ -278,6 +217,7 @@ void clearNumBits() {
   }
 }
 
+// Clear sign bit outputs
 void clearSignBits() {
   for (int i = 0; i < 4; i++) {
     digitalWrite(bitInputPins[i][4], LOW);

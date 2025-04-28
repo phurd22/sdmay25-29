@@ -14,7 +14,7 @@ const int bitInputPins[5][5] = {
   {3, 8, 18, 17, 16}   // Group 5
 };
 
-const int buttonPin = 1;
+const int buttonPin = 13;
 
 String numbers[5] = {"0", "0", "0", "0", "0"}; // Default values
 String receivedData = ""; // Buffer for incoming data
