@@ -14,6 +14,7 @@ unsigned long lastSent = 0;
 int reading = 0;
 int skipLoop = 0;
 int counterValue = 63; // TODO: change to 59 when circuit set up
+int unofficialCounter = 0;
 int endOfCycle = 0;
 
 BLECharacteristic *pCharacteristic;
@@ -70,27 +71,41 @@ void loop() {
 
   // Send data to tablet every 100 ms (delay for consistent bluetooth communication)
   if (binaryBuffer != "" && timer - lastSent > 100) {
-    pCharacteristic->setValue(binaryBuffer.c_str());
-    pCharacteristic->notify();
-    Serial.print("Sent: ");
-    Serial.println(binaryBuffer);
+    String toSend = "";
+    int dIndex = binaryBuffer.indexOf('d');
+    if (dIndex != -1) {
+      toSend = binaryBuffer.substring(0, dIndex);
+      binaryBuffer = binaryBuffer.substring(dIndex + 1);
+      pCharacteristic->setValue(toSend.c_str());
+      pCharacteristic->notify();
+      Serial.print("Sent: ");
+      Serial.println(toSend);
+    }
+    else {
+      pCharacteristic->setValue(binaryBuffer.c_str());
+      pCharacteristic->notify();
+      Serial.print("Sent: ");
+      Serial.println(binaryBuffer);
+      binaryBuffer = "";
+    }
     lastSent = timer;
-    binaryBuffer = "";
   }
+
+  unofficialCounter = readInputCounter();
 
   // counter goes 0 to 63
   skipLoop = 0;
-  if (counterValue != 63 && counterValue != readInputCounter() - 1) { // TODO: will need to change 63 to 59
+  if (counterValue != 63 && counterValue != unofficialCounter - 1) { // TODO: will need to change 63 to 59
     skipLoop = 1;
   }
-  if (counterValue == 63 && readInputCounter() != 0) { // TODO: will need to change 63 to 59
+  if (counterValue == 63 && unofficialCounter != 0) { // TODO: will need to change 63 to 59
     skipLoop = 1;
   }
 
   // Skip the loop if getting erroneous read from inputs
   // Also, only perform the loop if on the next counter value
   if (!skipLoop) {
-    counterValue = readInputCounter();
+    counterValue = unofficialCounter;
     Serial.print("Counter: ");
     Serial.println(counterValue);
 
@@ -138,4 +153,7 @@ void readToBuffer() {
     }
   }
   binaryBuffer += fourBits;
+  if (counterValue == 49) {
+    binaryBuffer += "d";
+  }
 }
