@@ -12,7 +12,7 @@ long long parsedNumbers[4]; // Array to store parsed long values
 String binaryStrings[4] = {"", "", "", ""}; // String array that holds 50 but numbers
 int newData = 0;
 int skipLoop = 0;
-int counterValue = 63;
+int counterValue = 63; // TODO: change to 59 when circuit setup
 int displaying = 0;
 int endOfCycle = 0;
 
