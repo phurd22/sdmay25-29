@@ -19,6 +19,7 @@ const int numberLength = 15;
 const int goPin = 14;
 const int counterFourBitPins[4] = {10, 11, 12, 13};  // b3, b2, b1, b0
 int counterValue = 0;
+int unofficialCounter = 0;
 int newData = 0;
 int displaying = 0;
 int initialNum = 1;
@@ -87,19 +88,21 @@ void setup() {
 }
 
 void loop() {
+  unofficialCounter = readInputCounter();
+
   // counter goes 14 to 0
   skipLoop = 0;
-  if (counterValue != 0 && counterValue != readInputCounter() + 1) {
+  if (counterValue != 0 && counterValue != unofficialCounter + 1) {
     skipLoop = 1;
   }
-  if (counterValue == 0 && readInputCounter() != 15) { // TODO: Will need to be changed to 14 when set up on circuit
+  if (counterValue == 0 && unofficialCounter != 15) { // TODO: Will need to be changed to 14 when set up on circuit
     skipLoop = 1;
   }
 
   // Skip the loop if getting erroneous read from inputs
   // Also, only perform loop if on next counter value
   if (!skipLoop) {
-    counterValue = readInputCounter();
+    counterValue = unofficialCounter;
     Serial.print("Counter: ");
     Serial.println(counterValue);
 

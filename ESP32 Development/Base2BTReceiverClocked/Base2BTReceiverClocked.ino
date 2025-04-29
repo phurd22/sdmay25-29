@@ -13,6 +13,7 @@ String binaryStrings[4] = {"", "", "", ""}; // String array that holds 50 but nu
 int newData = 0;
 int skipLoop = 0;
 int counterValue = 63; // TODO: change to 59 when circuit setup
+int unofficialCounter = 0;
 int displaying = 0;
 int endOfCycle = 0;
 
@@ -87,19 +88,21 @@ void setup() {
 }
 
 void loop() {
+  unofficialCounter = readInputCounter();
+
   // counter goes 0 to 63
   skipLoop = 0;
-  if (counterValue != 63 && counterValue != readInputCounter() - 1) { // TODO: will need to change 63 to 59
+  if (counterValue != 63 && counterValue != unofficialCounter - 1) { // TODO: will need to change 63 to 59
     skipLoop = 1;
   }
-  if (counterValue == 63 && readInputCounter() != 0) { // TODO: will need to change 63 to 59
+  if (counterValue == 63 && unofficialCounter != 0) { // TODO: will need to change 63 to 59
     skipLoop = 1;
   }
 
   // Skip the loop if getting erroneous read from inputs
   // Also, only perform the loop if on the next counter value
   if (!skipLoop) {
-    counterValue = readInputCounter();
+    counterValue = unofficialCounter;
     Serial.print("Counter: ");
     Serial.println(counterValue);
 
