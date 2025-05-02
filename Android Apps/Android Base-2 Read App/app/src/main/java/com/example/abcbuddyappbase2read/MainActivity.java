@@ -44,6 +44,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+// Controls all the elements of the screen.
+// This includes the base-2 punch card section and buttons on the left.
+// Typically waits for data from the write tablet and sends data to read ESP32 at user discretion.
 public class MainActivity extends AppCompatActivity {
 
     private Base2PunchView base2PunchView;
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean sendingToESP = false;
     private boolean destroying = false;
 
+    // Instantiate with one example page and set up onClickListeners.
     @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
         startClassicBluetoothListener();
     }
 
+    // Reset the app to 0 pages.
     private void reset() {
         Log.d("Reset", "Reset confirmed");
         pageDivider.setVisibility(View.GONE);
@@ -212,6 +217,7 @@ public class MainActivity extends AppCompatActivity {
         updatePage();
     }
 
+    // Add a page to the scrollable container.
     private void addPage(String message, int pageNumber) {
         Log.d("AddPage", "Adding page number " + pageNumber);
         totalPages++;
@@ -258,6 +264,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Update the base-2 punch card on the screen.
     private void updatePage() {
         if (allNumbers.size() > 0) {
             base2PunchView.setNumbers(allNumbers.get(currentPage - 1));
@@ -269,6 +276,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Listen for data from the write tablet.
     @SuppressLint("MissingPermission")
     private void startClassicBluetoothListener() {
         if (listening || destroying) {
@@ -303,6 +311,7 @@ public class MainActivity extends AppCompatActivity {
         classicListenerThread.start();
     }
 
+    // Close classic bluetooth sockets. (Used to prepare for ESP32 connection)
     private void closeClassicSockets() {
         try {
             if (serverSocket != null) {
@@ -323,6 +332,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Restart the classic bluetooth listener thread.
     private void restartClassicBluetoothListener() {
         if (classicListenerThread != null && classicListenerThread.isAlive()) {
             destroying = true;
@@ -343,6 +353,7 @@ public class MainActivity extends AppCompatActivity {
         startClassicBluetoothListener();
     }
 
+    // Process data from the write tablet (add a new page).
     private void handleClassicBluetoothData(InputStream inputStream) {
         try {
             byte[] buffer = new byte[1024];
@@ -376,6 +387,7 @@ public class MainActivity extends AppCompatActivity {
         closeClassicSockets();
     }
 
+    // Send data from current page to the read ESP32.
     @SuppressLint("MissingPermission")
     private void uploadNumbers() {
         if (totalPages == 0) {
@@ -414,6 +426,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Process BLE scan results.
     @SuppressLint("MissingPermission")
     private ScanCallback scanCallback = new ScanCallback() {
         @Override
@@ -431,6 +444,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    // Start scanning for BLE devices.
     @SuppressLint("MissingPermission")
     private void startScan() {
         BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
@@ -445,6 +459,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("BLE", "Scanning for ESP32...");
     }
 
+    // Connect to a BLE device (our read ESP32) and handle closing the connection to go back to classic bluetooth (tablet connection).
     @SuppressLint("MissingPermission")
     private void connectToDevice(BluetoothDevice device) {
         bluetoothGatt = device.connectGatt(this, false, new BluetoothGattCallback() {
@@ -491,6 +506,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Check if we are connected to the read ESP32.
     @SuppressLint("MissingPermission")
     private boolean isESP32Connected() {
         BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);

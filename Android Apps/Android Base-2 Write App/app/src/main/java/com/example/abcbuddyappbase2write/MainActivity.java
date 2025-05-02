@@ -36,6 +36,9 @@ import java.util.List;
 import java.util.UUID;
 import java.nio.charset.StandardCharsets;
 
+// Controls bluetooth connections.
+// This app connects to the sender ESP32 through BLE and prints received data on the screen.
+// Once the page is full, it disconnects from the ESP32 and sends data through classic bluetooth to the other tablet.
 public class MainActivity extends AppCompatActivity {
 
     private Base2PunchView base2PunchView;
@@ -78,12 +81,14 @@ public class MainActivity extends AppCompatActivity {
         requestBluetoothPermissions();
     }
 
+    // Connect to the ESP32 on start.
     @Override
     protected void onStart() {
         super.onStart();
         startScan();
     }
 
+    // Send data to the read tablet.
     @SuppressLint("MissingPermission")
     public void relayDataToAndroidDevice(String message) {
         sendingData = true;
@@ -126,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
+    // Clear the data structure controlling what appears on the screen.
     private void resetBinaryStrings() {
         binaryStringArray.clear();
         String binaryString = "00000000000000000000000000000000000000000000000000";
@@ -134,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Update the screen with the new data.
     private void updatePage() {
         for (int i = 0; i < 4; i++) {
             numbers.set(i, binaryToLongTwosComplement(binaryStringArray.get(i)));
@@ -141,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
         base2PunchView.setNumbers(numbers);
     }
 
+    // Convert the binary string to a Long variable.
     public long binaryToLongTwosComplement(String binary) {
         if (binary.length() != 50) {
             throw new IllegalArgumentException("Binary string must be exactly 50 bits");
@@ -161,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
         return big.longValue();
     }
 
+    // Process BLE scan results and only connect to the sender ESP32.
     @SuppressLint("MissingPermission")
     private ScanCallback scanCallback = new ScanCallback() {
         @Override
@@ -178,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    // Start scanning for BLE devices.
     @SuppressLint("MissingPermission")
     private void startScan() {
         BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
@@ -192,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("BLE", "Scanning for ESP32...");
     }
 
+    // Connect to the ESP32 through BLE. And reconnect when disconnected at wrong time.
     @SuppressLint("MissingPermission")
     private void connectToDevice(BluetoothDevice device) {
         bluetoothGatt = device.connectGatt(this, false, new BluetoothGattCallback() {
@@ -241,6 +252,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
+            // Process data from sender ESP32.
             @Override
             public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
                 String value = new String(characteristic.getValue(), StandardCharsets.UTF_8);
