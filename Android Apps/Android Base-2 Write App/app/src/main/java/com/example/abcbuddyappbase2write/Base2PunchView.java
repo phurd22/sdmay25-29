@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import java.util.ArrayList;
 import java.util.List;
 
+// Models the ABC base-2 punch card.
 public class Base2PunchView extends View {
 
     private final int dotRadius = 4; // Dot size for grid points
