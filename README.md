@@ -6,7 +6,7 @@
 - ESP32 scripts can be found under 'ESP32 Development'.
 - A simulation of the ABC's control panel and Gaussian elimination algorithm are found under 'Java'.
 - A simulation of the ABC in Quartus Prime can be found in 'Quartus Prime Projects'.
-- A simulatino of the ABC in Java can be found under 'abc-emulator'.
+- A simulation of the ABC in Java can be found under 'abc-emulator'.
 - Our KiCad projects are found in the folder 'KiCadProjects'. Note: these weren't used in our final implementation.
 - A punch card generating program can be found under 'Decimal to Binary Page Generator'.
 - Various notes on the specific modules are under 'Adder-Subtractor' and 'Base Converter'.
