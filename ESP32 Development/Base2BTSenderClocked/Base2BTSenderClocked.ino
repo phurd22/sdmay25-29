@@ -66,6 +66,7 @@ void setup() {
   Serial.println("BLE is ready. Waiting for data...");
 }
 
+// Delayed everything by one counter cycle 5/5
 void loop() {
   timer = millis();
 
@@ -110,13 +111,13 @@ void loop() {
     Serial.println(counterValue);
 
     // Reset when cycle is finished
-    if (endOfCycle && counterValue == 50) {
+    if (endOfCycle && counterValue == 51) {
       endOfCycle = 0;
       reading = 0;
     }
 
     // Set boolean 'reading' variable when at start of read cycle
-    if (digitalRead(goPin) == HIGH && counterValue == 0) {
+    if (digitalRead(goPin) == HIGH && counterValue == 1) {
       reading = 1;
     }
 
@@ -126,7 +127,7 @@ void loop() {
       delay(5); // LOOK AT THIS IF THERE ARE ERRORS, COULD HAVE TO DO WITH THIS
       readToBuffer();
 
-      if (counterValue == 49) {
+      if (counterValue == 50) {
         endOfCycle = 1;
       }
     }
