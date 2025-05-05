@@ -12,7 +12,7 @@ long long parsedNumbers[4]; // Array to store parsed long values
 String binaryStrings[4] = {"", "", "", ""}; // String array that holds 50 but numbers
 int newData = 0;
 int skipLoop = 0;
-int counterValue = 63; // TODO: change to 59 when circuit setup
+int counterValue = 59; 
 int unofficialCounter = 0;
 int displaying = 0;
 int endOfCycle = 0;
@@ -90,12 +90,12 @@ void setup() {
 void loop() {
   unofficialCounter = readInputCounter();
 
-  // counter goes 0 to 63
+  // counter goes 0 to 59
   skipLoop = 0;
-  if (counterValue != 63 && counterValue != unofficialCounter - 1) { // TODO: will need to change 63 to 59
+  if (counterValue != 59 && counterValue != unofficialCounter - 1) {
     skipLoop = 1;
   }
-  if (counterValue == 63 && unofficialCounter != 0) { // TODO: will need to change 63 to 59
+  if (counterValue == 59 && unofficialCounter != 0) {
     skipLoop = 1;
   }
 
