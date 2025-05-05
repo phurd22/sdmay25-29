@@ -1,5 +1,16 @@
 # Atanasoff-Berry Computer with Modern Technology
 
+## Repo Guide
+
+- The base-2 and base-10 Android punch card apps are under the 'Android Apps' folder.
+- ESP32 scripts can be found under 'ESP32 Development'.
+- A simulation of the ABC's control panel and Gaussian elimination algorithm are found under 'Java'.
+- A simulation of the ABC in Quartus Prime can be found in 'Quartus Prime Projects'.
+- A simulation of the ABC in Java can be found under 'abc-emulator'.
+- Our KiCad projects are found in the folder 'KiCadProjects'. Note: these weren't used in our final implementation.
+- A punch card generating program can be found under 'Decimal to Binary Page Generator'.
+- Various notes on the specific modules are under 'Adder-Subtractor' and 'Base Converter'.
+
 ## GitHub Action to compile KiCad files
 
 This repo contains an example custom PCB designed in KiCAD 5 with settings appropriate for PCB manufacture and assembly by JLCPCB. It also contains a GitHub workflow that generates the files needed by JLCPCB: gerbers, BOM, & position file. The workflow additionally generates a manual order BOM,  interactive BOM, and PDF export of the schematic. The manual order BOM includes components in the schematic not assembled by JLCPCB, such as board components not available through JLCPCB, enclosure, hardware, etc. The interactive BOM is an html document that assists in identifying component locations on the PCB for manual assembly.
