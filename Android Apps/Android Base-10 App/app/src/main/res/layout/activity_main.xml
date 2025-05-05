@@ -17,9 +17,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <View
+                android:layout_width="20dp"
+                android:layout_height="0dp"
+                android:background="@color/punchcard"/>
+
             <TextView
                 android:id="@+id/Var1"
-                android:layout_width="279dp"
+                android:layout_width="212dp"
                 android:layout_height="wrap_content"
                 android:autoSizeMaxTextSize="60sp"
                 android:autoSizeMinTextSize="10sp"
@@ -34,7 +39,7 @@
 
             <TextView
                 android:id="@+id/Var2"
-                android:layout_width="158dp"
+                android:layout_width="212dp"
                 android:layout_height="wrap_content"
                 android:autoSizeMaxTextSize="60sp"
                 android:autoSizeMinTextSize="10sp"
@@ -49,7 +54,7 @@
 
             <TextView
                 android:id="@+id/Var3"
-                android:layout_width="216dp"
+                android:layout_width="212dp"
                 android:layout_height="wrap_content"
                 android:autoSizeMaxTextSize="60sp"
                 android:autoSizeMinTextSize="10sp"
@@ -64,7 +69,7 @@
 
             <TextView
                 android:id="@+id/Var4"
-                android:layout_width="199dp"
+                android:layout_width="212dp"
                 android:layout_height="wrap_content"
                 android:autoSizeMaxTextSize="60sp"
                 android:autoSizeMinTextSize="10sp"
@@ -77,19 +82,19 @@
                 android:textAlignment="center"
                 android:textSize="60sp" />
 
-            <TextView
-                android:id="@+id/equal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:autoSizeTextType="uniform"
-                android:text="="
-                android:textAlignment="center"
-                android:textSize="60sp" />
+<!--            <TextView-->
+<!--                android:id="@+id/equal"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:autoSizeTextType="uniform"-->
+<!--                android:text="="-->
+<!--                android:textAlignment="center"-->
+<!--                android:textSize="60sp" />-->
 
             <TextView
                 android:id="@+id/Var5"
-                android:layout_width="219dp"
+                android:layout_width="212dp"
                 android:layout_height="wrap_content"
                 android:autoSizeMaxTextSize="60sp"
                 android:autoSizeMinTextSize="10sp"
@@ -101,6 +106,11 @@
                 android:text="Var5"
                 android:textAlignment="center"
                 android:textSize="60sp" />
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="0dp"
+                android:background="@color/punchcard"/>
 
 
         </LinearLayout>
@@ -283,7 +293,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/button_border_selector"
-                android:text="Upload Equation" />
+                android:text="Upload" />
         </LinearLayout>
 
     </LinearLayout>

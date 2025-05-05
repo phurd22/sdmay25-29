@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -13,9 +14,9 @@ import java.util.List;
 
 public class PunchcardView extends View {
 
-    private static final int NUM_COLUMNS = 75; // Total columns
+    private static final int NUM_COLUMNS = 80; // Total columns
     private static final int NUM_ROWS = 10;    // Total rows
-    private static final int SEGMENT_COLUMNS = 15; // Columns per segment
+    private static final int SEGMENT_COLUMNS = 16; // Columns per segment
 
     private final List<List<Boolean>> punchedGrid = new ArrayList<>(); // Store punched status
     private final Paint greyPaint = new Paint();
@@ -64,6 +65,7 @@ public class PunchcardView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        Log.d("Size", "Width: " + w + " Height: " + h);
 
         // Dynamically calculate cell sizes based on view dimensions
         int totalPadding = padding * (NUM_COLUMNS - 1);
@@ -77,7 +79,7 @@ public class PunchcardView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        int startX = numberMargin; // Adjust start position to accommodate numbers
+        int startX = numberMargin - 4; // Adjust start position to accommodate numbers
 
         for (int col = 0; col < NUM_COLUMNS; col++) {
             int startY = 0;
@@ -85,6 +87,7 @@ public class PunchcardView extends View {
             // Draw faint vertical separators for every 15 columns
             if (col % SEGMENT_COLUMNS == 0 && col > 0) {
                 canvas.drawLine(startX, 0, startX, getHeight(), linePaint);
+                startX += 2;
             }
 
             for (int row = 0; row < NUM_ROWS; row++) {
@@ -121,6 +124,7 @@ public class PunchcardView extends View {
         }
     }
 
+    // Punches the specified location
     public void punchCell(int column, int row) {
         if (column >= 0 && column < NUM_COLUMNS && row >= 0 && row < NUM_ROWS) {
             punchedGrid.get(column).set(row, true);
@@ -128,6 +132,7 @@ public class PunchcardView extends View {
         }
     }
 
+    // Clears all punches
     public void clearPunches() {
         for (List<Boolean> column : punchedGrid) {
             for (int row = 0; row < NUM_ROWS; row++) {

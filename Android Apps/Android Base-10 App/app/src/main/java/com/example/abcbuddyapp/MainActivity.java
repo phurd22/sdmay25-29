@@ -73,6 +73,17 @@ public class MainActivity extends AppCompatActivity {
         variableTextViews[3] = findViewById(R.id.Var4);
         variableTextViews[4] = findViewById(R.id.Var5);
 
+//        punchcardView.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                int widthInPx = punchcardView.getWidth();
+//                float density = punchcardView.getContext().getResources().getDisplayMetrics().density;
+//                float widthInDp = widthInPx / density;
+//
+//                Log.d("ViewWidth", "Width: " + widthInDp + " dp");
+//            }
+//        });
+
         resetEquationState();
 
         // Setup numpad buttons
@@ -97,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("BLE", "Connected to ESP32, uploading numbers...");
                 uploadEquation();
             }
+//            uploadEquation();
         });
 //        Button connectButton = findViewById(R.id.esp32Button);
 //        connectButton.setOnClickListener(v -> startScan());
@@ -104,37 +116,48 @@ public class MainActivity extends AppCompatActivity {
         requestBluetoothPermissions();
     }
 
+    // Handles numpad input, stores the number, clears, or moves to next column
     private void handleNumpadInput(String input) {
         if (input.equalsIgnoreCase("X")) {
             if (awaitingVariable) {
                 char nextVariable = getNextVariable();
 
                 // Prepare display text (remove leading zero before showing)
-                String displayText = currentSegment.toString() + nextVariable;
-                boolean hasNeg = displayText.startsWith("-");
-                if (hasNeg) {
+                String displayText = currentSegment.toString();
+                boolean hasNeg;
+                if (displayText.startsWith("0") && displayText.length() > 1) {
+                    hasNeg = true;
                     displayText = displayText.substring(1);
                 }
-                while (displayText.charAt(0) == '0') {
-                    displayText = displayText.substring(1);
+                else {
+                    hasNeg = false;
                 }
+//                if (hasNeg) {
+//                    displayText = displayText.substring(1);
+//                }
+//                while (displayText.charAt(0) == '0') {
+//                    displayText = displayText.substring(1);
+//                }
                 if (hasNeg) {
                     displayText = "-" + displayText;
                 }
+                displayText += nextVariable;
 
-                if (currentVariableIndex < variableTextViews.length) {
-                    variableTextViews[currentVariableIndex].setText(displayText);
+                boolean punched = punchStoredNumber(); // Now properly aligned & includes leading zero (only in punch)
+
+                if (punched) {
+                    // Move to the next segment
+                    if (currentVariableIndex < variableTextViews.length) {
+                        variableTextViews[currentVariableIndex].setText(displayText);
+                    }
+                    currentVariableIndex++;
+                    segmentStartColumn += 16;
                 }
-
-                punchStoredNumber(); // Now properly aligned & includes leading zero (only in punch)
-
-                // Move to the next segment
-                currentVariableIndex++;
-                segmentStartColumn += 15;
                 awaitingVariable = false;
                 isNegative = false;
                 isFirstNumber = true;
                 currentSegment.setLength(0);
+
             }
         } else {
             int number = Integer.parseInt(input);
@@ -143,9 +166,9 @@ public class MainActivity extends AppCompatActivity {
                     isNegative = true; // Mark as negative
                     currentSegment.append("0"); // Store for punching only (not displayed)
                 } else {
-                    if (isNegative) {
-                        currentSegment.insert(0, "-"); // Ensure negative sign is stored
-                    }
+//                    if (isNegative) {
+//                        currentSegment.insert(0, "-"); // Ensure negative sign is stored
+//                    }
                     currentSegment.append(number);
                     isFirstNumber = false;
                 }
@@ -157,21 +180,47 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Gets next letter variable
     private char getNextVariable() {
         String variables = "xyzwj";
         return variables.charAt(currentVariableIndex);
     }
 
-    private void punchStoredNumber() {
-        String rawCoefficient = currentSegment.toString();
-        boolean isNegative = rawCoefficient.startsWith("0"); // Detect negative indicator
-        String coefficient = rawCoefficient.replaceAll("[^0-9]", ""); // Extract all digits
+    // Punches the stored number onto the punchcard
+    private boolean punchStoredNumber() {
+        String coefficient = currentSegment.toString();
+        boolean isNegative;
+        if (coefficient.startsWith("0") && coefficient.length() > 1) {
+            isNegative = true;
+            coefficient = coefficient.substring(1);
+        }
+        else {
+            isNegative = false;
+        }
+        if (isNegative) {
+            if (currentSegment.length() > 16) {
+                Toast.makeText(context, "Number Too Long", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+        else {
+            if (currentSegment.length() > 15) {
+                Toast.makeText(context, "Number Too Long", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
 
-        int punchColumn = segmentStartColumn + 14 - (coefficient.length() - 1);
+//        String coefficient = rawCoefficient.replaceAll("[^0-9]", ""); // Extract all digits
+//        Log.d("Test", "Raw Coefficient: " + rawCoefficient);
+        Log.d("Test", "Coefficient: " + coefficient);
+        Log.d("Test", "Is Negative: " + isNegative);
+
+
+        int punchColumn = segmentStartColumn + 15 - (coefficient.length() - 1);
 
         // Punch the leading zero if it's negative
         if (isNegative) {
-            punchcardView.punchCell(punchColumn - 1 , 0);
+            punchcardView.punchCell(segmentStartColumn, 0);
         }
         
         // Punch each digit, ensuring all zeroes are included
@@ -179,8 +228,10 @@ public class MainActivity extends AppCompatActivity {
             int digit = Character.getNumericValue(coefficient.charAt(i));
             punchcardView.punchCell(punchColumn + i, digit);
         }
+        return true;
     }
 
+    // Clears the currently punched equation
     private void clearEquation() {
         resetEquationState();
         punchcardView.clearPunches();
@@ -189,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Resets variables used to build equation
     private void resetEquationState() {
         currentSegment = new StringBuilder();
         segmentStartColumn = 0;
@@ -198,6 +250,7 @@ public class MainActivity extends AppCompatActivity {
         currentVariableIndex = 0;
     }
 
+    // Uploads equation to ESP32
     @SuppressLint("MissingPermission")
     private void uploadEquation() {
         String equation = "";
@@ -252,6 +305,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Processes BLE scan results
     @SuppressLint("MissingPermission")
     private ScanCallback scanCallback = new ScanCallback() {
         @Override
@@ -269,6 +323,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    // Starts BLE scan
     @SuppressLint("MissingPermission")
     private void startScan() {
         BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
@@ -283,6 +338,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("BLE", "Scanning for ESP32...");
     }
 
+    // Connects to BLE device
     @SuppressLint("MissingPermission")
     private void connectToDevice(BluetoothDevice device) {
         bluetoothGatt = device.connectGatt(this, false, new BluetoothGattCallback() {
@@ -312,6 +368,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Checks if connected to ESP32
     @SuppressLint("MissingPermission")
     private boolean isDeviceConnected() {
         BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
@@ -345,6 +402,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Checks if string is numeric
     public static boolean isNumeric(String str) {
         try {
             Double.parseDouble(str);
