@@ -108,10 +108,152 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("BLE", "Connected to ESP32, uploading numbers...");
                 uploadEquation();
             }
-//            uploadEquation();
         });
-//        Button connectButton = findViewById(R.id.esp32Button);
-//        connectButton.setOnClickListener(v -> startScan());
+
+        Button mask1Button = findViewById(R.id.mask1Button);
+        mask1Button.setOnClickListener(v -> {
+            clearEquation();
+            currentSegment.append("111111111111111");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            variableTextViews[0].setText("111111111111111x");
+            variableTextViews[1].setText("0y");
+            variableTextViews[2].setText("0z");
+            variableTextViews[3].setText("0w");
+            variableTextViews[4].setText("0j");
+        });
+
+        Button mask2Button = findViewById(R.id.mask2Button);
+        mask2Button.setOnClickListener(v -> {
+            clearEquation();
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("111111111111111");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            variableTextViews[0].setText("0x");
+            variableTextViews[1].setText("111111111111111y");
+            variableTextViews[2].setText("0z");
+            variableTextViews[3].setText("0w");
+            variableTextViews[4].setText("0j");
+        });
+
+        Button mask3Button = findViewById(R.id.mask3Button);
+        mask3Button.setOnClickListener(v -> {
+            clearEquation();
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("111111111111111");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            variableTextViews[0].setText("0x");
+            variableTextViews[1].setText("0y");
+            variableTextViews[2].setText("111111111111111z");
+            variableTextViews[3].setText("0w");
+            variableTextViews[4].setText("0j");
+        });
+
+        Button mask4Button = findViewById(R.id.mask4Button);
+        mask4Button.setOnClickListener(v -> {
+            clearEquation();
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("111111111111111");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            variableTextViews[0].setText("0x");
+            variableTextViews[1].setText("0y");
+            variableTextViews[2].setText("0z");
+            variableTextViews[3].setText("111111111111111w");
+            variableTextViews[4].setText("0j");
+        });
+
+        Button mask5Button = findViewById(R.id.mask5Button);
+        mask5Button.setOnClickListener(v -> {
+            clearEquation();
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("0");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            currentSegment.setLength(0);
+            currentSegment.append("111111111111111");
+            punchStoredNumber();
+            segmentStartColumn += 16;
+            variableTextViews[0].setText("0x");
+            variableTextViews[1].setText("0y");
+            variableTextViews[2].setText("0z");
+            variableTextViews[3].setText("0w");
+            variableTextViews[4].setText("111111111111111j");
+        });
 
         requestBluetoothPermissions();
     }
@@ -120,6 +262,14 @@ public class MainActivity extends AppCompatActivity {
     private void handleNumpadInput(String input) {
         if (input.equalsIgnoreCase("X")) {
             if (awaitingVariable) {
+                if (segmentStartColumn >= 80) {
+                    Toast.makeText(context, "Clear Punchcard", Toast.LENGTH_SHORT).show();
+                    awaitingVariable = false;
+                    isNegative = false;
+                    isFirstNumber = true;
+                    currentSegment.setLength(0);
+                    return;
+                }
                 char nextVariable = getNextVariable();
 
                 // Prepare display text (remove leading zero before showing)

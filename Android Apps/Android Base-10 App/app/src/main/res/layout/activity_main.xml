@@ -292,8 +292,56 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/button_border_selector"
                 android:text="Upload" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/mask1Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_border_selector"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Mask 1"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/mask2Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_border_selector"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Mask 2"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/mask3Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_border_selector"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Mask 3"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/mask4Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_border_selector"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Mask 4"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/mask5Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_border_selector"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Mask 5"/>
         </LinearLayout>
 
     </LinearLayout>
