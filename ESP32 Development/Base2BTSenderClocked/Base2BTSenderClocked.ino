@@ -32,6 +32,10 @@ class MyServerCallbacks : public BLEServerCallbacks {
     Serial.println("Client disconnected, restarting advertising...");
     BLEDevice::startAdvertising(); // Restart advertising so Android can reconnect
   }
+
+  void onMtuChanged(BLEServer* pServer, esp_ble_gatts_cb_param_t* param) {
+    Serial.printf("MTU changed: %d\n", param->mtu);
+  }
 };
 
 void setup() {
@@ -47,7 +51,7 @@ void setup() {
 
   // Setup for BLE
   BLEDevice::init("Base2SenderESP32");
-  BLEDevice::setMTU(100);
+  BLEDevice::setMTU(185);
   pServer = BLEDevice::createServer();
   pServer->setCallbacks(new MyServerCallbacks());
   BLEService *pService = pServer->createService(SERVICE_UUID);
@@ -73,16 +77,18 @@ void loop() {
   // Send data to tablet every 100 ms (delay for consistent bluetooth communication)
   if (binaryBuffer != "" && timer - lastSent > 100) {
     String toSend = "";
-    int dIndex = binaryBuffer.indexOf('d');
-    if (dIndex != -1) {
-      toSend = binaryBuffer.substring(0, dIndex);
-      binaryBuffer = binaryBuffer.substring(dIndex + 1);
+    int xIndex = binaryBuffer.indexOf('x');
+    if (xIndex != -1) {
+      toSend = binaryBuffer.substring(0, xIndex);
+      binaryBuffer = binaryBuffer.substring(xIndex + 1);
+      toSend += "d";
       pCharacteristic->setValue(toSend.c_str());
       pCharacteristic->notify();
       Serial.print("Sent: ");
       Serial.println(toSend);
     }
     else {
+      binaryBuffer += "d";
       pCharacteristic->setValue(binaryBuffer.c_str());
       pCharacteristic->notify();
       Serial.print("Sent: ");
@@ -124,7 +130,7 @@ void loop() {
     // Read the inputs to the buffer
     if (reading) {
       // 5 ms delay for propogation
-      delay(5); // LOOK AT THIS IF THERE ARE ERRORS, COULD HAVE TO DO WITH THIS
+      // delay(5); // LOOK AT THIS IF THERE ARE ERRORS, COULD HAVE TO DO WITH THIS
       readToBuffer();
 
       if (counterValue == 50) {
@@ -154,7 +160,7 @@ void readToBuffer() {
     }
   }
   binaryBuffer += fourBits;
-  if (counterValue == 49) {
-    binaryBuffer += "d";
+  if (counterValue == 50) {
+    binaryBuffer += "x";
   }
 }

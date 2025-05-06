@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private final UUID CLASSIC_UUID = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
     private final String READ_TABLET_MAC = "0B:0B:01:04:48:35";
     private boolean sendingData = false;
+    private final StringBuilder bleBuffer = new StringBuilder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -209,11 +210,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
                 if (newState == BluetoothProfile.STATE_CONNECTED) {
+                    gatt.requestMtu(185);
                     Log.d("BLE", "Connected to ESP32");
                     runOnUiThread(() -> {
                         Toast.makeText(context, "Connected to ESP32", Toast.LENGTH_SHORT).show();
                     });
-                    gatt.discoverServices();
+//                    gatt.discoverServices();
                 } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                     Log.d("BLE", "Disconnected from ESP32");
                     runOnUiThread(() -> {
@@ -226,6 +228,20 @@ public class MainActivity extends AppCompatActivity {
                     if (!sendingData) {
                         runOnUiThread(() -> startScan());
                     }
+                }
+            }
+
+            @Override
+            public void onMtuChanged(BluetoothGatt gatt, int mtu, int status) {
+                if (status == BluetoothGatt.GATT_SUCCESS) {
+                    Log.d("BLE", "MTU successfully changed to " + mtu);
+
+                    // Safe to discover services now
+                    gatt.discoverServices();
+                } else {
+                    Log.d("BLE", "MTU change failed. Status: " + status);
+                    // Still try discovering services if needed
+                    gatt.discoverServices();
                 }
             }
 
@@ -258,49 +274,61 @@ public class MainActivity extends AppCompatActivity {
                 String value = new String(characteristic.getValue(), StandardCharsets.UTF_8);
 
                 // Ignore duplicate notifications if they occur too soon
-                long currentTime = System.currentTimeMillis();
-                if (currentTime - lastUpdateTime < BTDebounceDelay) {
-                    Log.d("BLE", "Ignoring duplicate notification (debouncing).");
-                    return;
-                }
-                lastUpdateTime = currentTime;
+//                long currentTime = System.currentTimeMillis();
+//                if (currentTime - lastUpdateTime < BTDebounceDelay) {
+//                    Log.d("BLE", "Ignoring duplicate notification (debouncing).");
+//                    return;
+//                }
+//                lastUpdateTime = currentTime;
 
-                // String format is a binary number of unknown length, but with length divisible by 4,
-                // add first four to respective binary string from binaryStringArray, and continue
-                // until out of values in the message string.
-                Log.d("BLE", "-----------------------------------------------------");
-                Log.d("BLE", "Received from ESP32: " + value);
-                for (int i = 0; i < value.length(); i++) {
-                    String newString = binaryStringArray.get(i % 4);
-                    StringBuilder sb = new StringBuilder(newString);
-                    sb.setCharAt(binaryIndex, value.charAt(i));
-                    binaryStringArray.set(i % 4, sb.toString());
-                    if (i % 4 == 3) {
-                        binaryIndex--;
-                    }
-                }
-                Log.d("Binary Strings", "Binary Index: " + binaryIndex);
-                runOnUiThread(MainActivity.this::updatePage);
-                if (binaryIndex < 0) {
-                    Log.d("Binary Strings", "Resetting Strings");
-                    // Construct and send bluetooth message here
-                    String message = "";
-                    for (int i = 0; i < 4; i++) {
-                        binaryToLongTwosComplement(binaryStringArray.get(i));
-                        if (i < 3) {
-                            message += String.valueOf(binaryToLongTwosComplement(binaryStringArray.get(i)));
-                            message += "x";
-                        }
-                        else {
-                            message += String.valueOf(binaryToLongTwosComplement(binaryStringArray.get(i)));
-                            message += "d";
+                // Append to buffer
+                bleBuffer.append(value);
+                Log.d("Value", "Value: " + value);
+
+                // Chcek if message end marker 'd' is present
+                int endIdx;
+                while((endIdx = bleBuffer.indexOf("d")) != -1) {
+                    String completeMessage = bleBuffer.substring(0, endIdx);
+                    bleBuffer.delete(0, endIdx + 1);
+
+                    // String format is a binary number of unknown length, but with length divisible by 4,
+                    // add first four to respective binary string from binaryStringArray, and continue
+                    // until out of values in the message string.
+                    Log.d("BLE", "-----------------------------------------------------");
+                    Log.d("BLE", "Received from ESP32: " + value);
+                    for (int i = 0; i < completeMessage.length(); i++) {
+                        String newString = binaryStringArray.get(i % 4);
+                        StringBuilder sb = new StringBuilder(newString);
+                        sb.setCharAt(binaryIndex, completeMessage.charAt(i));
+                        binaryStringArray.set(i % 4, sb.toString());
+                        if (i % 4 == 3) {
+                            binaryIndex--;
                         }
                     }
-                    String finalMessage = message;
-                    Log.d("ClassicBT", "Sending message: " + finalMessage);
-                    relayDataToAndroidDevice(finalMessage);
-                    resetBinaryStrings();
-                    binaryIndex = 49;
+
+                    Log.d("Binary Strings", "Binary Index: " + binaryIndex);
+                    runOnUiThread(MainActivity.this::updatePage);
+                    if (binaryIndex < 0) {
+                        Log.d("Binary Strings", "Resetting Strings");
+                        // Construct and send bluetooth message here
+                        String message = "";
+                        for (int i = 0; i < 4; i++) {
+                            binaryToLongTwosComplement(binaryStringArray.get(i));
+                            if (i < 3) {
+                                message += String.valueOf(binaryToLongTwosComplement(binaryStringArray.get(i)));
+                                message += "x";
+                            }
+                            else {
+                                message += String.valueOf(binaryToLongTwosComplement(binaryStringArray.get(i)));
+                                message += "d";
+                            }
+                        }
+                        String finalMessage = message;
+                        Log.d("ClassicBT", "Sending message: " + finalMessage);
+                        relayDataToAndroidDevice(finalMessage);
+                        resetBinaryStrings();
+                        binaryIndex = 49;
+                    }
                 }
             }
         });

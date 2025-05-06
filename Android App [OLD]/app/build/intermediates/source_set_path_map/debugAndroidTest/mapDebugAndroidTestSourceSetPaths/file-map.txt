@@ -1,0 +1,5 @@
+com.example.abcbuddyapp.test.app-core-1.6.1-0 C:\Users\conno\.gradle\caches\transforms-4\e630555a2759f9f23e6617babcf9cf2a\transformed\core-1.6.1\res
+com.example.abcbuddyapp.test.app-androidTest-1 C:\Users\conno\Documents\Senior Design\sdmay25-29\Android App\app\build\generated\res\resValues\androidTest\debug
+com.example.abcbuddyapp.test.app-mergeDebugAndroidTestResources-2 C:\Users\conno\Documents\Senior Design\sdmay25-29\Android App\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.example.abcbuddyapp.test.app-mergeDebugAndroidTestResources-3 C:\Users\conno\Documents\Senior Design\sdmay25-29\Android App\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.example.abcbuddyapp.test.app-debugAndroidTest-4 C:\Users\conno\Documents\Senior Design\sdmay25-29\Android App\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

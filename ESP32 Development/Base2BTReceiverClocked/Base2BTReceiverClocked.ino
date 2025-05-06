@@ -107,7 +107,7 @@ void loop() {
     Serial.println(counterValue);
 
     // Reset when cycle is finished
-    if (endOfCycle && counterValue == 50) {
+    if (endOfCycle && counterValue == 51) {
       endOfCycle = 0;
       displaying = 0;
       for (int i = 0; i < 4; i++) {
@@ -122,7 +122,7 @@ void loop() {
     }
 
     // Display the bit outputs
-    if (displaying) {
+    if (displaying && counterValue != 50) {
       for (int i = 0; i < 4; i++) {
         if (binaryStrings[i][49 - counterValue] == '1') {
           digitalWrite(bitPins[i], HIGH);
@@ -132,9 +132,21 @@ void loop() {
         }
       }
       
-      if (counterValue == 49) {
-        endOfCycle = 1;
+      // if (counterValue == 49) {
+      //   endOfCycle = 1;
+      // }
+    }
+
+    if (displaying && counterValue == 50) {
+      for (int i = 0; i < 4; i++) {
+        if (binaryStrings[i][0] == '1') {
+          digitalWrite(bitPins[i], HIGH);
+        }
+        else {
+          digitalWrite(bitPins[i], LOW);
+        }
       }
+      endOfCycle = 1;
     }
   }
 }

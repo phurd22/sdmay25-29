@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
         context = this;
         currentPage = 1;
-        totalPages = 1;
+        totalPages = 4;
         destroying = false;
 
         pageButtonContainer = findViewById(R.id.pageButtonContainer);
@@ -104,11 +104,25 @@ public class MainActivity extends AppCompatActivity {
         topBar = findViewById(R.id.topBar);
         pageDivider = findViewById(R.id.pageDivider);
 
-        List<Long> numbers1 = Arrays.asList(-1L, 750599937895082L, 900719925474099L, 860982281703183L,
-                0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L,
-                0L, 0L, 0L, 0L, 0L);
+//        List<Long> numbers1 = Arrays.asList(-1L, 750599937895082L, 900719925474099L, 860982281703183L,
+//                0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L,
+//                0L, 0L, 0L, 0L, 0L);
+//
+//        allNumbers.add(numbers1);
+
+        List<Long> numbers1 = Arrays.asList(100L, 100L, 100L, 400L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L,
+                0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L);
+        List<Long> numbers2 = Arrays.asList(100L, 300L, 300L, 1000L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L,
+                0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L);
+        List<Long> numbers3 = Arrays.asList(200L, 100L, -100L, 300L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L,
+                0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L);
+        List<Long> numbers4 = Arrays.asList(-1L, -1L, -1L, -1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L,
+                0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L);
 
         allNumbers.add(numbers1);
+        allNumbers.add(numbers2);
+        allNumbers.add(numbers3);
+        allNumbers.add(numbers4);
 
         for (int i = 1; i <= totalPages; i++) {
             Button pageButton = new Button(this);
@@ -196,6 +210,42 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("BLE", "Connected to ESP32, uploading numbers...");
                     uploadNumbers();
                 }
+            }
+        });
+
+        base2PunchView.setOnRightSideClickListener(() -> {
+            if (currentPage == totalPages) {
+                if (totalPages > 1) {
+                    totalPages--;
+                    currentPage--;
+                    allNumbers.remove(currentPage);
+                    pageButtons.remove(currentPage);
+                    pageButtonContainer.removeViewAt(currentPage);
+
+                    pageButtonContainer.getChildAt(currentPage - 1).setBackgroundResource(R.drawable.selected_button_border);
+                }
+                else {
+                    totalPages = 0;
+                    currentPage = 0;
+                    allNumbers.clear();
+                    pageButtons.clear();
+                    pageButtonContainer.removeAllViews();
+                }
+            }
+
+            updatePage();
+
+            if (totalPages < 10) {
+                pageDivider.setVisibility(View.GONE);
+            }
+            else {
+                pageDivider.setVisibility(View.VISIBLE);
+            }
+            if (totalPages == 0) {
+                topBar.setVisibility(View.GONE);
+            }
+            else {
+                topBar.setVisibility(View.VISIBLE);
             }
         });
 

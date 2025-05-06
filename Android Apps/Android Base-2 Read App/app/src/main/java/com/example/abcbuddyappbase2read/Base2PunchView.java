@@ -235,4 +235,36 @@ public class Base2PunchView extends View {
             canvas.drawText("n0", xOffsetRight - 30, yOffset - 14, labelPaint);
         }
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            float x = event.getX();
+            float viewWidth = getWidth();
+
+            // Define "right side" as the rightmost 1/4th of the view
+            if (x > (viewWidth * 3 / 4)) {
+                if (rightSideClickListener != null) {
+                    rightSideClickListener.onRightSideClick();
+                }
+            }
+        }
+        return true; // Return true to indicate the touch was handled
+    }
+
+    @Override
+    public boolean performClick() {
+        super.performClick();
+        return true;
+    }
+
+    public interface OnRightSideClickListener {
+        void onRightSideClick();
+    }
+
+    private OnRightSideClickListener rightSideClickListener;
+
+    public void setOnRightSideClickListener(OnRightSideClickListener listener) {
+        this.rightSideClickListener = listener;
+    }
 }

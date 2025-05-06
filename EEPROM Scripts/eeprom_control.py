@@ -16,8 +16,13 @@ data[104] |= 0x20
 
 data[106] |= 0x40
 
-data[118] |= 0x7F
-data[119] |= 0x7F
+for i in range(128):
+    middle = data[i] & 0x7E
+    flipped = (~middle) & 0x7E
+    data[i] = (data[i] & ~0x7E) | flipped
+    
+data[118] = 0x7F
+data[119] = 0x7F
     
 with open("eeprom_control.bin", "wb") as f:
     for i in range(128):
