@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 OutputStream outputStream = classicSocket.getOutputStream();
                 outputStream.write(message.getBytes(StandardCharsets.UTF_8));
                 outputStream.flush();
-                Thread.sleep(100);
+                Thread.sleep(1000);
 
                 Log.d("Relay", "Data sent to Android device: " + message);
                 classicSocket.close();
