@@ -90,12 +90,12 @@ void setup() {
 void loop() {
   unofficialCounter = readInputCounter();
 
-  // counter goes 14 to 0
+  // counter goes 14 to 0 (it actually does 15 to 0 but should be 14)
   skipLoop = 0;
   if (counterValue != 0 && counterValue != unofficialCounter + 1) {
     skipLoop = 1;
   }
-  if (counterValue == 0 && unofficialCounter != 14) {
+  if (counterValue == 0 && unofficialCounter != 15) {
     skipLoop = 1;
   }
 
@@ -107,7 +107,7 @@ void loop() {
     Serial.println(counterValue);
 
     // Reset when cycle is finished
-    if (endOfCycle && counterValue == 14) {
+    if (endOfCycle && counterValue == 15) {
       endOfCycle = 0;
       displaying = 0;
       clearNumBits();

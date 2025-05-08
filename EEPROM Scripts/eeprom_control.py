@@ -17,9 +17,9 @@ data[104] |= 0x20
 data[106] |= 0x40
 
 for i in range(128):
-    middle = data[i] & 0x7E
-    flipped = (~middle) & 0x7E
-    data[i] = (data[i] & ~0x7E) | flipped
+    middle = data[i] & 0x7C
+    flipped = (~middle) & 0x7C
+    data[i] = (data[i] & ~0x7C) | flipped
     
 data[118] = 0x7F
 data[119] = 0x7F
