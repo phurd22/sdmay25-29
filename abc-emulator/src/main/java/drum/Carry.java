@@ -1,7 +1,11 @@
 package src.main.java.drum;
 
-import java.util.Arrays;
-
+/*
+    Carry Borrow Drum, overflow buffer.
+    Smaller drum with 1 bit for each of the 30 bands/coefficients.
+    Is constantly set and read during operations.
+    Is the carry propagation during the bit-wise arithmetic.
+ */
 public class Carry extends Drum {
     public static final int BAND_COUNT = 30;
     public static final int BIT_COUNT = 1;

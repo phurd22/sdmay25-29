@@ -3,6 +3,7 @@ package src.main.java.drum;
 import java.math.BigInteger;
 
 public class Drum {
+    // Core
     public static final int MSB = 0;
     public static final int LSB = 49;
     protected final int bands;
@@ -16,6 +17,7 @@ public class Drum {
         this.data = new boolean[bands][bits];
     }
 
+    // Accessors
     public int getBandCount() {
         return bands;
     }
@@ -24,6 +26,7 @@ public class Drum {
         return bits;
     }
 
+    // Helpers
     public boolean getBit(int band, int position) {
         if (band < 0 || band >= bands || position < 0 || position >= bits) {
             throw new IndexOutOfBoundsException("Invalid band or position index");
@@ -61,6 +64,7 @@ public class Drum {
         return data;
     }
 
+    // Transfer
     public void transfer(KA ka) {
         for (int band = 0; band < this.data.length; band++) {
             for (int bit = 0; bit < this.data[band].length; bit++) {
@@ -69,7 +73,7 @@ public class Drum {
         }
     }
 
-    //LSB on the Right
+    // LSB on the Right
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < bands; i++) {
@@ -82,13 +86,14 @@ public class Drum {
         return sb.toString();
     }
 
+    // Print helper
     public void printData() {
         final String RED = "\u001B[31m";
         final String GREEN = "\u001B[32m";
         final String RESET = "\u001B[0m";
 
-        for (int i = 0; i < bands; i++) {
-            for (int j = 0; j < bits; j++) {
+        for (int i = 0; i < bands; ++i) {
+            for (int j = 0; j < bits; ++j) {
                 if (data[i][j]) {
                     // Print 1 in green
                     System.out.print(GREEN + "1" + RESET);
@@ -109,16 +114,17 @@ public class Drum {
         return clone;
     }
 
+    // Handles 50 bit binary to decimal conversion
     public BigInteger toBigInteger(int band) {
         if (data[band] == null || data[band].length != 50)
             throw new IllegalArgumentException("Array must be 50 bits long");
 
         BigInteger value = BigInteger.ZERO;
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 50; ++i) {
             value = value.shiftLeft(1);
             if (data[band][i]) value = value.add(BigInteger.ONE);
         }
-        if (data[band][0]) {                  // negative → two’s‑complement adjust
+        if (data[band][0]) {                  // negative -> two's complement
             value = value.subtract(BigInteger.ONE.shiftLeft(50));
         }
         return value;

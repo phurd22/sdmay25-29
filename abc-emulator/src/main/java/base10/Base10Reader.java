@@ -16,12 +16,8 @@ public class Base10Reader {
         this.abc = abc;
     }
 
-    public void readCard(int[] card) {
-        for (int i = 0; i < card.length; ++i) {
-            abc.conv.convert(String.valueOf(card[i]), i);
-        }
-    }
 
+    // Parses the dcardXX.csv into
     public void readCard(String filePath, int band) throws IOException {
 
         final boolean[][][] card = new boolean[SEGS][ROWS][COLS];
@@ -75,7 +71,9 @@ public class Base10Reader {
                 }
                 int decade = COLS - 1 - col;
                 int digit = punchedRow;
-                abc.conv.convert(decade, digit, addSubMode, band + seg);
+                if (digit != 0) {
+                    abc.conv.convert(decade, digit, addSubMode, band + seg);
+                }
             }
         }
     }

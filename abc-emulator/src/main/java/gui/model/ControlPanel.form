@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="src.main.java.gui.model.ControlPanel">
-  <grid id="27dc6" binding="contentPane" layout-manager="GridLayoutManager" row-count="7" column-count="30" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="contentPane" layout-manager="GridLayoutManager" row-count="8" column-count="31" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="944" height="400"/>
+      <xy x="20" y="20" width="965" height="400"/>
     </constraints>
     <properties>
-      <preferredSize width="932" height="400"/>
+      <preferredSize width="1100" height="400"/>
     </properties>
     <border type="none"/>
     <children>
       <component id="dd2f" class="javax.swing.JCheckBox" binding="SD0">
         <constraints>
-          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -20,12 +20,12 @@
       </component>
       <vspacer id="520fe">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
       <component id="c72bb" class="javax.swing.JCheckBox" binding="SD1">
         <constraints>
-          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -33,7 +33,7 @@
       </component>
       <component id="8fcc6" class="javax.swing.JCheckBox" binding="SD2">
         <constraints>
-          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -41,7 +41,7 @@
       </component>
       <component id="c781d" class="javax.swing.JCheckBox" binding="SD3">
         <constraints>
-          <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -49,7 +49,7 @@
       </component>
       <component id="cb17f" class="javax.swing.JCheckBox" binding="SD4">
         <constraints>
-          <grid row="6" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -57,7 +57,7 @@
       </component>
       <component id="91357" class="javax.swing.JCheckBox" binding="SD5">
         <constraints>
-          <grid row="6" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -65,7 +65,7 @@
       </component>
       <component id="1ee11" class="javax.swing.JCheckBox" binding="SD6">
         <constraints>
-          <grid row="6" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -73,7 +73,7 @@
       </component>
       <component id="d07bd" class="javax.swing.JCheckBox" binding="SD7">
         <constraints>
-          <grid row="6" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -81,7 +81,7 @@
       </component>
       <component id="df46f" class="javax.swing.JCheckBox" binding="SD8">
         <constraints>
-          <grid row="6" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="9" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -89,7 +89,7 @@
       </component>
       <component id="66c93" class="javax.swing.JCheckBox" binding="SD9">
         <constraints>
-          <grid row="6" column="9" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -97,7 +97,7 @@
       </component>
       <component id="b7893" class="javax.swing.JCheckBox" binding="SD10">
         <constraints>
-          <grid row="6" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -105,7 +105,7 @@
       </component>
       <component id="c56a1" class="javax.swing.JCheckBox" binding="SD11">
         <constraints>
-          <grid row="6" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="12" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -113,7 +113,7 @@
       </component>
       <component id="2b740" class="javax.swing.JCheckBox" binding="SD12">
         <constraints>
-          <grid row="6" column="12" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="13" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -121,7 +121,7 @@
       </component>
       <component id="c32aa" class="javax.swing.JCheckBox" binding="SD13">
         <constraints>
-          <grid row="6" column="13" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="14" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -129,7 +129,7 @@
       </component>
       <component id="94768" class="javax.swing.JCheckBox" binding="SD14">
         <constraints>
-          <grid row="6" column="14" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="15" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -137,7 +137,7 @@
       </component>
       <component id="2138f" class="javax.swing.JCheckBox" binding="SD15">
         <constraints>
-          <grid row="6" column="15" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -145,7 +145,7 @@
       </component>
       <component id="b25b4" class="javax.swing.JCheckBox" binding="SD16">
         <constraints>
-          <grid row="6" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="17" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -153,7 +153,7 @@
       </component>
       <component id="e029" class="javax.swing.JCheckBox" binding="SD17">
         <constraints>
-          <grid row="6" column="17" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="18" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -161,7 +161,7 @@
       </component>
       <component id="706fa" class="javax.swing.JCheckBox" binding="SD18">
         <constraints>
-          <grid row="6" column="18" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="19" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -169,7 +169,7 @@
       </component>
       <component id="ff18e" class="javax.swing.JCheckBox" binding="SD19">
         <constraints>
-          <grid row="6" column="19" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="20" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -177,7 +177,7 @@
       </component>
       <component id="11771" class="javax.swing.JCheckBox" binding="SD20">
         <constraints>
-          <grid row="6" column="20" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="21" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -185,7 +185,7 @@
       </component>
       <component id="af1ff" class="javax.swing.JCheckBox" binding="SD21">
         <constraints>
-          <grid row="6" column="21" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="22" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -193,7 +193,7 @@
       </component>
       <component id="28b1b" class="javax.swing.JCheckBox" binding="SD22">
         <constraints>
-          <grid row="6" column="22" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="23" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -201,7 +201,7 @@
       </component>
       <component id="33b49" class="javax.swing.JCheckBox" binding="SD23">
         <constraints>
-          <grid row="6" column="23" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="24" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -209,7 +209,7 @@
       </component>
       <component id="93432" class="javax.swing.JCheckBox" binding="SD24">
         <constraints>
-          <grid row="6" column="24" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="25" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -217,7 +217,7 @@
       </component>
       <component id="a8620" class="javax.swing.JCheckBox" binding="SD25">
         <constraints>
-          <grid row="6" column="25" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="26" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -225,7 +225,7 @@
       </component>
       <component id="548b4" class="javax.swing.JCheckBox" binding="SD26">
         <constraints>
-          <grid row="6" column="26" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="27" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -233,7 +233,7 @@
       </component>
       <component id="fde5e" class="javax.swing.JCheckBox" binding="SD27">
         <constraints>
-          <grid row="6" column="27" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="28" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -241,7 +241,7 @@
       </component>
       <component id="1d93d" class="javax.swing.JCheckBox" binding="SD28">
         <constraints>
-          <grid row="6" column="28" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="29" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -249,7 +249,7 @@
       </component>
       <component id="51078" class="javax.swing.JCheckBox" binding="ZD0">
         <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -257,7 +257,7 @@
       </component>
       <component id="c1115" class="javax.swing.JCheckBox" binding="ZD2">
         <constraints>
-          <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -265,7 +265,7 @@
       </component>
       <component id="c6855" class="javax.swing.JCheckBox" binding="ZD3">
         <constraints>
-          <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -273,7 +273,7 @@
       </component>
       <component id="3eed1" class="javax.swing.JCheckBox" binding="ZD4">
         <constraints>
-          <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -281,7 +281,7 @@
       </component>
       <component id="242d9" class="javax.swing.JCheckBox" binding="ZD5">
         <constraints>
-          <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -289,7 +289,7 @@
       </component>
       <component id="fac0" class="javax.swing.JCheckBox" binding="ZD6">
         <constraints>
-          <grid row="5" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -297,7 +297,7 @@
       </component>
       <component id="344a9" class="javax.swing.JCheckBox" binding="ZD7">
         <constraints>
-          <grid row="5" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -305,7 +305,7 @@
       </component>
       <component id="aecea" class="javax.swing.JCheckBox" binding="ZD1">
         <constraints>
-          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -313,7 +313,7 @@
       </component>
       <component id="d3d7e" class="javax.swing.JCheckBox" binding="ZD8">
         <constraints>
-          <grid row="5" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="9" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -321,7 +321,7 @@
       </component>
       <component id="a2860" class="javax.swing.JCheckBox" binding="ZD9">
         <constraints>
-          <grid row="5" column="9" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -329,7 +329,7 @@
       </component>
       <component id="c1fcb" class="javax.swing.JCheckBox" binding="ZD10">
         <constraints>
-          <grid row="5" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -337,7 +337,7 @@
       </component>
       <component id="10e03" class="javax.swing.JCheckBox" binding="ZD11">
         <constraints>
-          <grid row="5" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="12" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -345,7 +345,7 @@
       </component>
       <component id="3cec0" class="javax.swing.JCheckBox" binding="ZD12">
         <constraints>
-          <grid row="5" column="12" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="13" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -353,7 +353,7 @@
       </component>
       <component id="6cb6" class="javax.swing.JCheckBox" binding="ZD13">
         <constraints>
-          <grid row="5" column="13" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="14" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -361,7 +361,7 @@
       </component>
       <component id="aa1ab" class="javax.swing.JCheckBox" binding="ZD14">
         <constraints>
-          <grid row="5" column="14" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="15" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -369,7 +369,7 @@
       </component>
       <component id="9c4cb" class="javax.swing.JCheckBox" binding="ZD15">
         <constraints>
-          <grid row="5" column="15" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -377,7 +377,7 @@
       </component>
       <component id="c4408" class="javax.swing.JCheckBox" binding="ZD16">
         <constraints>
-          <grid row="5" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="17" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -385,7 +385,7 @@
       </component>
       <component id="7e64f" class="javax.swing.JCheckBox" binding="ZD17">
         <constraints>
-          <grid row="5" column="17" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="18" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -393,7 +393,7 @@
       </component>
       <component id="fab10" class="javax.swing.JCheckBox" binding="ZD18">
         <constraints>
-          <grid row="5" column="18" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="19" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -401,7 +401,7 @@
       </component>
       <component id="e848" class="javax.swing.JCheckBox" binding="ZD19">
         <constraints>
-          <grid row="5" column="19" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="20" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -409,7 +409,7 @@
       </component>
       <component id="e5037" class="javax.swing.JCheckBox" binding="ZD20">
         <constraints>
-          <grid row="5" column="20" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="21" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -417,7 +417,7 @@
       </component>
       <component id="488e7" class="javax.swing.JCheckBox" binding="ZD21">
         <constraints>
-          <grid row="5" column="21" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="22" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -425,7 +425,7 @@
       </component>
       <component id="d9f27" class="javax.swing.JCheckBox" binding="ZD22">
         <constraints>
-          <grid row="5" column="22" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="23" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -433,7 +433,7 @@
       </component>
       <component id="1e094" class="javax.swing.JCheckBox" binding="ZD23">
         <constraints>
-          <grid row="5" column="23" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="24" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -441,7 +441,7 @@
       </component>
       <component id="fc397" class="javax.swing.JCheckBox" binding="ZD24">
         <constraints>
-          <grid row="5" column="24" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="25" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -449,7 +449,7 @@
       </component>
       <component id="79c5d" class="javax.swing.JCheckBox" binding="ZD25">
         <constraints>
-          <grid row="5" column="25" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="26" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -457,7 +457,7 @@
       </component>
       <component id="bb8d" class="javax.swing.JCheckBox" binding="ZD26">
         <constraints>
-          <grid row="5" column="26" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="27" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -465,7 +465,7 @@
       </component>
       <component id="5e2e0" class="javax.swing.JCheckBox" binding="ZD27">
         <constraints>
-          <grid row="5" column="27" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="28" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -473,7 +473,7 @@
       </component>
       <component id="528f8" class="javax.swing.JCheckBox" binding="ZD28">
         <constraints>
-          <grid row="5" column="28" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="29" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -481,7 +481,7 @@
       </component>
       <component id="bf839" class="javax.swing.JCheckBox" binding="SD29">
         <constraints>
-          <grid row="6" column="29" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="30" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -489,7 +489,7 @@
       </component>
       <component id="8cc68" class="javax.swing.JCheckBox" binding="ZD29">
         <constraints>
-          <grid row="5" column="29" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="30" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
@@ -497,7 +497,7 @@
       </component>
       <component id="256e8" class="javax.swing.JButton" binding="PB1">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="PB1"/>
@@ -505,7 +505,7 @@
       </component>
       <component id="eaaf" class="javax.swing.JButton" binding="PB2">
         <constraints>
-          <grid row="0" column="3" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="PB2"/>
@@ -513,7 +513,7 @@
       </component>
       <component id="a0b63" class="javax.swing.JButton" binding="PB3">
         <constraints>
-          <grid row="0" column="6" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="7" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="PB3"/>
@@ -521,7 +521,7 @@
       </component>
       <component id="ad76d" class="javax.swing.JRadioButton" binding="SW1">
         <constraints>
-          <grid row="0" column="10" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="11" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="SW1"/>
@@ -529,7 +529,7 @@
       </component>
       <component id="b3a7a" class="javax.swing.JRadioButton" binding="SW2">
         <constraints>
-          <grid row="0" column="12" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="13" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="SW2"/>
@@ -537,7 +537,7 @@
       </component>
       <component id="8e446" class="javax.swing.JRadioButton" binding="SW3">
         <constraints>
-          <grid row="0" column="14" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="15" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="SW3"/>
@@ -545,7 +545,7 @@
       </component>
       <component id="4a2b2" class="javax.swing.JRadioButton" binding="SW4">
         <constraints>
-          <grid row="0" column="16" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="17" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="SW4"/>
@@ -553,7 +553,7 @@
       </component>
       <component id="79fe1" class="javax.swing.JRadioButton" binding="SW5">
         <constraints>
-          <grid row="0" column="18" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="19" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="SW5"/>
@@ -561,7 +561,7 @@
       </component>
       <component id="4ddbf" class="javax.swing.JRadioButton" binding="SW6">
         <constraints>
-          <grid row="0" column="20" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="21" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="SW6"/>
@@ -569,7 +569,7 @@
       </component>
       <component id="cbcb7" class="javax.swing.JRadioButton" binding="SW7">
         <constraints>
-          <grid row="1" column="14" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="15" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="SW7"/>
@@ -577,7 +577,7 @@
       </component>
       <component id="12020" class="javax.swing.JRadioButton" binding="SW8">
         <constraints>
-          <grid row="1" column="16" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="17" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="SW8"/>
@@ -585,7 +585,7 @@
       </component>
       <component id="14567" class="javax.swing.JRadioButton" binding="SW9">
         <constraints>
-          <grid row="1" column="18" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="19" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="SW9"/>
@@ -593,7 +593,7 @@
       </component>
       <component id="f65ad" class="javax.swing.JRadioButton" binding="SW10">
         <constraints>
-          <grid row="1" column="20" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="21" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="SW10"/>
@@ -601,7 +601,7 @@
       </component>
       <component id="ca055" class="javax.swing.JRadioButton" binding="SW11">
         <constraints>
-          <grid row="2" column="18" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="19" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="SW11"/>
@@ -609,7 +609,7 @@
       </component>
       <component id="c3d76" class="javax.swing.JRadioButton" binding="SW12">
         <constraints>
-          <grid row="2" column="20" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="21" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="SW12"/>
@@ -617,7 +617,7 @@
       </component>
       <component id="31469" class="javax.swing.JButton" binding="PB4">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="PB4"/>
@@ -625,7 +625,7 @@
       </component>
       <component id="b5584" class="javax.swing.JButton" binding="PB5">
         <constraints>
-          <grid row="2" column="3" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="PB5"/>
@@ -633,7 +633,7 @@
       </component>
       <component id="9704d" class="javax.swing.JButton" binding="PB6">
         <constraints>
-          <grid row="2" column="6" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="7" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="PB6"/>
@@ -641,7 +641,7 @@
       </component>
       <component id="4b1e9" class="javax.swing.JCheckBox" binding="L1">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="L1"/>
@@ -649,7 +649,7 @@
       </component>
       <component id="650a2" class="javax.swing.JCheckBox" binding="L3">
         <constraints>
-          <grid row="1" column="7" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="8" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="L3"/>
@@ -657,7 +657,7 @@
       </component>
       <component id="8ed0b" class="javax.swing.JCheckBox" binding="L2">
         <constraints>
-          <grid row="1" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="6" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="L2"/>
@@ -665,7 +665,7 @@
       </component>
       <component id="a553c" class="javax.swing.JCheckBox" binding="L4">
         <constraints>
-          <grid row="0" column="23" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="24" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="L4"/>
@@ -673,7 +673,7 @@
       </component>
       <component id="ef74c" class="javax.swing.JCheckBox" binding="L5">
         <constraints>
-          <grid row="0" column="25" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="26" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="L5"/>
@@ -681,23 +681,15 @@
       </component>
       <component id="7d38b" class="javax.swing.JCheckBox" binding="L6">
         <constraints>
-          <grid row="0" column="27" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="28" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="L6"/>
         </properties>
       </component>
-      <component id="a1f1f" class="javax.swing.JRadioButton" binding="L7">
-        <constraints>
-          <grid row="1" column="24" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="L7"/>
-        </properties>
-      </component>
       <component id="183f7" class="javax.swing.JCheckBox" binding="L8">
         <constraints>
-          <grid row="1" column="26" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="27" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="L8"/>
@@ -705,34 +697,274 @@
       </component>
       <component id="57e9d" class="javax.swing.JRadioButton" binding="MS">
         <constraints>
-          <grid row="3" column="25" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="26" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="MS"/>
         </properties>
       </component>
-      <component id="14ff2" class="javax.swing.JButton" binding="KAPrintButton">
+      <component id="530eb" class="javax.swing.JCheckBox" binding="L7">
         <constraints>
-          <grid row="3" column="21" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="25" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="KAP"/>
+          <text value="L7"/>
         </properties>
       </component>
-      <component id="87ea5" class="javax.swing.JButton" binding="CAPrintButton">
+      <component id="d7263" class="javax.swing.JLabel">
         <constraints>
-          <grid row="3" column="18" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="CAP"/>
+          <text value="1"/>
         </properties>
       </component>
-      <component id="3ce1" class="javax.swing.JButton" binding="base10Punch">
+      <component id="e061b" class="javax.swing.JLabel">
         <constraints>
-          <grid row="3" column="15" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="10PUNCH"/>
+          <text value="2"/>
+        </properties>
+      </component>
+      <component id="80be9" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="3"/>
+        </properties>
+      </component>
+      <component id="8d0a8" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="4"/>
+        </properties>
+      </component>
+      <component id="54ddd" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="5"/>
+        </properties>
+      </component>
+      <component id="f7da7" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="6"/>
+        </properties>
+      </component>
+      <component id="9d343" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="7"/>
+        </properties>
+      </component>
+      <component id="6b44d" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="8"/>
+        </properties>
+      </component>
+      <component id="84c74" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="9" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="9"/>
+        </properties>
+      </component>
+      <component id="766f0" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="10"/>
+        </properties>
+      </component>
+      <component id="ebf12" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="11"/>
+        </properties>
+      </component>
+      <component id="204a0" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="12" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="12"/>
+        </properties>
+      </component>
+      <component id="b84b3" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="13" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="13"/>
+        </properties>
+      </component>
+      <component id="70560" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="14" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="14"/>
+        </properties>
+      </component>
+      <component id="323c" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="15" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="15"/>
+        </properties>
+      </component>
+      <component id="8643c" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="16"/>
+        </properties>
+      </component>
+      <component id="3c15c" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="17" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="17"/>
+        </properties>
+      </component>
+      <component id="c00d0" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="18" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="18"/>
+        </properties>
+      </component>
+      <component id="3cba7" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="19" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="19"/>
+        </properties>
+      </component>
+      <component id="6c89" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="20" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="20"/>
+        </properties>
+      </component>
+      <component id="9bc6f" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="21" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="21"/>
+        </properties>
+      </component>
+      <component id="aa965" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="22" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="22"/>
+        </properties>
+      </component>
+      <component id="45cb8" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="23" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="23"/>
+        </properties>
+      </component>
+      <component id="17dba" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="24" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="24"/>
+        </properties>
+      </component>
+      <component id="faebf" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="25" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="25"/>
+        </properties>
+      </component>
+      <component id="f5a2b" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="26" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="26"/>
+        </properties>
+      </component>
+      <component id="580dc" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="27" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="27"/>
+        </properties>
+      </component>
+      <component id="ffaad" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="28" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="28"/>
+        </properties>
+      </component>
+      <component id="bba1c" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="29" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="29"/>
+        </properties>
+      </component>
+      <component id="2472d" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="30" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="30"/>
+        </properties>
+      </component>
+      <component id="2eb25" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="ZD:"/>
+        </properties>
+      </component>
+      <component id="4f714" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="SD:"/>
         </properties>
       </component>
     </children>
