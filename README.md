@@ -1,4 +1,26 @@
+![ABCm logo in red with the trailing 'm' after ABC being colored gold](branding/logo/logo.png "ABCm Logo")
+
 # Atanasoff-Berry Computer with Modern Technology
+
+Developed by ABCm Development Group (formerly SDMAY25-29 Senior Design) under Dr. Alexander Stoytchev, the ABCm is a modern reimagining of the orignal Atanasoff-Berry Computer.
+
+Built by Dr. Atanasoff and Clifford Berry in 1939, the Atanasoff Berry Computer (ABC) was the first digital electronic computer ever built, and the ABCm seeks to recreate the magic of this device using modern technology and design techniques. This repository houses all the final materials of the project including KiCAD projects, microcontroller and Android scripts, and supplemental documentation.
+
+Orignal information regarding the ABCm project can be found on the [Senior Design website](https://sdmay25-29.sd.ece.iastate.edu/).
+
+## Who are we?
+
+The ABCm Development Group spun off from Iowa State University.  During the 2024-2025 academic year, an Electrical and Computer Engineering (ECpE) Senior Design project was proposed by Dr. Alexander Stoytchev to research the ABC and design a modern equivalent in both hardware and software.
+
+The members of the ABCm Development Group are listed in the included [AUTHORS](./AUTHORS) file.
+
+## Licensing
+
+Hardware, including printed circuit board designs, CAD files, and relevant files, is licensed under [CERN-OHL-P v2](https://cern.ch/cern-ohl).
+
+Logo and relevant components are restricted for use by the ABCm Development Group (see [Branding License and Terms](branding/LICENSE)).
+
+All other source files and documentation herein are licensed under MIT License in their respective folders.
 
 ## Repo Guide
 
